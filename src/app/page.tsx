@@ -1,33 +1,151 @@
-// src/app/page.tsx
+import Image from 'next/image';
+import { CheckCircle } from 'lucide-react';
+
 export default function HomePage() {
+  // 定义特性列表，便于管理
+  const features = [
+    "一个真正懂你的 AI 执行功能教练",
+    "从对话中轻松创建、分解和管理任务",
+    "在 AI 支持下建立改变人生的习惯",
+    "智能食物管理，减少浪费，规划健康",
+    "沉浸式专注模式，提供情感支持",
+  ];
+
+  // 定义社交证明数据
+  const socialProof = [
+    { value: "10K+", label: "活跃用户" },
+    { value: "95%", label: "用户满意度" },
+    { value: "4.9", label: "App Store 评分" },
+  ];
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gray-50 text-gray-800">
-      <div className="container mx-auto flex flex-col items-center px-4 py-12 text-center">
-        {/* 你可以把你的 Logo 图片放在 public 文件夹下 */}
-        {/* <img src="/dopamind-logo.png" alt="Dopamind Logo" className="w-24 h-24 mb-4" /> */}
-        
-        <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-          重新定义你的专注与效率
-        </h1>
-        
-        <p className="mt-6 text-lg leading-8 text-gray-600">
-          通过 AI 对话和科学方法，让任务管理变得简单直观。
-          <br />
-          告别传统复杂的任务工具，享受专注带来的成就感。
-        </p>
-        
-        <div className="mt-10 flex items-center justify-center gap-x-6">
-          <a
-            href="#"
-            className="rounded-md bg-orange-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
-          >
-            立即体验
+    <div className="flex min-h-screen flex-col">
+      {/* 1. 导航栏 */}
+      <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/80 backdrop-blur-md">
+        <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
+          <a href="#" className="flex items-center gap-2">
+            <Image src="/dopamind-logo.svg" alt="Dopamind Logo" width={32} height={32} />
+            <span className="text-xl font-bold text-foreground">Dopamind</span>
           </a>
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            了解功能 <span aria-hidden="true">→</span>
-          </a>
+          <nav className="hidden items-center gap-6 md:flex">
+            <a href="#" className="text-sm font-medium text-muted transition-colors hover:text-primary">功能特性</a>
+            <a href="#" className="text-sm font-medium text-muted transition-colors hover:text-primary">价格方案</a>
+            <a href="#" className="text-sm font-medium text-muted transition-colors hover:text-primary">帮助中心</a>
+          </nav>
+          <div className="flex items-center gap-4">
+            <a href="#" className="text-sm font-medium text-muted transition-colors hover:text-primary">登录</a>
+            <a
+              href="#"
+              className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-primary-600"
+            >
+              立即注册
+            </a>
+          </div>
         </div>
-      </div>
-    </main>
+      </header>
+
+      {/* 2. 英雄区域 */}
+      <main className="flex-1">
+        <section className="w-full py-20 md:py-32 lg:py-40 animate-fade-in">
+          <div className="container mx-auto px-4 text-center md:px-6">
+            <div className="mx-auto max-w-3xl space-y-6">
+              <div className="inline-block rounded-lg bg-orange-100 px-3 py-1 text-sm font-medium text-primary animate-fade-in-up">
+                专为 ADHD 用户设计
+              </div>
+              <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl animate-fade-in-up [animation-delay:0.1s]">
+                重新定义你的<span className="text-primary">专注</span>与<span className="text-primary">效率</span>
+              </h1>
+              <p className="text-lg text-muted md:text-xl animate-fade-in-up [animation-delay:0.2s]">
+                通过 AI 对话和科学方法，让任务管理变得简单直观。
+                告别传统复杂的任务工具，享受专注带来的成就感。
+              </p>
+              <div className="flex justify-center gap-4 animate-fade-in-up [animation-delay:0.3s]">
+                <a
+                  href="#"
+                  className="inline-flex h-12 items-center justify-center rounded-xl bg-primary px-8 text-base font-semibold text-white shadow-lg transition-transform hover:scale-105"
+                >
+                  立即体验
+                </a>
+                <a
+                  href="#"
+                  className="inline-flex h-12 items-center justify-center rounded-xl border border-gray-200 bg-white px-8 text-base font-semibold text-muted shadow-lg transition-transform hover:scale-105 hover:bg-gray-100"
+                >
+                  了解功能
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 3. 社交证明区域 */}
+        <section className="w-full bg-gray-100 py-12 md:py-20 animate-fade-in-up [animation-delay:0.4s]">
+          <div className="container mx-auto grid grid-cols-1 gap-8 px-4 text-center md:grid-cols-3 md:px-6">
+            {socialProof.map((item, index) => (
+              <div key={index} className="flex flex-col items-center justify-center">
+                <p className="text-4xl font-bold text-primary">{item.value}</p>
+                <p className="text-sm font-medium text-muted">{item.label}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* 4. 特性介绍区域 */}
+        <section className="w-full py-20 md:py-32">
+          <div className="container mx-auto grid gap-12 px-4 md:grid-cols-2 md:px-6 lg:gap-20">
+            <div className="flex flex-col justify-center space-y-4">
+              <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+                一个真正懂你的 AI 伙伴
+              </h2>
+              <p className="text-muted md:text-lg">
+                Dopamind 不仅仅是一个工具，它被设计成一个充满同理心的教练，帮助你克服执行功能的挑战，并在你最需要的时候提供支持。
+              </p>
+              <ul className="space-y-3 pt-4">
+                {features.map((feature, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
+                    <span className="text-muted">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            {/* 这里可以放一张应用的截图或动画 */}
+            <div className="flex items-center justify-center">
+              <Image 
+                src="/app-screenshot.svg" 
+                alt="App Screenshot" 
+                width={300} 
+                height={600}
+                className="rounded-2xl shadow-2xl"
+              />
+            </div>
+          </div>
+        </section>
+        
+        {/* 5. 最终行动号召 (CTA) */}
+        <section className="w-full bg-gray-900 py-20 md:py-28">
+            <div className="container mx-auto px-4 text-center text-white md:px-6">
+                <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
+                    立即下载 Dopamind
+                </h2>
+                <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-300">
+                    加入成千上万用户的行列，开始你的高效专注之旅。
+                </p>
+                <div className="mt-8 flex justify-center">
+                    {/* 这里可以放 App Store 和 Google Play 的下载按钮 */}
+                    <a href="#">
+                      <Image src="/download-app-store.svg" alt="Download on the App Store" width={160} height={54} />
+                    </a>
+                </div>
+            </div>
+        </section>
+      </main>
+
+      {/* 6. 页脚 */}
+      <footer className="w-full border-t border-gray-200 bg-white py-6">
+        <div className="container mx-auto px-4 text-center text-sm text-muted md:px-6">
+          <p>&copy; {new Date().getFullYear()} Dopamind Inc. All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
   );
 }
