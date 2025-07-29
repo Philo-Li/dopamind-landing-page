@@ -1,0 +1,33 @@
+{
+  "name": "Dopamind - AI Focus Companion",
+  "short_name": "Dopamind",
+  "description": "专为 ADHD 用户设计的 AI 专注伙伴",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F8FAFC",
+  "theme_color": "#F97316",
+  "icons": [
+    {
+      "src": "/dopamind-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/dopamind-logo.png", 
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/dopamind-logo.png",
+      "sizes": "32x32", 
+      "type": "image/png"
+    },
+    {
+      "src": "/dopamind-logo.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["productivity", "health", "lifestyle"]
+}
