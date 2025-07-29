@@ -4,20 +4,21 @@ import { getTranslation } from '../../../../lib/i18n';
 import LanguageSwitcher from '../../../../components/LanguageSwitcher';
 
 interface PrivacyPageProps {
-  params: {
+  params: Promise<{
     locale: string;
-  };
+  }>;
 }
 
-export default function PrivacyPage({ params }: PrivacyPageProps) {
-  const t = getTranslation(params.locale);
+export default async function PrivacyPage({ params }: PrivacyPageProps) {
+  const { locale } = await params;
+  const t = getTranslation(locale);
 
   return (
     <div className="flex min-h-screen flex-col">
       {/* 导航栏 */}
       <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/80 backdrop-blur-md">
         <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
-          <a href={`/${params.locale}`} className="flex items-center gap-2">
+          <a href={`/${locale}`} className="flex items-center gap-2">
             <Image 
               src="/dopamind-logo.png"
               alt="Dopamind Logo" 
@@ -28,13 +29,13 @@ export default function PrivacyPage({ params }: PrivacyPageProps) {
             <span className="text-xl font-bold text-foreground">Dopamind</span>
           </a>
           <nav className="hidden items-center gap-6 md:flex">
-            <a href={`/${params.locale}`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.home}</a>
-            <a href={`/${params.locale}#features`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.features}</a>
-            <a href={`/${params.locale}#pricing`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.pricing}</a>
-            <a href={`/${params.locale}/support`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.support}</a>
+            <a href={`/${locale}`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.home}</a>
+            <a href={`/${locale}#features`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.features}</a>
+            <a href={`/${locale}#pricing`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.pricing}</a>
+            <a href={`/${locale}/support`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.support}</a>
           </nav>
           <div className="flex items-center gap-4">
-            <LanguageSwitcher currentLocale={params.locale} />
+            <LanguageSwitcher currentLocale={locale} />
             <a href="#" className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.login}</a>
             <a
               href="#"
@@ -272,15 +273,15 @@ export default function PrivacyPage({ params }: PrivacyPageProps) {
             <div>
               <h4 className="font-semibold text-foreground mb-3">{t.footer.sections.product}</h4>
               <ul className="space-y-2 text-sm text-muted">
-                <li><a href={`/${params.locale}`} className="hover:text-primary">{t.navigation.home}</a></li>
-                <li><a href={`/${params.locale}#features`} className="hover:text-primary">{t.footer.links.features}</a></li>
-                <li><a href={`/${params.locale}#pricing`} className="hover:text-primary">{t.footer.links.pricing}</a></li>
+                <li><a href={`/${locale}`} className="hover:text-primary">{t.navigation.home}</a></li>
+                <li><a href={`/${locale}#features`} className="hover:text-primary">{t.footer.links.features}</a></li>
+                <li><a href={`/${locale}#pricing`} className="hover:text-primary">{t.footer.links.pricing}</a></li>
               </ul>
             </div>
             <div>
               <h4 className="font-semibold text-foreground mb-3">{t.footer.sections.support}</h4>
               <ul className="space-y-2 text-sm text-muted">
-                <li><a href={`/${params.locale}/support`} className="hover:text-primary">{t.footer.links.supportCenter}</a></li>
+                <li><a href={`/${locale}/support`} className="hover:text-primary">{t.footer.links.supportCenter}</a></li>
                 <li><a href="mailto:support@dopamind.com" className="hover:text-primary">{t.footer.links.contactUs}</a></li>
                 <li><a href="#" className="hover:text-primary">{t.footer.links.status}</a></li>
               </ul>
@@ -288,7 +289,7 @@ export default function PrivacyPage({ params }: PrivacyPageProps) {
             <div>
               <h4 className="font-semibold text-foreground mb-3">{t.footer.sections.legal}</h4>
               <ul className="space-y-2 text-sm text-muted">
-                <li><a href={`/${params.locale}/privacy`} className="hover:text-primary">{t.footer.links.privacy}</a></li>
+                <li><a href={`/${locale}/privacy`} className="hover:text-primary">{t.footer.links.privacy}</a></li>
                 <li><a href="#" className="hover:text-primary">{t.footer.links.terms}</a></li>
                 <li><a href="#" className="hover:text-primary">{t.footer.links.cookies}</a></li>
               </ul>

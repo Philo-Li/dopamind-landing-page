@@ -1,0 +1,229 @@
+{
+  "navigation": {
+    "home": "首页",
+    "features": "功能特性",
+    "pricing": "价格方案",
+    "support": "帮助中心",
+    "login": "登录",
+    "signup": "立即注册"
+  },
+  "hero": {
+    "badge": "专为 ADHD 用户设计",
+    "title": "重新定义你的",
+    "titleHighlight1": "专注",
+    "titleHighlight2": "效率",
+    "subtitle": "通过 AI 对话和科学方法，让任务管理变得简单直观。告别传统复杂的任务工具，享受专注带来的成就感。",
+    "ctaPrimary": "立即体验",
+    "ctaSecondary": "了解功能"
+  },
+  "socialProof": [
+    { "value": "10K+", "label": "活跃用户" },
+    { "value": "95%", "label": "用户满意度" },
+    { "value": "4.9", "label": "App Store 评分" }
+  ],
+  "features": {
+    "title": "一个真正懂你的 AI 伙伴",
+    "subtitle": "Dopamind 不仅仅是一个工具，它被设计成一个充满同理心的教练，帮助你克服执行功能的挑战，并在你最需要的时候提供支持。",
+    "list": [
+      "一个真正懂你的 AI 执行功能教练",
+      "从对话中轻松创建、分解和管理任务",
+      "在 AI 支持下建立改变人生的习惯",
+      "智能食物管理，减少浪费，规划健康",
+      "沉浸式专注模式，提供情感支持"
+    ]
+  },
+  "cta": {
+    "title": "立即下载 Dopamind",
+    "subtitle": "加入成千上万用户的行列，开始你的高效专注之旅。"
+  },
+  "footer": {
+    "description": "专为 ADHD 用户设计的 AI 专注伙伴",
+    "sections": {
+      "product": "产品",
+      "support": "支持",
+      "legal": "法律"
+    },
+    "links": {
+      "features": "功能特性",
+      "pricing": "价格方案",
+      "supportCenter": "帮助中心",
+      "contactUs": "联系我们",
+      "status": "状态页面",
+      "privacy": "隐私政策",
+      "terms": "服务条款",
+      "cookies": "Cookie 政策"
+    },
+    "copyright": "版权所有"
+  },
+  "support": {
+    "title": "Dopamind 支持中心",
+    "subtitle": "我们致力于为您提供最好的使用体验。如果您遇到任何问题或需要帮助，这里有您需要的所有答案。",
+    "contact": {
+      "email": {
+        "title": "邮件支持",
+        "description": "发送邮件至 support@dopamind.com",
+        "response": "24-48小时内回复"
+      },
+      "feedback": {
+        "title": "应用内反馈",
+        "description": "在 App 的「我的」页面找到「意见反馈」"
+      },
+      "guide": {
+        "title": "使用指南",
+        "description": "查看详细的功能使用教程"
+      }
+    },
+    "faq": {
+      "title": "常见问题解答",
+      "categories": {
+        "account": "账户与订阅",
+        "features": "核心功能",
+        "privacy": "隐私与安全",
+        "technical": "技术问题"
+      }
+    },
+    "guides": {
+      "title": "深入了解 Dopamind",
+      "quickStart": {
+        "title": "🚀 快速上手指南",
+        "description": "从零开始，5分钟内掌握 Dopamind 的核心功能"
+      },
+      "aiCoach": {
+        "title": "💡 AI 教练使用技巧",
+        "description": "如何与 AI 教练有效对话，拆解复杂任务"
+      },
+      "focus": {
+        "title": "🧘 专注模式高级设置",
+        "description": "打造你的完美「专注圣所」，提升专注效果"
+      }
+    },
+    "stillNeedHelp": {
+      "title": "仍然需要帮助？",
+      "subtitle": "如果您的问题没有在上方得到解答，或者您有任何功能建议和反馈，我们非常乐意倾听！",
+      "sendEmail": "发送邮件",
+      "responseTime": "我们会在 24-48 小时内回复您的邮件"
+    }
+  },
+  "privacy": {
+    "title": "隐私政策",
+    "subtitle": "您的隐私对我们至关重要。本政策详细说明我们如何收集、使用和保护您的个人信息。",
+    "lastUpdated": "最后更新时间",
+    "sections": {
+      "introduction": {
+        "title": "引言",
+        "content": "欢迎使用 Dopamind！我们致力于为您提供一个安全、可靠的 AI 伙伴，帮助您管理任务、提升专注力。本隐私政策旨在向您说明，当您使用我们的服务时，我们如何收集、使用、保护和处理您的个人信息。"
+      },
+      "dataCollection": {
+        "title": "我们收集的信息",
+        "subtitle": "为了提供和改进服务，我们会收集以下类型的信息：",
+        "directInfo": {
+          "title": "您直接提供的信息",
+          "items": [
+            "账户信息：昵称、电子邮件地址和加密后的密码",
+            "任务和习惯数据：您创建的任务、设定的习惯、完成记录等",
+            "AI 对话记录：您与 Dopamind AI 的对话历史，用于提供个性化建议",
+            "偏好设置：应用设置、通知偏好、主题选择等"
+          ]
+        },
+        "autoInfo": {
+          "title": "自动收集的信息",
+          "items": [
+            "使用数据：应用使用时长、功能使用频率等（已匿名化）",
+            "设备信息：设备型号、操作系统版本、应用版本号",
+            "技术数据：IP 地址、设备标识符（仅用于技术支持）"
+          ]
+        }
+      },
+      "dataUsage": {
+        "title": "我们如何使用您的信息",
+        "items": [
+          {
+            "title": "提供和维护服务",
+            "description": "创建和管理您的账户，同步您的数据，并让您能够使用 App 的所有功能"
+          },
+          {
+            "title": "个性化您的体验",
+            "description": "AI 利用您的任务和对话历史提供更相关、更个性化的建议和鼓励"
+          },
+          {
+            "title": "改进我们的产品",
+            "description": "通过分析匿名使用数据，了解功能使用情况，优化产品设计"
+          },
+          {
+            "title": "与您沟通",
+            "description": "发送重要服务通知、更新信息，或在您联系我们时提供支持"
+          }
+        ]
+      },
+      "dataSharing": {
+        "title": "我们如何分享您的信息",
+        "promise": "我们不会出售、租赁或以其他方式向第三方披露您的个人信息，除以下情况外：",
+        "exceptions": [
+          "服务提供商：我们可能与可信的第三方服务提供商共享必要信息，如云存储、数据分析服务，但他们只能在我们的指示下使用这些信息",
+          "法律要求：在法律要求或为保护我们的权利、财产或安全时，我们可能会披露信息",
+          "业务转让：在合并、收购或资产出售的情况下，您的信息可能会作为业务资产的一部分被转让"
+        ]
+      },
+      "dataSecurity": {
+        "title": "数据安全",
+        "subtitle": "我们采用行业标准的安全措施来保护您的个人信息：",
+        "measures": [
+          {
+            "title": "数据加密",
+            "description": "传输和存储过程中的端到端加密"
+          },
+          {
+            "title": "访问控制",
+            "description": "严格的员工访问权限和审计制度"
+          },
+          {
+            "title": "安全监控",
+            "description": "24/7 安全监控和威胁检测"
+          }
+        ]
+      },
+      "userRights": {
+        "title": "您的权利与选择",
+        "subtitle": "您对您的数据拥有以下权利：",
+        "rights": [
+          {
+            "title": "📋 访问与更新",
+            "description": "您可以随时在 App 的「账户信息」页面查看和修改您的昵称、邮箱和头像"
+          },
+          {
+            "title": "📤 数据导出",
+            "description": "您可以联系我们，请求导出您的个人数据副本"
+          },
+          {
+            "title": "🗑️ 账户删除",
+            "description": "您可以在 App 的「账户信息」页面选择永久删除您的账户。此操作将删除您的所有个人数据，且无法恢复"
+          },
+          {
+            "title": "🔔 推送通知",
+            "description": "您可以随时在设备的系统设置中开启或关闭 Dopamind 的推送通知权限"
+          }
+        ]
+      },
+      "childrenPrivacy": {
+        "title": "儿童隐私",
+        "content": "我们的服务不面向 13 岁以下的儿童。我们不会有意收集 13 岁以下儿童的个人身份信息。如果我们发现无意中收集了此类信息，我们将立即采取措施将其删除。如果您是家长或监护人，并且您知道您的孩子向我们提供了个人信息，请联系我们。"
+      },
+      "policyChanges": {
+        "title": "政策变更",
+        "content": "我们可能会不时更新本隐私政策。如果我们做出重大变更，我们将通过以下方式通知您：",
+        "methods": [
+          "在 App 内显示通知",
+          "向您的注册邮箱发送邮件",
+          "在本网站上发布更新通知"
+        ]
+      },
+      "contact": {
+        "title": "联系我们",
+        "subtitle": "如果您对本隐私政策有任何疑问或疑虑，请随时联系我们：",
+        "email": "privacy@dopamind.com",
+        "support": "support@dopamind.com",
+        "responseTime": "我们会在收到您的询问后 48 小时内回复。"
+      }
+    }
+  }
+}

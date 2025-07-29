@@ -1,0 +1,229 @@
+{
+  "navigation": {
+    "home": "Home",
+    "features": "Features",
+    "pricing": "Pricing",
+    "support": "Support",
+    "login": "Login",
+    "signup": "Sign Up"
+  },
+  "hero": {
+    "badge": "Designed for ADHD Users",
+    "title": "Redefine Your",
+    "titleHighlight1": "Focus",
+    "titleHighlight2": "Efficiency",
+    "subtitle": "Through AI conversations and scientific methods, make task management simple and intuitive. Say goodbye to traditional complex task tools and enjoy the sense of accomplishment that focus brings.",
+    "ctaPrimary": "Get Started",
+    "ctaSecondary": "Learn More"
+  },
+  "socialProof": [
+    { "value": "10K+", "label": "Active Users" },
+    { "value": "95%", "label": "User Satisfaction" },
+    { "value": "4.9", "label": "App Store Rating" }
+  ],
+  "features": {
+    "title": "An AI Companion That Truly Understands You",
+    "subtitle": "Dopamind is more than just a tool—it's designed as an empathetic coach to help you overcome executive function challenges and provide support when you need it most.",
+    "list": [
+      "A truly understanding AI executive function coach",
+      "Easily create, break down, and manage tasks through conversation",
+      "Build life-changing habits with AI support",
+      "Smart food management to reduce waste and plan health",
+      "Immersive focus mode with emotional support"
+    ]
+  },
+  "cta": {
+    "title": "Download Dopamind Now",
+    "subtitle": "Join thousands of users and start your journey to efficient focus."
+  },
+  "footer": {
+    "description": "AI focus companion designed for ADHD users",
+    "sections": {
+      "product": "Product",
+      "support": "Support",
+      "legal": "Legal"
+    },
+    "links": {
+      "features": "Features",
+      "pricing": "Pricing",
+      "supportCenter": "Support Center",
+      "contactUs": "Contact Us",
+      "status": "Status Page",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "cookies": "Cookie Policy"
+    },
+    "copyright": "All rights reserved"
+  },
+  "support": {
+    "title": "Dopamind Support Center",
+    "subtitle": "We are committed to providing you with the best user experience. If you encounter any problems or need help, here are all the answers you need.",
+    "contact": {
+      "email": {
+        "title": "Email Support",
+        "description": "Send email to support@dopamind.com",
+        "response": "Reply within 24-48 hours"
+      },
+      "feedback": {
+        "title": "In-App Feedback",
+        "description": "Find 'Feedback' in the 'My' page of the App"
+      },
+      "guide": {
+        "title": "User Guide",
+        "description": "View detailed feature usage tutorials"
+      }
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "categories": {
+        "account": "Account & Subscription",
+        "features": "Core Features",
+        "privacy": "Privacy & Security",
+        "technical": "Technical Issues"
+      }
+    },
+    "guides": {
+      "title": "Learn More About Dopamind",
+      "quickStart": {
+        "title": "🚀 Quick Start Guide",
+        "description": "Master Dopamind's core features in 5 minutes from scratch"
+      },
+      "aiCoach": {
+        "title": "💡 AI Coach Usage Tips",
+        "description": "How to effectively communicate with AI coach and break down complex tasks"
+      },
+      "focus": {
+        "title": "🧘 Advanced Focus Mode Settings",
+        "description": "Create your perfect 'focus sanctuary' to enhance focus effects"
+      }
+    },
+    "stillNeedHelp": {
+      "title": "Still Need Help?",
+      "subtitle": "If your question hasn't been answered above, or if you have any feature suggestions and feedback, we'd love to hear from you!",
+      "sendEmail": "Send Email",
+      "responseTime": "We will reply to your email within 24-48 hours"
+    }
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "subtitle": "Your privacy is critically important to us. This policy details how we collect, use, and protect your personal information.",
+    "lastUpdated": "Last updated",
+    "sections": {
+      "introduction": {
+        "title": "Introduction",
+        "content": "Welcome to Dopamind! We are committed to providing you with a secure and reliable AI companion to help you manage tasks and enhance focus. This Privacy Policy explains how we collect, use, protect, and handle your personal information when you use our services."
+      },
+      "dataCollection": {
+        "title": "Information We Collect",
+        "subtitle": "To provide and improve our services, we collect the following types of information:",
+        "directInfo": {
+          "title": "Information You Provide Directly",
+          "items": [
+            "Account Information: Nickname, email address, and encrypted password",
+            "Task and Habit Data: Tasks you create, habits you set, completion records, etc.",
+            "AI Conversation Records: Your conversation history with Dopamind AI for personalized suggestions",
+            "Preference Settings: App settings, notification preferences, theme choices, etc."
+          ]
+        },
+        "autoInfo": {
+          "title": "Automatically Collected Information",
+          "items": [
+            "Usage Data: App usage duration, feature usage frequency, etc. (anonymized)",
+            "Device Information: Device model, operating system version, app version",
+            "Technical Data: IP address, device identifiers (for technical support only)"
+          ]
+        }
+      },
+      "dataUsage": {
+        "title": "How We Use Your Information",
+        "items": [
+          {
+            "title": "Provide and Maintain Services",
+            "description": "Create and manage your account, sync your data, and enable you to use all App features"
+          },
+          {
+            "title": "Personalize Your Experience",
+            "description": "AI uses your task and conversation history to provide more relevant, personalized suggestions and encouragement"
+          },
+          {
+            "title": "Improve Our Products",
+            "description": "Analyze anonymous usage data to understand feature usage and optimize product design"
+          },
+          {
+            "title": "Communicate With You",
+            "description": "Send important service notifications, updates, or provide support when you contact us"
+          }
+        ]
+      },
+      "dataSharing": {
+        "title": "How We Share Your Information",
+        "promise": "We do not sell, rent, or otherwise disclose your personal information to third parties, except in the following circumstances:",
+        "exceptions": [
+          "Service Providers: We may share necessary information with trusted third-party service providers, such as cloud storage and data analytics services, but they can only use this information under our direction",
+          "Legal Requirements: We may disclose information when required by law or to protect our rights, property, or safety",
+          "Business Transfers: In the event of a merger, acquisition, or asset sale, your information may be transferred as part of business assets"
+        ]
+      },
+      "dataSecurity": {
+        "title": "Data Security",
+        "subtitle": "We employ industry-standard security measures to protect your personal information:",
+        "measures": [
+          {
+            "title": "Data Encryption",
+            "description": "End-to-end encryption during transmission and storage"
+          },
+          {
+            "title": "Access Control",
+            "description": "Strict employee access permissions and audit systems"
+          },
+          {
+            "title": "Security Monitoring",
+            "description": "24/7 security monitoring and threat detection"
+          }
+        ]
+      },
+      "userRights": {
+        "title": "Your Rights and Choices",
+        "subtitle": "You have the following rights regarding your data:",
+        "rights": [
+          {
+            "title": "📋 Access & Update",
+            "description": "You can view and modify your nickname, email, and avatar anytime in the App's 'Account Information' page"
+          },
+          {
+            "title": "📤 Data Export",
+            "description": "You can contact us to request a copy of your personal data"
+          },
+          {
+            "title": "🗑️ Account Deletion",
+            "description": "You can permanently delete your account in the App's 'Account Information' page. This will delete all your personal data and cannot be recovered"
+          },
+          {
+            "title": "🔔 Push Notifications",
+            "description": "You can enable or disable Dopamind's push notification permissions anytime in your device's system settings"
+          }
+        ]
+      },
+      "childrenPrivacy": {
+        "title": "Children's Privacy",
+        "content": "Our services are not directed at children under 13. We do not knowingly collect personally identifiable information from children under 13. If we discover that we have inadvertently collected such information, we will take immediate steps to delete it. If you are a parent or guardian and you know that your child has provided us with personal information, please contact us."
+      },
+      "policyChanges": {
+        "title": "Policy Changes",
+        "content": "We may update this Privacy Policy from time to time. If we make significant changes, we will notify you through the following methods:",
+        "methods": [
+          "Display notifications in the App",
+          "Send emails to your registered email address",
+          "Post update notices on this website"
+        ]
+      },
+      "contact": {
+        "title": "Contact Us",
+        "subtitle": "If you have any questions or concerns about this Privacy Policy, please feel free to contact us:",
+        "email": "privacy@dopamind.com",
+        "support": "support@dopamind.com",
+        "responseTime": "We will respond to your inquiry within 48 hours."
+      }
+    }
+  }
+}
