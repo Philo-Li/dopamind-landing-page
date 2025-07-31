@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import { Shield, Lock, Eye, Users, Calendar, Mail } from 'lucide-react';
-import { getTranslation } from '../../../../lib/i18n';
+import { getTranslation } from '../../../lib/i18n';
 import LanguageSwitcher from '../../../../components/LanguageSwitcher';
+import AuthButton from '../../../../components/AuthButton';
 
 interface PrivacyPageProps {
   params: Promise<{
@@ -36,13 +37,7 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
           </nav>
           <div className="flex items-center gap-4">
             <LanguageSwitcher currentLocale={locale} />
-            <a href="#" className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.login}</a>
-            <a
-              href="#"
-              className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-primary-600"
-            >
-              {t.navigation.signup}
-            </a>
+            <AuthButton />
           </div>
         </div>
       </header>

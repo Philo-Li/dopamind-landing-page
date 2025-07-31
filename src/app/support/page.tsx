@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { ChevronDown, ChevronUp, Mail, MessageCircle, Book } from 'lucide-react';
 import { useState } from 'react';
+import AuthButton from '../../../components/AuthButton';
 
 export default function SupportPage() {
   return (
@@ -27,13 +28,7 @@ export default function SupportPage() {
             <a href="/support" className="text-sm font-medium text-primary">帮助中心</a>
           </nav>
           <div className="flex items-center gap-4">
-            <a href="#" className="text-sm font-medium text-muted transition-colors hover:text-primary">登录</a>
-            <a
-              href="#"
-              className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-primary-600"
-            >
-              立即注册
-            </a>
+            <AuthButton />
           </div>
         </div>
       </header>

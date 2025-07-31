@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import { CheckCircle, Play, Calendar, Brain, Clock, TrendingUp } from 'lucide-react';
-import { getTranslation } from '../../../lib/i18n';
+import { getTranslation } from '../../lib/i18n';
 import LanguageSwitcher from '../../../components/LanguageSwitcher';
+import AuthButton from '../../../components/AuthButton';
 
 interface HomePageProps {
   params: Promise<{
@@ -35,13 +36,7 @@ export default async function HomePage({ params }: HomePageProps) {
           </nav>
           <div className="flex items-center gap-4">
             <LanguageSwitcher currentLocale={locale} />
-            <a href="#" className="text-sm font-medium text-muted transition-colors hover:text-primary">登录</a>
-            <a
-              href="#"
-              className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-primary-600"
-            >
-              立即注册
-            </a>
+            <AuthButton />
           </div>
         </div>
       </header>

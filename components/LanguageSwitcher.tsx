@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { ChevronDown, Globe } from 'lucide-react';
-import { languageNames, locales, type Locale } from '../lib/i18n';
+import { languageNames, locales, type Locale } from '../src/lib/i18n';
 
 interface LanguageSwitcherProps {
   currentLocale: string;

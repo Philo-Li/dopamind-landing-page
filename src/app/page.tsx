@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { CheckCircle } from 'lucide-react';
+import AuthButton from '../../components/AuthButton';
 
 export default function HomePage() {
   // 定义特性列表，便于管理
@@ -54,13 +55,7 @@ export default function HomePage() {
             <a href="/support" className="text-sm font-medium text-muted transition-colors hover:text-primary">帮助中心</a>
           </nav>
           <div className="flex items-center gap-4">
-            <a href="#" className="text-sm font-medium text-muted transition-colors hover:text-primary">登录</a>
-            <a
-              href="#"
-              className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-primary-600"
-            >
-              立即注册
-            </a>
+            <AuthButton />
           </div>
         </div>
       </header>
