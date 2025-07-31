@@ -15,8 +15,7 @@ import {
   Clock,
   Target,
   Zap,
-  BookOpen,
-  Bell
+  BookOpen
 } from "lucide-react";
 
 interface User {

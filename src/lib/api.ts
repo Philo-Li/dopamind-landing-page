@@ -26,6 +26,17 @@ export interface RegisterResponse {
   };
 }
 
+export interface ProfileResponse {
+  user: {
+    id: string;
+    email: string;
+    nickname: string;
+    avatarUrl?: string;
+    createdAt: string;
+    updatedAt: string;
+  };
+}
+
 export interface ApiError {
   message: string;
 }
@@ -109,8 +120,8 @@ class ApiService {
     });
   }
 
-  async getProfile(token: string) {
-    return this.makeRequest('/api/auth/profile', {
+  async getProfile(token: string): Promise<ProfileResponse> {
+    return this.makeRequest<ProfileResponse>('/api/auth/profile', {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,

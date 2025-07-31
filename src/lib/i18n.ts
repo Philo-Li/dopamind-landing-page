@@ -231,7 +231,7 @@ const translations = {
         title: '专为 ADHD 设计的',
         titleHighlight: 'AI 伙伴',
         subtitle: '您的思绪变为清晰的行动，用最自然的方式——对话，来管理您的整个生活。',
-        downloadText: '立即下载，开启 7 天免费 Premium 试用'
+        downloadText: '立即下载，新用户注册享 7 天免费 Premium 试用'
       },
       features: {
         section1: {
@@ -350,13 +350,13 @@ const translations = {
         cta: {
           monthly: '立即订阅月度方案',
           yearly: '立即订阅年度方案',
-          trial: '7 天免费试用 • 随时取消'
+          trial: '新用户注册即享 7 天免费试用 • 随时取消'
         }
       },
       finalCta: {
         title: '准备好将混乱变为清晰了吗？',
         subtitle: '立即下载 Dopamind，让 AI 成为你最懂你的伙伴。开启专注高效的全新生活方式。',
-        trial: '7 天免费试用 • 随时取消',
+        trial: '新用户注册即享 7 天免费试用 • 随时取消',
         users: '加入超过 10,000 名满意用户',
         stats: [
           { value: '10K+', label: '活跃用户' },
@@ -587,7 +587,7 @@ const translations = {
         title: 'AI Companion',
         titleHighlight: 'Designed for ADHD',
         subtitle: 'Transform your scattered thoughts into clear actions. Manage your entire life through the most natural way—conversation.',
-        downloadText: 'Download now, start your 7-day free Premium trial'
+        downloadText: 'Download now, new users get 7-day free Premium trial'
       },
       features: {
         section1: {
@@ -706,13 +706,13 @@ const translations = {
         cta: {
           monthly: 'Subscribe to Monthly Plan',
           yearly: 'Subscribe to Yearly Plan',
-          trial: '7-day free trial • Cancel anytime'
+          trial: 'New users get 7-day free trial • Cancel anytime'
         }
       },
       finalCta: {
         title: 'Ready to Transform Chaos into Clarity?',
         subtitle: 'Download Dopamind now and let AI become your most understanding companion. Start a new focused and efficient lifestyle.',
-        trial: '7-day free trial • Cancel anytime',
+        trial: 'New users get 7-day free trial • Cancel anytime',
         users: 'Join over 10,000 satisfied users',
         stats: [
           { value: '10K+', label: 'Active Users' },
@@ -943,7 +943,7 @@ const translations = {
         title: 'ADHD向けに設計された',
         titleHighlight: 'AIパートナー',
         subtitle: '散らばった思考を明確な行動に変える。最も自然な方法—会話で、あなたの人生全体を管理します。',
-        downloadText: '今すぐダウンロード、7日間無料プレミアム試用開始'
+        downloadText: '今すぐダウンロード、新規ユーザー登録で7日間無料プレミアム試用'
       },
       features: {
         section1: {
@@ -1062,13 +1062,13 @@ const translations = {
         cta: {
           monthly: '月額プランに登録',
           yearly: '年額プランに登録',
-          trial: '7日間無料試用 • いつでもキャンセル可能'
+          trial: '新規ユーザー登録で7日間無料試用 • いつでもキャンセル可能'
         }
       },
       finalCta: {
         title: '混乱を明晰に変える準備はできましたか？',
         subtitle: '今すぐDopamindをダウンロードし、AIをあなたの最も理解してくれるパートナーにしましょう。集中的で効率的な新しいライフスタイルを始めましょう。',
-        trial: '7日間無料試用 • いつでもキャンセル可能',
+        trial: '新規ユーザー登録で7日間無料試用 • いつでもキャンセル可能',
         users: '10,000人以上の満足ユーザーに参加',
         stats: [
           { value: '10K+', label: 'アクティブユーザー' },

@@ -1,45 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
-
-interface User {
-  id: string;
-  email: string;
-  nickname: string;
-  avatarUrl?: string;
-  createdAt: string;
-  updatedAt: string;
-}
+import { useAuth } from "../src/hooks/useAuth";
 
 export default function AuthButton() {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+  const { user, isLoading, logout } = useAuth();
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    const userData = localStorage.getItem('user');
-    
-    if (token && userData) {
-      try {
-        const parsedUser = JSON.parse(userData);
-        setUser(parsedUser);
-      } catch (error) {
-        console.error('Error parsing user data:', error);
-      }
-    }
-    
-    setLoading(false);
-  }, []);
-
-  const handleSignOut = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    setUser(null);
-    window.location.href = "/";
-  };
-
-  if (loading) {
+  if (isLoading) {
     return <div className="animate-pulse bg-gray-200 h-8 w-16 rounded"></div>;
   }
 
@@ -56,7 +23,7 @@ export default function AuthButton() {
           {user.nickname}
         </span>
         <button
-          onClick={handleSignOut}
+          onClick={logout}
           className="text-sm font-medium text-red-600 hover:text-red-700"
         >
           退出

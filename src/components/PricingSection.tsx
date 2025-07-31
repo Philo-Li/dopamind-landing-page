@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { useRouter } from 'next/navigation';
 import { differenceInDays } from 'date-fns';
-import { CheckCircle, Gift } from 'lucide-react';
+import { CheckCircle, Gift, Crown, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
 import SubscribeButton from './SubscribeButton';
 import { getTranslation } from '../lib/i18n';
@@ -228,6 +228,41 @@ export default function PricingSection({ locale }: PricingSectionProps) {
   }
 
   const selectedPlanData = plans.find(plan => plan.id === selectedPlan)!;
+
+  // 判断用户当前的订阅状态
+  const getUserPlanStatus = () => {
+    if (!user) return null;
+    
+    if (premiumStatus?.isPremium && premiumStatus?.source === 'trial') {
+      return 'trial';
+    }
+    
+    if (premiumStatus?.isPremium && premiumStatus?.source === 'subscription') {
+      // 这里应该根据实际的订阅类型判断，目前默认为yearly
+      // 在实际项目中，可以从premiumStatus中获取具体的计划类型
+      return premiumStatus.planType === 'monthly' ? 'monthly' : 'yearly';
+    }
+    
+    return 'free'; // 免费用户或试用已结束
+  };
+
+  const currentUserPlan = getUserPlanStatus();
+
+  // 判断是否为升级方案
+  const isUpgradePlan = (planId: PlanType) => {
+    if (!user || !currentUserPlan) return false;
+    
+    const planHierarchy = { trial: 0, free: 0, monthly: 1, yearly: 2 };
+    const currentLevel = planHierarchy[currentUserPlan as keyof typeof planHierarchy] || 0;
+    const targetLevel = planHierarchy[planId] || 0;
+    
+    return targetLevel > currentLevel;
+  };
+
+  // 判断是否为当前方案
+  const isCurrentPlan = (planId: PlanType) => {
+    return currentUserPlan === planId;
+  };
 
   return (
     <section id="pricing" className="w-full py-20 md:py-32 bg-gray-50">

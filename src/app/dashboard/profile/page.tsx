@@ -58,7 +58,6 @@ export default function ProfilePage() {
     timezone: '',
     language: ''
   });
-  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const router = useRouter();
 
   useEffect(() => {

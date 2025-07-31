@@ -3,6 +3,7 @@ import { CheckCircle, Calendar, Brain, Clock, TrendingUp, Cloud, RefreshCw, Shie
 import { getTranslation } from '../../lib/i18n';
 import LanguageSwitcher from '../../../components/LanguageSwitcher';
 import AuthButton from '../../../components/AuthButton';
+import PricingSection from '../../components/PricingSection';
 
 interface HomePageProps {
   params: Promise<{
@@ -415,74 +416,7 @@ export default async function HomePage({ params }: HomePageProps) {
         </section>
 
         {/* 7. 定价方案 Section */}
-        <section id="pricing" className="w-full py-20 md:py-32 bg-gray-50">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl mb-4">
-                {t.home.pricing.title}
-              </h2>
-              <p className="text-lg text-muted md:text-xl">
-                {t.home.pricing.subtitle}
-              </p>
-            </div>
-            
-            <div className="flex flex-col lg:flex-row gap-8 max-w-4xl mx-auto">
-              {/* 月度计划 */}
-              <div className="flex-1 pricing-card bg-white rounded-3xl p-8 shadow-lg border-2 border-primary hover:shadow-xl transition-all cursor-pointer" data-plan="monthly">
-                <h3 className="text-2xl font-bold text-foreground mb-2">{t.home.pricing.plans.monthly.title}</h3>
-                <div className="mb-6">
-                  <span className="text-4xl font-bold text-foreground">{t.home.pricing.plans.monthly.price}</span>
-                  <span className="text-muted ml-2">{t.home.pricing.plans.monthly.period}</span>
-                </div>
-                <ul className="space-y-4 mb-8">
-                  {t.home.pricing.plans.monthly.features.map((feature, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
-                      <span className="text-muted">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* 年度计划 */}
-              <div className="flex-1 pricing-card bg-white rounded-3xl p-8 shadow-sm border border-gray-200 hover:shadow-xl transition-all relative cursor-pointer" data-plan="yearly">
-                {/* Most Popular 标签 */}
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-primary text-white px-6 py-2 rounded-full text-sm font-medium shadow-lg">
-                    {t.home.pricing.plans.yearly.badge}
-                  </span>
-                </div>
-                
-                <h3 className="text-2xl font-bold text-foreground mb-2">{t.home.pricing.plans.yearly.title}</h3>
-                <div className="mb-2">
-                  <span className="text-4xl font-bold text-foreground">{t.home.pricing.plans.yearly.price}</span>
-                  <span className="text-muted ml-2">{t.home.pricing.plans.yearly.period}</span>
-                </div>
-                <div className="mb-6">
-                  <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
-                    {t.home.pricing.plans.yearly.discount}
-                  </span>
-                </div>
-                <ul className="space-y-4 mb-8">
-                  {t.home.pricing.plans.yearly.features.map((feature, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
-                      <span className="text-muted">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            {/* 行动号召按钮 */}
-            <div className="text-center mt-12">
-              <button id="subscribe-btn" className="bg-primary hover:bg-primary-600 text-white font-bold py-4 px-8 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 mb-4">
-                {t.home.pricing.cta.monthly}
-              </button>
-              <p className="text-sm text-muted">{t.home.pricing.cta.trial}</p>
-            </div>
-          </div>
-        </section>
+        <PricingSection locale={locale} />
 
         {/* 8. 最终 CTA Section */}
         <section className="w-full py-20 md:py-32 bg-gradient-to-br from-primary/10 to-orange-100 relative overflow-hidden">
@@ -523,72 +457,6 @@ export default async function HomePage({ params }: HomePageProps) {
           </div>
         </section>
       </main>
-
-      {/* 定价切换JavaScript */}
-      <script dangerouslySetInnerHTML={{
-        __html: `
-          document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.pricing-card');
-            const subscribeBtn = document.getElementById('subscribe-btn');
-            let selectedPlan = 'monthly'; // 默认选中月度方案
-            
-            // 获取翻译文本
-            const translations = {
-              monthly: '${t.home.pricing.cta.monthly}',
-              yearly: '${t.home.pricing.cta.yearly}'
-            };
-            
-            // 设置选中状态的函数
-            function setSelectedCard(selectedPlan) {
-              cards.forEach(card => {
-                const plan = card.getAttribute('data-plan');
-                if (plan === selectedPlan) {
-                  // 选中状态：橙色边框，阴影加强
-                  card.style.borderColor = '#F97316';
-                  card.style.borderWidth = '2px';
-                  card.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.25)';
-                  card.style.transform = 'scale(1.02)';
-                } else {
-                  // 未选中状态：灰色边框，普通阴影
-                  card.style.borderColor = '#E5E7EB';
-                  card.style.borderWidth = '1px';
-                  card.style.boxShadow = '0 1px 3px 0 rgba(0, 0, 0, 0.1)';
-                  card.style.transform = 'scale(1)';
-                }
-              });
-              
-              // 更新按钮文案
-              subscribeBtn.textContent = translations[selectedPlan];
-            }
-            
-            // 设置初始状态
-            setSelectedCard('monthly');
-            
-            // 为每个卡片添加点击事件
-            cards.forEach(card => {
-              card.addEventListener('click', function() {
-                selectedPlan = this.getAttribute('data-plan');
-                setSelectedCard(selectedPlan);
-              });
-              
-              // 添加鼠标悬停效果
-              card.addEventListener('mouseenter', function() {
-                if (this.getAttribute('data-plan') !== selectedPlan) {
-                  this.style.transform = 'scale(1.01)';
-                }
-              });
-              
-              card.addEventListener('mouseleave', function() {
-                if (this.getAttribute('data-plan') !== selectedPlan) {
-                  this.style.transform = 'scale(1)';
-                } else {
-                  this.style.transform = 'scale(1.02)';
-                }
-              });
-            });
-          });
-        `
-      }} />
 
       {/* 页脚 */}
       <footer className="w-full border-t border-gray-200 bg-white py-8">

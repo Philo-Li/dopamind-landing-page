@@ -4,33 +4,25 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { apiService } from "../../lib/api";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const { login, isLoading } = useAuth();
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-    setLoading(true);
 
     try {
-      const response = await apiService.login(email, password);
-      
-      // 保存token到localStorage
-      localStorage.setItem('token', response.token);
-      localStorage.setItem('user', JSON.stringify(response.user));
-      
+      await login(email, password);
       // 跳转到仪表板
       router.push("/dashboard");
     } catch (error) {
       setError(error instanceof Error ? error.message : "登录过程中出现错误");
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -113,10 +105,10 @@ export default function LoginPage() {
           <div>
             <button
               type="submit"
-              disabled={loading}
+              disabled={isLoading}
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? "登录中..." : "登录"}
+              {isLoading ? "登录中..." : "登录"}
             </button>
           </div>
 
