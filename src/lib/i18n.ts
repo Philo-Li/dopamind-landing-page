@@ -8,17 +8,899 @@ export const languageNames: Record<Locale, string> = {
   ja: '日本語',
 };
 
-export function getTranslation(locale: string) {
-  // 为了简化，这里返回一个默认的翻译对象结构
-  // 实际项目中应该从翻译文件中加载对应语言的内容
-  return new Proxy({}, {
-    get(target, prop) {
-      // 返回一个递归的代理对象，支持任意深度的属性访问
-      return new Proxy({}, {
-        get(target, prop) {
-          return typeof prop === 'string' ? prop : '';
+// 翻译内容定义
+const translations = {
+  zh: {
+    navigation: {
+      home: '首页',
+      features: '功能特性',
+      howItWorks: '如何使用',
+      pricing: '定价方案', 
+      support: '帮助中心'
+    },
+    privacy: {
+      title: '隐私政策',
+      subtitle: '了解我们如何保护您的个人信息',
+      lastUpdated: '最后更新',
+      sections: {
+        introduction: {
+          title: '简介',
+          content: '我们重视您的隐私。本隐私政策说明了我们如何收集、使用和保护您的个人信息。'
+        },
+        dataCollection: {
+          title: '数据收集',
+          subtitle: '我们会收集以下类型的信息：',
+          directInfo: {
+            title: '您直接提供的信息',
+            items: [
+              '账户信息（邮箱、用户名、密码）',
+              '个人资料信息（姓名、头像等）',
+              '您创建的任务和笔记内容',
+              '与我们的客服通讯记录'
+            ]
+          },
+          autoInfo: {
+            title: '自动收集的信息',
+            items: [
+              '设备信息（操作系统、设备型号等）',
+              '使用统计数据（功能使用频率、会话时长等）',
+              '技术信息（IP地址、浏览器类型等）',
+              '错误日志和性能数据'
+            ]
+          }
+        },
+        dataUsage: {
+          title: '数据使用',
+          items: [
+            {
+              title: '提供服务',
+              description: '处理您的任务管理、AI建议等核心功能'
+            },
+            {
+              title: '改进产品',
+              description: '分析使用模式以优化用户体验'
+            },
+            {
+              title: '客户支持',
+              description: '响应您的问题和技术支持请求'
+            },
+            {
+              title: '安全防护',
+              description: '检测和防止欺诈、滥用等不当行为'
+            }
+          ]
+        },
+        dataSharing: {
+          title: '数据共享',
+          promise: '我们承诺不会出售、租用或交易您的个人信息给任何第三方。',
+          exceptions: [
+            '获得您明确同意的情况下',
+            '遵守法律法规、法院命令或政府要求',
+            '保护我们或他人的权利、财产或安全',
+            '与服务提供商合作（如云服务商），但他们只能按我们的指示使用数据'
+          ]
+        },
+        dataSecurity: {
+          title: '数据安全',
+          subtitle: '我们采用多层安全措施保护您的数据：',
+          measures: [
+            {
+              title: '加密存储',
+              description: '敏感数据使用行业标准加密技术'
+            },
+            {
+              title: '访问控制',
+              description: '严格限制员工对用户数据的访问权限'
+            },
+            {
+              title: '安全审计',
+              description: '定期进行安全评估和漏洞测试'
+            }
+          ]
+        },
+        userRights: {
+          title: '您的权利',
+          subtitle: '根据适用的隐私法律，您享有以下权利：',
+          rights: [
+            {
+              title: '访问权',
+              description: '您可以要求查看我们持有的关于您的个人信息'
+            },
+            {
+              title: '更正权',
+              description: '您可以要求我们更正不准确或不完整的信息'
+            },
+            {
+              title: '删除权',
+              description: '在某些情况下，您可以要求我们删除您的个人信息'
+            },
+            {
+              title: '数据可携权',
+              description: '您可以要求以结构化格式获取您的数据'
+            }
+          ]
+        },
+        childrenPrivacy: {
+          title: '儿童隐私',
+          content: '我们的服务不面向13岁以下的儿童。我们不会故意收集13岁以下儿童的个人信息。如果我们发现收集了此类信息，将立即删除。'
+        },
+        policyChanges: {
+          title: '政策变更',
+          content: '我们可能会不时更新本隐私政策。当我们进行重大变更时，我们会通过以下方式通知您：',
+          methods: [
+            '在应用内发送通知',
+            '向您的注册邮箱发送邮件',
+            '在我们的网站上发布公告'
+          ]
+        },
+        contact: {
+          title: '联系我们',
+          subtitle: '如果您对本隐私政策有任何疑问或需要行使您的权利，请联系我们：',
+          email: 'privacy@dopamind.com',
+          support: 'support@dopamind.com',
+          responseTime: '我们承诺在收到您的询问后7个工作日内回复。'
         }
-      });
+      }
+    },
+    support: {
+      title: '帮助中心',
+      subtitle: '我们随时为您提供帮助'
+    },
+    footer: {
+      description: '专为 ADHD 用户设计的 AI 专注伙伴',
+      copyright: '版权所有',
+      sections: {
+        product: '产品',
+        support: '支持',
+        legal: '法律'
+      },
+      links: {
+        features: '功能特性',
+        pricing: '定价方案',
+        supportCenter: '帮助中心',
+        contactUs: '联系我们',
+        status: '状态页面',
+        privacy: '隐私政策',
+        terms: '服务条款',
+        cookies: 'Cookie 政策'
+      }
+    },
+    home: {
+      hero: {
+        badge: '专为 ADHD 用户设计',
+        title: '专为 ADHD 设计的',
+        titleHighlight: 'AI 伙伴',
+        subtitle: '您的思绪变为清晰的行动，用最自然的方式——对话，来管理您的整个生活。',
+        downloadText: '立即下载，开启 7 天免费 Premium 试用'
+      },
+      features: {
+        section1: {
+          title: '计划，从容不迫',
+          subtitle: '告别杂乱无章的待办清单。Dopamind 的智能任务系统能自动分类、排序，并通过可视化的统计激励你。让你一眼看清重点，轻松应对每一天。',
+          points: [
+            '智能任务分类和优先级排序',
+            '进度可视化，激励持续行动',
+            '告别「不知从何下手」的困扰'
+          ]
+        },
+        section2: {
+          title: '想到说到，即可办到',
+          subtitle: '不再需要繁琐的手动输入。只需说出你的想法，AI 就能理解并立即为你创建任务。支持语音输入，用最自然的方式安排一切。',
+          points: [
+            '智能语音识别，精准理解意图',
+            '自然对话式交互，无需学习成本',
+            '即时任务创建，思维不被打断'
+          ]
+        }
+      },
+      howItWorks: {
+        section1: {
+          title: 'AI 智能拆解，告别拖延',
+          subtitle: '复杂的项目？让 AI 帮你分解成小步骤。每个子任务都清晰可行，让「开始」变得简单，让「完成」变得可能。',
+          example: {
+            title: '示例：准备面试',
+            steps: [
+              '1. 准备一份整洁的简历',
+              '2. 调查公司背景信息',
+              '3. 准备常见面试问题答案'
+            ]
+          }
+        },
+        section2: {
+          title: '沉浸式专注模式',
+          subtitle: '屏蔽干扰，进入心流状态。专注计时器配合温和的提醒，帮你建立高效的工作节奏，每一分钟都有价值。',
+          stats: [
+            { value: '25', label: '分钟专注' },
+            { value: '5', label: '分钟休息' },
+            { value: '4', label: '轮循环' }
+          ]
+        }
+      },
+      globalView: {
+        title: '鸟瞰你的全局计划',
+        subtitle: '任务不再是孤立的点，而是在日历上清晰可见的时间线。直观地回顾过去，规划未来。AI 还能根据您一天的活动，为您生成一份专属的每日报告，提供深刻洞察。',
+        badges: ['AI 日报生成', '智能提醒']
+      },
+      beyondTasks: {
+        title: '不止任务，更是您的生活操作系统',
+        subtitle: 'Dopamind 不仅帮你管理工作，更关注你的整个生活质量',
+        features: [
+          {
+            title: '习惯养成',
+            description: '用热力图见证复利的力量，建立积极的多巴胺循环。每一个小习惯都是通向更好自己的垫脚石。'
+          },
+          {
+            title: '智能冰箱管家',
+            description: '随手记录食材，智能提醒过期时间。告别「过期惊喜」，让健康饮食变得简单可控。'
+          },
+          {
+            title: '订阅追踪',
+            description: '轻松追踪所有订阅服务，告别意外扣费。掌控你的每一笔订阅，让财务管理变得透明简单。'
+          }
+        ]
+      },
+      cloudSync: {
+        title: '云端同步，随时随地',
+        subtitle: '您的数据安全储存在云端，在所有设备间无缝同步，让您的生活管理不受设备限制。',
+        features: [
+          {
+            title: '实时同步',
+            description: '在手机上添加的任务，立即出现在平板和电脑上。跨设备协作，让您的计划始终保持最新状态。'
+          },
+          {
+            title: '安全备份',
+            description: '企业级加密保护您的隐私数据，自动备份防止意外丢失。您的信息安全是我们的首要任务。'
+          },
+          {
+            title: '云端同步',
+            description: '在所有设备间无缝同步数据，永不丢失。无论您使用哪台设备，都能访问完整的任务和数据。'
+          }
+        ]
+      },
+      pricing: {
+        title: '选择适合您的方案',
+        subtitle: '解锁完整功能，开启高效生活方式',
+        plans: {
+          monthly: {
+            title: 'Monthly',
+            price: '$14.99',
+            period: 'USD / month',
+            features: [
+              '所有高级功能',
+              '无限任务和项目',
+              '云端同步备份',
+              'AI 智能建议'
+            ]
+          },
+          yearly: {
+            title: 'Yearly',
+            price: '$159.99',
+            period: 'USD / year',
+            badge: 'Most Popular',
+            discount: 'Save 12%',
+            features: [
+              '所有高级功能',
+              '无限任务和项目',
+              '云端同步备份',
+              'AI 智能建议',
+              '优先客户支持'
+            ]
+          }
+        },
+        cta: {
+          monthly: '立即订阅月度方案',
+          yearly: '立即订阅年度方案',
+          trial: '7 天免费试用 • 随时取消'
+        }
+      },
+      finalCta: {
+        title: '准备好将混乱变为清晰了吗？',
+        subtitle: '立即下载 Dopamind，让 AI 成为你最懂你的伙伴。开启专注高效的全新生活方式。',
+        trial: '7 天免费试用 • 随时取消',
+        users: '加入超过 10,000 名满意用户',
+        stats: [
+          { value: '10K+', label: '活跃用户' },
+          { value: '95%', label: '用户满意度' },
+          { value: '4.9', label: 'App Store 评分' }
+        ]
+      }
     }
-  });
+  },
+  en: {
+    navigation: {
+      home: 'Home',
+      features: 'Features',
+      howItWorks: 'How It Works',
+      pricing: 'Pricing',
+      support: 'Support'
+    },
+    privacy: {
+      title: 'Privacy Policy',
+      subtitle: 'Learn how we protect your personal information',
+      lastUpdated: 'Last Updated',
+      sections: {
+        introduction: {
+          title: 'Introduction',
+          content: 'We value your privacy. This privacy policy explains how we collect, use and protect your personal information.'
+        },
+        dataCollection: {
+          title: 'Data Collection',
+          subtitle: 'We collect the following types of information:',
+          directInfo: {
+            title: 'Information you provide directly',
+            items: [
+              'Account information (email, username, password)',
+              'Profile information (name, avatar, etc.)',
+              'Tasks and notes content you create',
+              'Communication records with our customer service'
+            ]
+          },
+          autoInfo: {
+            title: 'Automatically collected information',
+            items: [
+              'Device information (OS, device model, etc.)',
+              'Usage statistics (feature usage frequency, session duration, etc.)',
+              'Technical information (IP address, browser type, etc.)',
+              'Error logs and performance data'
+            ]
+          }
+        },
+        dataUsage: {
+          title: 'Data Usage',
+          items: [
+            {
+              title: 'Service Provision',
+              description: 'Process your task management, AI suggestions and other core features'
+            },
+            {
+              title: 'Product Improvement',
+              description: 'Analyze usage patterns to optimize user experience'
+            },
+            {
+              title: 'Customer Support',
+              description: 'Respond to your questions and technical support requests'
+            },
+            {
+              title: 'Security Protection',
+              description: 'Detect and prevent fraud, abuse and other inappropriate behavior'
+            }
+          ]
+        },
+        dataSharing: {
+          title: 'Data Sharing',
+          promise: 'We promise not to sell, rent or trade your personal information to any third parties.',
+          exceptions: [
+            'With your explicit consent',
+            'To comply with laws, court orders or government requirements',
+            'To protect our or others\' rights, property or safety',
+            'With service providers (such as cloud providers), but they can only use data as instructed by us'
+          ]
+        },
+        dataSecurity: {
+          title: 'Data Security',
+          subtitle: 'We employ multi-layered security measures to protect your data:',
+          measures: [
+            {
+              title: 'Encrypted Storage',
+              description: 'Sensitive data uses industry-standard encryption technology'
+            },
+            {
+              title: 'Access Control',
+              description: 'Strictly limit employee access to user data'
+            },
+            {
+              title: 'Security Audits',
+              description: 'Regular security assessments and vulnerability testing'
+            }
+          ]
+        },
+        userRights: {
+          title: 'Your Rights',
+          subtitle: 'Under applicable privacy laws, you have the following rights:',
+          rights: [
+            {
+              title: 'Right of Access',
+              description: 'You can request to view the personal information we hold about you'
+            },
+            {
+              title: 'Right of Rectification',
+              description: 'You can request us to correct inaccurate or incomplete information'
+            },
+            {
+              title: 'Right of Erasure',
+              description: 'In certain circumstances, you can request us to delete your personal information'
+            },
+            {
+              title: 'Right to Data Portability',
+              description: 'You can request to receive your data in a structured format'
+            }
+          ]
+        },
+        childrenPrivacy: {
+          title: 'Children\'s Privacy',
+          content: 'Our service is not directed to children under 13. We do not knowingly collect personal information from children under 13. If we discover we have collected such information, we will delete it immediately.'
+        },
+        policyChanges: {
+          title: 'Policy Changes',
+          content: 'We may update this privacy policy from time to time. When we make significant changes, we will notify you through the following methods:',
+          methods: [
+            'Send notifications within the app',
+            'Send emails to your registered email address',
+            'Post announcements on our website'
+          ]
+        },
+        contact: {
+          title: 'Contact Us',
+          subtitle: 'If you have any questions about this privacy policy or need to exercise your rights, please contact us:',
+          email: 'privacy@dopamind.com',
+          support: 'support@dopamind.com',
+          responseTime: 'We promise to respond to your inquiry within 7 business days.'
+        }
+      }
+    },
+    support: {
+      title: 'Help Center',
+      subtitle: 'We are here to help you'
+    },
+    footer: {
+      description: 'AI focus companion designed for ADHD users',
+      copyright: 'All rights reserved',
+      sections: {
+        product: 'Product',
+        support: 'Support',
+        legal: 'Legal'
+      },
+      links: {
+        features: 'Features',
+        pricing: 'Pricing',
+        supportCenter: 'Help Center',
+        contactUs: 'Contact Us',
+        status: 'Status Page',
+        privacy: 'Privacy Policy',
+        terms: 'Terms of Service',
+        cookies: 'Cookie Policy'
+      }
+    },
+    home: {
+      hero: {
+        badge: 'Designed for ADHD Users',
+        title: 'AI Companion',
+        titleHighlight: 'Designed for ADHD',
+        subtitle: 'Transform your scattered thoughts into clear actions. Manage your entire life through the most natural way—conversation.',
+        downloadText: 'Download now, start your 7-day free Premium trial'
+      },
+      features: {
+        section1: {
+          title: 'Plan with Confidence',
+          subtitle: 'Say goodbye to chaotic to-do lists. Dopamind\'s intelligent task system automatically categorizes, prioritizes, and motivates you with visual statistics. See priorities at a glance and tackle each day with ease.',
+          points: [
+            'Smart task categorization and priority sorting',
+            'Progress visualization for continuous motivation',
+            'Eliminate the "where to start" confusion'
+          ]
+        },
+        section2: {
+          title: 'Think It, Say It, Get It Done',
+          subtitle: 'No more tedious manual input. Just speak your thoughts, and AI will understand and instantly create tasks for you. Voice input supported for the most natural way to organize everything.',
+          points: [
+            'Smart voice recognition with precise intent understanding',
+            'Natural conversational interaction, no learning curve',
+            'Instant task creation without interrupting your flow'
+          ]
+        }
+      },
+      howItWorks: {
+        section1: {
+          title: 'AI Smart Breakdown, Beat Procrastination',
+          subtitle: 'Complex projects? Let AI break them down into small steps. Each sub-task is clear and actionable, making "getting started" simple and "finishing" possible.',
+          example: {
+            title: 'Example: Preparing for Interview',
+            steps: [
+              '1. Prepare a clean resume',
+              '2. Research company background',
+              '3. Prepare answers to common interview questions'
+            ]
+          }
+        },
+        section2: {
+          title: 'Immersive Focus Mode',
+          subtitle: 'Block distractions, enter flow state. Focus timer with gentle reminders helps you build efficient work rhythm where every minute counts.',
+          stats: [
+            { value: '25', label: 'min focus' },
+            { value: '5', label: 'min break' },
+            { value: '4', label: 'cycles' }
+          ]
+        }
+      },
+      globalView: {
+        title: 'Bird\'s Eye View of Your Master Plan',
+        subtitle: 'Tasks are no longer isolated dots, but clear timelines visible on your calendar. Intuitively review the past, plan the future. AI can also generate personalized daily reports based on your day\'s activities, providing deep insights.',
+        badges: ['AI Daily Reports', 'Smart Reminders']
+      },
+      beyondTasks: {
+        title: 'Beyond Tasks, Your Life Operating System',
+        subtitle: 'Dopamind doesn\'t just help you manage work, it cares about your entire life quality',
+        features: [
+          {
+            title: 'Habit Building',
+            description: 'Witness the power of compound interest through heat maps, building positive dopamine loops. Every small habit is a stepping stone to a better you.'
+          },
+          {
+            title: 'Smart Fridge Manager',
+            description: 'Easily record ingredients, smart expiration reminders. Say goodbye to "expiry surprises" and make healthy eating simple and controllable.'
+          },
+          {
+            title: 'Subscription Tracking',
+            description: 'Easily track all subscription services, avoid unexpected charges. Control every subscription and make financial management transparent and simple.'
+          }
+        ]
+      },
+      cloudSync: {
+        title: 'Cloud Sync, Anywhere, Anytime',
+        subtitle: 'Your data is securely stored in the cloud and seamlessly synced across all devices, making your life management unrestricted by devices.',
+        features: [
+          {
+            title: 'Real-time Sync',
+            description: 'Tasks added on your phone instantly appear on your tablet and computer. Cross-device collaboration keeps your plans always up-to-date.'
+          },
+          {
+            title: 'Secure Backup',
+            description: 'Enterprise-grade encryption protects your private data, automatic backup prevents accidental loss. Your information security is our top priority.'
+          },
+          {
+            title: 'Cloud Sync',
+            description: 'Seamlessly sync data across all devices, never lose anything. Access complete tasks and data no matter which device you use.'
+          }
+        ]
+      },
+      pricing: {
+        title: 'Choose Your Perfect Plan',
+        subtitle: 'Unlock full features, start your efficient lifestyle',
+        plans: {
+          monthly: {
+            title: 'Monthly',
+            price: '$14.99',
+            period: 'USD / month',
+            features: [
+              'All premium features',
+              'Unlimited tasks and projects',
+              'Cloud sync backup',
+              'AI smart suggestions'
+            ]
+          },
+          yearly: {
+            title: 'Yearly',
+            price: '$159.99',
+            period: 'USD / year',
+            badge: 'Most Popular',
+            discount: 'Save 12%',
+            features: [
+              'All premium features',
+              'Unlimited tasks and projects',
+              'Cloud sync backup',
+              'AI smart suggestions',
+              'Priority customer support'
+            ]
+          }
+        },
+        cta: {
+          monthly: 'Subscribe to Monthly Plan',
+          yearly: 'Subscribe to Yearly Plan',
+          trial: '7-day free trial • Cancel anytime'
+        }
+      },
+      finalCta: {
+        title: 'Ready to Transform Chaos into Clarity?',
+        subtitle: 'Download Dopamind now and let AI become your most understanding companion. Start a new focused and efficient lifestyle.',
+        trial: '7-day free trial • Cancel anytime',
+        users: 'Join over 10,000 satisfied users',
+        stats: [
+          { value: '10K+', label: 'Active Users' },
+          { value: '95%', label: 'User Satisfaction' },
+          { value: '4.9', label: 'App Store Rating' }
+        ]
+      }
+    }
+  },
+  ja: {
+    navigation: {
+      home: 'ホーム',
+      features: '機能',
+      howItWorks: '使い方',
+      pricing: '料金',
+      support: 'サポート'
+    },
+    privacy: {
+      title: 'プライバシーポリシー',
+      subtitle: '個人情報の保護について',
+      lastUpdated: '最終更新',
+      sections: {
+        introduction: {
+          title: '紹介',
+          content: '私たちはあなたのプライバシーを大切にします。このプライバシーポリシーは、個人情報の収集、使用、保護方法について説明します。'
+        },
+        dataCollection: {
+          title: 'データ収集',
+          subtitle: '以下の種類の情報を収集します：',
+          directInfo: {
+            title: '直接提供していただく情報',
+            items: [
+              'アカウント情報（メール、ユーザー名、パスワード）',
+              'プロフィール情報（名前、アバターなど）',
+              '作成したタスクやメモの内容',
+              'カスタマーサービスとのやり取り記録'
+            ]
+          },
+          autoInfo: {
+            title: '自動的に収集される情報',
+            items: [
+              'デバイス情報（OS、デバイスモデルなど）',
+              '使用統計（機能使用頻度、セッション時間など）',
+              '技術情報（IPアドレス、ブラウザタイプなど）',
+              'エラーログとパフォーマンスデータ'
+            ]
+          }
+        },
+        dataUsage: {
+          title: 'データ使用',
+          items: [
+            {
+              title: 'サービス提供',
+              description: 'タスク管理、AI提案などの核心機能を処理'
+            },
+            {
+              title: '製品改善',
+              description: 'ユーザー体験を最適化するための使用パターン分析'
+            },
+            {
+              title: 'カスタマーサポート',
+              description: 'お客様の質問や技術サポート要求への対応'
+            },
+            {
+              title: 'セキュリティ保護',
+              description: '詐欺、悪用などの不適切な行為の検出と防止'
+            }
+          ]
+        },
+        dataSharing: {
+          title: 'データ共有',
+          promise: '個人情報を第三者に販売、賃貸、取引することはありません。',
+          exceptions: [
+            'お客様の明示的な同意がある場合',
+            '法律、裁判所命令、政府要求に従う場合',
+            '当社または他者の権利、財産、安全を保護する場合',
+            'サービスプロバイダー（クラウドプロバイダーなど）との協力時（当社の指示に従う場合のみ）'
+          ]
+        },
+        dataSecurity: {
+          title: 'データセキュリティ',
+          subtitle: 'データ保護のため多層的なセキュリティ対策を採用：',
+          measures: [
+            {
+              title: '暗号化ストレージ',
+              description: '機密データは業界標準の暗号化技術を使用'
+            },
+            {
+              title: 'アクセス制御',
+              description: '従業員のユーザーデータへのアクセスを厳格制限'
+            },
+            {
+              title: 'セキュリティ監査',
+              description: '定期的なセキュリティ評価と脆弱性テスト'
+            }
+          ]
+        },
+        userRights: {
+          title: 'お客様の権利',
+          subtitle: '適用されるプライバシー法に基づき、以下の権利があります：',
+          rights: [
+            {
+              title: 'アクセス権',
+              description: '当社が保有するお客様の個人情報の閲覧を要求できます'
+            },
+            {
+              title: '訂正権',
+              description: '不正確または不完全な情報の訂正を要求できます'
+            },
+            {
+              title: '削除権',
+              description: '特定の状況下で個人情報の削除を要求できます'
+            },
+            {
+              title: 'データポータビリティ権',
+              description: '構造化された形式でデータを受け取ることを要求できます'
+            }
+          ]
+        },
+        childrenPrivacy: {
+          title: '児童のプライバシー',
+          content: '当サービスは13歳未満の児童を対象としていません。13歳未満の児童から故意に個人情報を収集することはありません。このような情報を収集したことが判明した場合、直ちに削除いたします。'
+        },
+        policyChanges: {
+          title: 'ポリシー変更',
+          content: 'このプライバシーポリシーを随時更新する場合があります。重要な変更を行う際は、以下の方法でお知らせします：',
+          methods: [
+            'アプリ内通知の送信',
+            '登録メールアドレスへのメール送信',
+            'ウェブサイトでのお知らせ掲載'
+          ]
+        },
+        contact: {
+          title: 'お問い合わせ',
+          subtitle: 'このプライバシーポリシーについてご質問がある場合や権利を行使したい場合は、お問い合わせください：',
+          email: 'privacy@dopamind.com',
+          support: 'support@dopamind.com',
+          responseTime: 'お問い合わせから7営業日以内にご回答いたします。'
+        }
+      }
+    },
+    support: {
+      title: 'ヘルプセンター',
+      subtitle: 'いつでもサポートいたします'
+    },
+    footer: {
+      description: 'ADHD用户向けに設計されたAI集中パートナー',
+      copyright: '全権利保留',
+      sections: {
+        product: '製品',
+        support: 'サポート',
+        legal: '法的事項'
+      },
+      links: {
+        features: '機能',
+        pricing: '料金',
+        supportCenter: 'ヘルプセンター',
+        contactUs: 'お問い合わせ',
+        status: 'ステータスページ',
+        privacy: 'プライバシーポリシー',
+        terms: '利用規約',
+        cookies: 'Cookieポリシー'
+      }
+    },
+    home: {
+      hero: {
+        badge: 'ADHD用户向けに設計',
+        title: 'ADHD向けに設計された',
+        titleHighlight: 'AIパートナー',
+        subtitle: '散らばった思考を明確な行動に変える。最も自然な方法—会話で、あなたの人生全体を管理します。',
+        downloadText: '今すぐダウンロード、7日間無料プレミアム試用開始'
+      },
+      features: {
+        section1: {
+          title: '計画、余裕を持って',
+          subtitle: '散らかったToDoリストに別れを告げましょう。Dopamindのインテリジェントタスクシステムが自動的に分類・優先順位付けし、視覚的な統計でモチベーションを向上させます。重要なことが一目でわかり、毎日を楽に対処できます。',
+          points: [
+            'スマートタスク分類と優先順位設定',
+            '進捗の可視化で継続的なモチベーション',
+            '「どこから始めればいいかわからない」悩みを解消'
+          ]
+        },
+        section2: {
+          title: '思ったら言うだけ、すぐ実行',
+          subtitle: '面倒な手動入力はもう不要。あなたの考えを話すだけで、AIが理解し、即座にタスクを作成します。音声入力対応で、最も自然な方法ですべてを整理できます。',
+          points: [
+            'スマート音声認識で意図を正確に理解',
+            '自然な会話式インタラクション、学習コスト不要',
+            '思考を中断せずに即座にタスク作成'
+          ]
+        }
+      },
+      howItWorks: {
+        section1: {
+          title: 'AI スマートな分解で先延ばしを撃退',
+          subtitle: '複雑なプロジェクト？AIが小さなステップに分解します。各サブタスクは明確で実行可能、「始める」ことを簡単に、「完了」を可能にします。',
+          example: {
+            title: '例：面接準備',
+            steps: [
+              '1. きれいな履歴書を準備',
+              '2. 会社の背景情報を調査',
+              '3. よくある面接質問の回答を準備'
+            ]
+          }
+        },
+        section2: {
+          title: '没入型集中モード',
+          subtitle: '妨害をブロックし、フロー状態に入る。優しいリマインダー付きの集中タイマーで効率的な作業リズムを構築、すべての分が価値あるものになります。',
+          stats: [
+            { value: '25', label: '分集中' },
+            { value: '5', label: '分休憩' },
+            { value: '4', label: '回サイクル' }
+          ]
+        }
+      },
+      globalView: {
+        title: 'あなたの全体計画を鳥瞰',
+        subtitle: 'タスクはもはや孤立した点ではなく、カレンダー上に明確に見えるタイムライン。過去を直感的に振り返り、未来を計画。AIはあなたの一日の活動に基づいて専用の日次レポートを生成し、深い洞察を提供します。',
+        badges: ['AI日次レポート生成', 'スマートリマインダー']
+      },
+      beyondTasks: {
+        title: 'タスクを超えて、あなたの生活OS',
+        subtitle: 'Dopamindは仕事の管理だけでなく、あなたの生活の質全体をケアします',
+        features: [
+          {
+            title: '習慣形成',
+            description: 'ヒートマップで複利の力を見証し、ポジティブなドーパミンループを構築。小さな習慣一つ一つが、より良い自分への足がかりです。'
+          },
+          {
+            title: 'スマート冷蔵庫マネージャー',
+            description: '食材を手軽に記録、スマートな賞味期限リマインダー。「期限切れサプライズ」に別れを告げ、健康的な食事を簡単にコントロール。'
+          },
+          {
+            title: 'サブスクリプション追跡',
+            description: 'すべてのサブスクリプションサービスを簡単に追跡、予期しない請求を回避。すべてのサブスクリプションをコントロールし、財務管理を透明で簡単に。'
+          }
+        ]
+      },
+      cloudSync: {
+        title: 'クラウド同期、いつでもどこでも',
+        subtitle: 'あなたのデータはクラウドに安全に保存され、すべてのデバイス間でシームレスに同期。デバイスに制限されない生活管理を実現します。',
+        features: [
+          {
+            title: 'リアルタイム同期',
+            description: 'スマートフォンで追加したタスクが、即座にタブレットやコンピューターに表示。デバイス間連携で、計画を常に最新状態に保ちます。'
+          },
+          {
+            title: 'セキュアバックアップ',
+            description: 'エンタープライズレベルの暗号化でプライベートデータを保護、自動バックアップで偶発的な損失を防ぎます。あなたの情報セキュリティが最優先です。'
+          },
+          {
+            title: 'クラウド同期',
+            description: 'すべてのデバイス間でデータをシームレスに同期、何も失いません。どのデバイスを使用しても完全なタスクとデータにアクセス可能。'
+          }
+        ]
+      },
+      pricing: {
+        title: 'あなたにぴったりのプランを選択',
+        subtitle: 'すべての機能をアンロック、効率的なライフスタイルを始めましょう',
+        plans: {
+          monthly: {
+            title: 'Monthly',
+            price: '$14.99',
+            period: 'USD / month',
+            features: [
+              'すべてのプレミアム機能',
+              '無制限のタスクとプロジェクト',
+              'クラウド同期バックアップ',
+              'AIスマート提案'
+            ]
+          },
+          yearly: {
+            title: 'Yearly',
+            price: '$159.99',
+            period: 'USD / year',
+            badge: 'Most Popular',
+            discount: '12%節約',
+            features: [
+              'すべてのプレミアム機能',
+              '無制限のタスクとプロジェクト',
+              'クラウド同期バックアップ',
+              'AIスマート提案',
+              '優先カスタマーサポート'
+            ]
+          }
+        },
+        cta: {
+          monthly: '月額プランに登録',
+          yearly: '年額プランに登録',
+          trial: '7日間無料試用 • いつでもキャンセル可能'
+        }
+      },
+      finalCta: {
+        title: '混乱を明晰に変える準備はできましたか？',
+        subtitle: '今すぐDopamindをダウンロードし、AIをあなたの最も理解してくれるパートナーにしましょう。集中的で効率的な新しいライフスタイルを始めましょう。',
+        trial: '7日間無料試用 • いつでもキャンセル可能',
+        users: '10,000人以上の満足ユーザーに参加',
+        stats: [
+          { value: '10K+', label: 'アクティブユーザー' },
+          { value: '95%', label: 'ユーザー満足度' },
+          { value: '4.9', label: 'App Store評価' }
+        ]
+      }
+    }
+  }
+};
+
+export function getTranslation(locale: string) {
+  const validLocale = locales.includes(locale as Locale) ? locale as Locale : defaultLocale;
+  return translations[validLocale];
 }
