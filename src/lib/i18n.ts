@@ -144,7 +144,67 @@ const translations = {
     },
     support: {
       title: '帮助中心',
-      subtitle: '我们随时为您提供帮助'
+      subtitle: '我们随时为您提供帮助',
+      contact: {
+        email: {
+          title: '邮件支持',
+          description: '发送邮件至 support@dopamind.com',
+          response: '24小时内回复'
+        },
+        feedback: {
+          title: '产品反馈',
+          description: '分享您的建议和想法'
+        },
+        guide: {
+          title: '使用文档',
+          description: '查看详细的功能说明'
+        }
+      },
+      faq: {
+        title: '常见问题',
+        categories: {
+          account: '账户相关'
+        },
+        items: [
+          {
+            question: '如何开始使用 Dopamind？',
+            answer: '下载应用后，只需注册账户即可开始。系统会自动为您提供7天免费试用期。'
+          },
+          {
+            question: '支持哪些平台？',
+            answer: '目前支持 iOS 平台，Android 版本正在开发中。'
+          },
+          {
+            question: '数据安全吗？',
+            answer: '是的，我们使用企业级加密技术保护您的数据，所有信息都安全存储在云端。'
+          },
+          {
+            question: '可以取消订阅吗？',
+            answer: '可以随时在设置中取消订阅，取消后仍可使用到当前付费周期结束。'
+          }
+        ]
+      },
+      guides: {
+        title: '功能指南',
+        quickStart: {
+          title: '快速开始',
+          description: '5分钟了解 Dopamind 的核心功能'
+        },
+        aiCoach: {
+          title: 'AI 教练',
+          description: '如何与 AI 有效沟通获得最佳建议'
+        },
+        focus: {
+          title: '专注模式',
+          description: '番茄工作法和深度工作技巧'
+        }
+      },
+      stillNeedHelp: {
+        title: '仍需要帮助？',
+        subtitle: '我们的支持团队随时为您服务，通常在24小时内回复。',
+        sendEmail: '发送邮件',
+        responseTime: '我们会在 24-48 小时内回复您的邮件'
+      }
     },
     footer: {
       description: '专为 ADHD 用户设计的 AI 专注伙伴',
@@ -440,7 +500,67 @@ const translations = {
     },
     support: {
       title: 'Help Center',
-      subtitle: 'We are here to help you'
+      subtitle: 'We are here to help you',
+      contact: {
+        email: {
+          title: 'Email Support',
+          description: 'Send email to support@dopamind.com',
+          response: 'Reply within 24 hours'
+        },
+        feedback: {
+          title: 'Product Feedback',
+          description: 'Share your suggestions and ideas'
+        },
+        guide: {
+          title: 'Documentation',
+          description: 'View detailed feature instructions'
+        }
+      },
+      faq: {
+        title: 'Frequently Asked Questions',
+        categories: {
+          account: 'Account Related'
+        },
+        items: [
+          {
+            question: 'How to get started with Dopamind?',
+            answer: 'After downloading the app, simply register an account to get started. The system will automatically provide a 7-day free trial.'
+          },
+          {
+            question: 'Which platforms are supported?',
+            answer: 'Currently supports iOS platform, Android version is under development.'
+          },
+          {
+            question: 'Is my data secure?',
+            answer: 'Yes, we use enterprise-grade encryption to protect your data, all information is securely stored in the cloud.'
+          },
+          {
+            question: 'Can I cancel my subscription?',
+            answer: 'You can cancel your subscription anytime in settings, and continue using until the current billing period ends.'
+          }
+        ]
+      },
+      guides: {
+        title: 'Feature Guides',
+        quickStart: {
+          title: 'Quick Start',
+          description: 'Learn Dopamind&apos;s core features in 5 minutes'
+        },
+        aiCoach: {
+          title: 'AI Coach',
+          description: 'How to communicate effectively with AI for best advice'
+        },
+        focus: {
+          title: 'Focus Mode',
+          description: 'Pomodoro technique and deep work tips'
+        }
+      },
+      stillNeedHelp: {
+        title: 'Still Need Help?',
+        subtitle: 'Our support team is always here for you, usually responding within 24 hours.',
+        sendEmail: 'Send Email',
+        responseTime: 'We typically respond within 24-48 hours'
+      }
     },
     footer: {
       description: 'AI focus companion designed for ADHD users',
@@ -513,13 +633,13 @@ const translations = {
         }
       },
       globalView: {
-        title: 'Bird\'s Eye View of Your Master Plan',
-        subtitle: 'Tasks are no longer isolated dots, but clear timelines visible on your calendar. Intuitively review the past, plan the future. AI can also generate personalized daily reports based on your day\'s activities, providing deep insights.',
+        title: 'Bird&apos;s Eye View of Your Master Plan',
+        subtitle: 'Tasks are no longer isolated dots, but clear timelines visible on your calendar. Intuitively review the past, plan the future. AI can also generate personalized daily reports based on your day&apos;s activities, providing deep insights.',
         badges: ['AI Daily Reports', 'Smart Reminders']
       },
       beyondTasks: {
         title: 'Beyond Tasks, Your Life Operating System',
-        subtitle: 'Dopamind doesn\'t just help you manage work, it cares about your entire life quality',
+        subtitle: 'Dopamind doesn&apos;t just help you manage work, it cares about your entire life quality',
         features: [
           {
             title: 'Habit Building',
@@ -736,7 +856,67 @@ const translations = {
     },
     support: {
       title: 'ヘルプセンター',
-      subtitle: 'いつでもサポートいたします'
+      subtitle: 'いつでもサポートいたします',
+      contact: {
+        email: {
+          title: 'メールサポート',
+          description: 'support@dopamind.com にメール送信',
+          response: '24時間以内に返信'
+        },
+        feedback: {
+          title: '製品フィードバック',
+          description: 'ご提案やアイデアをお聞かせください'
+        },
+        guide: {
+          title: '使用説明書',
+          description: '詳細な機能説明をご覧ください'
+        }
+      },
+      faq: {
+        title: 'よくある質問',
+        categories: {
+          account: 'アカウント関連'
+        },
+        items: [
+          {
+            question: 'Dopamindの使用を開始するには？',
+            answer: 'アプリをダウンロード後、アカウント登録するだけで開始できます。システムが自動的に7日間無料試用を提供します。'
+          },
+          {
+            question: 'どのプラットフォームがサポートされていますか？',
+            answer: '現在iOSプラットフォームをサポート、Androidバージョンは開発中です。'
+          },
+          {
+            question: 'データは安全ですか？',
+            answer: 'はい、エンタープライズレベルの暗号化技術でデータを保護し、すべての情報はクラウドに安全に保存されています。'
+          },
+          {
+            question: 'サブスクリプションをキャンセルできますか？',
+            answer: '設定でいつでもサブスクリプションをキャンセルでき、現在の課金期間終了まで利用を続けられます。'
+          }
+        ]
+      },
+      guides: {
+        title: '機能ガイド',
+        quickStart: {
+          title: 'クイックスタート',
+          description: '5分でDopamindの核心機能を理解'
+        },
+        aiCoach: {
+          title: 'AIコーチ',
+          description: 'AIと効果的にコミュニケーションして最良のアドバイスを得る方法'
+        },
+        focus: {
+          title: 'フォーカスモード',
+          description: 'ポモドーロテクニックと深い作業のコツ'
+        }
+      },
+      stillNeedHelp: {
+        title: 'それでもサポートが必要ですか？',
+        subtitle: 'サポートチームがいつでもお手伝いします。通常24時間以内に返信いたします。',
+        sendEmail: 'メール送信',
+        responseTime: '通常24-48時間以内に返信いたします'
+      }
     },
     footer: {
       description: 'ADHD用户向けに設計されたAI集中パートナー',

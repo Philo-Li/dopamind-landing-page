@@ -1,8 +1,5 @@
-'use client';
-
 import Image from 'next/image';
-import { ChevronDown, ChevronUp, Mail, MessageCircle, Book } from 'lucide-react';
-import { useState } from 'react';
+import { Mail, MessageCircle, Book } from 'lucide-react';
 import { getTranslation } from '../../../lib/i18n';
 import LanguageSwitcher from '../../../../components/LanguageSwitcher';
 import AuthButton from '../../../../components/AuthButton';

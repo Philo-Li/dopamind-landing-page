@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { CheckCircle } from 'lucide-react';
 import AuthButton from '../../components/AuthButton';
 
@@ -52,7 +53,7 @@ export default function HomePage() {
           <nav className="hidden items-center gap-6 md:flex">
             <a href="#" className="text-sm font-medium text-muted transition-colors hover:text-primary">功能特性</a>
             <a href="#" className="text-sm font-medium text-muted transition-colors hover:text-primary">价格方案</a>
-            <a href="/support" className="text-sm font-medium text-muted transition-colors hover:text-primary">帮助中心</a>
+            <Link href="/support" className="text-sm font-medium text-muted transition-colors hover:text-primary">帮助中心</Link>
           </nav>
           <div className="flex items-center gap-4">
             <AuthButton />

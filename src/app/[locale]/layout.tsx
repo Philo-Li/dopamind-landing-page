@@ -34,7 +34,7 @@ export default async function LocaleLayout({
 }) {
   // 验证语言参数
   const { locale } = await params;
-  if (!locales.includes(locale as any)) {
+  if (!locales.includes(locale as typeof locales[number])) {
     notFound();
   }
 

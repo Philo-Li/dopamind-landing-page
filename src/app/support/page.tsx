@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { ChevronDown, ChevronUp, Mail, MessageCircle, Book } from 'lucide-react';
 import { useState } from 'react';
 import AuthButton from '../../../components/AuthButton';
@@ -11,7 +12,7 @@ export default function SupportPage() {
       {/* 导航栏 */}
       <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/80 backdrop-blur-md">
         <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
-          <a href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <Image 
               src="/dopamind-logo.png"
               alt="Dopamind Logo" 
@@ -20,12 +21,12 @@ export default function SupportPage() {
               className="rounded-[8px]"
             />
             <span className="text-xl font-bold text-foreground">Dopamind</span>
-          </a>
+          </Link>
           <nav className="hidden items-center gap-6 md:flex">
-            <a href="/" className="text-sm font-medium text-muted transition-colors hover:text-primary">首页</a>
+            <Link href="/" className="text-sm font-medium text-muted transition-colors hover:text-primary">首页</Link>
             <a href="#features" className="text-sm font-medium text-muted transition-colors hover:text-primary">功能特性</a>
             <a href="#pricing" className="text-sm font-medium text-muted transition-colors hover:text-primary">价格方案</a>
-            <a href="/support" className="text-sm font-medium text-primary">帮助中心</a>
+            <Link href="/support" className="text-sm font-medium text-primary">帮助中心</Link>
           </nav>
           <div className="flex items-center gap-4">
             <AuthButton />
@@ -63,7 +64,7 @@ export default function SupportPage() {
                 <MessageCircle className="h-8 w-8 text-primary mb-3" />
                 <h3 className="text-lg font-semibold text-foreground">应用内反馈</h3>
                 <p className="text-sm text-muted text-center mt-2">
-                  在 App 的"我的"页面找到"意见反馈"
+                  在 App 的「我的」页面找到「意见反馈」
                 </p>
               </div>
               <div className="flex flex-col items-center rounded-lg bg-white p-6 shadow-sm">
@@ -181,7 +182,7 @@ export default function SupportPage() {
               </a>
               <a href="#" className="block p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
                 <h3 className="text-lg font-semibold text-primary mb-2">🧘 专注模式高级设置</h3>
-                <p className="text-sm text-muted">打造你的完美"专注圣所"，提升专注效果</p>
+                <p className="text-sm text-muted">打造你的完美「专注圣所」，提升专注效果</p>
               </a>
             </div>
           </div>
@@ -234,7 +235,7 @@ export default function SupportPage() {
             <div>
               <h4 className="font-semibold text-foreground mb-3">产品</h4>
               <ul className="space-y-2 text-sm text-muted">
-                <li><a href="/" className="hover:text-primary">首页</a></li>
+                <li><Link href="/" className="hover:text-primary">首页</Link></li>
                 <li><a href="#" className="hover:text-primary">功能特性</a></li>
                 <li><a href="#" className="hover:text-primary">价格方案</a></li>
               </ul>
@@ -242,7 +243,7 @@ export default function SupportPage() {
             <div>
               <h4 className="font-semibold text-foreground mb-3">支持</h4>
               <ul className="space-y-2 text-sm text-muted">
-                <li><a href="/support" className="hover:text-primary">帮助中心</a></li>
+                <li><Link href="/support" className="hover:text-primary">帮助中心</Link></li>
                 <li><a href="mailto:support@dopamind.com" className="hover:text-primary">联系我们</a></li>
                 <li><a href="#" className="hover:text-primary">状态页面</a></li>
               </ul>
@@ -250,7 +251,7 @@ export default function SupportPage() {
             <div>
               <h4 className="font-semibold text-foreground mb-3">法律</h4>
               <ul className="space-y-2 text-sm text-muted">
-                <li><a href="/privacy" className="hover:text-primary">隐私政策</a></li>
+                <li><Link href="/privacy" className="hover:text-primary">隐私政策</Link></li>
                 <li><a href="#" className="hover:text-primary">服务条款</a></li>
                 <li><a href="#" className="hover:text-primary">Cookie 政策</a></li>
               </ul>

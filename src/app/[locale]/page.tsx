@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { CheckCircle, Play, Calendar, Brain, Clock, TrendingUp, Cloud, RefreshCw, Shield } from 'lucide-react';
+import { CheckCircle, Calendar, Brain, Clock, TrendingUp, Cloud, RefreshCw, Shield } from 'lucide-react';
 import { getTranslation } from '../../lib/i18n';
 import LanguageSwitcher from '../../../components/LanguageSwitcher';
 import AuthButton from '../../../components/AuthButton';

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { Shield, Lock, Eye, Users, Calendar, Mail } from 'lucide-react';
 import AuthButton from '../../../components/AuthButton';
 
@@ -8,7 +9,7 @@ export default function PrivacyPage() {
       {/* 导航栏 */}
       <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/80 backdrop-blur-md">
         <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
-          <a href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <Image 
               src="/dopamind-logo.png"
               alt="Dopamind Logo" 
@@ -17,12 +18,12 @@ export default function PrivacyPage() {
               className="rounded-[8px]"
             />
             <span className="text-xl font-bold text-foreground">Dopamind</span>
-          </a>
+          </Link>
           <nav className="hidden items-center gap-6 md:flex">
-            <a href="/" className="text-sm font-medium text-muted transition-colors hover:text-primary">首页</a>
+            <Link href="/" className="text-sm font-medium text-muted transition-colors hover:text-primary">首页</Link>
             <a href="#features" className="text-sm font-medium text-muted transition-colors hover:text-primary">功能特性</a>
             <a href="#pricing" className="text-sm font-medium text-muted transition-colors hover:text-primary">价格方案</a>
-            <a href="/support" className="text-sm font-medium text-muted transition-colors hover:text-primary">帮助中心</a>
+            <Link href="/support" className="text-sm font-medium text-muted transition-colors hover:text-primary">帮助中心</Link>
           </nav>
           <div className="flex items-center gap-4">
             <AuthButton />
@@ -109,7 +110,7 @@ export default function PrivacyPage() {
                     </ul>
                   </div>
 
-                  <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
+                  <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
                     <p className="text-sm font-medium text-yellow-800 mb-2">重要说明</p>
                     <p className="text-sm text-yellow-700">
                       订阅和支付信息由 Apple App Store 或 Google Play Store 直接处理。我们<strong>不会</strong>收集或存储您的信用卡号等完整的支付信息。我们只会从应用商店接收到关于您订阅状态的确认信息。
@@ -316,7 +317,7 @@ export default function PrivacyPage() {
             <div>
               <h4 className="font-semibold text-foreground mb-3">产品</h4>
               <ul className="space-y-2 text-sm text-muted">
-                <li><a href="/" className="hover:text-primary">首页</a></li>
+                <li><Link href="/" className="hover:text-primary">首页</Link></li>
                 <li><a href="#" className="hover:text-primary">功能特性</a></li>
                 <li><a href="#" className="hover:text-primary">价格方案</a></li>
               </ul>
@@ -324,7 +325,7 @@ export default function PrivacyPage() {
             <div>
               <h4 className="font-semibold text-foreground mb-3">支持</h4>
               <ul className="space-y-2 text-sm text-muted">
-                <li><a href="/support" className="hover:text-primary">帮助中心</a></li>
+                <li><Link href="/support" className="hover:text-primary">帮助中心</Link></li>
                 <li><a href="mailto:support@dopamind.com" className="hover:text-primary">联系我们</a></li>
                 <li><a href="#" className="hover:text-primary">状态页面</a></li>
               </ul>
@@ -332,7 +333,7 @@ export default function PrivacyPage() {
             <div>
               <h4 className="font-semibold text-foreground mb-3">法律</h4>
               <ul className="space-y-2 text-sm text-muted">
-                <li><a href="/privacy" className="hover:text-primary">隐私政策</a></li>
+                <li><Link href="/privacy" className="hover:text-primary">隐私政策</Link></li>
                 <li><a href="#" className="hover:text-primary">服务条款</a></li>
                 <li><a href="#" className="hover:text-primary">Cookie 政策</a></li>
               </ul>

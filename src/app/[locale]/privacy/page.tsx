@@ -121,7 +121,7 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
                 </div>
                 <div className="space-y-4 text-muted leading-relaxed">
                   <div className="grid gap-4 md:grid-cols-2">
-                    {t.privacy.sections.dataUsage.items.map((item: any, index: number) => (
+                    {t.privacy.sections.dataUsage.items.map((item: {title: string, description: string}, index: number) => (
                       <div key={index} className="bg-gray-50 rounded-lg p-4">
                         <h4 className="font-semibold text-foreground mb-2">{item.title}</h4>
                         <p className="text-sm">{item.description}</p>
@@ -163,7 +163,7 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
                 <div className="space-y-4 text-muted leading-relaxed">
                   <p>{t.privacy.sections.dataSecurity.subtitle}</p>
                   <div className="grid gap-4 md:grid-cols-3">
-                    {t.privacy.sections.dataSecurity.measures.map((measure: any, index: number) => (
+                    {t.privacy.sections.dataSecurity.measures.map((measure: {title: string, description: string}, index: number) => (
                       <div key={index} className="text-center p-4 bg-gray-50 rounded-lg">
                         <Shield className="h-8 w-8 text-primary mx-auto mb-2" />
                         <h4 className="font-semibold text-foreground mb-1">{measure.title}</h4>
@@ -185,7 +185,7 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
                 <div className="space-y-4 text-muted leading-relaxed">
                   <p>{t.privacy.sections.userRights.subtitle}</p>
                   <div className="space-y-4">
-                    {t.privacy.sections.userRights.rights.map((right: any, index: number) => (
+                    {t.privacy.sections.userRights.rights.map((right: {title: string, description: string}, index: number) => (
                       <div key={index} className="border border-gray-200 rounded-lg p-4">
                         <h4 className="font-semibold text-foreground mb-2">{right.title}</h4>
                         <p className="text-sm">{right.description}</p>
