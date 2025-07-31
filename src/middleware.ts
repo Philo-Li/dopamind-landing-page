@@ -45,7 +45,7 @@ function getLocale(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // 跳过内部 Next.js 路径和静态文件
-    '/((?!_next/static|_next/image|favicon.ico|.*\\..*|api/).*)',
+    // 跳过内部 Next.js 路径、静态文件、API路由和认证页面
+    '/((?!_next/static|_next/image|favicon.ico|.*\\..*|api/|login|register|dashboard).*)',
   ],
 }

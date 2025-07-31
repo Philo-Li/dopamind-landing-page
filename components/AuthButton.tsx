@@ -48,11 +48,11 @@ export default function AuthButton() {
       <div className="flex items-center space-x-4">
         <Link
           href="/dashboard"
-          className="text-sm font-medium text-gray-700 hover:text-gray-900"
+          className="text-sm font-medium text-muted hover:text-foreground"
         >
           仪表板
         </Link>
-        <span className="text-sm text-gray-600">
+        <span className="text-sm text-muted">
           {user.nickname}
         </span>
         <button
@@ -69,13 +69,13 @@ export default function AuthButton() {
     <div className="flex items-center space-x-4">
       <Link
         href="/login"
-        className="text-sm font-medium text-gray-700 hover:text-gray-900"
+        className="text-sm font-medium text-muted hover:text-foreground"
       >
         登录
       </Link>
       <Link
         href="/register"
-        className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium"
+        className="bg-primary hover:bg-primary-600 text-white px-4 py-2 rounded-md text-sm font-medium"
       >
         注册
       </Link>

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { CheckCircle, Play, Calendar, Brain, Clock, TrendingUp, Cloud, Sync, Shield } from 'lucide-react';
+import { CheckCircle, Play, Calendar, Brain, Clock, TrendingUp, Cloud, RefreshCw, Shield } from 'lucide-react';
 import { getTranslation } from '../../lib/i18n';
 import LanguageSwitcher from '../../../components/LanguageSwitcher';
 import AuthButton from '../../../components/AuthButton';
@@ -379,7 +379,155 @@ export default async function HomePage({ params }: HomePageProps) {
           </div>
         </section>
 
-        {/* 6. 最终 CTA Section */}
+        {/* 6. 云端同步功能 Section */}
+        <section className="w-full py-20 md:py-32">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl mb-4">
+                云端同步，随时随地
+              </h2>
+              <p className="text-lg text-muted md:text-xl max-w-2xl mx-auto">
+                您的数据安全储存在云端，在所有设备间无缝同步，让您的生活管理不受设备限制。
+              </p>
+            </div>
+            
+            <div className="grid gap-8 md:grid-cols-3 max-w-4xl mx-auto">
+              {/* 实时同步 */}
+              <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all border border-gray-100">
+                <div className="flex items-center justify-center w-16 h-16 bg-blue-100 rounded-2xl mx-auto mb-6">
+                  <RefreshCw className="w-8 h-8 text-blue-600" />
+                </div>
+                <h3 className="text-xl font-bold text-foreground mb-4 text-center">实时同步</h3>
+                <p className="text-muted text-center">
+                  在手机上添加的任务，立即出现在平板和电脑上。跨设备协作，让您的计划始终保持最新状态。
+                </p>
+              </div>
+
+              {/* 安全备份 */}
+              <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all border border-gray-100">
+                <div className="flex items-center justify-center w-16 h-16 bg-green-100 rounded-2xl mx-auto mb-6">
+                  <Shield className="w-8 h-8 text-green-600" />
+                </div>
+                <h3 className="text-xl font-bold text-foreground mb-4 text-center">安全备份</h3>
+                <p className="text-muted text-center">
+                  企业级加密保护您的隐私数据，自动备份防止意外丢失。您的信息安全是我们的首要任务。
+                </p>
+              </div>
+
+              {/* 云端同步 */}
+              <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all border border-gray-100">
+                <div className="flex items-center justify-center w-16 h-16 bg-purple-100 rounded-2xl mx-auto mb-6">
+                  <Cloud className="w-8 h-8 text-purple-600" />
+                </div>
+                <h3 className="text-xl font-bold text-foreground mb-4 text-center">云端同步</h3>
+                <p className="text-muted text-center">
+                  在所有设备间无缝同步数据，永不丢失。无论您使用哪台设备，都能访问完整的任务和数据。
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 7. 定价方案 Section */}
+        <section className="w-full py-20 md:py-32 bg-gray-50">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl mb-4">
+                选择适合您的方案
+              </h2>
+              <p className="text-lg text-muted md:text-xl">
+                解锁完整功能，开启高效生活方式
+              </p>
+            </div>
+            
+            <div className="flex flex-col lg:flex-row gap-8 max-w-4xl mx-auto">
+              {/* 月度计划 */}
+              <div className="flex-1 bg-white rounded-3xl p-8 shadow-sm border border-gray-200 hover:shadow-lg transition-all">
+                <h3 className="text-2xl font-bold text-foreground mb-2">Monthly</h3>
+                <div className="mb-6">
+                  <span className="text-4xl font-bold text-foreground">$14.99</span>
+                  <span className="text-muted ml-2">USD / month</span>
+                </div>
+                <ul className="space-y-4 mb-8">
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
+                    <span className="text-muted">所有高级功能</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
+                    <span className="text-muted">无限任务和项目</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
+                    <span className="text-muted">云端同步备份</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
+                    <span className="text-muted">AI 智能建议</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 年度计划 */}
+              <div className="flex-1 bg-white rounded-3xl p-8 shadow-lg border-2 border-primary hover:shadow-xl transition-all relative">
+                {/* Most Popular 标签 */}
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                  <span className="bg-primary text-white px-6 py-2 rounded-full text-sm font-medium shadow-lg">
+                    Most Popular
+                  </span>
+                </div>
+                
+                <h3 className="text-2xl font-bold text-foreground mb-2">Yearly</h3>
+                <div className="mb-2">
+                  <span className="text-4xl font-bold text-foreground">$159.99</span>
+                  <span className="text-muted ml-2">USD / year</span>
+                </div>
+                <div className="mb-6">
+                  <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
+                    Save 12%
+                  </span>
+                </div>
+                <ul className="space-y-4 mb-8">
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
+                    <span className="text-muted">所有高级功能</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
+                    <span className="text-muted">无限任务和项目</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
+                    <span className="text-muted">云端同步备份</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
+                    <span className="text-muted">AI 智能建议</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
+                    <span className="text-muted">优先客户支持</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* 行动号召按钮 */}
+            <div className="text-center mt-12">
+              <button className="bg-primary hover:bg-primary-600 text-white font-bold py-4 px-8 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 mb-4">
+                立即订阅
+              </button>
+              <div>
+                <a href="#" className="text-primary hover:text-primary-600 font-medium transition-colors">
+                  恢复购买
+                </a>
+              </div>
+              <p className="text-sm text-muted mt-4">7 天免费试用 • 随时取消</p>
+            </div>
+          </div>
+        </section>
+
+        {/* 8. 最终 CTA Section */}
         <section className="w-full py-20 md:py-32 bg-gradient-to-br from-primary/10 to-orange-100 relative overflow-hidden">
           {/* 背景装饰 */}
           <div className="absolute inset-0 opacity-20">

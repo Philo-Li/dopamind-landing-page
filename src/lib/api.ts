@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.BACKEND_URL || 'http://localhost:3001';
+const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3001';
 
 export interface LoginResponse {
   message: string;
@@ -37,25 +37,61 @@ class ApiService {
   ): Promise<T> {
     const url = `${API_BASE_URL}${endpoint}`;
     
-    const response = await fetch(url, {
-      headers: {
-        'Content-Type': 'application/json',
-        ...options.headers,
-      },
-      ...options,
-    });
+    console.log(`🚀 API Request: ${options.method || 'GET'} ${url}`);
+    console.log('Request options:', options);
+    
+    try {
+      const response = await fetch(url, {
+        headers: {
+          'Content-Type': 'application/json',
+          ...options.headers,
+        },
+        ...options,
+      });
 
-    const data = await response.json();
+      console.log(`📡 Response Status: ${response.status} ${response.statusText}`);
+      console.log('Response Headers:', Object.fromEntries(response.headers.entries()));
 
-    if (!response.ok) {
-      throw new Error(data.message || `HTTP error! status: ${response.status}`);
+      // 获取响应文本，用于调试
+      const responseText = await response.text();
+      console.log('📝 Raw Response:', responseText);
+
+      // 检查响应的内容类型
+      const contentType = response.headers.get('content-type');
+      console.log('📋 Content-Type:', contentType);
+
+      if (!contentType || !contentType.includes('application/json')) {
+        console.error('❌ 非JSON响应内容:', responseText);
+        throw new Error(`后端服务器返回了非JSON响应。请检查后端服务是否正常运行在 ${API_BASE_URL}`);
+      }
+
+      let data;
+      try {
+        data = JSON.parse(responseText);
+        console.log('✅ Parsed JSON:', data);
+      } catch (parseError) {
+        console.error('❌ JSON解析失败:', parseError);
+        console.error('原始响应内容:', responseText);
+        throw new Error('后端返回的不是有效的JSON格式');
+      }
+
+      if (!response.ok) {
+        console.error('❌ API错误:', data);
+        throw new Error(data.message || `HTTP error! status: ${response.status}`);
+      }
+
+      return data;
+    } catch (error) {
+      console.error('❌ API请求失败:', error);
+      if (error instanceof TypeError && error.message.includes('fetch')) {
+        throw new Error(`无法连接到后端服务器。请确保后端服务正在运行在 ${API_BASE_URL}`);
+      }
+      throw error;
     }
-
-    return data;
   }
 
   async login(email: string, password: string): Promise<LoginResponse> {
-    return this.makeRequest<LoginResponse>('/auth/login', {
+    return this.makeRequest<LoginResponse>('/api/auth/login', {
       method: 'POST',
       body: JSON.stringify({ email, password }),
     });
@@ -67,14 +103,14 @@ class ApiService {
     nickname: string,
     referralCode?: string
   ): Promise<RegisterResponse> {
-    return this.makeRequest<RegisterResponse>('/auth/register', {
+    return this.makeRequest<RegisterResponse>('/api/auth/register', {
       method: 'POST',
       body: JSON.stringify({ email, password, nickname, referralCode }),
     });
   }
 
   async getProfile(token: string) {
-    return this.makeRequest('/auth/profile', {
+    return this.makeRequest('/api/auth/profile', {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -83,7 +119,7 @@ class ApiService {
   }
 
   async refreshToken(token: string): Promise<LoginResponse> {
-    return this.makeRequest<LoginResponse>('/auth/refresh', {
+    return this.makeRequest<LoginResponse>('/api/auth/refresh', {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
