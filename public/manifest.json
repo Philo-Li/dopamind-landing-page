@@ -8,25 +8,25 @@
   "theme_color": "#F97316",
   "icons": [
     {
-      "src": "/dopamind-logo.png",
+      "src": "/dopamind-logo-bw.jpg",
       "sizes": "512x512",
-      "type": "image/png",
+      "type": "image/jpeg",
       "purpose": "any maskable"
     },
     {
-      "src": "/dopamind-logo.png", 
+      "src": "/dopamind-logo-bw.jpg", 
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/jpeg"
     },
     {
-      "src": "/dopamind-logo.png",
+      "src": "/dopamind-logo-bw.jpg",
       "sizes": "32x32", 
-      "type": "image/png"
+      "type": "image/jpeg"
     },
     {
-      "src": "/dopamind-logo.png",
+      "src": "/dopamind-logo-bw.jpg",
       "sizes": "16x16",
-      "type": "image/png"
+      "type": "image/jpeg"
     }
   ],
   "categories": ["productivity", "health", "lifestyle"]

@@ -5,6 +5,15 @@ import { locales, defaultLocale } from './lib/i18n'
 export function middleware(request: NextRequest) {
   // 检查路径是否已经包含语言前缀
   const pathname = request.nextUrl.pathname
+  
+  // 排除不需要多语言处理的路径
+  const excludePaths = ['/login', '/register', '/dashboard', '/api']
+  const shouldExclude = excludePaths.some(path => 
+    pathname.startsWith(path) || pathname === path
+  )
+  
+  if (shouldExclude) return
+  
   const pathnameHasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   )

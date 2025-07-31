@@ -10,13 +10,13 @@ export const metadata: Metadata = {
   description: "专为 ADHD 用户设计的 AI 专注伙伴",
   icons: {
     icon: [
-      { url: '/dopamind-logo.png', sizes: '32x32', type: 'image/png' },
-      { url: '/dopamind-logo.png', sizes: '16x16', type: 'image/png' },
+      { url: '/dopamind-logo-bw.jpg', sizes: '32x32', type: 'image/jpeg' },
+      { url: '/dopamind-logo-bw.jpg', sizes: '16x16', type: 'image/jpeg' },
     ],
     apple: [
-      { url: '/dopamind-logo.png', sizes: '180x180', type: 'image/png' },
+      { url: '/dopamind-logo-bw.jpg', sizes: '180x180', type: 'image/jpeg' },
     ],
-    shortcut: '/dopamind-logo.png',
+    shortcut: '/dopamind-logo-bw.jpg',
   },
 };
 
