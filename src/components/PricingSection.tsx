@@ -227,8 +227,6 @@ export default function PricingSection({ locale }: PricingSectionProps) {
     );
   }
 
-  const selectedPlanData = plans.find(plan => plan.id === selectedPlan)!;
-
   // 判断用户当前的订阅状态
   const getUserPlanStatus = () => {
     if (!user) return null;
@@ -264,6 +262,44 @@ export default function PricingSection({ locale }: PricingSectionProps) {
     return currentUserPlan === planId;
   };
 
+  const selectedPlanData = plans.find(plan => plan.id === selectedPlan)!;
+
+  // 获取按钮文案
+  const getButtonText = () => {
+    const planId = selectedPlanData.id;
+    
+    // 如果是当前方案
+    if (isCurrentPlan(planId)) {
+      switch (currentUserPlan) {
+        case 'trial':
+          return '您正在7天试用中';
+        case 'monthly':
+          return '您已经是月度会员';
+        case 'yearly':
+          return '您已经是年度会员';
+        default:
+          return '当前方案';
+      }
+    }
+    
+    // 如果是升级方案
+    if (isUpgradePlan(planId)) {
+      const planNames = {
+        monthly: '月度会员',
+        yearly: '年度会员'
+      };
+      return `立即升级到${planNames[planId as keyof typeof planNames]}`;
+    }
+    
+    // 试用方案
+    if (planId === 'trial') {
+      return selectedPlanData.buttonText;
+    }
+    
+    // 默认文案
+    return selectedPlanData.buttonText;
+  };
+
   return (
     <section id="pricing" className="w-full py-20 md:py-32 bg-gray-50">
       <div className="container mx-auto px-4 md:px-6">
@@ -273,104 +309,138 @@ export default function PricingSection({ locale }: PricingSectionProps) {
         
         {/* 定价卡片 */}
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12">
-          {plans.map((plan) => (
-            <div
-              key={plan.id}
-              onClick={() => setSelectedPlan(plan.id)}
-              className={`relative bg-white rounded-3xl p-8 shadow-lg cursor-pointer transition-all hover:shadow-xl ${
-                selectedPlan === plan.id
-                  ? 'border-2 border-primary ring-4 ring-primary/20'
-                  : 'border border-gray-200 hover:border-gray-300'
-              }`}
-            >
-              {/* 选中指示器 */}
-              {selectedPlan === plan.id && (
-                <div className="absolute -top-3 -right-3 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
-                  <CheckCircle className="w-4 h-4 text-white" />
-                </div>
-              )}
+          {plans.map((plan) => {
+            const isSelected = selectedPlan === plan.id;
+            const isCurrent = isCurrentPlan(plan.id);
+            const isUpgrade = isUpgradePlan(plan.id);
+            
+            return (
+              <div
+                key={plan.id}
+                onClick={() => setSelectedPlan(plan.id)}
+                className={`relative bg-white rounded-3xl p-8 shadow-lg cursor-pointer transition-all hover:shadow-xl ${
+                  isSelected
+                    ? 'border-2 border-primary ring-4 ring-primary/20'
+                    : 'border border-gray-200 hover:border-gray-300'
+                } ${isCurrent ? 'ring-2 ring-green-500 ring-offset-2' : ''}`}
+              >
+                {/* 选中指示器 */}
+                {isSelected && !isCurrent && (
+                  <div className="absolute -top-3 -right-3 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
+                    <CheckCircle className="w-4 h-4 text-white" />
+                  </div>
+                )}
 
-              {/* 推荐标签 */}
-              {plan.isPopular && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-primary text-white px-6 py-2 rounded-full text-sm font-medium shadow-lg">
-                    最受欢迎
-                  </span>
-                </div>
-              )}
-
-              {/* 试用标签 */}
-              {plan.isTrial && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-green-500 text-white px-6 py-2 rounded-full text-sm font-medium shadow-lg flex items-center gap-2">
-                    <Gift className="w-4 h-4" />
-                    免费试用
-                  </span>
-                </div>
-              )}
-
-              <div className="text-center">
-                <h3 className="text-2xl font-bold text-foreground mb-2">{plan.name}</h3>
-                <div className="mb-6">
-                  <span className="text-4xl font-bold text-foreground">{plan.price}</span>
-                  <span className="text-muted ml-2">/{plan.period}</span>
-                </div>
-
-                {/* 年度计划折扣 */}
-                {plan.id === 'yearly' && (
-                  <div className="mb-6">
-                    <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
-                      省下 2 个月费用 (相当于 88 折)
+                {/* 当前方案标识 */}
+                {isCurrent && (
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                    <span className="bg-green-500 text-white px-6 py-2 rounded-full text-sm font-medium shadow-lg flex items-center gap-2">
+                      <Crown className="w-4 h-4" />
+                      当前方案
                     </span>
                   </div>
                 )}
 
-                <ul className="space-y-4 text-left">
-                  {plan.features.map((feature, index) => {
-                    // 为年度订阅的独有功能添加特殊样式
-                    const isYearlyExclusiveFeature = plan.id === 'yearly' && (
-                      feature.includes('省下 2 个月费用') || 
-                      feature.includes('专属会员社群')
-                    );
-                    
-                    // 为试用、月度和年度订阅的高级功能添加特殊样式
-                    const isPremiumFeature = (plan.id === 'trial' || plan.id === 'monthly' || plan.id === 'yearly') && (
-                      feature.includes('一对一 AI 教练支持') || 
-                      feature.includes('新功能抢先体验权')
-                    );
-                    
-                    const shouldHighlight = isYearlyExclusiveFeature || isPremiumFeature;
-                    
-                    return (
-                      <li key={index} className="flex items-start gap-3">
-                        <CheckCircle className={`mt-0.5 h-5 w-5 flex-shrink-0 ${
-                          shouldHighlight ? 'text-green-500' : 'text-primary'
-                        }`} />
-                        <span className={`text-sm ${
-                          shouldHighlight 
-                            ? 'text-foreground font-medium' 
-                            : 'text-muted'
-                        }`}>
-                          {feature}
-                        </span>
-                      </li>
-                    );
-                  })}
-                </ul>
+                {/* 升级标识 */}
+                {isUpgrade && !isSelected && (
+                  <div className="absolute -top-4 right-4">
+                    <span className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm font-medium shadow-lg flex items-center gap-1">
+                      <TrendingUp className="w-3 h-3" />
+                      升级
+                    </span>
+                  </div>
+                )}
+
+                {/* 推荐标签 */}
+                {plan.isPopular && !isCurrent && !isUpgrade && (
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                    <span className="bg-primary text-white px-6 py-2 rounded-full text-sm font-medium shadow-lg">
+                      最受欢迎
+                    </span>
+                  </div>
+                )}
+
+                {/* 试用标签 */}
+                {plan.isTrial && !isCurrent && (
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                    <span className="bg-green-500 text-white px-6 py-2 rounded-full text-sm font-medium shadow-lg flex items-center gap-2">
+                      <Gift className="w-4 h-4" />
+                      免费试用
+                    </span>
+                  </div>
+                )}
+
+                <div className="text-center">
+                  <h3 className="text-2xl font-bold text-foreground mb-2">{plan.name}</h3>
+                  <div className="mb-6">
+                    <span className="text-4xl font-bold text-foreground">{plan.price}</span>
+                    <span className="text-muted ml-2">/{plan.period}</span>
+                  </div>
+
+                  {/* 年度计划折扣 */}
+                  {plan.id === 'yearly' && (
+                    <div className="mb-6">
+                      <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
+                        省下 2 个月费用 (相当于 88 折)
+                      </span>
+                    </div>
+                  )}
+
+                  <ul className="space-y-4 text-left">
+                    {plan.features.map((feature, index) => {
+                      // 为年度订阅的独有功能添加特殊样式
+                      const isYearlyExclusiveFeature = plan.id === 'yearly' && (
+                        feature.includes('省下 2 个月费用') || 
+                        feature.includes('专属会员社群')
+                      );
+                      
+                      // 为试用、月度和年度订阅的高级功能添加特殊样式
+                      const isPremiumFeature = (plan.id === 'trial' || plan.id === 'monthly' || plan.id === 'yearly') && (
+                        feature.includes('一对一 AI 教练支持') || 
+                        feature.includes('新功能抢先体验权')
+                      );
+                      
+                      const shouldHighlight = isYearlyExclusiveFeature || isPremiumFeature;
+                      
+                      return (
+                        <li key={index} className="flex items-start gap-3">
+                          <CheckCircle className={`mt-0.5 h-5 w-5 flex-shrink-0 ${
+                            shouldHighlight ? 'text-green-500' : 'text-primary'
+                          }`} />
+                          <span className={`text-sm ${
+                            shouldHighlight 
+                              ? 'text-foreground font-medium' 
+                              : 'text-muted'
+                          }`}>
+                            {feature}
+                          </span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* 统一的订阅按钮 */}
         <div className="text-center">
           <div className="max-w-md mx-auto">
-            {selectedPlanData.isTrial ? (
+            {isCurrentPlan(selectedPlanData.id) ? (
+              <button 
+                disabled
+                className="w-full bg-green-100 text-green-700 font-semibold py-4 px-8 rounded-xl text-lg cursor-not-allowed border-2 border-green-200"
+              >
+                <Crown className="w-5 h-5 inline mr-2" />
+                {getButtonText()}
+              </button>
+            ) : selectedPlanData.isTrial ? (
               <button 
                 onClick={handleTrialStart}
                 className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-4 px-8 rounded-xl text-lg transition-colors shadow-lg"
               >
-                {selectedPlanData.buttonText}
+                {getButtonText()}
               </button>
             ) : user ? (
               <SubscribeButton 
@@ -383,19 +453,24 @@ export default function PricingSection({ locale }: PricingSectionProps) {
                 }}
                 isPopular={selectedPlanData.isPopular}
                 className="w-full py-4 text-lg"
+                customText={getButtonText()}
               />
             ) : (
               <Link 
                 href="/register" 
                 className="w-full inline-block bg-primary hover:bg-primary-600 text-white font-semibold py-4 px-8 rounded-xl text-lg transition-colors shadow-lg text-center"
               >
-                {selectedPlanData.buttonText}
+                {getButtonText()}
               </Link>
             )}
             
             <p className="text-sm text-muted mt-4">
-              {selectedPlanData.isTrial 
+              {isCurrentPlan(selectedPlanData.id)
+                ? "您正在使用此方案"
+                : selectedPlanData.isTrial 
                 ? "无需信用卡，立即体验完整 Premium 功能"
+                : isUpgradePlan(selectedPlanData.id)
+                ? `升级到 ${selectedPlanData.name} • 随时取消 • 安全支付`
                 : selectedPlanData.id === 'yearly'
                 ? "年付专享特权 • 随时取消 • 省下 158 元 • 专属教练"
                 : "包含核心功能 • 随时取消 • 安全支付"

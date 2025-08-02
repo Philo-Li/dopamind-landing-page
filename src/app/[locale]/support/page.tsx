@@ -194,7 +194,7 @@ export default async function SupportPage({ params }: SupportPageProps) {
               <h4 className="font-semibold text-foreground mb-3">{t.footer.sections.legal}</h4>
               <ul className="space-y-2 text-sm text-muted">
                 <li><a href={`/${locale}/privacy`} className="hover:text-primary">{t.footer.links.privacy}</a></li>
-                <li><a href="#" className="hover:text-primary">{t.footer.links.terms}</a></li>
+                <li><a href={`/${locale}/terms`} className="hover:text-primary">{t.footer.links.terms}</a></li>
                 <li><a href="#" className="hover:text-primary">{t.footer.links.cookies}</a></li>
               </ul>
             </div>

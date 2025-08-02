@@ -16,9 +16,10 @@ interface SubscribeButtonProps {
   plan: Plan;
   isPopular?: boolean;
   className?: string;
+  customText?: string;
 }
 
-export default function SubscribeButton({ plan, isPopular = false, className = "" }: SubscribeButtonProps) {
+export default function SubscribeButton({ plan, isPopular = false, className = "", customText }: SubscribeButtonProps) {
   const { user } = useAuth();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -75,7 +76,7 @@ export default function SubscribeButton({ plan, isPopular = false, className = "
   };
 
   // 根据 plan 动态生成按钮文案
-  const buttonText = `立即订阅${plan.name}方案`;
+  const buttonText = customText || `立即订阅${plan.name}方案`;
 
   // 按钮样式
   const buttonClass = `

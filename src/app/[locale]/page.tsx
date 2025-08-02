@@ -445,6 +445,21 @@ export default async function HomePage({ params }: HomePageProps) {
               </div>
             </div>
 
+            {/* 服务条款和隐私政策链接 */}
+            <div className="mb-8 text-center">
+              <p className="text-sm text-muted">
+                {t.home.finalCta.termsAndPrivacy.split('{terms}')[0]}
+                <a href={`/${locale}/terms`} className="text-primary hover:underline mx-1">{t.home.finalCta.termsLink}</a>
+                {t.home.finalCta.termsAndPrivacy.split('{terms}')[1].split('{privacy}')[0]}
+                <a href={`/${locale}/privacy`} className="text-primary hover:underline mx-1">{t.home.finalCta.privacyLink}</a>
+                {t.home.finalCta.termsAndPrivacy.split('{privacy}')[1]}
+              </p>
+              <div className="mt-2 flex flex-col sm:flex-row justify-center items-center gap-4 text-xs text-muted">
+                <span>{t.home.finalCta.termsUrl}</span>
+                <span>{t.home.finalCta.privacyUrl}</span>
+              </div>
+            </div>
+
             {/* 社交证明 */}
             <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto">
               {t.home.finalCta.stats.map((stat, index) => (
@@ -497,7 +512,7 @@ export default async function HomePage({ params }: HomePageProps) {
               <h4 className="font-semibold text-foreground mb-3">{t.footer.sections.legal}</h4>
               <ul className="space-y-2 text-sm text-muted">
                 <li><a href={`/${locale}/privacy`} className="hover:text-primary">{t.footer.links.privacy}</a></li>
-                <li><a href="#" className="hover:text-primary">{t.footer.links.terms}</a></li>
+                <li><a href={`/${locale}/terms`} className="hover:text-primary">{t.footer.links.terms}</a></li>
                 <li><a href="#" className="hover:text-primary">{t.footer.links.cookies}</a></li>
               </ul>
             </div>

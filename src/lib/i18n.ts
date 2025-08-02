@@ -358,11 +358,137 @@ const translations = {
         subtitle: '立即下载 Dopamind，让 AI 成为你最懂你的伙伴。开启专注高效的全新生活方式。',
         trial: '新用户注册即享 7 天免费试用 • 随时取消',
         users: '加入超过 10,000 名满意用户',
+        termsAndPrivacy: '使用 Dopamind 即表示您同意我们的{terms}和{privacy}。',
+        termsLink: '服务条款',
+        privacyLink: '隐私政策',
+        termsUrl: '服务条款: https://dopamind.app/terms',
+        privacyUrl: '隐私政策: https://dopamind.app/privacy',
         stats: [
           { value: '10K+', label: '活跃用户' },
           { value: '95%', label: '用户满意度' },
           { value: '4.9', label: 'App Store 评分' }
         ]
+      }
+    },
+    terms: {
+      title: '服务条款',
+      subtitle: '使用 Dopamind 服务前，请仔细阅读本服务条款',
+      lastUpdated: '最后更新',
+      sections: {
+        acceptance: {
+          title: '服务条款的接受',
+          content: '欢迎使用 Dopamind！通过访问或使用我们的应用程序和服务，您同意受本服务条款的约束。如果您不同意这些条款，请不要使用我们的服务。'
+        },
+        serviceDescription: {
+          title: '服务描述',
+          content: 'Dopamind 是一款专为 ADHD 用户设计的 AI 伙伴应用，提供任务管理、专注模式、习惯追踪等功能。',
+          features: {
+            title: '我们提供的主要功能包括：',
+            items: [
+              'AI 对话式任务管理',
+              '智能任务分解和优先级排序',
+              '专注模式和番茄工作法',
+              '习惯追踪和数据可视化',
+              '云端数据同步',
+              '多平台支持'
+            ]
+          }
+        },
+        userResponsibilities: {
+          title: '用户责任',
+          subtitle: '使用我们的服务时，您需要承担以下责任：',
+          items: [
+            {
+              title: '账户安全',
+              description: '您有责任保护您的账户密码和登录信息，不得与他人共享账户。'
+            },
+            {
+              title: '内容准确性',
+              description: '您提供的所有信息应当真实、准确、完整且最新。'
+            },
+            {
+              title: '合法使用',
+              description: '您必须遵守所有适用的法律法规，不得将服务用于非法目的。'
+            },
+            {
+              title: '尊重他人',
+              description: '在与客服或其他用户互动时，应保持礼貌和尊重。'
+            }
+          ]
+        },
+        prohibitedUses: {
+          title: '禁止行为',
+          warning: '以下行为是被严格禁止的，违反者将面临账户暂停或永久封禁：',
+          items: [
+            '使用服务进行任何非法活动',
+            '试图破解、反编译或逆向工程我们的软件',
+            '上传恶意软件或病毒',
+            '骚扰其他用户或我们的员工',
+            '创建虚假账户或冒充他人',
+            '滥用客服系统或发送垃圾邮件',
+            '违反知识产权法律',
+            '干扰或破坏服务的正常运行'
+          ]
+        },
+        intellectualProperty: {
+          title: '知识产权',
+          content: 'Dopamind 应用程序、其内容、功能和特色（包括但不限于信息、软件、文本、显示、图像、视频和音频，以及其设计、选择和排列）均为我们或我们的许可方所有，受版权、商标、专利和其他知识产权法律保护。',
+          userContent: '您保留对您创建的任务、笔记和其他用户内容的所有权。通过使用我们的服务，您授予我们处理、存储和同步这些内容以提供服务的权利。'
+        },
+        paidServices: {
+          title: '付费服务和计费',
+          items: [
+            {
+              title: '订阅模式',
+              description: '我们提供免费试用和付费订阅服务。订阅将自动续费，除非您在当前计费周期结束前取消。'
+            },
+            {
+              title: '价格变更',
+              description: '我们保留随时更改订阅价格的权利，但会提前至少30天通知现有用户。'
+            },
+            {
+              title: '退款政策',
+              description: '根据应用商店的政策，某些情况下可能提供退款。具体请参考您购买平台的退款条款。'
+            },
+            {
+              title: '免费试用',
+              description: '新用户享有7天免费试用期。试用期结束后，如不取消将自动转为付费订阅。'
+            }
+          ]
+        },
+        disclaimer: {
+          title: '免责声明',
+          content: '我们的服务按"现状"提供，不提供任何明示或暗示的保证：',
+          items: [
+            '我们不保证服务的无中断或无错误运行',
+            'AI 建议仅供参考，不构成专业医疗或心理健康建议',
+            '您应该根据自己的判断使用 AI 提供的建议',
+            '对于因使用或无法使用服务而造成的任何损失，我们不承担责任',
+            '我们不对第三方内容或服务负责'
+          ]
+        },
+        serviceChanges: {
+          title: '服务变更和终止',
+          content: '我们保留随时修改、暂停或终止服务的权利，恕不另行通知。我们也可能需要定期进行维护，期间服务可能暂时不可用。',
+          terminationConditions: [
+            '违反本服务条款',
+            '涉嫌欺诈或滥用',
+            '长期不活跃的账户',
+            '应法律要求或监管命令',
+            '服务不再商业可行'
+          ]
+        },
+        governingLaw: {
+          title: '适用法律',
+          content: '本服务条款受新加坡法律管辖。如发生争议，双方同意首先通过友好协商解决；协商不成的，应提交至新加坡仲裁中心进行仲裁。'
+        },
+        contact: {
+          title: '联系我们',
+          subtitle: '如果您对本服务条款有任何疑问，请联系我们：',
+          email: 'legal@dopamind.com',
+          support: 'support@dopamind.com',
+          responseTime: '我们会在收到您的询问后7个工作日内回复。'
+        }
       }
     }
   },
@@ -714,11 +840,137 @@ const translations = {
         subtitle: 'Download Dopamind now and let AI become your most understanding companion. Start a new focused and efficient lifestyle.',
         trial: 'New users get 7-day free trial • Cancel anytime',
         users: 'Join over 10,000 satisfied users',
+        termsAndPrivacy: 'By using Dopamind, you agree to our {terms} and {privacy}.',
+        termsLink: 'Terms of Service',
+        privacyLink: 'Privacy Policy',
+        termsUrl: 'Terms of Service: https://dopamind.app/terms',
+        privacyUrl: 'Privacy Policy: https://dopamind.app/privacy',
         stats: [
           { value: '10K+', label: 'Active Users' },
           { value: '95%', label: 'User Satisfaction' },
           { value: '4.9', label: 'App Store Rating' }
         ]
+      }
+    },
+    terms: {
+      title: 'Terms of Service',
+      subtitle: 'Please read these terms carefully before using Dopamind services',
+      lastUpdated: 'Last updated',
+      sections: {
+        acceptance: {
+          title: 'Acceptance of Terms',
+          content: 'Welcome to Dopamind! By accessing or using our application and services, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.'
+        },
+        serviceDescription: {
+          title: 'Service Description',
+          content: 'Dopamind is an AI companion app designed for ADHD users, providing task management, focus mode, habit tracking and other features.',
+          features: {
+            title: 'Our main features include:',
+            items: [
+              'AI conversational task management',
+              'Smart task breakdown and priority sorting',
+              'Focus mode and Pomodoro technique',
+              'Habit tracking and data visualization',
+              'Cloud data synchronization',
+              'Multi-platform support'
+            ]
+          }
+        },
+        userResponsibilities: {
+          title: 'User Responsibilities',
+          subtitle: 'When using our services, you are responsible for:',
+          items: [
+            {
+              title: 'Account Security',
+              description: 'You are responsible for protecting your account password and login information, and must not share your account with others.'
+            },
+            {
+              title: 'Content Accuracy',
+              description: 'All information you provide should be true, accurate, complete and up-to-date.'
+            },
+            {
+              title: 'Lawful Use',
+              description: 'You must comply with all applicable laws and regulations and not use the service for illegal purposes.'
+            },
+            {
+              title: 'Respect Others',
+              description: 'When interacting with customer service or other users, you should be polite and respectful.'
+            }
+          ]
+        },
+        prohibitedUses: {
+          title: 'Prohibited Conduct',
+          warning: 'The following behaviors are strictly prohibited and violators will face account suspension or permanent banning:',
+          items: [
+            'Using the service for any illegal activities',
+            'Attempting to hack, decompile or reverse engineer our software',
+            'Uploading malware or viruses',
+            'Harassing other users or our staff',
+            'Creating fake accounts or impersonating others',
+            'Abusing customer service system or sending spam',
+            'Violating intellectual property laws',
+            'Interfering with or disrupting normal service operation'
+          ]
+        },
+        intellectualProperty: {
+          title: 'Intellectual Property',
+          content: 'The Dopamind application, its content, functionality and features (including but not limited to information, software, text, displays, images, video and audio, and their design, selection and arrangement) are owned by us or our licensors and are protected by copyright, trademark, patent and other intellectual property laws.',
+          userContent: 'You retain ownership of the tasks, notes and other user content you create. By using our service, you grant us the right to process, store and synchronize this content to provide the service.'
+        },
+        paidServices: {
+          title: 'Paid Services and Billing',
+          items: [
+            {
+              title: 'Subscription Model',
+              description: 'We offer free trial and paid subscription services. Subscriptions will automatically renew unless you cancel before the end of the current billing cycle.'
+            },
+            {
+              title: 'Price Changes',
+              description: 'We reserve the right to change subscription prices at any time, but will provide at least 30 days notice to existing users.'
+            },
+            {
+              title: 'Refund Policy',
+              description: 'Refunds may be available in certain circumstances according to app store policies. Please refer to your purchase platform\'s refund terms.'
+            },
+            {
+              title: 'Free Trial',
+              description: 'New users enjoy a 7-day free trial period. After the trial ends, it will automatically convert to a paid subscription if not cancelled.'
+            }
+          ]
+        },
+        disclaimer: {
+          title: 'Disclaimer',
+          content: 'Our services are provided "as is" without any express or implied warranties:',
+          items: [
+            'We do not guarantee uninterrupted or error-free service operation',
+            'AI suggestions are for reference only and do not constitute professional medical or mental health advice',
+            'You should use AI-provided suggestions based on your own judgment',
+            'We are not liable for any losses caused by using or inability to use the service',
+            'We are not responsible for third-party content or services'
+          ]
+        },
+        serviceChanges: {
+          title: 'Service Changes and Termination',
+          content: 'We reserve the right to modify, suspend or terminate services at any time without notice. We may also need to perform regular maintenance during which services may be temporarily unavailable.',
+          terminationConditions: [
+            'Violation of these Terms of Service',
+            'Suspected fraud or abuse',
+            'Long-term inactive accounts',
+            'Legal requirements or regulatory orders',
+            'Service is no longer commercially viable'
+          ]
+        },
+        governingLaw: {
+          title: 'Governing Law',
+          content: 'These Terms of Service are governed by Singapore law. In case of disputes, both parties agree to first resolve through friendly negotiation; if negotiation fails, disputes shall be submitted to Singapore Arbitration Centre for arbitration.'
+        },
+        contact: {
+          title: 'Contact Us',
+          subtitle: 'If you have any questions about these Terms of Service, please contact us:',
+          email: 'legal@dopamind.com',
+          support: 'support@dopamind.com',
+          responseTime: 'We will respond to your inquiry within 7 business days.'
+        }
       }
     }
   },
@@ -1070,11 +1322,137 @@ const translations = {
         subtitle: '今すぐDopamindをダウンロードし、AIをあなたの最も理解してくれるパートナーにしましょう。集中的で効率的な新しいライフスタイルを始めましょう。',
         trial: '新規ユーザー登録で7日間無料試用 • いつでもキャンセル可能',
         users: '10,000人以上の満足ユーザーに参加',
+        termsAndPrivacy: 'Dopamindを使用することで、当社の{terms}と{privacy}に同意したものとみなされます。',
+        termsLink: '利用規約',
+        privacyLink: 'プライバシーポリシー',
+        termsUrl: '利用規約: https://dopamind.app/terms',
+        privacyUrl: 'プライバシーポリシー: https://dopamind.app/privacy',
         stats: [
           { value: '10K+', label: 'アクティブユーザー' },
           { value: '95%', label: 'ユーザー満足度' },
           { value: '4.9', label: 'App Store評価' }
         ]
+      }
+    },
+    terms: {
+      title: '利用規約',
+      subtitle: 'Dopamindサービスをご利用になる前に、本利用規約をよくお読みください',
+      lastUpdated: '最終更新',
+      sections: {
+        acceptance: {
+          title: '利用規約の同意',
+          content: 'Dopamindへようこそ！当社のアプリケーションおよびサービスにアクセスまたは利用することで、お客様は本利用規約に拘束されることに同意するものとします。これらの条項に同意されない場合は、当社のサービスをご利用にならないでください。'
+        },
+        serviceDescription: {
+          title: 'サービス説明',
+          content: 'DopamindはADHDユーザー向けに設計されたAIコンパニオンアプリで、タスク管理、フォーカスモード、習慣追跡などの機能を提供します。',
+          features: {
+            title: '提供する主な機能：',
+            items: [
+              'AI対話式タスク管理',
+              'スマートタスク分解と優先順位付け',
+              'フォーカスモードとポモドーロテクニック',
+              '習慣追跡とデータ可視化',
+              'クラウドデータ同期',
+              'マルチプラットフォーム対応'
+            ]
+          }
+        },
+        userResponsibilities: {
+          title: 'ユーザーの責任',
+          subtitle: 'サービスご利用時、お客様には以下の責任があります：',
+          items: [
+            {
+              title: 'アカウントセキュリティ',
+              description: 'アカウントのパスワードとログイン情報を保護し、他人とアカウントを共有しない責任があります。'
+            },
+            {
+              title: 'コンテンツの正確性',
+              description: '提供するすべての情報は真実、正確、完全かつ最新である必要があります。'
+            },
+            {
+              title: '合法的使用',
+              description: '適用されるすべての法律と規制に従い、違法な目的でサービスを使用してはいけません。'
+            },
+            {
+              title: '他者への敬意',
+              description: 'カスタマーサービスや他のユーザーとやり取りする際は、礼儀正しく敬意を払う必要があります。'
+            }
+          ]
+        },
+        prohibitedUses: {
+          title: '禁止行為',
+          warning: '以下の行為は厳格に禁止されており、違反者はアカウント停止または永久禁止処分を受けます：',
+          items: [
+            '違法活動へのサービス使用',
+            'ソフトウェアのハッキング、逆コンパイル、リバースエンジニアリングの試み',
+            'マルウェアやウイルスのアップロード',
+            '他のユーザーやスタッフへの嫌がらせ',
+            '偽アカウント作成や他人のなりすまし',
+            'カスタマーサービスシステムの悪用やスパム送信',
+            '知的財産権法の違反',
+            'サービスの正常な運営への干渉や妨害'
+          ]
+        },
+        intellectualProperty: {
+          title: '知的財産権',
+          content: 'Dopamindアプリケーション、そのコンテンツ、機能および特徴（情報、ソフトウェア、テキスト、ディスプレイ、画像、ビデオ、オーディオ、およびそれらのデザイン、選択、配置を含むがこれらに限定されない）は、当社または当社のライセンサーが所有し、著作権、商標、特許およびその他の知的財産法によって保護されています。',
+          userContent: 'お客様が作成したタスク、メモ、その他のユーザーコンテンツの所有権はお客様が保持します。当社のサービスを使用することで、サービス提供のためにこれらのコンテンツを処理、保存、同期する権利を当社に付与することになります。'
+        },
+        paidServices: {
+          title: '有料サービスと課金',
+          items: [
+            {
+              title: 'サブスクリプションモデル',
+              description: '無料試用と有料サブスクリプションサービスを提供しています。現在の課金サイクル終了前にキャンセルしない限り、サブスクリプションは自動更新されます。'
+            },
+            {
+              title: '価格変更',
+              description: 'サブスクリプション価格をいつでも変更する権利を留保しますが、既存ユーザーには少なくとも30日前に通知いたします。'
+            },
+            {
+              title: '返金ポリシー',
+              description: 'アプリストアのポリシーに従い、特定の状況下では返金が可能な場合があります。購入プラットフォームの返金規約をご参照ください。'
+            },
+            {
+              title: '無料試用',
+              description: '新規ユーザーは7日間の無料試用期間をお楽しみいただけます。試用期間終了後、キャンセルしない場合は自動的に有料サブスクリプションに移行します。'
+            }
+          ]
+        },
+        disclaimer: {
+          title: '免責事項',
+          content: '当社のサービスは「現状のまま」提供され、明示または黙示の保証は一切ありません：',
+          items: [
+            'サービスの無中断または無エラー運営を保証いたしません',
+            'AI提案は参考用であり、専門的な医療または精神的健康アドバイスを構成するものではありません',
+            'AI提供の提案はお客様自身の判断に基づいて使用する必要があります',
+            'サービスの使用または使用不能により生じるいかなる損失についても責任を負いません',
+            '第三者のコンテンツやサービスについては責任を負いません'
+          ]
+        },
+        serviceChanges: {
+          title: 'サービス変更と終了',
+          content: '当社は予告なしにサービスを変更、停止、終了する権利を留保します。また、定期的なメンテナンスが必要な場合があり、その間サービスが一時的に利用できなくなる可能性があります。',
+          terminationConditions: [
+            '本利用規約の違反',
+            '詐欺または悪用の疑い',
+            '長期間非アクティブなアカウント',
+            '法的要件または規制命令',
+            'サービスが商業的に実行不可能'
+          ]
+        },
+        governingLaw: {
+          title: '準拠法',
+          content: '本利用規約はシンガポール法に準拠します。紛争が発生した場合、両当事者はまず友好的な交渉による解決に同意し、交渉が失敗した場合は、シンガポール仲裁センターに仲裁を提出するものとします。'
+        },
+        contact: {
+          title: 'お問い合わせ',
+          subtitle: '本利用規約についてご質問がある場合は、お問い合わせください：',
+          email: 'legal@dopamind.com',
+          support: 'support@dopamind.com',
+          responseTime: 'お問い合わせから7営業日以内にご回答いたします。'
+        }
       }
     }
   }
