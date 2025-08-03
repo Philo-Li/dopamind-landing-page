@@ -51,7 +51,8 @@
       "status": "Status Page",
       "privacy": "Privacy Policy",
       "terms": "Terms of Service",
-      "cookies": "Cookie Policy"
+      "cookies": "Cookie Policy",
+      "accountDeletion": "Account Deletion"
     },
     "copyright": "All rights reserved"
   },
@@ -224,6 +225,102 @@
         "support": "support@dopamind.com",
         "responseTime": "We will respond to your inquiry within 48 hours."
       }
+    }
+  },
+  "accountDeletion": {
+    "title": "Dopamind Account & Data Deletion Guide",
+    "subtitle": "Learn how to permanently delete your Dopamind account and all associated data",
+    "appInfo": {
+      "title": "App Information",
+      "appName": "App Name",
+      "developer": "Developer Name",
+      "contact": "Contact Email"
+    },
+    "steps": {
+      "title": "Account Deletion Steps",
+      "items": [
+        {
+          "number": 1,
+          "title": "Open Dopamind app and log in",
+          "description": "Make sure you are logged into the account you want to delete"
+        },
+        {
+          "number": 2,
+          "title": "Go to 'Profile' page",
+          "description": "Tap 'Profile' in the bottom navigation bar of the app"
+        },
+        {
+          "number": 3,
+          "title": "Tap 'Account Info'",
+          "description": "Find and tap 'Account Info' on your profile page"
+        },
+        {
+          "number": 4,
+          "title": "Tap 'Permanently Delete Account' button",
+          "description": "At the bottom of the Account Info page, tap the red 'Permanently Delete Account' button"
+        },
+        {
+          "number": 5,
+          "title": "Enter password for final confirmation",
+          "description": "Follow the on-screen prompts and enter your account password for final confirmation"
+        }
+      ]
+    },
+    "dataInfo": {
+      "title": "Important Data Information",
+      "warning": "Please note: Account deletion is an irreversible operation!",
+      "description": "Once confirmed, all your personal information and data will be permanently deleted and cannot be recovered.",
+      "deletedData": {
+        "title": "The following data will be permanently deleted:",
+        "items": [
+          "All personal information (nickname, email, avatar, etc.)",
+          "All task records and completion history",
+          "All habit data and tracking records",
+          "All focus session records",
+          "Chat history with AI coach",
+          "App preferences and custom configurations",
+          "Subscription and payment records",
+          "All other data associated with your account"
+        ]
+      }
+    },
+    "confirmation": {
+      "title": "Confirmation Requirements",
+      "description": "To ensure account security, the deletion operation requires the following conditions:",
+      "requirements": [
+        "Enter your current account login password",
+        "Confirm that you understand the irreversible nature of this operation",
+        "Agree to waive all rights to data recovery"
+      ]
+    },
+    "support": {
+      "title": "Need Help?",
+      "description": "If you encounter any issues during the deletion process, or have any questions, please contact our support team:",
+      "subject": "Email Subject",
+      "subjectText": "Account Deletion Related Issues",
+      "responseTime": "We will reply to your email within 24-48 hours"
+    },
+    "alternatives": {
+      "title": "Other Options Before Deletion",
+      "description": "Before permanently deleting your account, you may also consider the following alternatives:",
+      "options": [
+        {
+          "title": "Pause Usage",
+          "description": "You can delete the app but keep your account, and reinstall and restore data anytime"
+        },
+        {
+          "title": "Data Export",
+          "description": "Contact support team to export a backup of your personal data"
+        },
+        {
+          "title": "Cancel Subscription",
+          "description": "If you just want to stop paying, you can cancel subscription separately without deleting the account"
+        },
+        {
+          "title": "Contact Support",
+          "description": "If you encounter issues, our team is happy to help you"
+        }
+      ]
     }
   }
 }

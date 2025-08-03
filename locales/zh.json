@@ -51,7 +51,8 @@
       "status": "状态页面",
       "privacy": "隐私政策",
       "terms": "服务条款",
-      "cookies": "Cookie 政策"
+      "cookies": "Cookie 政策",
+      "accountDeletion": "账户删除"
     },
     "copyright": "版权所有"
   },
@@ -224,6 +225,102 @@
         "support": "support@dopamind.com",
         "responseTime": "我们会在收到您的询问后 48 小时内回复。"
       }
+    }
+  },
+  "accountDeletion": {
+    "title": "Dopamind 账户与数据删除指南",
+    "subtitle": "了解如何永久删除您的 Dopamind 账户和所有相关数据",
+    "appInfo": {
+      "title": "应用信息",
+      "appName": "应用名称",
+      "developer": "开发者名称",
+      "contact": "联系邮箱"
+    },
+    "steps": {
+      "title": "账户删除步骤",
+      "items": [
+        {
+          "number": 1,
+          "title": "打开 Dopamind 应用并登录",
+          "description": "确保您已经登录到需要删除的账户"
+        },
+        {
+          "number": 2,
+          "title": "前往「我的」页面",
+          "description": "在应用底部导航栏中点击「我的」(Profile) 页面"
+        },
+        {
+          "number": 3,
+          "title": "点击「账户信息」",
+          "description": "在个人页面中找到并点击「账户信息」(Account Info)"
+        },
+        {
+          "number": 4,
+          "title": "点击「永久删除账户」按钮",
+          "description": "在账户信息页面底部，点击红色的「永久删除账户」(Permanently Delete Account) 按钮"
+        },
+        {
+          "number": 5,
+          "title": "输入密码进行最终确认",
+          "description": "按照屏幕提示，输入您的账户密码进行最终确认删除操作"
+        }
+      ]
+    },
+    "dataInfo": {
+      "title": "重要数据说明",
+      "warning": "请注意：删除账户是一个不可逆转的操作！",
+      "description": "一旦确认删除，将会永久删除您的所有个人信息和数据，且无法恢复。",
+      "deletedData": {
+        "title": "以下数据将被永久删除：",
+        "items": [
+          "所有个人信息（昵称、邮箱、头像等）",
+          "所有任务记录和完成历史",
+          "所有习惯数据和追踪记录",
+          "所有专注会话记录",
+          "与 AI 教练的聊天历史",
+          "应用偏好设置和自定义配置",
+          "订阅和付费记录",
+          "其他所有与您账户关联的数据"
+        ]
+      }
+    },
+    "confirmation": {
+      "title": "确认要求",
+      "description": "为确保账户安全，删除操作需要满足以下条件：",
+      "requirements": [
+        "输入当前账户的登录密码",
+        "确认您理解此操作的不可逆性",
+        "同意放弃所有相关数据的恢复权利"
+      ]
+    },
+    "support": {
+      "title": "需要帮助？",
+      "description": "如果您在删除过程中遇到任何问题，或有任何疑问，请联系我们的支持团队：",
+      "subject": "邮件主题",
+      "subjectText": "账户删除相关问题",
+      "responseTime": "我们会在 24-48 小时内回复您的邮件"
+    },
+    "alternatives": {
+      "title": "删除前的其他选择",
+      "description": "在永久删除账户之前，您也可以考虑以下替代方案：",
+      "options": [
+        {
+          "title": "暂停使用",
+          "description": "您可以删除应用但保留账户，随时可以重新安装并恢复数据"
+        },
+        {
+          "title": "数据导出",
+          "description": "联系支持团队导出您的个人数据备份"
+        },
+        {
+          "title": "取消订阅",
+          "description": "如果只是想停止付费，可以单独取消订阅而不删除账户"
+        },
+        {
+          "title": "联系支持",
+          "description": "如果遇到问题，我们的团队很乐意为您提供帮助"
+        }
+      ]
     }
   }
 }
