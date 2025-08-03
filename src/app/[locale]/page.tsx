@@ -513,6 +513,7 @@ export default async function HomePage({ params }: HomePageProps) {
               <ul className="space-y-2 text-sm text-muted">
                 <li><a href={`/${locale}/privacy`} className="hover:text-primary">{t.footer.links.privacy}</a></li>
                 <li><a href={`/${locale}/terms`} className="hover:text-primary">{t.footer.links.terms}</a></li>
+                <li><a href={`/${locale}/account-deletion`} className="hover:text-primary">{t.footer.links.accountDeletion}</a></li>
                 <li><a href="#" className="hover:text-primary">{t.footer.links.cookies}</a></li>
               </ul>
             </div>

@@ -222,7 +222,8 @@ const translations = {
         status: '状态页面',
         privacy: '隐私政策',
         terms: '服务条款',
-        cookies: 'Cookie 政策'
+        cookies: 'Cookie 政策',
+        accountDeletion: '账户删除'
       }
     },
     home: {
@@ -490,6 +491,102 @@ const translations = {
           responseTime: '我们会在收到您的询问后7个工作日内回复。'
         }
       }
+    },
+    accountDeletion: {
+      title: 'Dopamind 账户与数据删除指南',
+      subtitle: '了解如何永久删除您的 Dopamind 账户和所有相关数据',
+      appInfo: {
+        title: '应用信息',
+        appName: '应用名称',
+        developer: '开发者名称',
+        contact: '联系邮箱'
+      },
+      steps: {
+        title: '账户删除步骤',
+        items: [
+          {
+            number: 1,
+            title: '打开 Dopamind 应用并登录',
+            description: '确保您已经登录到需要删除的账户'
+          },
+          {
+            number: 2,
+            title: '前往「我的」页面',
+            description: '在应用底部导航栏中点击「我的」(Profile) 页面'
+          },
+          {
+            number: 3,
+            title: '点击「账户信息」',
+            description: '在个人页面中找到并点击「账户信息」(Account Info)'
+          },
+          {
+            number: 4,
+            title: '点击「永久删除账户」按钮',
+            description: '在账户信息页面底部，点击红色的「永久删除账户」(Permanently Delete Account) 按钮'
+          },
+          {
+            number: 5,
+            title: '输入密码进行最终确认',
+            description: '按照屏幕提示，输入您的账户密码进行最终确认删除操作'
+          }
+        ]
+      },
+      dataInfo: {
+        title: '重要数据说明',
+        warning: '请注意：删除账户是一个不可逆转的操作！',
+        description: '一旦确认删除，将会永久删除您的所有个人信息和数据，且无法恢复。',
+        deletedData: {
+          title: '以下数据将被永久删除：',
+          items: [
+            '所有个人信息（昵称、邮箱、头像等）',
+            '所有任务记录和完成历史',
+            '所有习惯数据和追踪记录',
+            '所有专注会话记录',
+            '与 AI 教练的聊天历史',
+            '应用偏好设置和自定义配置',
+            '订阅和付费记录',
+            '其他所有与您账户关联的数据'
+          ]
+        }
+      },
+      confirmation: {
+        title: '确认要求',
+        description: '为确保账户安全，删除操作需要满足以下条件：',
+        requirements: [
+          '输入当前账户的登录密码',
+          '确认您理解此操作的不可逆性',
+          '同意放弃所有相关数据的恢复权利'
+        ]
+      },
+      support: {
+        title: '需要帮助？',
+        description: '如果您在删除过程中遇到任何问题，或有任何疑问，请联系我们的支持团队：',
+        subject: '邮件主题',
+        subjectText: '账户删除相关问题',
+        responseTime: '我们会在 24-48 小时内回复您的邮件'
+      },
+      alternatives: {
+        title: '删除前的其他选择',
+        description: '在永久删除账户之前，您也可以考虑以下替代方案：',
+        options: [
+          {
+            title: '暂停使用',
+            description: '您可以删除应用但保留账户，随时可以重新安装并恢复数据'
+          },
+          {
+            title: '数据导出',
+            description: '联系支持团队导出您的个人数据备份'
+          },
+          {
+            title: '取消订阅',
+            description: '如果只是想停止付费，可以单独取消订阅而不删除账户'
+          },
+          {
+            title: '联系支持',
+            description: '如果遇到问题，我们的团队很乐意为您提供帮助'
+          }
+        ]
+      }
     }
   },
   en: {
@@ -704,7 +801,8 @@ const translations = {
         status: 'Status Page',
         privacy: 'Privacy Policy',
         terms: 'Terms of Service',
-        cookies: 'Cookie Policy'
+        cookies: 'Cookie Policy',
+        accountDeletion: 'Account Deletion'
       }
     },
     home: {
@@ -972,6 +1070,102 @@ const translations = {
           responseTime: 'We will respond to your inquiry within 7 business days.'
         }
       }
+    },
+    accountDeletion: {
+      title: 'Dopamind Account & Data Deletion Guide',
+      subtitle: 'Learn how to permanently delete your Dopamind account and all related data',
+      appInfo: {
+        title: 'App Information',
+        appName: 'App Name',
+        developer: 'Developer Name',
+        contact: 'Contact Email'
+      },
+      steps: {
+        title: 'Account Deletion Steps',
+        items: [
+          {
+            number: 1,
+            title: 'Open Dopamind app and log in',
+            description: 'Make sure you are logged into the account you want to delete'
+          },
+          {
+            number: 2,
+            title: 'Go to "Profile" page',
+            description: 'Tap on "Profile" in the bottom navigation bar of the app'
+          },
+          {
+            number: 3,
+            title: 'Tap "Account Info"',
+            description: 'Find and tap "Account Info" on your profile page'
+          },
+          {
+            number: 4,
+            title: 'Tap "Permanently Delete Account" button',
+            description: 'At the bottom of the account info page, tap the red "Permanently Delete Account" button'
+          },
+          {
+            number: 5,
+            title: 'Enter password for final confirmation',
+            description: 'Follow the on-screen prompts and enter your account password to confirm the deletion'
+          }
+        ]
+      },
+      dataInfo: {
+        title: 'Important Data Information',
+        warning: 'Please note: Account deletion is an irreversible operation!',
+        description: 'Once confirmed, all your personal information and data will be permanently deleted and cannot be recovered.',
+        deletedData: {
+          title: 'The following data will be permanently deleted:',
+          items: [
+            'All personal information (nickname, email, avatar, etc.)',
+            'All task records and completion history',
+            'All habit data and tracking records',
+            'All focus session records',
+            'Chat history with AI coach',
+            'App preferences and custom configurations',
+            'Subscription and payment records',
+            'All other data associated with your account'
+          ]
+        }
+      },
+      confirmation: {
+        title: 'Confirmation Requirements',
+        description: 'To ensure account security, the deletion operation requires the following conditions:',
+        requirements: [
+          'Enter your current account login password',
+          'Confirm that you understand the irreversible nature of this operation',
+          'Agree to waive all rights to data recovery'
+        ]
+      },
+      support: {
+        title: 'Need Help?',
+        description: 'If you encounter any problems during the deletion process or have any questions, please contact our support team:',
+        subject: 'Email Subject',
+        subjectText: 'Account Deletion Related Issue',
+        responseTime: 'We will reply to your email within 24-48 hours'
+      },
+      alternatives: {
+        title: 'Other Options Before Deletion',
+        description: 'Before permanently deleting your account, you may also consider the following alternatives:',
+        options: [
+          {
+            title: 'Pause Usage',
+            description: 'You can delete the app but keep your account, and reinstall to restore data anytime'
+          },
+          {
+            title: 'Data Export',
+            description: 'Contact support team to export a backup of your personal data'
+          },
+          {
+            title: 'Cancel Subscription',
+            description: 'If you just want to stop payments, you can cancel subscription separately without deleting account'
+          },
+          {
+            title: 'Contact Support',
+            description: 'If you encounter problems, our team is happy to help you'
+          }
+        ]
+      }
     }
   },
   ja: {
@@ -1186,7 +1380,8 @@ const translations = {
         status: 'ステータスページ',
         privacy: 'プライバシーポリシー',
         terms: '利用規約',
-        cookies: 'Cookieポリシー'
+        cookies: 'Cookieポリシー',
+        accountDeletion: 'アカウント削除'
       }
     },
     home: {
@@ -1453,6 +1648,102 @@ const translations = {
           support: 'support@dopamind.com',
           responseTime: 'お問い合わせから7営業日以内にご回答いたします。'
         }
+      }
+    },
+    accountDeletion: {
+      title: 'Dopamind アカウント・データ削除ガイド',
+      subtitle: 'Dopamind アカウントと関連するすべてのデータを完全に削除する方法をご案内します',
+      appInfo: {
+        title: 'アプリ情報',
+        appName: 'アプリ名',
+        developer: '開発者名',
+        contact: '連絡先メール'
+      },
+      steps: {
+        title: 'アカウント削除手順',
+        items: [
+          {
+            number: 1,
+            title: 'Dopamind アプリを開いてログイン',
+            description: '削除したいアカウントにログインしていることを確認してください'
+          },
+          {
+            number: 2,
+            title: '「マイページ」に移動',
+            description: 'アプリの下部ナビゲーションバーで「マイページ」をタップします'
+          },
+          {
+            number: 3,
+            title: '「アカウント情報」をタップ',
+            description: 'プロフィールページで「アカウント情報」を見つけてタップします'
+          },
+          {
+            number: 4,
+            title: '「アカウントを完全削除」ボタンをタップ',
+            description: 'アカウント情報ページの下部にある赤い「アカウントを完全削除」ボタンをタップします'
+          },
+          {
+            number: 5,
+            title: 'パスワードを入力して最終確認',
+            description: '画面の指示に従って、アカウントのパスワードを入力し最終確認を行います'
+          }
+        ]
+      },
+      dataInfo: {
+        title: '重要なデータ情報',
+        warning: '注意：アカウント削除は元に戻すことができない操作です！',
+        description: '一度確認すると、すべての個人情報とデータが完全に削除され、復旧することはできません。',
+        deletedData: {
+          title: '以下のデータが完全に削除されます：',
+          items: [
+            'すべての個人情報（ニックネーム、メール、アバターなど）',
+            'すべてのタスク記録と完了履歴',
+            'すべての習慣データと追跡記録',
+            'すべての集中セッション記録',
+            'AI コーチとのチャット履歴',
+            'アプリの設定とカスタム構成',
+            'サブスクリプションと支払い記録',
+            'アカウントに関連するその他すべてのデータ'
+          ]
+        }
+      },
+      confirmation: {
+        title: '確認要件',
+        description: 'アカウントセキュリティを確保するため、削除操作には以下の条件が必要です：',
+        requirements: [
+          '現在のアカウントのログインパスワードを入力',
+          'この操作の不可逆性を理解していることを確認',
+          'すべてのデータ復旧権利を放棄することに同意'
+        ]
+      },
+      support: {
+        title: 'ヘルプが必要ですか？',
+        description: '削除プロセス中に問題が発生した場合、またはご質問がある場合は、サポートチームにお問い合わせください：',
+        subject: 'メールの件名',
+        subjectText: 'アカウント削除に関する問題',
+        responseTime: '24-48時間以内にメールに返信いたします'
+      },
+      alternatives: {
+        title: '削除前のその他の選択肢',
+        description: 'アカウントを完全削除する前に、以下の代替案もご検討ください：',
+        options: [
+          {
+            title: '使用一時停止',
+            description: 'アプリを削除してもアカウントは保持し、いつでも再インストールしてデータを復旧できます'
+          },
+          {
+            title: 'データエクスポート',
+            description: 'サポートチームに連絡して個人データのバックアップをエクスポートできます'
+          },
+          {
+            title: 'サブスクリプション解約',
+            description: '支払いを停止したい場合は、アカウントを削除せずにサブスクリプションのみ解約できます'
+          },
+          {
+            title: 'サポートに連絡',
+            description: '問題が発生した場合、私たちのチームが喜んでお手伝いします'
+          }
+        ]
       }
     }
   }
