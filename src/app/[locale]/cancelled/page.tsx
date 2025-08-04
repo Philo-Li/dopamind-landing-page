@@ -1,17 +1,18 @@
 "use client";
 
-import { useEffect } from 'react';
+import { useEffect, use } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { X, ArrowLeft, CreditCard, HelpCircle } from 'lucide-react';
 import { getTranslation, type Locale } from '@/lib/i18n';
 
 interface CancelledPageProps {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }
 
 export default function PaymentCancelledPage({ params }: CancelledPageProps) {
-  const locale = params.locale as Locale;
+  const { locale: localeParam } = use(params);
+  const locale = localeParam as Locale;
   const t = getTranslation(locale);
 
   useEffect(() => {

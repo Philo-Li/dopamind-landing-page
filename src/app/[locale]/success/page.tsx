@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, Suspense } from 'react';
+import { useEffect, useState, Suspense, use } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -169,8 +169,9 @@ function PaymentSuccessContent({ locale }: { locale: Locale }) {
   );
 }
 
-export default function PaymentSuccessPage({ params }: { params: { locale: string } }) {
-  const locale = params.locale as Locale;
+export default function PaymentSuccessPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: localeParam } = use(params);
+  const locale = localeParam as Locale;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background relative overflow-hidden py-12">
