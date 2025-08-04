@@ -1,16 +1,21 @@
 "use client";
 
 import { useEffect, useState, Suspense } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { CheckCircle, Crown, ArrowRight } from 'lucide-react';
 
+interface SessionData {
+  paymentStatus: string;
+  subscriptionId?: string;
+  sessionId: string;
+}
+
 function PaymentSuccessContent() {
-  const [sessionData, setSessionData] = useState<any>(null);
+  const [sessionData, setSessionData] = useState<SessionData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const router = useRouter();
   const searchParams = useSearchParams();
 
   useEffect(() => {

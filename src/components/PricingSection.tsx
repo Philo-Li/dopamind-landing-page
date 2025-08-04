@@ -8,10 +8,6 @@ import { CheckCircle, Gift, Crown, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
 import SubscribeButton from './SubscribeButton';
 import { getTranslation } from '../lib/i18n';
-import { loadStripe } from '@stripe/stripe-js';
-
-// 初始化 Stripe
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 interface PricingSectionProps {
   locale: string;

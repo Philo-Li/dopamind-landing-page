@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Trash2, Shield, AlertTriangle, Mail, User, Key } from 'lucide-react';
+import { Trash2, AlertTriangle, Mail, User, Key } from 'lucide-react';
 import { getTranslation } from '../../../lib/i18n';
 import LanguageSwitcher from '../../../../components/LanguageSwitcher';
 import AuthButton from '../../../../components/AuthButton';
