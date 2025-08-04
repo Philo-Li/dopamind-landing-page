@@ -6,7 +6,11 @@ import Link from 'next/link';
 import { X, ArrowLeft, CreditCard, HelpCircle } from 'lucide-react';
 import { getTranslation, type Locale } from '@/lib/i18n';
 
-export default function PaymentCancelledPage({ params }: { params: { locale: string } }) {
+interface CancelledPageProps {
+  params: { locale: string };
+}
+
+export default function PaymentCancelledPage({ params }: CancelledPageProps) {
   const locale = params.locale as Locale;
   const t = getTranslation(locale);
 
