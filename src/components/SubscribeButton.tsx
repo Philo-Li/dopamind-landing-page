@@ -30,6 +30,9 @@ export default function SubscribeButton({ plan, isPopular = false, className = "
   const [isLoading, setIsLoading] = useState(false);
 
   const handlePress = async () => {
+    // 获取当前语言，优先使用传入的locale参数
+    const currentLocale = locale || localStorage.getItem('preferred-locale') || 'en';
+    
     // 如果用户未登录，重定向到注册页面，并附带支付信息
     if (!user) {
       const paymentParams = new URLSearchParams({
@@ -39,7 +42,7 @@ export default function SubscribeButton({ plan, isPopular = false, className = "
         plan_price: plan.price,
         plan_period: plan.period
       });
-      router.push(`/register?${paymentParams.toString()}`);
+      router.push(`/${currentLocale}/register?${paymentParams.toString()}`);
       return;
     }
 
@@ -49,12 +52,18 @@ export default function SubscribeButton({ plan, isPopular = false, className = "
       console.log('Creating checkout session for:', {
         userId: user.id,
         priceId: plan.priceId,
-        planName: plan.name
+        planName: plan.name,
+        currentLocale: currentLocale
       });
+      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || window.location.origin;
+      const successUrl = `${baseUrl}/${currentLocale}/success?session_id={CHECKOUT_SESSION_ID}`;
+      const cancelUrl = `${baseUrl}/${currentLocale}/cancelled`;
       
-      // 获取当前语言，优先使用传入的locale参数
-      const currentLocale = locale || localStorage.getItem('preferred-locale') || 'zh';
-      const baseUrl = window.location.origin;
+      console.log('Frontend sending URLs:', {
+        success_url: successUrl,
+        cancel_url: cancelUrl,
+        currentLocale
+      });
       
       // 创建 Stripe Checkout Session - 调用后端 API
       const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/stripe/create-checkout-session`, {
@@ -66,8 +75,8 @@ export default function SubscribeButton({ plan, isPopular = false, className = "
         body: JSON.stringify({ 
           plan: plan.id === 'monthly' ? 'monthly' : 'yearly',
           currency: 'usd',
-          success_url: `${baseUrl}/${currentLocale}/success?session_id={CHECKOUT_SESSION_ID}`,
-          cancel_url: `${baseUrl}/${currentLocale}/cancelled`,
+          success_url: successUrl,
+          cancel_url: cancelUrl,
           metadata: {
             planName: plan.name,
             planPrice: plan.price,

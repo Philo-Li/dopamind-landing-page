@@ -46,7 +46,7 @@ export default function SubscriptionPage() {
     const userData = localStorage.getItem('user');
     
     if (!token || !userData) {
-      router.push("/login");
+      router.push("/en/login");
       return;
     }
 
@@ -69,7 +69,7 @@ export default function SubscriptionPage() {
       
     } catch (error) {
       console.error('Error parsing user data:', error);
-      router.push("/login");
+      router.push("/en/login");
       return;
     }
     

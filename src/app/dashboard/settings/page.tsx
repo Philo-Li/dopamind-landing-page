@@ -95,7 +95,7 @@ export default function SettingsPage() {
     const userData = localStorage.getItem('user');
     
     if (!token || !userData) {
-      router.push("/login");
+      router.push("/en/login");
       return;
     }
 
@@ -111,7 +111,7 @@ export default function SettingsPage() {
       
     } catch (error) {
       console.error('Error parsing user data:', error);
-      router.push("/login");
+      router.push("/en/login");
       return;
     }
     

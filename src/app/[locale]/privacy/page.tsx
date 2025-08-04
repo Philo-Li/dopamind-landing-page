@@ -37,7 +37,7 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
           </nav>
           <div className="flex items-center gap-4">
             <LanguageSwitcher currentLocale={locale} />
-            <AuthButton />
+            <AuthButton locale={locale} />
           </div>
         </div>
       </header>

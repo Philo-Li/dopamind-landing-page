@@ -93,7 +93,7 @@ export default function PricingSection({ locale }: PricingSectionProps) {
   const handleTrialStart = () => {
     if (!user) {
       // 如果用户未登录，跳转到注册页面
-      router.push('/register');
+      router.push(`/${locale}/register`);
     } else {
       // 如果用户已登录但没有试用过，开始试用
       // 这里应该调用 API 来激活试用
@@ -533,7 +533,7 @@ export default function PricingSection({ locale }: PricingSectionProps) {
               />
             ) : (
               <Link 
-                href="/register" 
+                href={`/${locale}/register`} 
                 className="w-full inline-block bg-primary hover:bg-primary-600 text-white font-semibold py-4 px-8 rounded-xl text-lg transition-colors shadow-lg text-center"
               >
                 {getButtonText()}

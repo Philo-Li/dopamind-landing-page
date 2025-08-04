@@ -65,7 +65,7 @@ export default function ProfilePage() {
     const userData = localStorage.getItem('user');
     
     if (!token || !userData) {
-      router.push("/login");
+      router.push("/en/login");
       return;
     }
 
@@ -85,7 +85,7 @@ export default function ProfilePage() {
       
     } catch (error) {
       console.error('Error parsing user data:', error);
-      router.push("/login");
+      router.push("/en/login");
       return;
     }
     

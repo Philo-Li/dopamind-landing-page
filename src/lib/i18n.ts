@@ -1,5 +1,5 @@
-export const defaultLocale = 'zh' as const;
-export const locales = ['zh', 'en', 'ja'] as const;
+export const defaultLocale = 'en' as const;
+export const locales = ['en', 'zh', 'ja'] as const;
 export type Locale = typeof locales[number];
 
 export const languageNames: Record<Locale, string> = {
@@ -17,6 +17,41 @@ const translations = {
       howItWorks: '如何使用',
       pricing: '定价方案', 
       support: '帮助中心'
+    },
+    auth: {
+      login: '登录',
+      register: '注册',
+      dashboard: '仪表板',
+      logout: '退出'
+    },
+    login: {
+      title: '登录您的账户',
+      email: '邮箱地址',
+      password: '密码',
+      loginButton: '登录',
+      loggingIn: '登录中...',
+      createAccount: '创建新账户',
+      backToHome: '返回首页',
+      or: '或'
+    },
+    register: {
+      title: '创建您的账户',
+      nickname: '昵称',
+      email: '邮箱地址',
+      password: '密码',
+      confirmPassword: '确认密码',
+      referralCode: '推荐码（可选）',
+      registerButton: '注册',
+      registering: '注册中...',
+      alreadyHaveAccount: '已有账户？',
+      backToHome: '返回首页',
+      or: '或',
+      errors: {
+        passwordMismatch: '密码不匹配',
+        passwordTooShort: '密码至少需要6位字符',
+        nicknameEmpty: '昵称不能为空',
+        nicknameTooLong: '昵称长度不能超过20个字符'
+      }
     },
     privacy: {
       title: '隐私政策',
@@ -513,7 +548,9 @@ const translations = {
       manageSubscription: '管理我的订阅',
       thankYou: '感谢您选择 Dopamind Premium！',
       support: '客服支持',
-      confirmingPayment: '正在确认支付状态...'
+      confirmingPayment: '正在确认支付状态...',
+      missingSessionId: '缺少支付会话ID',
+      fetchError: '获取支付详情失败，但您的支付已成功处理'
     },
     paymentCancelled: {
       title: '支付已取消',
@@ -644,6 +681,41 @@ const translations = {
       howItWorks: 'How It Works',
       pricing: 'Pricing',
       support: 'Support'
+    },
+    auth: {
+      login: 'Login',
+      register: 'Sign Up',
+      dashboard: 'Dashboard',
+      logout: 'Logout'
+    },
+    login: {
+      title: 'Sign in to your account',
+      email: 'Email address',
+      password: 'Password',
+      loginButton: 'Sign in',
+      loggingIn: 'Signing in...',
+      createAccount: 'Create new account',
+      backToHome: 'Back to home',
+      or: 'or'
+    },
+    register: {
+      title: 'Create your account',
+      nickname: 'Nickname',
+      email: 'Email address',
+      password: 'Password',
+      confirmPassword: 'Confirm password',
+      referralCode: 'Referral code (optional)',
+      registerButton: 'Sign up',
+      registering: 'Signing up...',
+      alreadyHaveAccount: 'Already have an account?',
+      backToHome: 'Back to home',
+      or: 'or',
+      errors: {
+        passwordMismatch: 'Passwords do not match',
+        passwordTooShort: 'Password must be at least 6 characters',
+        nicknameEmpty: 'Nickname cannot be empty',
+        nicknameTooLong: 'Nickname cannot exceed 20 characters'
+      }
     },
     privacy: {
       title: 'Privacy Policy',
@@ -1140,7 +1212,9 @@ const translations = {
       manageSubscription: 'Manage My Subscription',
       thankYou: 'Thank you for choosing Dopamind Premium!',
       support: 'Customer Support',
-      confirmingPayment: 'Confirming payment status...'
+      confirmingPayment: 'Confirming payment status...',
+      missingSessionId: 'Missing payment session ID',
+      fetchError: 'Failed to fetch payment details, but your payment was processed successfully'
     },
     paymentCancelled: {
       title: 'Payment Cancelled',
@@ -1271,6 +1345,41 @@ const translations = {
       howItWorks: '使い方',
       pricing: '料金',
       support: 'サポート'
+    },
+    auth: {
+      login: 'ログイン',
+      register: '新規登録',
+      dashboard: 'ダッシュボード',
+      logout: 'ログアウト'
+    },
+    login: {
+      title: 'アカウントにログイン',
+      email: 'メールアドレス',
+      password: 'パスワード',
+      loginButton: 'ログイン',
+      loggingIn: 'ログイン中...',
+      createAccount: '新しいアカウントを作成',
+      backToHome: 'ホームに戻る',
+      or: 'または'
+    },
+    register: {
+      title: 'アカウントを作成',
+      nickname: 'ニックネーム',
+      email: 'メールアドレス',
+      password: 'パスワード',
+      confirmPassword: 'パスワード確認',
+      referralCode: '紹介コード（任意）',
+      registerButton: '新規登録',
+      registering: '登録中...',
+      alreadyHaveAccount: '既にアカウントをお持ちですか？',
+      backToHome: 'ホームに戻る',
+      or: 'または',
+      errors: {
+        passwordMismatch: 'パスワードが一致しません',
+        passwordTooShort: 'パスワードは6文字以上である必要があります',
+        nicknameEmpty: 'ニックネームを入力してください',
+        nicknameTooLong: 'ニックネームは20文字以内である必要があります'
+      }
     },
     privacy: {
       title: 'プライバシーポリシー',
@@ -1767,7 +1876,9 @@ const translations = {
       manageSubscription: 'サブスクリプション管理',
       thankYou: 'Dopamind Premiumをお選びいただき、ありがとうございます！',
       support: 'カスタマーサポート',
-      confirmingPayment: '支払いステータスを確認中...'
+      confirmingPayment: '支払いステータスを確認中...',
+      missingSessionId: '支払いセッションIDがありません',
+      fetchError: '支払い詳細の取得に失敗しましたが、お支払いは正常に処理されました'
     },
     paymentCancelled: {
       title: 'お支払いがキャンセルされました',

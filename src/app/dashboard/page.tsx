@@ -50,7 +50,7 @@ export default function DashboardPage() {
     const userData = localStorage.getItem('user');
     
     if (!token || !userData) {
-      router.push("/login");
+      router.push("/en/login");
       return;
     }
 
@@ -68,7 +68,7 @@ export default function DashboardPage() {
       
     } catch (error) {
       console.error('Error parsing user data:', error);
-      router.push("/login");
+      router.push("/en/login");
       return;
     }
     

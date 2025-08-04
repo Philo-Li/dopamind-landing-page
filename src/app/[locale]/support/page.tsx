@@ -37,7 +37,7 @@ export default async function SupportPage({ params }: SupportPageProps) {
           </nav>
           <div className="flex items-center gap-4">
             <LanguageSwitcher currentLocale={locale} />
-            <AuthButton />
+            <AuthButton locale={locale} />
           </div>
         </div>
       </header>

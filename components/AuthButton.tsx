@@ -2,9 +2,15 @@
 
 import Link from "next/link";
 import { useAuth } from "../src/hooks/useAuth";
+import { getTranslation, type Locale } from "../src/lib/i18n";
 
-export default function AuthButton() {
+interface AuthButtonProps {
+  locale: string;
+}
+
+export default function AuthButton({ locale }: AuthButtonProps) {
   const { user, isLoading, logout } = useAuth();
+  const t = getTranslation(locale as Locale);
 
   if (isLoading) {
     return <div className="animate-pulse bg-gray-200 h-8 w-16 rounded"></div>;
@@ -17,7 +23,7 @@ export default function AuthButton() {
           href="/dashboard"
           className="text-sm font-medium text-muted hover:text-foreground"
         >
-          仪表板
+          {t.auth.dashboard}
         </Link>
         <span className="text-sm text-muted">
           {user.nickname}
@@ -26,7 +32,7 @@ export default function AuthButton() {
           onClick={logout}
           className="text-sm font-medium text-red-600 hover:text-red-700"
         >
-          退出
+          {t.auth.logout}
         </button>
       </div>
     );
@@ -35,16 +41,16 @@ export default function AuthButton() {
   return (
     <div className="flex items-center space-x-4">
       <Link
-        href="/login"
+        href={`/${locale}/login`}
         className="text-sm font-medium text-muted hover:text-foreground"
       >
-        登录
+        {t.auth.login}
       </Link>
       <Link
-        href="/register"
+        href={`/${locale}/register`}
         className="bg-primary hover:bg-primary-600 text-white px-4 py-2 rounded-md text-sm font-medium"
       >
-        注册
+        {t.auth.register}
       </Link>
     </div>
   );

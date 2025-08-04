@@ -37,7 +37,7 @@ export default async function TermsPage({ params }: TermsPageProps) {
           </nav>
           <div className="flex items-center gap-4">
             <LanguageSwitcher currentLocale={locale} />
-            <AuthButton />
+            <AuthButton locale={locale} />
           </div>
         </div>
       </header>

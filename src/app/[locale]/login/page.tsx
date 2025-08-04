@@ -1,12 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useState, use } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../../hooks/useAuth";
+import { getTranslation, type Locale } from "../../../lib/i18n";
 
-export default function LoginPage() {
+interface LoginPageProps {
+  params: Promise<{ locale: string }>;
+}
+
+export default function LoginPage({ params }: LoginPageProps) {
+  const { locale: localeParam } = use(params);
+  const locale = localeParam as Locale;
+  const t = getTranslation(locale);
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -38,7 +47,7 @@ export default function LoginPage() {
       <div className="max-w-md w-full space-y-8 relative z-10">
         <div>
           <div className="flex justify-center mb-6">
-            <Link href="/" className="flex items-center gap-3">
+            <Link href={`/${locale}`} className="flex items-center gap-3">
               <Image 
                 src="/dopamind-logo.png"
                 alt="Dopamind Logo" 
@@ -50,15 +59,15 @@ export default function LoginPage() {
             </Link>
           </div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-foreground">
-            登录您的账户
+            {t.login.title}
           </h2>
           <p className="mt-2 text-center text-sm text-muted">
-            或{" "}
+            {t.login.or}{" "}
             <Link
-              href="/register"
+              href={`/${locale}/register`}
               className="font-medium text-primary hover:text-primary-600"
             >
-              创建新账户
+              {t.login.createAccount}
             </Link>
           </p>
         </div>
@@ -66,7 +75,7 @@ export default function LoginPage() {
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <label htmlFor="email" className="sr-only">
-                邮箱地址
+                {t.login.email}
               </label>
               <input
                 id="email"
@@ -75,14 +84,14 @@ export default function LoginPage() {
                 autoComplete="email"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-foreground rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-                placeholder="邮箱地址"
+                placeholder={t.login.email}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div>
               <label htmlFor="password" className="sr-only">
-                密码
+                {t.login.password}
               </label>
               <input
                 id="password"
@@ -91,7 +100,7 @@ export default function LoginPage() {
                 autoComplete="current-password"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-foreground rounded-b-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-                placeholder="密码"
+                placeholder={t.login.password}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -108,16 +117,16 @@ export default function LoginPage() {
               disabled={isLoading}
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isLoading ? "登录中..." : "登录"}
+              {isLoading ? t.login.loggingIn : t.login.loginButton}
             </button>
           </div>
 
           <div className="text-center">
             <Link
-              href="/"
+              href={`/${locale}`}
               className="font-medium text-primary hover:text-primary-600"
             >
-              返回首页
+              {t.login.backToHome}
             </Link>
           </div>
         </form>

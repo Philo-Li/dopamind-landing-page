@@ -23,8 +23,15 @@ function PaymentSuccessContent({ locale }: { locale: Locale }) {
   useEffect(() => {
     const sessionId = searchParams.get('session_id');
     
+    // 调试信息
+    console.log('Current URL:', window.location.href);
+    console.log('Search params:', window.location.search);
+    console.log('Session ID from searchParams:', sessionId);
+    console.log('All search params:', Object.fromEntries(searchParams.entries()));
+    
     if (!sessionId) {
-      setError('缺少支付会话ID');
+      console.error('Missing session_id in URL params');
+      setError(t.paymentSuccess.missingSessionId);
       setLoading(false);
       return;
     }
@@ -40,11 +47,11 @@ function PaymentSuccessContent({ locale }: { locale: Locale }) {
           const data = await response.json();
           setSessionData(data);
         } else {
-          throw new Error('获取支付详情失败');
+          throw new Error('Failed to fetch payment details');
         }
       } catch (error) {
         console.error('Error fetching payment details:', error);
-        setError('获取支付详情失败，但您的支付已成功处理');
+        setError(t.paymentSuccess.fetchError);
       } finally {
         setLoading(false);
       }

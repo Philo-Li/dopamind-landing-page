@@ -38,7 +38,7 @@ export default async function HomePage({ params }: HomePageProps) {
           </nav>
           <div className="flex items-center gap-4">
             <LanguageSwitcher currentLocale={locale} />
-            <AuthButton />
+            <AuthButton locale={locale} />
           </div>
         </div>
       </header>

@@ -1,12 +1,17 @@
 "use client";
 
-import { useState, Suspense } from "react";
+import { useState, Suspense, use } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../../hooks/useAuth";
+import { getTranslation, type Locale } from "../../../lib/i18n";
 
-function RegisterForm() {
+interface RegisterPageProps {
+  params: Promise<{ locale: string }>;
+}
+
+function RegisterForm({ locale }: { locale: Locale }) {
   const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,28 +21,29 @@ function RegisterForm() {
   const { register, isLoading } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const t = getTranslation(locale);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
     if (password !== confirmPassword) {
-      setError("密码不匹配");
+      setError(t.register.errors.passwordMismatch);
       return;
     }
 
     if (password.length < 6) {
-      setError("密码至少需要6位字符");
+      setError(t.register.errors.passwordTooShort);
       return;
     }
 
     if (!nickname.trim()) {
-      setError("昵称不能为空");
+      setError(t.register.errors.nicknameEmpty);
       return;
     }
 
     if (nickname.trim().length > 20) {
-      setError("昵称长度不能超过20个字符");
+      setError(t.register.errors.nicknameTooLong);
       return;
     }
 
@@ -56,6 +62,18 @@ function RegisterForm() {
         // 给一个短暂的延迟确保用户认证状态已更新
         setTimeout(async () => {
           try {
+            // 获取当前语言并构建回调URL
+            const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || window.location.origin;
+            const currentLocale = locale;
+            const successUrl = `${baseUrl}/${currentLocale}/success?session_id={CHECKOUT_SESSION_ID}`;
+            const cancelUrl = `${baseUrl}/${currentLocale}/cancelled`;
+            
+            console.log('Register page sending URLs:', {
+              success_url: successUrl,
+              cancel_url: cancelUrl,
+              currentLocale
+            });
+            
             // 根据 planId 确定计划类型
             const planType = planId === process.env.NEXT_PUBLIC_STRIPE_MONTHLY_PRODUCT_ID ? 'monthly' : 'yearly';
             
@@ -68,25 +86,37 @@ function RegisterForm() {
               body: JSON.stringify({ 
                 plan: planType,
                 currency: 'usd',
+                success_url: successUrl,
+                cancel_url: cancelUrl,
                 metadata: {
                   planId: planId,
                   planName: planName,
                   planPrice: planPrice,
-                  planPeriod: planPeriod
+                  planPeriod: planPeriod,
+                  locale: currentLocale
                 }
               }),
             });
             
             if (response.ok) {
-              const { url } = await response.json();
-              window.location.href = url; // 直接跳转到 Stripe 支付页面
+              const { sessionId } = await response.json();
+              
+              // 重定向到 Stripe Checkout
+              const stripe = await import('@stripe/stripe-js').then(m => m.loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!));
+              if (stripe) {
+                const { error } = await stripe.redirectToCheckout({ sessionId });
+                if (error) {
+                  console.error('Stripe redirect error:', error);
+                  router.push(`/${locale}/pricing?selected_plan=${planId}`);
+                }
+              }
             } else {
               // 如果支付创建失败，跳转到定价页面让用户重试
-              router.push(`/pricing?selected_plan=${planId}`);
+              router.push(`/${locale}/pricing?selected_plan=${planId}`);
             }
           } catch (error) {
             console.error('Payment creation failed after registration:', error);
-            router.push(`/pricing?selected_plan=${planId}`);
+            router.push(`/${locale}/pricing?selected_plan=${planId}`);
           }
         }, 1000);
         
@@ -107,7 +137,7 @@ function RegisterForm() {
       <div className="space-y-4">
         <div>
           <label htmlFor="nickname" className="sr-only">
-            昵称
+            {t.register.nickname}
           </label>
           <input
             id="nickname"
@@ -115,14 +145,14 @@ function RegisterForm() {
             type="text"
             required
             className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-foreground rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-            placeholder="昵称 (最多20个字符)"
+            placeholder={`${t.register.nickname} (最多20个字符)`}
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
           />
         </div>
         <div>
           <label htmlFor="email" className="sr-only">
-            邮箱地址
+            {t.register.email}
           </label>
           <input
             id="email"
@@ -131,14 +161,14 @@ function RegisterForm() {
             autoComplete="email"
             required
             className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-foreground rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-            placeholder="邮箱地址"
+            placeholder={t.register.email}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div>
           <label htmlFor="password" className="sr-only">
-            密码
+            {t.register.password}
           </label>
           <input
             id="password"
@@ -147,14 +177,14 @@ function RegisterForm() {
             autoComplete="new-password"
             required
             className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-foreground rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-            placeholder="密码 (至少6位)"
+            placeholder={`${t.register.password} (至少6位)`}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div>
           <label htmlFor="confirmPassword" className="sr-only">
-            确认密码
+            {t.register.confirmPassword}
           </label>
           <input
             id="confirmPassword"
@@ -163,21 +193,21 @@ function RegisterForm() {
             autoComplete="new-password"
             required
             className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-foreground rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-            placeholder="确认密码"
+            placeholder={t.register.confirmPassword}
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>
         <div>
           <label htmlFor="referralCode" className="sr-only">
-            推荐码
+            {t.register.referralCode}
           </label>
           <input
             id="referralCode"
             name="referralCode"
             type="text"
             className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-foreground rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-            placeholder="推荐码 (可选)"
+            placeholder={t.register.referralCode}
             value={referralCode}
             onChange={(e) => setReferralCode(e.target.value)}
           />
@@ -194,23 +224,27 @@ function RegisterForm() {
           disabled={isLoading}
           className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {isLoading ? "注册中..." : "注册"}
+          {isLoading ? t.register.registering : t.register.registerButton}
         </button>
       </div>
 
       <div className="text-center">
         <Link
-          href="/"
+          href={`/${locale}`}
           className="font-medium text-primary hover:text-primary-600"
         >
-          返回首页
+          {t.register.backToHome}
         </Link>
       </div>
     </form>
   );
 }
 
-export default function RegisterPage() {
+export default function RegisterPage({ params }: RegisterPageProps) {
+  const { locale: localeParam } = use(params);
+  const locale = localeParam as Locale;
+  const t = getTranslation(locale);
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-background relative overflow-hidden">
       {/* 背景装饰 */}
@@ -223,7 +257,7 @@ export default function RegisterPage() {
       <div className="max-w-md w-full space-y-8 relative z-10">
         <div>
           <div className="flex justify-center mb-6">
-            <Link href="/" className="flex items-center gap-3">
+            <Link href={`/${locale}`} className="flex items-center gap-3">
               <Image 
                 src="/dopamind-logo.png"
                 alt="Dopamind Logo" 
@@ -235,20 +269,20 @@ export default function RegisterPage() {
             </Link>
           </div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-foreground">
-            创建新账户
+            {t.register.title}
           </h2>
           <p className="mt-2 text-center text-sm text-muted">
-            或{" "}
+            {t.register.or}{" "}
             <Link
-              href="/login"
+              href={`/${locale}/login`}
               className="font-medium text-primary hover:text-primary-600"
             >
-              登录现有账户
+              {t.register.alreadyHaveAccount}
             </Link>
           </p>
         </div>
         <Suspense fallback={<div className="text-center">加载中...</div>}>
-          <RegisterForm />
+          <RegisterForm locale={locale} />
         </Suspense>
       </div>
     </div>
