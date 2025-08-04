@@ -529,6 +529,7 @@ export default function PricingSection({ locale }: PricingSectionProps) {
                 isPopular={selectedPlanData.isPopular}
                 className="w-full py-4 text-lg"
                 customText={getButtonText()}
+                locale={locale}
               />
             ) : (
               <Link 

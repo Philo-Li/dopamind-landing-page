@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { CheckCircle, Crown, ArrowRight } from 'lucide-react';
+import { getTranslation, type Locale } from '@/lib/i18n';
 
 interface SessionData {
   paymentStatus: string;
@@ -12,11 +13,12 @@ interface SessionData {
   sessionId: string;
 }
 
-function PaymentSuccessContent() {
+function PaymentSuccessContent({ locale }: { locale: Locale }) {
   const [sessionData, setSessionData] = useState<SessionData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const searchParams = useSearchParams();
+  const t = getTranslation(locale);
 
   useEffect(() => {
     const sessionId = searchParams.get('session_id');
@@ -55,7 +57,7 @@ function PaymentSuccessContent() {
     return (
       <div className="text-center">
         <div className="animate-spin w-12 h-12 border-4 border-primary border-t-transparent rounded-full mx-auto mb-6"></div>
-        <p className="text-muted">正在确认支付状态...</p>
+        <p className="text-muted">{t.paymentSuccess.confirmingPayment}</p>
       </div>
     );
   }
@@ -69,41 +71,41 @@ function PaymentSuccessContent() {
         </div>
         
         <h1 className="text-3xl font-bold text-foreground mb-4">
-          🎉 支付成功！
+          {t.paymentSuccess.title}
         </h1>
         
         <p className="text-xl text-muted mb-2">
-          欢迎成为 Dopamind Premium 用户
+          {t.paymentSuccess.subtitle}
         </p>
         
         <div className="inline-flex items-center gap-2 bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-medium">
           <Crown className="w-4 h-4" />
-          <span>Premium 会员已激活</span>
+          <span>{t.paymentSuccess.membershipActivated}</span>
         </div>
       </div>
 
       {/* 支付详情 */}
       {sessionData && (
         <div className="bg-white rounded-xl p-6 shadow-lg border mb-8">
-          <h3 className="text-lg font-semibold text-foreground mb-4">支付详情</h3>
+          <h3 className="text-lg font-semibold text-foreground mb-4">{t.paymentSuccess.paymentDetails}</h3>
           
           <div className="space-y-3 text-sm">
             <div className="flex justify-between">
-              <span className="text-muted">支付状态：</span>
+              <span className="text-muted">{t.paymentSuccess.paymentStatus}</span>
               <span className="font-medium text-green-600">
-                {sessionData.paymentStatus === 'paid' ? '已支付' : sessionData.paymentStatus}
+                {sessionData.paymentStatus === 'paid' ? t.paymentSuccess.paid : sessionData.paymentStatus}
               </span>
             </div>
             
             {sessionData.subscriptionId && (
               <div className="flex justify-between">
-                <span className="text-muted">订阅ID：</span>
+                <span className="text-muted">{t.paymentSuccess.subscriptionId}</span>
                 <span className="font-mono text-xs">{sessionData.subscriptionId}</span>
               </div>
             )}
             
             <div className="flex justify-between">
-              <span className="text-muted">支付会话：</span>
+              <span className="text-muted">{t.paymentSuccess.sessionId}</span>
               <span className="font-mono text-xs">{sessionData.sessionId}</span>
             </div>
           </div>
@@ -120,17 +122,11 @@ function PaymentSuccessContent() {
       <div className="bg-gradient-to-r from-primary/5 to-primary/10 rounded-xl p-6 mb-8">
         <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
           <Crown className="w-5 h-5 text-primary" />
-          您现在可以享受的 Premium 功能
+          {t.paymentSuccess.premiumFeatures}
         </h3>
         
         <div className="grid gap-3">
-          {[
-            'AI 对话式规划 - 像聊天一样安排一切',
-            '沉浸式专注圣所 - 屏蔽干扰，进入心流状态', 
-            'AI 智能拆解 - 将复杂项目分解为小步骤',
-            '多设备云端同步 - 所有数据，永不丢失',
-            '可视化成长报告 - 用热力图见证进步'
-          ].map((feature, index) => (
+          {t.paymentSuccess.features.map((feature, index) => (
             <div key={index} className="flex items-center gap-3">
               <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
               <span className="text-sm text-foreground">{feature}</span>
@@ -145,7 +141,7 @@ function PaymentSuccessContent() {
           onClick={() => window.location.href = '/dashboard'}
           className="flex items-center justify-center gap-2 bg-primary hover:bg-primary-600 text-white font-semibold py-3 px-6 rounded-xl transition-colors shadow-lg"
         >
-          开始使用 Premium 功能
+          {t.paymentSuccess.startUsing}
           <ArrowRight className="w-4 h-4" />
         </button>
         
@@ -153,19 +149,19 @@ function PaymentSuccessContent() {
           href="/dashboard/subscription"
           className="flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-foreground font-semibold py-3 px-6 rounded-xl transition-colors"
         >
-          管理我的订阅
+          {t.paymentSuccess.manageSubscription}
         </Link>
       </div>
 
       {/* 帮助信息 */}
       <div className="text-center mt-8 space-y-2">
         <p className="text-sm text-muted">
-          感谢您选择 Dopamind Premium！
+          {t.paymentSuccess.thankYou}
         </p>
         <p className="text-xs text-muted">
           如有任何问题，请联系我们的 
-          <Link href="/support" className="text-primary hover:underline ml-1">
-            客服支持
+          <Link href={`/${locale}/support`} className="text-primary hover:underline ml-1">
+            {t.paymentSuccess.support}
           </Link>
         </p>
       </div>
@@ -173,7 +169,9 @@ function PaymentSuccessContent() {
   );
 }
 
-export default function PaymentSuccessPage() {
+export default function PaymentSuccessPage({ params }: { params: { locale: string } }) {
+  const locale = params.locale as Locale;
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-background relative overflow-hidden py-12">
       {/* 背景装饰 */}
@@ -186,7 +184,7 @@ export default function PaymentSuccessPage() {
       <div className="max-w-4xl w-full mx-auto px-4 relative z-10">
         {/* Logo */}
         <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center gap-3">
+          <Link href={`/${locale}`} className="inline-flex items-center gap-3">
             <Image 
               src="/dopamind-logo.png"
               alt="Dopamind Logo" 
@@ -204,7 +202,7 @@ export default function PaymentSuccessPage() {
             <p className="text-muted">加载中...</p>
           </div>
         }>
-          <PaymentSuccessContent />
+          <PaymentSuccessContent locale={locale} />
         </Suspense>
       </div>
     </div>

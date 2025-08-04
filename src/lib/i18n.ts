@@ -492,6 +492,54 @@ const translations = {
         }
       }
     },
+    paymentSuccess: {
+      title: '🎉 支付成功！',
+      subtitle: '欢迎成为 Dopamind Premium 用户',
+      membershipActivated: 'Premium 会员已激活',
+      paymentDetails: '支付详情',
+      paymentStatus: '支付状态：',
+      paid: '已支付',
+      subscriptionId: '订阅ID：',
+      sessionId: '支付会话：',
+      premiumFeatures: '您现在可以享受的 Premium 功能',
+      features: [
+        'AI 对话式规划 - 像聊天一样安排一切',
+        '沉浸式专注圣所 - 屏蔽干扰，进入心流状态',
+        'AI 智能拆解 - 将复杂项目分解为小步骤',
+        '多设备云端同步 - 所有数据，永不丢失',
+        '可视化成长报告 - 用热力图见证进步'
+      ],
+      startUsing: '开始使用 Premium 功能',
+      manageSubscription: '管理我的订阅',
+      thankYou: '感谢您选择 Dopamind Premium！',
+      support: '客服支持',
+      confirmingPayment: '正在确认支付状态...'
+    },
+    paymentCancelled: {
+      title: '支付已取消',
+      subtitle: '没关系，您可以随时重新开始',
+      incompletePayment: '未完成支付',
+      whatHappened: '发生了什么？',
+      explanation: [
+        '您的支付过程被中断或取消',
+        '没有产生任何费用',
+        '您的账户状态保持不变',
+        '可以随时重新尝试购买'
+      ],
+      whyPremium: '为什么选择 Premium？',
+      premiumFeatures: [
+        '🧠 AI 对话式规划 - 像聊天一样安排生活',
+        '🎯 沉浸式专注模式 - 告别拖延症',
+        '📊 可视化成长报告 - 见证每天的进步',
+        '☁️ 多设备云端同步 - 随时随地访问',
+        '🎮 智能游戏化系统 - 让自律变得有趣'
+      ],
+      retryPayment: '重新选择订阅计划',
+      backToHome: '返回首页',
+      contactSupport: '联系客服',
+      tip: '💡 小贴士',
+      savings: '年度订阅可节省 2 个月费用，相当于 88 折优惠！还能获得专属会员社群访问权限。'
+    },
     accountDeletion: {
       title: 'Dopamind 账户与数据删除指南',
       subtitle: '了解如何永久删除您的 Dopamind 账户和所有相关数据',
@@ -1071,6 +1119,54 @@ const translations = {
         }
       }
     },
+    paymentSuccess: {
+      title: '🎉 Payment Successful!',
+      subtitle: 'Welcome to Dopamind Premium',
+      membershipActivated: 'Premium Membership Activated',
+      paymentDetails: 'Payment Details',
+      paymentStatus: 'Payment Status:',
+      paid: 'Paid',
+      subscriptionId: 'Subscription ID:',
+      sessionId: 'Payment Session:',
+      premiumFeatures: 'Premium Features You Can Now Enjoy',
+      features: [
+        'AI Conversational Planning - Arrange everything like a chat',
+        'Immersive Focus Sanctuary - Block distractions, enter flow state',
+        'AI Smart Breakdown - Break complex projects into small steps',
+        'Multi-device Cloud Sync - All data, never lost',
+        'Visual Growth Reports - Witness progress with heat maps'
+      ],
+      startUsing: 'Start Using Premium Features',
+      manageSubscription: 'Manage My Subscription',
+      thankYou: 'Thank you for choosing Dopamind Premium!',
+      support: 'Customer Support',
+      confirmingPayment: 'Confirming payment status...'
+    },
+    paymentCancelled: {
+      title: 'Payment Cancelled',
+      subtitle: 'No worries, you can restart anytime',
+      incompletePayment: 'Payment Incomplete',
+      whatHappened: 'What happened?',
+      explanation: [
+        'Your payment process was interrupted or cancelled',
+        'No charges were made',
+        'Your account status remains unchanged',
+        'You can retry the purchase anytime'
+      ],
+      whyPremium: 'Why Choose Premium?',
+      premiumFeatures: [
+        '🧠 AI Conversational Planning - Arrange life like chatting',
+        '🎯 Immersive Focus Mode - Say goodbye to procrastination',
+        '📊 Visual Growth Reports - Witness daily progress',
+        '☁️ Multi-device Cloud Sync - Access anywhere, anytime',
+        '🎮 Smart Gamification System - Make self-discipline fun'
+      ],
+      retryPayment: 'Choose Subscription Plan Again',
+      backToHome: 'Back to Home',
+      contactSupport: 'Contact Support',
+      tip: '💡 Tip',
+      savings: 'Annual subscription saves 2 months\' cost, equivalent to 12% off! Plus exclusive member community access.'
+    },
     accountDeletion: {
       title: 'Dopamind Account & Data Deletion Guide',
       subtitle: 'Learn how to permanently delete your Dopamind account and all related data',
@@ -1649,6 +1745,54 @@ const translations = {
           responseTime: 'お問い合わせから7営業日以内にご回答いたします。'
         }
       }
+    },
+    paymentSuccess: {
+      title: '🎉 お支払い完了！',
+      subtitle: 'Dopamind Premiumへようこそ',
+      membershipActivated: 'Premiumメンバーシップが有効になりました',
+      paymentDetails: '支払い詳細',
+      paymentStatus: '支払いステータス：',
+      paid: '支払い完了',
+      subscriptionId: 'サブスクリプションID：',
+      sessionId: '支払いセッション：',
+      premiumFeatures: 'お使いいただけるPremium機能',
+      features: [
+        'AI対話式プランニング - チャットのようにすべてを整理',
+        '没入型集中サンクチュアリ - 妨害をブロック、フロー状態に',
+        'AIスマート分解 - 複雑なプロジェクトを小さなステップに',
+        'マルチデバイスクラウド同期 - すべてのデータ、永続保存',
+        'ビジュアル成長レポート - ヒートマップで進歩を見証'
+      ],
+      startUsing: 'Premium機能を使い始める',
+      manageSubscription: 'サブスクリプション管理',
+      thankYou: 'Dopamind Premiumをお選びいただき、ありがとうございます！',
+      support: 'カスタマーサポート',
+      confirmingPayment: '支払いステータスを確認中...'
+    },
+    paymentCancelled: {
+      title: 'お支払いがキャンセルされました',
+      subtitle: '大丈夫です、いつでも再開できます',
+      incompletePayment: '支払い未完了',
+      whatHappened: '何が起こったのですか？',
+      explanation: [
+        'お支払いプロセスが中断またはキャンセルされました',
+        '料金は請求されていません',
+        'アカウントの状態は変更されていません',
+        'いつでも購入を再試行できます'
+      ],
+      whyPremium: 'なぜPremiumを選ぶのか？',
+      premiumFeatures: [
+        '🧠 AI対話式プランニング - チャットのように生活を整理',
+        '🎯 没入型集中モード - 先延ばしとお別れ',
+        '📊 ビジュアル成長レポート - 毎日の進歩を見証',
+        '☁️ マルチデバイスクラウド同期 - いつでもどこでもアクセス',
+        '🎮 スマートゲーミフィケーションシステム - 自制を楽しく'
+      ],
+      retryPayment: 'サブスクリプションプランを再選択',
+      backToHome: 'ホームに戻る',
+      contactSupport: 'サポートに連絡',
+      tip: '💡 ヒント',
+      savings: '年間サブスクリプションで2ヶ月分お得！12%オフ相当！さらに専用メンバーコミュニティアクセス特典付き。'
     },
     accountDeletion: {
       title: 'Dopamind アカウント・データ削除ガイド',

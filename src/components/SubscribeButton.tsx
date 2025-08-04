@@ -21,9 +21,10 @@ interface SubscribeButtonProps {
   isPopular?: boolean;
   className?: string;
   customText?: string;
+  locale?: string;
 }
 
-export default function SubscribeButton({ plan, isPopular = false, className = "", customText }: SubscribeButtonProps) {
+export default function SubscribeButton({ plan, isPopular = false, className = "", customText, locale }: SubscribeButtonProps) {
   const { user } = useAuth();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -51,6 +52,10 @@ export default function SubscribeButton({ plan, isPopular = false, className = "
         planName: plan.name
       });
       
+      // 获取当前语言，优先使用传入的locale参数
+      const currentLocale = locale || localStorage.getItem('preferred-locale') || 'zh';
+      const baseUrl = window.location.origin;
+      
       // 创建 Stripe Checkout Session - 调用后端 API
       const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/stripe/create-checkout-session`, {
         method: 'POST',
@@ -61,11 +66,14 @@ export default function SubscribeButton({ plan, isPopular = false, className = "
         body: JSON.stringify({ 
           plan: plan.id === 'monthly' ? 'monthly' : 'yearly',
           currency: 'usd',
+          success_url: `${baseUrl}/${currentLocale}/success?session_id={CHECKOUT_SESSION_ID}`,
+          cancel_url: `${baseUrl}/${currentLocale}/cancelled`,
           metadata: {
             planName: plan.name,
             planPrice: plan.price,
             planPeriod: plan.period,
-            priceId: plan.priceId
+            priceId: plan.priceId,
+            locale: currentLocale
           }
         }),
       });

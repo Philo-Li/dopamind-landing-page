@@ -4,8 +4,12 @@ import { useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { X, ArrowLeft, CreditCard, HelpCircle } from 'lucide-react';
+import { getTranslation, type Locale } from '@/lib/i18n';
 
-export default function PaymentCancelledPage() {
+export default function PaymentCancelledPage({ params }: { params: { locale: string } }) {
+  const locale = params.locale as Locale;
+  const t = getTranslation(locale);
+
   useEffect(() => {
     // 可以在这里添加分析或日志
     console.log('User cancelled payment');
@@ -23,7 +27,7 @@ export default function PaymentCancelledPage() {
       <div className="max-w-2xl w-full mx-auto px-4 relative z-10">
         {/* Logo */}
         <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center gap-3">
+          <Link href={`/${locale}`} className="inline-flex items-center gap-3">
             <Image 
               src="/dopamind-logo.png"
               alt="Dopamind Logo" 
@@ -43,27 +47,26 @@ export default function PaymentCancelledPage() {
             </div>
             
             <h1 className="text-3xl font-bold text-foreground mb-4">
-              支付已取消
+              {t.paymentCancelled.title}
             </h1>
             
             <p className="text-lg text-muted mb-2">
-              没关系，您可以随时重新开始
+              {t.paymentCancelled.subtitle}
             </p>
             
             <div className="inline-flex items-center gap-2 bg-orange-100 text-orange-700 px-4 py-2 rounded-full text-sm font-medium">
-              <span>未完成支付</span>
+              <span>{t.paymentCancelled.incompletePayment}</span>
             </div>
           </div>
 
           {/* 说明信息 */}
           <div className="bg-white rounded-xl p-6 shadow-lg border mb-8">
-            <h3 className="text-lg font-semibold text-foreground mb-4">发生了什么？</h3>
+            <h3 className="text-lg font-semibold text-foreground mb-4">{t.paymentCancelled.whatHappened}</h3>
             
             <div className="space-y-3 text-sm text-muted">
-              <p>• 您的支付过程被中断或取消</p>
-              <p>• 没有产生任何费用</p>
-              <p>• 您的账户状态保持不变</p>
-              <p>• 可以随时重新尝试购买</p>
+              {t.paymentCancelled.explanation.map((item, index) => (
+                <p key={index}>• {item}</p>
+              ))}
             </div>
           </div>
 
@@ -71,17 +74,11 @@ export default function PaymentCancelledPage() {
           <div className="bg-gradient-to-r from-primary/5 to-primary/10 rounded-xl p-6 mb-8">
             <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
               <CreditCard className="w-5 h-5 text-primary" />
-              为什么选择 Premium？
+              {t.paymentCancelled.whyPremium}
             </h3>
             
             <div className="grid gap-3">
-              {[
-                '🧠 AI 对话式规划 - 像聊天一样安排生活',
-                '🎯 沉浸式专注模式 - 告别拖延症',
-                '📊 可视化成长报告 - 见证每天的进步',
-                '☁️ 多设备云端同步 - 随时随地访问',
-                '🎮 智能游戏化系统 - 让自律变得有趣'
-              ].map((feature, index) => (
+              {t.paymentCancelled.premiumFeatures.map((feature, index) => (
                 <div key={index} className="text-sm text-foreground">
                   {feature}
                 </div>
@@ -92,28 +89,28 @@ export default function PaymentCancelledPage() {
           {/* 行动按钮 */}
           <div className="flex flex-col gap-4">
             <Link
-              href="/pricing"
+              href={`/${locale}/pricing`}
               className="flex items-center justify-center gap-2 bg-primary hover:bg-primary-600 text-white font-semibold py-3 px-6 rounded-xl transition-colors shadow-lg"
             >
               <CreditCard className="w-4 h-4" />
-              重新选择订阅计划
+              {t.paymentCancelled.retryPayment}
             </Link>
             
             <div className="flex gap-3">
               <Link
-                href="/"
+                href={`/${locale}`}
                 className="flex-1 flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-foreground font-semibold py-3 px-4 rounded-xl transition-colors"
               >
                 <ArrowLeft className="w-4 h-4" />
-                返回首页
+                {t.paymentCancelled.backToHome}
               </Link>
               
               <Link
-                href="/support"
+                href={`/${locale}/support`}
                 className="flex-1 flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-foreground font-semibold py-3 px-4 rounded-xl transition-colors"
               >
                 <HelpCircle className="w-4 h-4" />
-                联系客服
+                {t.paymentCancelled.contactSupport}
               </Link>
             </div>
           </div>
@@ -121,12 +118,10 @@ export default function PaymentCancelledPage() {
           {/* 特别优惠提示 */}
           <div className="text-center mt-8 p-4 bg-yellow-50 border border-yellow-200 rounded-xl">
             <p className="text-sm text-yellow-800 font-medium mb-2">
-              💡 小贴士
+              {t.paymentCancelled.tip}
             </p>
             <p className="text-xs text-yellow-700">
-              年度订阅可节省 2 个月费用，相当于 88 折优惠！
-              <br />
-              还能获得专属会员社群访问权限。
+              {t.paymentCancelled.savings}
             </p>
           </div>
         </div>
