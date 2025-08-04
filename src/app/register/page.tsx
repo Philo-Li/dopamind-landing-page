@@ -57,7 +57,7 @@ function RegisterForm() {
         setTimeout(async () => {
           try {
             // 根据 planId 确定计划类型
-            const planType = planId === process.env.NEXT_PUBLIC_STRIPE_MONTHLY_PRICE_ID ? 'monthly' : 'yearly';
+            const planType = planId === process.env.NEXT_PUBLIC_STRIPE_MONTHLY_PRODUCT_ID ? 'monthly' : 'yearly';
             
             const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/stripe/create-checkout-session`, {
               method: 'POST',

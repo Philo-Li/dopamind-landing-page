@@ -62,9 +62,9 @@ export default function PricingSection({ locale }: PricingSectionProps) {
       
       if (selectedPlanParam) {
         // 根据 priceId 找到对应的计划类型
-        if (selectedPlanParam === process.env.NEXT_PUBLIC_STRIPE_MONTHLY_PRICE_ID) {
+        if (selectedPlanParam === process.env.NEXT_PUBLIC_STRIPE_MONTHLY_PRODUCT_ID) {
           setSelectedPlan('monthly');
-        } else if (selectedPlanParam === process.env.NEXT_PUBLIC_STRIPE_YEARLY_PRICE_ID) {
+        } else if (selectedPlanParam === process.env.NEXT_PUBLIC_STRIPE_YEARLY_PRODUCT_ID) {
           setSelectedPlan('yearly');
         }
       }
@@ -146,7 +146,7 @@ export default function PricingSection({ locale }: PricingSectionProps) {
     {
       id: 'monthly',
       name: '月度 Premium',
-      priceId: prices.monthly?.id || process.env.NEXT_PUBLIC_STRIPE_MONTHLY_PRICE_ID || 'price_monthly_placeholder',
+      priceId: prices.monthly?.id || process.env.NEXT_PUBLIC_STRIPE_MONTHLY_PRODUCT_ID || 'price_monthly_placeholder',
       price: loading ? '加载中...' : formatPrice('monthly'),
       period: '每月',
       buttonText: '立即订阅月度计划',
