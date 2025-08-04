@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { useRouter } from 'next/navigation';
 import { differenceInDays } from 'date-fns';
@@ -8,6 +8,10 @@ import { CheckCircle, Gift, Crown, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
 import SubscribeButton from './SubscribeButton';
 import { getTranslation } from '../lib/i18n';
+import { loadStripe } from '@stripe/stripe-js';
+
+// 初始化 Stripe
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 interface PricingSectionProps {
   locale: string;
@@ -27,11 +31,68 @@ interface Plan {
   isTrial?: boolean;
 }
 
+interface StripePrice {
+  id: string;
+  amount: number;
+  currency: string;
+  interval: string;
+}
+
+interface PricesResponse {
+  success: boolean;
+  prices?: {
+    monthly: StripePrice;
+    yearly: StripePrice;
+  };
+}
+
 export default function PricingSection({ locale }: PricingSectionProps) {
   const { user, premiumStatus } = useAuth();
   const router = useRouter();
   const t = getTranslation(locale);
   const [selectedPlan, setSelectedPlan] = useState<PlanType>('yearly');
+  const [prices, setPrices] = useState<{ monthly?: StripePrice; yearly?: StripePrice }>({});
+  const [loading, setLoading] = useState(true);
+
+  // 检查 URL 参数，如果有选中的计划则高亮显示
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      const selectedPlanParam = urlParams.get('selected_plan');
+      
+      if (selectedPlanParam) {
+        // 根据 priceId 找到对应的计划类型
+        if (selectedPlanParam === process.env.NEXT_PUBLIC_STRIPE_MONTHLY_PRICE_ID) {
+          setSelectedPlan('monthly');
+        } else if (selectedPlanParam === process.env.NEXT_PUBLIC_STRIPE_YEARLY_PRICE_ID) {
+          setSelectedPlan('yearly');
+        }
+      }
+    }
+  }, []);
+
+  // 获取 Stripe 价格信息
+  useEffect(() => {
+    const fetchPrices = async () => {
+      try {
+        // 通过后端 API 获取 Stripe 价格信息
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/stripe/prices`);
+        
+        if (response.ok) {
+          const data: PricesResponse = await response.json();
+          if (data.success && data.prices) {
+            setPrices(data.prices);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching Stripe prices:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPrices();
+  }, []);
 
   const handleTrialStart = () => {
     if (!user) {
@@ -46,11 +107,29 @@ export default function PricingSection({ locale }: PricingSectionProps) {
     }
   };
 
+  // 格式化价格
+  const formatPrice = (planType: 'monthly' | 'yearly') => {
+    const priceData = prices[planType];
+    if (!priceData) return '¥0';
+    
+    // Stripe 价格是以分为单位，需要除以100转换为元
+    const amount = priceData.amount / 100;
+    
+    // 根据货币类型格式化
+    if (priceData.currency === 'usd') {
+      return `$${amount}`;
+    } else if (priceData.currency === 'cny') {
+      return `¥${amount}`;
+    } else {
+      return `${amount} ${priceData.currency.toUpperCase()}`;
+    }
+  };
+
   const plans: Plan[] = [
     {
       id: 'trial',
       name: '7天 Premium 体验',
-      price: '￥0',
+      price: '¥0',
       period: '7天',
       buttonText: '开始7天免费体验',
       isTrial: true,
@@ -67,8 +146,8 @@ export default function PricingSection({ locale }: PricingSectionProps) {
     {
       id: 'monthly',
       name: '月度 Premium',
-      priceId: 'price_monthly_placeholder',
-      price: '￥79',
+      priceId: prices.monthly?.id || process.env.NEXT_PUBLIC_STRIPE_MONTHLY_PRICE_ID || 'price_monthly_placeholder',
+      price: loading ? '加载中...' : formatPrice('monthly'),
       period: '每月',
       buttonText: '立即订阅月度计划',
       features: [
@@ -85,8 +164,8 @@ export default function PricingSection({ locale }: PricingSectionProps) {
     {
       id: 'yearly',
       name: '年度 Premium',
-      priceId: 'price_yearly_placeholder', 
-      price: '￥799',
+      priceId: prices.yearly?.id || process.env.NEXT_PUBLIC_STRIPE_YEARLY_PRICE_ID || 'price_yearly_placeholder', 
+      price: loading ? '加载中...' : formatPrice('yearly'),
       period: '每年',
       buttonText: '立即订阅年度计划',
       isPopular: true,

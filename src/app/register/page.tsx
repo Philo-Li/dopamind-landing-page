@@ -44,17 +44,59 @@ function RegisterForm() {
     try {
       await register(email, password, nickname.trim(), referralCode.trim() || undefined);
       
-      // 检查是否有重定向参数
-      const redirectUrl = searchParams.get('redirect_url');
+      // 检查是否需要跳转到支付流程
+      const redirectTo = searchParams.get('redirect_to');
       const planId = searchParams.get('plan_id');
+      const planName = searchParams.get('plan_name');
+      const planPrice = searchParams.get('plan_price');
+      const planPeriod = searchParams.get('plan_period');
       
-      if (redirectUrl && planId) {
-        // 如果有计划 ID，重定向到定价页面
-        router.push(`${redirectUrl}?plan_id=${planId}`);
-      } else {
-        // 默认跳转到仪表板
-        router.push("/dashboard");
+      if (redirectTo === 'payment' && planId) {
+        // 注册成功后，自动触发支付流程
+        // 给一个短暂的延迟确保用户认证状态已更新
+        setTimeout(async () => {
+          try {
+            // 根据 planId 确定计划类型
+            const planType = planId === process.env.NEXT_PUBLIC_STRIPE_MONTHLY_PRICE_ID ? 'monthly' : 'yearly';
+            
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/stripe/create-checkout-session`, {
+              method: 'POST',
+              headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}` 
+              },
+              body: JSON.stringify({ 
+                plan: planType,
+                currency: 'usd',
+                metadata: {
+                  planId: planId,
+                  planName: planName,
+                  planPrice: planPrice,
+                  planPeriod: planPeriod
+                }
+              }),
+            });
+            
+            if (response.ok) {
+              const { url } = await response.json();
+              window.location.href = url; // 直接跳转到 Stripe 支付页面
+            } else {
+              // 如果支付创建失败，跳转到定价页面让用户重试
+              router.push(`/pricing?selected_plan=${planId}`);
+            }
+          } catch (error) {
+            console.error('Payment creation failed after registration:', error);
+            router.push(`/pricing?selected_plan=${planId}`);
+          }
+        }, 1000);
+        
+        // 先显示一个loading页面
+        router.push('/payment-processing');
+        return;
       }
+      
+      // 默认跳转到仪表板
+      router.push("/dashboard");
     } catch (error) {
       setError(error instanceof Error ? error.message : "注册过程中出现错误");
     }

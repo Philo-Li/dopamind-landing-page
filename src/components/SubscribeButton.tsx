@@ -3,6 +3,10 @@
 import { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { useRouter } from 'next/navigation';
+import { loadStripe } from '@stripe/stripe-js';
+
+// 初始化 Stripe
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 interface Plan {
   id: string;
@@ -25,51 +29,70 @@ export default function SubscribeButton({ plan, isPopular = false, className = "
   const [isLoading, setIsLoading] = useState(false);
 
   const handlePress = async () => {
-    // 如果用户未登录，重定向到注册页面，并附带回调参数
+    // 如果用户未登录，重定向到注册页面，并附带支付信息
     if (!user) {
-      const redirectUrl = `/pricing`;
-      router.push(`/register?redirect_url=${encodeURIComponent(redirectUrl)}&plan_id=${plan.priceId}`);
+      const paymentParams = new URLSearchParams({
+        redirect_to: 'payment',
+        plan_id: plan.priceId,
+        plan_name: plan.name,
+        plan_price: plan.price,
+        plan_period: plan.period
+      });
+      router.push(`/register?${paymentParams.toString()}`);
       return;
     }
 
     // 如果用户已登录，执行支付流程
     setIsLoading(true);
     try {
-      // 模拟 API 调用 - 在实际项目中，这里应该调用后端 API
       console.log('Creating checkout session for:', {
         userId: user.id,
         priceId: plan.priceId,
         planName: plan.name
       });
       
-      // 模拟创建 Stripe Checkout Session
-      const response = await fetch('/api/stripe/create-checkout-session', {
+      // 创建 Stripe Checkout Session - 调用后端 API
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/stripe/create-checkout-session`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}` 
         },
-        body: JSON.stringify({ priceId: plan.priceId }),
+        body: JSON.stringify({ 
+          plan: plan.id === 'monthly' ? 'monthly' : 'yearly',
+          currency: 'usd',
+          metadata: {
+            planName: plan.name,
+            planPrice: plan.price,
+            planPeriod: plan.period,
+            priceId: plan.priceId
+          }
+        }),
       });
       
       if (!response.ok) {
-        throw new Error('Failed to create checkout session');
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to create checkout session');
       }
 
       const { sessionId } = await response.json();
       
       // 重定向到 Stripe Checkout
-      // 这里需要安装 @stripe/stripe-js
-      // const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
-      // await stripe?.redirectToCheckout({ sessionId });
+      const stripe = await stripePromise;
+      if (!stripe) {
+        throw new Error('Stripe failed to load');
+      }
       
-      // 暂时模拟重定向到成功页面
-      console.log('Redirecting to Stripe Checkout with session:', sessionId);
-      alert(`模拟：即将跳转到 Stripe 支付页面\n计划: ${plan.name}\n价格: ${plan.price}\n周期: ${plan.period}`);
+      const { error } = await stripe.redirectToCheckout({ sessionId });
+      
+      if (error) {
+        throw new Error(error.message);
+      }
       
     } catch (error) {
       console.error('Subscription error:', error);
-      alert('订阅过程中出现错误，请稍后重试');
+      const errorMessage = error instanceof Error ? error.message : '订阅过程中出现错误，请稍后重试';
+      alert(errorMessage);
     } finally {
       setIsLoading(false);
     }
