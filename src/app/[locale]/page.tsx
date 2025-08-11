@@ -15,6 +15,17 @@ interface HomePageProps {
 export default async function HomePage({ params }: HomePageProps) {
   const { locale } = await params;
   const t = getTranslation(locale);
+  
+  // 根据语言选择图片路径
+  const getImagePath = (imageNumber: number) => {
+    if (locale === 'en') {
+      return `/screenshots/${imageNumber}_iOS_en.jpg`;
+    } else if (locale === 'zh') {
+      return `/screenshots/${imageNumber}_iOS_zh.jpg`;
+    }
+    // 日语版本使用中文截图作为后备
+    return `/screenshots/${imageNumber}_iOS_zh.jpg`;
+  };
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -77,7 +88,7 @@ export default async function HomePage({ params }: HomePageProps) {
                     {/* 屏幕区域 */}
                     <div className="w-full h-full bg-black rounded-[1.75rem] overflow-hidden relative">
                       <Image 
-                        src="/1.jpg" 
+                        src={getImagePath(1)} 
                         alt="Dopamind AI 主界面" 
                         fill
                         className="object-cover"
@@ -126,7 +137,7 @@ export default async function HomePage({ params }: HomePageProps) {
               </div>
               <div className="flex items-center justify-center">
                 <Image 
-                  src="/2.jpg" 
+                  src={getImagePath(2)} 
                   alt="智能任务管理" 
                   width={300} 
                   height={600}
@@ -139,7 +150,7 @@ export default async function HomePage({ params }: HomePageProps) {
             <div className="grid gap-12 lg:grid-cols-2 lg:gap-20 items-center">
               <div className="order-2 lg:order-1 flex items-center justify-center">
                 <Image 
-                  src="/3.jpg" 
+                  src={getImagePath(3)} 
                   alt="语音输入功能" 
                   width={300} 
                   height={600}
@@ -198,7 +209,7 @@ export default async function HomePage({ params }: HomePageProps) {
               </div>
               <div className="flex items-center justify-center">
                 <Image 
-                  src="/4.jpg" 
+                  src={getImagePath(4)} 
                   alt="AI 智能拆解任务" 
                   width={300} 
                   height={600}
@@ -211,7 +222,7 @@ export default async function HomePage({ params }: HomePageProps) {
             <div className="grid gap-12 lg:grid-cols-2 lg:gap-20 items-center">
               <div className="order-2 lg:order-1 flex items-center justify-center">
                 <Image 
-                  src="/5.jpg" 
+                  src={getImagePath(5)} 
                   alt="沉浸式专注模式" 
                   width={300} 
                   height={600}
@@ -265,7 +276,7 @@ export default async function HomePage({ params }: HomePageProps) {
             <div className="flex items-center justify-center">
               <div className="relative">
                 <Image 
-                  src="/9.jpg" 
+                  src={getImagePath(9)} 
                   alt="日历全局视图" 
                   width={350} 
                   height={700}
@@ -300,7 +311,7 @@ export default async function HomePage({ params }: HomePageProps) {
               <div className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow">
                 <div className="mb-6">
                   <Image 
-                    src="/6.jpg" 
+                    src={getImagePath(6)} 
                     alt="习惯养成功能" 
                     width={250} 
                     height={500}
@@ -322,7 +333,7 @@ export default async function HomePage({ params }: HomePageProps) {
               <div className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow">
                 <div className="mb-6">
                   <Image 
-                    src="/7.jpg" 
+                    src={getImagePath(7)} 
                     alt="智能冰箱管家" 
                     width={250} 
                     height={500}
@@ -344,7 +355,7 @@ export default async function HomePage({ params }: HomePageProps) {
               <div className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow">
                 <div className="mb-6">
                   <Image 
-                    src="/8.jpg" 
+                    src={getImagePath(8)} 
                     alt="订阅管理功能" 
                     width={250} 
                     height={500}

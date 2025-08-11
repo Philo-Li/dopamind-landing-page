@@ -37,6 +37,15 @@ export interface ProfileResponse {
   };
 }
 
+export interface PremiumStatus {
+  isPremium: boolean;
+  expiresAt: Date | null;
+  store: string | null;
+  type: string | null;
+  willRenew: boolean;
+  referralCreditDays?: number;
+}
+
 export interface ApiError {
   message: string;
 }
@@ -132,6 +141,15 @@ class ApiService {
   async refreshToken(token: string): Promise<LoginResponse> {
     return this.makeRequest<LoginResponse>('/api/auth/refresh', {
       method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  async getPremiumStatus(token: string): Promise<PremiumStatus> {
+    return this.makeRequest<PremiumStatus>('/api/user-premium-status/', {
+      method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
       },

@@ -928,74 +928,74 @@ const translations = {
     home: {
       hero: {
         badge: 'Designed for ADHD Users',
-        title: 'AI Companion',
-        titleHighlight: 'Designed for ADHD',
-        subtitle: 'Transform your scattered thoughts into clear actions. Manage your entire life through the most natural way—conversation.',
+        title: 'Your Personal',
+        titleHighlight: 'AI Life Coach',
+        subtitle: 'Transform scattered thoughts into organized actions. Experience task management designed specifically for ADHD brains through natural conversation with AI.',
         downloadText: 'Download now, new users get 7-day free Premium trial'
       },
       features: {
         section1: {
-          title: 'Plan with Confidence',
-          subtitle: 'Say goodbye to chaotic to-do lists. Dopamind\'s intelligent task system automatically categorizes, prioritizes, and motivates you with visual statistics. See priorities at a glance and tackle each day with ease.',
+          title: 'Smart Task Organization',
+          subtitle: 'Never feel overwhelmed again. Our AI automatically organizes your tasks by importance, deadline, and energy level. Visual progress tracking keeps you motivated and shows exactly what to focus on next.',
           points: [
-            'Smart task categorization and priority sorting',
-            'Progress visualization for continuous motivation',
-            'Eliminate the "where to start" confusion'
+            'AI-powered task prioritization based on urgency and importance',
+            'Visual progress charts and completion streaks for motivation',
+            'Smart grouping by context, energy level, and time requirements'
           ]
         },
         section2: {
-          title: 'Think It, Say It, Get It Done',
-          subtitle: 'No more tedious manual input. Just speak your thoughts, and AI will understand and instantly create tasks for you. Voice input supported for the most natural way to organize everything.',
+          title: 'Voice-First Task Creation',
+          subtitle: 'Just talk to Dopamind like you would a friend. "Hey, remind me to call mom tomorrow at 3pm" becomes an organized task with smart notifications. No complex interfaces, just natural conversation.',
           points: [
-            'Smart voice recognition with precise intent understanding',
-            'Natural conversational interaction, no learning curve',
-            'Instant task creation without interrupting your flow'
+            'Advanced speech recognition understands context and intent',
+            'Conversational AI extracts dates, times, and priorities automatically',
+            'Works seamlessly while you\'re cooking, walking, or multitasking'
           ]
         }
       },
       howItWorks: {
         section1: {
-          title: 'AI Smart Breakdown, Beat Procrastination',
-          subtitle: 'Complex projects? Let AI break them down into small steps. Each sub-task is clear and actionable, making "getting started" simple and "finishing" possible.',
+          title: 'Break Down Any Challenge',
+          subtitle: 'Feeling stuck on a big project? Our AI coach breaks overwhelming tasks into bite-sized, manageable steps. Each step is designed to build momentum and reduce anxiety.',
           example: {
-            title: 'Example: Preparing for Interview',
+            title: 'Example: "Plan a Birthday Party"',
             steps: [
-              '1. Prepare a clean resume',
-              '2. Research company background',
-              '3. Prepare answers to common interview questions'
+              '1. Choose date and guest list (15 min)',
+              '2. Book venue or prepare home (30 min)',
+              '3. Order cake and decorations (20 min)'
             ]
           }
         },
         section2: {
-          title: 'Immersive Focus Mode',
-          subtitle: 'Block distractions, enter flow state. Focus timer with gentle reminders helps you build efficient work rhythm where every minute counts.',
+          title: 'Deep Focus Sessions',
+          subtitle: 'Enter your zone with our ADHD-friendly focus mode. Customizable timers, gentle transitions, and encouraging feedback help you maintain concentration without burnout.',
           stats: [
             { value: '25', label: 'min focus' },
             { value: '5', label: 'min break' },
-            { value: '4', label: 'cycles' }
+            { value: '92%', label: 'success rate' }
           ]
         }
       },
       globalView: {
-        title: 'Bird&apos;s Eye View of Your Master Plan',
-        subtitle: 'Tasks are no longer isolated dots, but clear timelines visible on your calendar. Intuitively review the past, plan the future. AI can also generate personalized daily reports based on your day&apos;s activities, providing deep insights.',
-        badges: ['AI Daily Reports', 'Smart Reminders']
+        title: 'See Your Life in Full Color',
+        subtitle: 'Your personalized dashboard shows everything at once - tasks, habits, deadlines, and achievements. Color-coded priorities and smart scheduling help you plan your week like a pro.',
+        badges: ['Weekly Overview', 'Smart Planning']
       },
       beyondTasks: {
-        title: 'Beyond Tasks, Your Life Operating System',
-        subtitle: 'Dopamind doesn&apos;t just help you manage work, it cares about your entire life quality',
+        title: 'More Than Tasks, It&apos;s Your Life Assistant',
+        subtitle: 'Dopamind helps you manage every aspect of your life, from daily routines to long-term goals, all in one intuitive app',
         features: [
           {
-            title: 'Habit Building',
-            description: 'Witness the power of compound interest through heat maps, building positive dopamine loops. Every small habit is a stepping stone to a better you.'
+            title: 'Habit Stacking',
+            description: 'Build lasting habits with visual streak tracking and smart reminders. Start small, stay consistent, and watch positive changes compound over time.'
           },
           {
-            title: 'Smart Fridge Manager',
-            description: 'Easily record ingredients, smart expiration reminders. Say goodbye to "expiry surprises" and make healthy eating simple and controllable.'
+            title: 'Pantry & Meal Planner',
+            description: 'Never waste food again. Track what you have, get expiry alerts, and get AI suggestions for meals based on your ingredients and dietary preferences.'
           },
           {
-            title: 'Subscription Tracking',
-            description: 'Easily track all subscription services, avoid unexpected charges. Control every subscription and make financial management transparent and simple.'
+            title: 'Subscription Guardian',
+            description: 'Keep track of all your subscriptions in one place. Get renewal alerts, spending insights, and make informed decisions about what to keep or cancel.'
           }
         ]
       },
