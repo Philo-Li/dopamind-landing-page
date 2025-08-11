@@ -4,6 +4,7 @@ import { getTranslation } from '../../lib/i18n';
 import LanguageSwitcher from '../../../components/LanguageSwitcher';
 import AuthButton from '../../../components/AuthButton';
 import PricingSection from '../../components/PricingSection';
+import AppStoreButton from '../../components/AppStoreButton';
 
 interface HomePageProps {
   params: Promise<{
@@ -61,9 +62,7 @@ export default async function HomePage({ params }: HomePageProps) {
                   {t.home.hero.subtitle}
                 </p>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-                  <a href="https://apps.apple.com/jp/app/dopamind-ai/id6747915249?l=en-US" className="hover:scale-105 transition-transform">
-                    <Image src="/download-app-store.svg" alt="Download on the App Store" width={160} height={54} />
-                  </a>
+                  <AppStoreButton size="small" />
                   <div className="flex flex-col justify-center">
                     <p className="text-sm text-muted">{t.home.hero.downloadText}</p>
                   </div>
@@ -436,9 +435,7 @@ export default async function HomePage({ params }: HomePageProps) {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
-              <a href="https://apps.apple.com/jp/app/dopamind-ai/id6747915249?l=en-US" className="hover:scale-105 transition-transform">
-                <Image src="/download-app-store.svg" alt="Download on the App Store" width={180} height={60} />
-              </a>
+              <AppStoreButton size="large" />
               <div className="text-center">
                 <p className="text-sm text-muted">{t.home.finalCta.trial}</p>
                 <p className="text-xs text-muted mt-1">{t.home.finalCta.users}</p>
