@@ -61,7 +61,7 @@ export default async function HomePage({ params }: HomePageProps) {
                   {t.home.hero.subtitle}
                 </p>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-                  <a href="#" className="hover:scale-105 transition-transform">
+                  <a href="https://apps.apple.com/jp/app/dopamind-ai/id6747915249?l=en-US" className="hover:scale-105 transition-transform">
                     <Image src="/download-app-store.svg" alt="Download on the App Store" width={160} height={54} />
                   </a>
                   <div className="flex flex-col justify-center">
@@ -436,7 +436,7 @@ export default async function HomePage({ params }: HomePageProps) {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
-              <a href="#" className="hover:scale-105 transition-transform">
+              <a href="https://apps.apple.com/jp/app/dopamind-ai/id6747915249?l=en-US" className="hover:scale-105 transition-transform">
                 <Image src="/download-app-store.svg" alt="Download on the App Store" width={180} height={60} />
               </a>
               <div className="text-center">
