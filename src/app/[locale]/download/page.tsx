@@ -25,7 +25,7 @@ export default async function DownloadPage({ params }: DownloadPageProps) {
     },
     android: {
       size: '87.4 MB',
-      downloadUrl: '/release/dopamind-android-release-1.5.13.apk'
+      downloadUrl: 'https://r2.dopamind.app/dopamind-android-release-1.5.13.apk'
     }
   };
 
