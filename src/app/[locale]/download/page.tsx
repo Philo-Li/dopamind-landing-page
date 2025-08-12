@@ -1,0 +1,337 @@
+import Image from 'next/image';
+import { CheckCircle, AlertTriangle } from 'lucide-react';
+import { getTranslation } from '../../../lib/i18n';
+import LanguageSwitcher from '../../../../components/LanguageSwitcher';
+import AuthButton from '../../../../components/AuthButton';
+import AndroidDownloadButton from '../../../components/AndroidDownloadButton';
+import AppStoreButton from '../../../components/AppStoreButton';
+
+interface DownloadPageProps {
+  params: Promise<{
+    locale: string;
+  }>;
+}
+
+export default async function DownloadPage({ params }: DownloadPageProps) {
+  const { locale } = await params;
+  const t = getTranslation(locale);
+  
+  // 应用信息
+  const appInfo = {
+    version: '1.5.13',
+    lastUpdated: '2025-08-12',
+    ios: {
+      size: '28.9 MB'
+    },
+    android: {
+      size: '87.4 MB',
+      downloadUrl: '/release/dopamind-android-release-1.5.13.apk'
+    }
+  };
+
+  return (
+    <div className="flex min-h-screen flex-col">
+      {/* 导航栏 */}
+      <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/80 backdrop-blur-md">
+        <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
+          <a href={`/${locale}`} className="flex items-center gap-2">
+            <Image 
+              src="/dopamind-logo.png"
+              alt="Dopamind Logo" 
+              width={32}
+              height={32}
+              className="rounded-[8px]"
+            />
+            <span className="text-xl font-bold text-foreground">Dopamind</span>
+          </a>
+          <nav className="hidden items-center gap-6 md:flex">
+            <a href={`/${locale}#features`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.features}</a>
+            <a href={`/${locale}#how-it-works`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.howItWorks}</a>
+            <a href={`/${locale}#pricing`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.pricing}</a>
+            <a href={`/${locale}/download`} className="text-sm font-medium text-muted transition-colors hover:text-primary">Download</a>
+            <a href={`/${locale}/support`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.support}</a>
+          </nav>
+          <div className="flex items-center gap-4">
+            <LanguageSwitcher currentLocale={locale} />
+            <AuthButton locale={locale} />
+          </div>
+        </div>
+      </header>
+
+      <main className="flex-1">
+        {/* Hero Section */}
+        <section className="w-full py-16 md:py-24 lg:py-32 bg-gradient-to-br from-blue-50 to-purple-50 overflow-hidden">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="text-center mb-12">
+              <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm font-medium text-primary w-fit mb-6">
+                {t.download.hero.badge}
+              </div>
+              <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-6xl mb-6">
+                {t.download.hero.title}
+              </h1>
+              <p className="text-lg text-muted md:text-xl max-w-3xl mx-auto">
+                {t.download.hero.description}
+              </p>
+            </div>
+
+            {/* 下载选项 */}
+            <div className="grid gap-8 md:grid-cols-2 max-w-4xl mx-auto">
+              {/* iOS 下载 */}
+              <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
+                <div className="text-center mb-6">
+                  <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-8 h-8 text-blue-600" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                  </div>
+                  <h2 className="text-2xl font-bold text-foreground mb-2">{t.download.platforms.ios.title}</h2>
+                  <p className="text-muted mb-4">{t.download.platforms.ios.description}</p>
+                  
+                  {/* iOS 应用信息 */}
+                  <div className="grid grid-cols-3 gap-4 mb-6 text-sm">
+                    <div>
+                      <div className="text-muted">{t.download.hero.version}</div>
+                      <div className="font-semibold">{appInfo.version}</div>
+                    </div>
+                    <div>
+                      <div className="text-muted">{t.download.hero.size}</div>
+                      <div className="font-semibold">{appInfo.ios.size}</div>
+                    </div>
+                    <div>
+                      <div className="text-muted">{t.download.hero.lastUpdated}</div>
+                      <div className="font-semibold">{appInfo.lastUpdated}</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="flex justify-center">
+                  <AppStoreButton size="large" />
+                </div>
+              </div>
+
+              {/* Android 下载 */}
+              <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
+                <div className="text-center mb-6">
+                  <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-8 h-8 text-green-600" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993.9993.4482.9993.9993c0 .5511-.4482.9997-.9993.9997zm-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993.9993.4482.9993.9993c0 .5511-.4482.9997-.9993.9997zm11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.2439 13.8452 7.8508 12 7.8508s-3.5902.3931-5.1333 1.0329L4.8442 5.3819a.4161.4161 0 00-.5676-.1521.4157.4157 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6456 0 18.761h24c-.3435-4.1154-2.6892-7.5743-6.1185-9.4396z"/>
+                    </svg>
+                  </div>
+                  <h2 className="text-2xl font-bold text-foreground mb-2">{t.download.platforms.android.title}</h2>
+                  <p className="text-muted mb-4">{t.download.platforms.android.description}</p>
+                  
+                  {/* APK 信息 */}
+                  <div className="grid grid-cols-3 gap-4 mb-6 text-sm">
+                    <div>
+                      <div className="text-muted">{t.download.hero.version}</div>
+                      <div className="font-semibold">{appInfo.version}</div>
+                    </div>
+                    <div>
+                      <div className="text-muted">{t.download.hero.size}</div>
+                      <div className="font-semibold">{appInfo.android.size}</div>
+                    </div>
+                    <div>
+                      <div className="text-muted">{t.download.hero.lastUpdated}</div>
+                      <div className="font-semibold">{appInfo.lastUpdated}</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="flex justify-center">
+                  <AndroidDownloadButton 
+                    size="large" 
+                    downloadUrl={appInfo.android.downloadUrl}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 系统要求 Section */}
+        <section className="w-full py-16 md:py-24">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="grid gap-12 lg:grid-cols-2 lg:gap-20 items-center">
+              <div className="flex flex-col justify-center space-y-6">
+                <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+                  {t.download.requirements.title}
+                </h2>
+                <ul className="space-y-4">
+                  {t.download.requirements.items.map((requirement, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-green-500" />
+                      <span className="text-muted">{requirement}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              {/* 安全保障卡片 */}
+              <div className="grid gap-4">
+                {t.download.security.items.map((item, index) => (
+                  <div key={index} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div className="flex items-start gap-4">
+                      <div className="text-2xl">{item.icon}</div>
+                      <div>
+                        <h3 className="font-bold text-foreground mb-2">{item.title}</h3>
+                        <p className="text-sm text-muted">{item.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 安装步骤 Section */}
+        <section className="w-full py-16 md:py-24 bg-gray-50">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl mb-4">
+                {t.download.installation.title}
+              </h2>
+              
+              {/* 安全警告 */}
+              <div className="max-w-3xl mx-auto bg-orange-50 border border-orange-200 rounded-lg p-4 mb-8">
+                <div className="flex items-center gap-3">
+                  <AlertTriangle className="w-5 h-5 text-orange-500 flex-shrink-0" />
+                  <p className="text-sm text-orange-700">{t.download.installation.warning}</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="max-w-4xl mx-auto">
+              <div className="grid gap-8 md:grid-cols-2">
+                {t.download.installation.steps.map((step, index) => (
+                  <div key={index} className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="flex items-center justify-center w-10 h-10 bg-green-100 rounded-full font-bold text-green-600">
+                        {step.number}
+                      </div>
+                      <h3 className="text-xl font-bold text-foreground">{step.title}</h3>
+                    </div>
+                    <p className="text-muted">{step.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Android 专属特性 Section */}
+        <section className="w-full py-16 md:py-24">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl mb-4">
+                {t.download.features.title}
+              </h2>
+            </div>
+            
+            <div className="grid gap-8 md:grid-cols-3 max-w-4xl mx-auto">
+              {t.download.features.items.map((feature, index) => (
+                <div key={index} className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all border border-gray-100 text-center">
+                  <div className="text-4xl mb-4">{feature.icon}</div>
+                  <h3 className="text-xl font-bold text-foreground mb-4">{feature.title}</h3>
+                  <p className="text-muted">{feature.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="w-full py-16 md:py-24 bg-gray-50">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+                {t.download.faq.title}
+              </h2>
+            </div>
+            
+            <div className="max-w-4xl mx-auto space-y-6">
+              {t.download.faq.items.map((faq, index) => (
+                <div key={index} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                  <h3 className="font-bold text-foreground mb-3 text-lg">{faq.question}</h3>
+                  <p className="text-muted">{faq.answer}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 支持 Section */}
+        <section className="w-full py-16 md:py-24">
+          <div className="container mx-auto px-4 md:px-6 text-center">
+            <div className="max-w-2xl mx-auto">
+              <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl mb-6">
+                {t.download.support.title}
+              </h2>
+              <p className="text-lg text-muted mb-8">
+                {t.download.support.description}
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a 
+                  href={`mailto:${t.download.support.email}`}
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-semibold rounded-2xl hover:bg-primary/90 transition-colors"
+                >
+                  {t.download.support.contactButton}
+                </a>
+                <p className="text-sm text-muted">{t.download.support.email}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* 页脚 */}
+      <footer className="w-full border-t border-gray-200 bg-white py-8">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid gap-8 md:grid-cols-4">
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <Image 
+                  src="/dopamind-logo.png"
+                  alt="Dopamind Logo" 
+                  width={24}
+                  height={24}
+                  className="rounded-[6px]"
+                />
+                <span className="font-bold text-foreground">Dopamind</span>
+              </div>
+              <p className="text-sm text-muted">
+                {t.footer.description}
+              </p>
+            </div>
+            <div>
+              <h4 className="font-semibold text-foreground mb-3">{t.footer.sections.product}</h4>
+              <ul className="space-y-2 text-sm text-muted">
+                <li><a href={`/${locale}`} className="hover:text-primary">{t.navigation.home}</a></li>
+                <li><a href={`/${locale}#features`} className="hover:text-primary">{t.footer.links.features}</a></li>
+                <li><a href={`/${locale}/download`} className="hover:text-primary">Android Download</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold text-foreground mb-3">{t.footer.sections.support}</h4>
+              <ul className="space-y-2 text-sm text-muted">
+                <li><a href={`/${locale}/support`} className="hover:text-primary">{t.footer.links.supportCenter}</a></li>
+                <li><a href="mailto:support@dopamind.com" className="hover:text-primary">{t.footer.links.contactUs}</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold text-foreground mb-3">{t.footer.sections.legal}</h4>
+              <ul className="space-y-2 text-sm text-muted">
+                <li><a href={`/${locale}/privacy`} className="hover:text-primary">{t.footer.links.privacy}</a></li>
+                <li><a href={`/${locale}/terms`} className="hover:text-primary">{t.footer.links.terms}</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="mt-8 pt-6 border-t border-gray-200 text-center text-sm text-muted">
+            <p>&copy; {new Date().getFullYear()} Dopamind Inc. {t.footer.copyright}.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}

@@ -227,6 +227,121 @@
       }
     }
   },
+  "download": {
+    "title": "Download Dopamind for Android",
+    "subtitle": "Experience Dopamind's powerful features on your Android device",
+    "hero": {
+      "badge": "Android APK Download",
+      "title": "Stay Focused, Anywhere",
+      "description": "Download Dopamind for Android and let your AI assistant accompany you every day.",
+      "downloadButton": "Download APK File",
+      "version": "Version",
+      "size": "File Size",
+      "lastUpdated": "Last Updated"
+    },
+    "requirements": {
+      "title": "System Requirements",
+      "items": [
+        "Android 8.0 (API level 26) or higher",
+        "At least 100 MB of available storage space",
+        "Network connection (for sync and AI features)",
+        "Allow installation from unknown sources"
+      ]
+    },
+    "installation": {
+      "title": "Installation Steps",
+      "warning": "⚠️ Please ensure you download the APK file from official sources before installation",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Download APK File",
+          "description": "Click the download button above to save the APK file to your device"
+        },
+        {
+          "number": 2,
+          "title": "Allow Unknown Sources",
+          "description": "Go to Settings > Security > Install unknown apps, and enable permission for your browser or file manager"
+        },
+        {
+          "number": 3,
+          "title": "Install App",
+          "description": "Find the downloaded APK file, tap it and follow the prompts to complete installation"
+        },
+        {
+          "number": 4,
+          "title": "Get Started",
+          "description": "Open the app, create an account or sign in to your existing account, and begin your focus journey"
+        }
+      ]
+    },
+    "security": {
+      "title": "Security Assurance",
+      "items": [
+        {
+          "icon": "🛡️",
+          "title": "Digital Signature Verification",
+          "description": "All APK files are officially digitally signed to ensure file integrity and trusted source"
+        },
+        {
+          "icon": "🔒",
+          "title": "Malware Scanning",
+          "description": "Every release is rigorously scanned for security to ensure no malicious code"
+        },
+        {
+          "icon": "🔐",
+          "title": "Privacy Protection",
+          "description": "Follows the same privacy policy, ensuring your data security is fully protected"
+        }
+      ]
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "items": [
+        {
+          "question": "Why isn't it available on Google Play Store?",
+          "answer": "We are actively preparing for Google Play Store listing. In the meantime, you can experience full functionality through the official APK file."
+        },
+        {
+          "question": "Is the APK file safe?",
+          "answer": "Yes, our APK files are officially signed and rigorously security tested. Please ensure you download from the official website to guarantee safety."
+        },
+        {
+          "question": "How do I update the app?",
+          "answer": "When a new version is released, you can revisit this page to download the latest APK file and install the update."
+        },
+        {
+          "question": "What if I encounter installation issues?",
+          "answer": "Please check the installation steps above and ensure you have enabled unknown source installation permission. If you still have issues, please contact our support team."
+        }
+      ]
+    },
+    "features": {
+      "title": "Android-Exclusive Features",
+      "items": [
+        {
+          "icon": "🔄",
+          "title": "Quick Actions",
+          "description": "Support Android shortcuts for quickly adding tasks and launching focus mode"
+        },
+        {
+          "icon": "🔔",
+          "title": "Smart Notifications",
+          "description": "Deep integration with Android notification system for smarter reminder functionality"
+        },
+        {
+          "icon": "🎨",
+          "title": "Material Design",
+          "description": "Fully compliant with Material Design guidelines for a native Android experience"
+        }
+      ]
+    },
+    "support": {
+      "title": "Need Help?",
+      "description": "If you encounter any issues during download or installation, our support team is here to help.",
+      "contactButton": "Contact Support",
+      "email": "support@dopamind.com"
+    }
+  },
   "accountDeletion": {
     "title": "Dopamind Account & Data Deletion Guide",
     "subtitle": "Learn how to permanently delete your Dopamind account and all associated data",

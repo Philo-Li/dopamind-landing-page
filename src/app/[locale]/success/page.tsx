@@ -58,6 +58,7 @@ function PaymentSuccessContent({ locale }: { locale: Locale }) {
     };
 
     fetchPaymentDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   if (loading) {

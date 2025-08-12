@@ -5,6 +5,7 @@ import LanguageSwitcher from '../../../components/LanguageSwitcher';
 import AuthButton from '../../../components/AuthButton';
 import PricingSection from '../../components/PricingSection';
 import AppStoreButton from '../../components/AppStoreButton';
+import AndroidDownloadLink from '../../components/AndroidDownloadLink';
 
 interface HomePageProps {
   params: Promise<{
@@ -46,6 +47,7 @@ export default async function HomePage({ params }: HomePageProps) {
             <a href={`/${locale}#features`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.features}</a>
             <a href={`/${locale}#how-it-works`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.howItWorks}</a>
             <a href={`/${locale}#pricing`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.pricing}</a>
+            <a href={`/${locale}/download`} className="text-sm font-medium text-muted transition-colors hover:text-primary">Download</a>
             <a href={`/${locale}/support`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.support}</a>
           </nav>
           <div className="flex items-center gap-4">
@@ -73,7 +75,10 @@ export default async function HomePage({ params }: HomePageProps) {
                   {t.home.hero.subtitle}
                 </p>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-                  <AppStoreButton size="small" />
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <AppStoreButton size="small" />
+                    <AndroidDownloadLink size="small" locale={locale} />
+                  </div>
                   <div className="flex flex-col justify-center">
                     <p className="text-sm text-muted">{t.home.hero.downloadText}</p>
                   </div>
@@ -446,7 +451,10 @@ export default async function HomePage({ params }: HomePageProps) {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
-              <AppStoreButton size="large" />
+              <div className="flex flex-col sm:flex-row gap-4">
+                <AppStoreButton size="large" />
+                <AndroidDownloadLink size="large" locale={locale} />
+              </div>
               <div className="text-center">
                 <p className="text-sm text-muted">{t.home.finalCta.trial}</p>
                 <p className="text-xs text-muted mt-1">{t.home.finalCta.users}</p>

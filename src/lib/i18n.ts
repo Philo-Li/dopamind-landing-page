@@ -577,6 +577,131 @@ const translations = {
       tip: '💡 小贴士',
       savings: '年度订阅可节省 2 个月费用，相当于 88 折优惠！还能获得专属会员社群访问权限。'
     },
+    download: {
+      title: '下载 Dopamind',
+      subtitle: '在你的设备上体验 Dopamind 的强大功能',
+      hero: {
+        badge: '应用下载',
+        title: '随时随地，保持专注',
+        description: '立即下载 Dopamind，让 AI 助手陪伴你的每一天。选择适合你设备的版本。',
+        downloadButton: '下载 APK 文件',
+        version: '版本',
+        size: '文件大小',
+        lastUpdated: '更新时间'
+      },
+      platforms: {
+        ios: {
+          title: 'iOS App Store',
+          description: '官方推荐，自动更新，完整功能'
+        },
+        android: {
+          title: 'Android APK',
+          description: '直接下载，无需 Google Play Store'
+        }
+      },
+      requirements: {
+        title: '系统要求',
+        items: [
+          'Android 8.0 (API 级别 26) 或更高版本',
+          '至少 100 MB 可用存储空间',
+          '网络连接（用于同步和 AI 功能）',
+          '允许安装未知来源应用'
+        ]
+      },
+      installation: {
+        title: '安装步骤',
+        warning: '⚠️ 安装前请确保从官方渠道下载 APK 文件',
+        steps: [
+          {
+            number: 1,
+            title: '下载 APK 文件',
+            description: '点击上方下载按钮，将 APK 文件保存到你的设备'
+          },
+          {
+            number: 2,
+            title: '允许未知来源安装',
+            description: '前往设置 > 安全 > 允许安装未知应用，为你的浏览器或文件管理器开启权限'
+          },
+          {
+            number: 3,
+            title: '安装应用',
+            description: '找到下载的 APK 文件，点击并按照提示完成安装'
+          },
+          {
+            number: 4,
+            title: '开始使用',
+            description: '打开应用，创建账户或登录现有账户，开始你的专注之旅'
+          }
+        ]
+      },
+      security: {
+        title: '安全保障',
+        items: [
+          {
+            icon: '🛡️',
+            title: '数字签名验证',
+            description: '所有 APK 文件都经过官方数字签名，确保文件完整性和来源可信'
+          },
+          {
+            icon: '🔒',
+            title: '恶意软件扫描',
+            description: '每个发布版本都经过严格的安全扫描，确保无恶意代码'
+          },
+          {
+            icon: '🔐',
+            title: '隐私保护',
+            description: '遵循相同的隐私政策，你的数据安全得到充分保障'
+          }
+        ]
+      },
+      faq: {
+        title: '常见问题',
+        items: [
+          {
+            question: '为什么不在 Google Play Store 上架？',
+            answer: '我们正在积极准备 Google Play Store 的上架流程。在此期间，你可以通过官方 APK 文件体验完整功能。'
+          },
+          {
+            question: 'APK 文件安全吗？',
+            answer: '是的，我们的 APK 文件经过官方签名和严格的安全检测。请确保从官方网站下载以保证安全性。'
+          },
+          {
+            question: '如何更新应用？',
+            answer: '当有新版本发布时，你可以重新访问此页面下载最新的 APK 文件并安装更新。'
+          },
+          {
+            question: '遇到安装问题怎么办？',
+            answer: '请查看上方的安装步骤，确保已开启未知来源安装权限。如仍有问题，请联系我们的支持团队。'
+          }
+        ]
+      },
+      features: {
+        title: 'Android 版独有特性',
+        items: [
+          {
+            icon: '🔄',
+            title: '快捷操作',
+            description: '支持 Android 快捷方式，快速添加任务和启动专注模式'
+          },
+          {
+            icon: '🔔',
+            title: '智能通知',
+            description: '与 Android 通知系统深度集成，提供更智能的提醒功能'
+          },
+          {
+            icon: '🎨',
+            title: 'Material Design',
+            description: '完全遵循 Material Design 设计规范，提供原生 Android 体验'
+          }
+        ]
+      },
+      support: {
+        title: '需要帮助？',
+        description: '如果你在下载或安装过程中遇到任何问题，我们的支持团队随时为你服务。',
+        contactButton: '联系支持',
+        email: 'support@dopamind.com'
+      }
+    },
     accountDeletion: {
       title: 'Dopamind 账户与数据删除指南',
       subtitle: '了解如何永久删除您的 Dopamind 账户和所有相关数据',
@@ -1241,6 +1366,131 @@ const translations = {
       tip: '💡 Tip',
       savings: 'Annual subscription saves 2 months\' cost, equivalent to 12% off! Plus exclusive member community access.'
     },
+    download: {
+      title: 'Download Dopamind',
+      subtitle: 'Experience Dopamind\'s powerful features on your device',
+      hero: {
+        badge: 'App Download',
+        title: 'Stay Focused, Anywhere',
+        description: 'Download Dopamind and let your AI assistant accompany you every day. Choose the version that fits your device.',
+        downloadButton: 'Download APK File',
+        version: 'Version',
+        size: 'File Size',
+        lastUpdated: 'Last Updated'
+      },
+      platforms: {
+        ios: {
+          title: 'iOS App Store',
+          description: 'Official, auto-update, full features'
+        },
+        android: {
+          title: 'Android APK',
+          description: 'Direct download, no Google Play Store needed'
+        }
+      },
+      requirements: {
+        title: 'System Requirements',
+        items: [
+          'Android 8.0 (API level 26) or higher',
+          'At least 100 MB of available storage space',
+          'Network connection (for sync and AI features)',
+          'Allow installation from unknown sources'
+        ]
+      },
+      installation: {
+        title: 'Installation Steps',
+        warning: '⚠️ Please ensure you download the APK file from official sources before installation',
+        steps: [
+          {
+            number: 1,
+            title: 'Download APK File',
+            description: 'Click the download button above to save the APK file to your device'
+          },
+          {
+            number: 2,
+            title: 'Allow Unknown Sources',
+            description: 'Go to Settings > Security > Install unknown apps, and enable permission for your browser or file manager'
+          },
+          {
+            number: 3,
+            title: 'Install App',
+            description: 'Find the downloaded APK file, tap it and follow the prompts to complete installation'
+          },
+          {
+            number: 4,
+            title: 'Get Started',
+            description: 'Open the app, create an account or sign in to your existing account, and begin your focus journey'
+          }
+        ]
+      },
+      security: {
+        title: 'Security Assurance',
+        items: [
+          {
+            icon: '🛡️',
+            title: 'Digital Signature Verification',
+            description: 'All APK files are officially digitally signed to ensure file integrity and trusted source'
+          },
+          {
+            icon: '🔒',
+            title: 'Malware Scanning',
+            description: 'Every release is rigorously scanned for security to ensure no malicious code'
+          },
+          {
+            icon: '🔐',
+            title: 'Privacy Protection',
+            description: 'Follows the same privacy policy, ensuring your data security is fully protected'
+          }
+        ]
+      },
+      faq: {
+        title: 'Frequently Asked Questions',
+        items: [
+          {
+            question: 'Why isn\'t it available on Google Play Store?',
+            answer: 'We are actively preparing for Google Play Store listing. In the meantime, you can experience full functionality through the official APK file.'
+          },
+          {
+            question: 'Is the APK file safe?',
+            answer: 'Yes, our APK files are officially signed and rigorously security tested. Please ensure you download from the official website to guarantee safety.'
+          },
+          {
+            question: 'How do I update the app?',
+            answer: 'When a new version is released, you can revisit this page to download the latest APK file and install the update.'
+          },
+          {
+            question: 'What if I encounter installation issues?',
+            answer: 'Please check the installation steps above and ensure you have enabled unknown source installation permission. If you still have issues, please contact our support team.'
+          }
+        ]
+      },
+      features: {
+        title: 'Android-Exclusive Features',
+        items: [
+          {
+            icon: '🔄',
+            title: 'Quick Actions',
+            description: 'Support Android shortcuts for quickly adding tasks and launching focus mode'
+          },
+          {
+            icon: '🔔',
+            title: 'Smart Notifications',
+            description: 'Deep integration with Android notification system for smarter reminder functionality'
+          },
+          {
+            icon: '🎨',
+            title: 'Material Design',
+            description: 'Fully compliant with Material Design guidelines for a native Android experience'
+          }
+        ]
+      },
+      support: {
+        title: 'Need Help?',
+        description: 'If you encounter any issues during download or installation, our support team is here to help.',
+        contactButton: 'Contact Support',
+        email: 'support@dopamind.com'
+      }
+    },
     accountDeletion: {
       title: 'Dopamind Account & Data Deletion Guide',
       subtitle: 'Learn how to permanently delete your Dopamind account and all related data',
@@ -1904,6 +2154,131 @@ const translations = {
       contactSupport: 'サポートに連絡',
       tip: '💡 ヒント',
       savings: '年間サブスクリプションで2ヶ月分お得！12%オフ相当！さらに専用メンバーコミュニティアクセス特典付き。'
+    },
+    download: {
+      title: 'Dopamind をダウンロード',
+      subtitle: 'あなたのデバイスで Dopamind の強力な機能を体験してください',
+      hero: {
+        badge: 'アプリダウンロード',
+        title: 'いつでもどこでも集中力を保つ',
+        description: 'Dopamind をダウンロードして、AIアシスタントと毎日を過ごしましょう。あなたのデバイスに適したバージョンを選択してください。',
+        downloadButton: 'APK ファイルをダウンロード',
+        version: 'バージョン',
+        size: 'ファイルサイズ',
+        lastUpdated: '最終更新'
+      },
+      platforms: {
+        ios: {
+          title: 'iOS App Store',
+          description: '公式推奨、自動更新、完全機能'
+        },
+        android: {
+          title: 'Android APK',
+          description: '直接ダウンロード、Google Play Store不要'
+        }
+      },
+      requirements: {
+        title: 'システム要件',
+        items: [
+          'Android 8.0（APIレベル26）以上',
+          '少なくとも100MBの利用可能ストレージ領域',
+          'ネットワーク接続（同期とAI機能のため）',
+          '提供元不明のアプリのインストールを許可'
+        ]
+      },
+      installation: {
+        title: 'インストール手順',
+        warning: '⚠️ インストール前に公式ソースからAPKファイルをダウンロードすることを確認してください',
+        steps: [
+          {
+            number: 1,
+            title: 'APKファイルをダウンロード',
+            description: '上のダウンロードボタンをクリックして、APKファイルをデバイスに保存します'
+          },
+          {
+            number: 2,
+            title: '提供元不明のアプリを許可',
+            description: '設定 > セキュリティ > 不明なアプリのインストール に進み、ブラウザまたはファイルマネージャーの権限を有効にします'
+          },
+          {
+            number: 3,
+            title: 'アプリをインストール',
+            description: 'ダウンロードしたAPKファイルを見つけてタップし、プロンプトに従ってインストールを完了します'
+          },
+          {
+            number: 4,
+            title: '使い始める',
+            description: 'アプリを開き、アカウントを作成するか既存のアカウントにサインインして、集中の旅を始めましょう'
+          }
+        ]
+      },
+      security: {
+        title: 'セキュリティ保証',
+        items: [
+          {
+            icon: '🛡️',
+            title: 'デジタル署名検証',
+            description: 'すべてのAPKファイルは公式にデジタル署名されており、ファイルの整合性と信頼できるソースを保証します'
+          },
+          {
+            icon: '🔒',
+            title: 'マルウェアスキャン',
+            description: 'すべてのリリースは厳密にセキュリティスキャンされ、悪意のあるコードがないことを保証します'
+          },
+          {
+            icon: '🔐',
+            title: 'プライバシー保護',
+            description: '同じプライバシーポリシーに従い、データのセキュリティが完全に保護されることを保証します'
+          }
+        ]
+      },
+      faq: {
+        title: 'よくある質問',
+        items: [
+          {
+            question: 'Google Play ストアで利用できないのはなぜですか？',
+            answer: 'Google Play ストアでの公開準備を積極的に進めています。その間、公式APKファイルを通じて完全な機能を体験できます。'
+          },
+          {
+            question: 'APKファイルは安全ですか？',
+            answer: 'はい、私たちのAPKファイルは公式に署名され、厳密にセキュリティテストされています。安全性を保証するために公式ウェブサイトからダウンロードすることを確認してください。'
+          },
+          {
+            question: 'アプリを更新するにはどうすればよいですか？',
+            answer: '新しいバージョンがリリースされたときは、このページを再訪問して最新のAPKファイルをダウンロードし、更新をインストールできます。'
+          },
+          {
+            question: 'インストールの問題が発生した場合はどうすればよいですか？',
+            answer: '上記のインストール手順を確認し、提供元不明のインストール権限を有効にしていることを確認してください。それでも問題がある場合は、サポートチームにお問い合わせください。'
+          }
+        ]
+      },
+      features: {
+        title: 'Android専用機能',
+        items: [
+          {
+            icon: '🔄',
+            title: 'クイックアクション',
+            description: 'Androidショートカットをサポートし、タスクの素早い追加と集中モードの起動が可能'
+          },
+          {
+            icon: '🔔',
+            title: 'スマート通知',
+            description: 'Android通知システムとの深い統合により、よりスマートなリマインダー機能を提供'
+          },
+          {
+            icon: '🎨',
+            title: 'Material Design',
+            description: 'Material Design ガイドラインに完全準拠し、ネイティブAndroid体験を提供'
+          }
+        ]
+      },
+      support: {
+        title: 'ヘルプが必要ですか？',
+        description: 'ダウンロードまたはインストール中に何か問題が発生した場合、サポートチームがお手伝いします。',
+        contactButton: 'サポートに問い合わせ',
+        email: 'support@dopamind.com'
+      }
     },
     accountDeletion: {
       title: 'Dopamind アカウント・データ削除ガイド',
