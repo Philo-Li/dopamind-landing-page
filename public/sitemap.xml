@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <!-- Root language selection page -->
+  <url>
+    <loc>https://www.dopamind.app/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.dopamind.app/en"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.dopamind.app/zh"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.dopamind.app/ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.dopamind.app/"/>
+  </url>
+
+  <!-- English pages -->
+  <url>
+    <loc>https://www.dopamind.app/en</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.dopamind.app/en"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.dopamind.app/zh"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.dopamind.app/ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.dopamind.app/en"/>
+  </url>
+  
+  <url>
+    <loc>https://www.dopamind.app/en/download</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.dopamind.app/en/terms</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.dopamind.app/en/terms"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.dopamind.app/zh/terms"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.dopamind.app/ja/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.dopamind.app/en/terms"/>
+  </url>
+  
+  <url>
+    <loc>https://www.dopamind.app/en/privacy</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.dopamind.app/en/support</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Chinese pages -->
+  <url>
+    <loc>https://www.dopamind.app/zh</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.dopamind.app/en"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.dopamind.app/zh"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.dopamind.app/ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.dopamind.app/en"/>
+  </url>
+  
+  <url>
+    <loc>https://www.dopamind.app/zh/download</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.dopamind.app/zh/terms</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.dopamind.app/en/terms"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.dopamind.app/zh/terms"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.dopamind.app/ja/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.dopamind.app/en/terms"/>
+  </url>
+  
+  <url>
+    <loc>https://www.dopamind.app/zh/privacy</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.dopamind.app/zh/support</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Japanese pages -->
+  <url>
+    <loc>https://www.dopamind.app/ja</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.dopamind.app/en"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.dopamind.app/zh"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.dopamind.app/ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.dopamind.app/en"/>
+  </url>
+  
+  <url>
+    <loc>https://www.dopamind.app/ja/download</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.dopamind.app/ja/terms</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.dopamind.app/en/terms"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.dopamind.app/zh/terms"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.dopamind.app/ja/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.dopamind.app/en/terms"/>
+  </url>
+  
+  <url>
+    <loc>https://www.dopamind.app/ja/privacy</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.dopamind.app/ja/support</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>

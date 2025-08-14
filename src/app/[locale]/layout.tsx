@@ -49,6 +49,15 @@ export default async function LocaleLayout({
         <meta name="msapplication-TileColor" content="#F97316" />
         <meta name="msapplication-TileImage" content="/dopamind-logo-bw.jpg" />
         <link rel="manifest" href="/manifest.json" />
+        
+        {/* hreflang tags for multilingual SEO */}
+        <link rel="alternate" hreflang="en" href="https://www.dopamind.app/en" />
+        <link rel="alternate" hreflang="zh" href="https://www.dopamind.app/zh" />
+        <link rel="alternate" hreflang="ja" href="https://www.dopamind.app/ja" />
+        <link rel="alternate" hreflang="x-default" href="https://www.dopamind.app/en" />
+        
+        {/* canonical tag */}
+        <link rel="canonical" href={`https://www.dopamind.app/${locale}`} />
       </head>
       <body className={inter.className}>
         {children}

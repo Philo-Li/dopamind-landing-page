@@ -1,0 +1,23 @@
+# Robots.txt for dopamind.app
+
+# Allow all user agents on main domain
+User-agent: *
+Allow: /
+
+# Block API and staging subdomains (if any crawler accidentally reaches them)
+# Note: These should be handled at the subdomain level, but adding here as backup
+User-agent: *
+Disallow: /api/
+
+# Allow crawling of multilingual content
+Allow: /en/
+Allow: /zh/
+Allow: /ja/
+
+# Block dashboard and private areas
+Disallow: /dashboard/
+Disallow: /login
+Disallow: /register
+
+# Sitemap location (to be created)
+Sitemap: https://www.dopamind.app/sitemap.xml

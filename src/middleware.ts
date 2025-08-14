@@ -1,13 +1,13 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { locales, defaultLocale } from './lib/i18n'
+import { locales } from './lib/i18n'
 
 export function middleware(request: NextRequest) {
   // 检查路径是否已经包含语言前缀
   const pathname = request.nextUrl.pathname
   
-  // 排除不需要多语言处理的路径
-  const excludePaths = ['/login', '/register', '/dashboard', '/api']
+  // 排除不需要多语言处理的路径（包括根路径）
+  const excludePaths = ['/login', '/register', '/dashboard', '/api', '/']
   const shouldExclude = excludePaths.some(path => 
     pathname.startsWith(path) || pathname === path
   )
@@ -20,28 +20,12 @@ export function middleware(request: NextRequest) {
 
   if (pathnameHasLocale) return
 
-  // 如果没有语言前缀，根据 Accept-Language 头重定向
-  const locale = getLocale(request) || defaultLocale
-  
-  return NextResponse.redirect(
-    new URL(`/${locale}${pathname === '/' ? '' : pathname}`, request.url)
-  )
+  // 移除了自动语言重定向逻辑
+  // 现在只有带语言前缀的路径会被处理，其他路径将正常访问
+  return
 }
 
-function getLocale(request: NextRequest) {
-  // 从 Accept-Language 头获取用户偏好语言
-  const acceptLanguage = request.headers.get('accept-language')
-  if (!acceptLanguage) return defaultLocale
-
-  // 简单的语言匹配逻辑
-  for (const locale of locales) {
-    if (acceptLanguage.includes(locale)) {
-      return locale
-    }
-  }
-  
-  return defaultLocale
-}
+// getLocale 函数已移除，不再需要自动语言检测
 
 export const config = {
   matcher: [

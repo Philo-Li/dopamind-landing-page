@@ -3,11 +3,28 @@ import { FileText, Shield, Users, AlertTriangle, Calendar, Mail } from 'lucide-r
 import { getTranslation } from '../../../lib/i18n';
 import LanguageSwitcher from '../../../../components/LanguageSwitcher';
 import AuthButton from '../../../../components/AuthButton';
+import { Metadata } from 'next';
 
 interface TermsPageProps {
   params: Promise<{
     locale: string;
   }>;
+}
+
+export async function generateMetadata({ params }: TermsPageProps): Promise<Metadata> {
+  const { locale } = await params;
+  
+  return {
+    alternates: {
+      canonical: `https://www.dopamind.app/${locale}/terms`,
+      languages: {
+        'en': 'https://www.dopamind.app/en/terms',
+        'zh': 'https://www.dopamind.app/zh/terms',
+        'ja': 'https://www.dopamind.app/ja/terms',
+        'x-default': 'https://www.dopamind.app/en/terms',
+      },
+    },
+  };
 }
 
 export default async function TermsPage({ params }: TermsPageProps) {

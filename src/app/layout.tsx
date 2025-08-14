@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Dopamind",
-  description: "专为 ADHD 用户设计的 AI 专注伙伴",
+  description: "AI-powered focus companion designed for ADHD users",
   icons: {
     icon: [
       { url: '/dopamind-logo-bw.jpg', sizes: '32x32', type: 'image/jpeg' },
