@@ -28,6 +28,51 @@ export default async function HomePage({ params }: HomePageProps) {
     return `/screenshots/${imageNumber}_iOS_zh.jpg`;
   };
 
+  // SEO优化的多语言alt标签
+  const getImageAlt = (key: string) => {
+    const altTexts = {
+      en: {
+        mainInterface: "Dopamind AI-powered focus companion main interface for ADHD users",
+        taskManagement: "Intelligent task management system for ADHD productivity",
+        voiceInput: "Voice input feature for hands-free task creation",
+        aiTaskBreakdown: "AI-powered task breakdown and organization tool",
+        focusMode: "Immersive focus mode for deep work sessions",
+        calendarView: "Calendar global view with task scheduling",
+        habitTracking: "Habit formation and tracking functionality",
+        smartReminder: "Smart reminder system for ADHD management",
+        subscriptionManagement: "Subscription and account management interface",
+        logo: "Dopamind - AI-powered focus companion for ADHD users"
+      },
+      zh: {
+        mainInterface: "Dopamind AI 智能专注伙伴主界面 - 专为 ADHD 用户设计",
+        taskManagement: "智能任务管理系统 - 提升 ADHD 生产力",
+        voiceInput: "语音输入功能 - 免手动创建任务",
+        aiTaskBreakdown: "AI 智能任务拆解和组织工具",
+        focusMode: "沉浸式专注模式 - 深度工作会话",
+        calendarView: "日历全局视图 - 任务调度管理",
+        habitTracking: "习惯养成和跟踪功能",
+        smartReminder: "智能提醒系统 - ADHD 管理工具",
+        subscriptionManagement: "订阅和账户管理界面",
+        logo: "Dopamind - 专为 ADHD 用户设计的 AI 专注伙伴"
+      },
+      ja: {
+        mainInterface: "Dopamind AI集中力コンパニオンメインインターフェース - ADHDユーザー向け",
+        taskManagement: "インテリジェントタスク管理システム - ADHD生産性向上",
+        voiceInput: "音声入力機能 - ハンズフリータスク作成",
+        aiTaskBreakdown: "AI搭載タスク分解・整理ツール",
+        focusMode: "没入型集中モード - 深い作業セッション",
+        calendarView: "カレンダーグローバルビュー - タスクスケジューリング",
+        habitTracking: "習慣形成・追跡機能",
+        smartReminder: "スマートリマインダーシステム - ADHD管理",
+        subscriptionManagement: "サブスクリプション・アカウント管理インターフェース",
+        logo: "Dopamind - ADHDユーザー向けAI集中力コンパニオン"
+      }
+    };
+    
+    const currentTexts = altTexts[locale as keyof typeof altTexts] || altTexts.en;
+    return currentTexts[key as keyof typeof currentTexts] || currentTexts.logo;
+  };
+
   return (
     <div className="flex min-h-screen flex-col">
       {/* 导航栏 */}
@@ -36,7 +81,7 @@ export default async function HomePage({ params }: HomePageProps) {
           <a href={`/${locale}`} className="flex items-center gap-2">
             <Image 
               src="/dopamind-logo.png"
-              alt="Dopamind Logo" 
+              alt={getImageAlt('logo')}
               width={32}
               height={32}
               className="rounded-[8px]"
@@ -94,7 +139,7 @@ export default async function HomePage({ params }: HomePageProps) {
                     <div className="w-full h-full bg-black rounded-[1.75rem] overflow-hidden relative">
                       <Image 
                         src={getImagePath(1)} 
-                        alt="Dopamind AI 主界面" 
+                        alt={getImageAlt('mainInterface')}
                         fill
                         className="object-cover"
                         style={{
@@ -143,7 +188,7 @@ export default async function HomePage({ params }: HomePageProps) {
               <div className="flex items-center justify-center">
                 <Image 
                   src={getImagePath(2)} 
-                  alt="智能任务管理" 
+                  alt={getImageAlt('taskManagement')}
                   width={300} 
                   height={600}
                   className="rounded-3xl shadow-xl"
@@ -156,7 +201,7 @@ export default async function HomePage({ params }: HomePageProps) {
               <div className="order-2 lg:order-1 flex items-center justify-center">
                 <Image 
                   src={getImagePath(3)} 
-                  alt="语音输入功能" 
+                  alt={getImageAlt('voiceInput')}
                   width={300} 
                   height={600}
                   className="rounded-3xl shadow-xl"
@@ -215,7 +260,7 @@ export default async function HomePage({ params }: HomePageProps) {
               <div className="flex items-center justify-center">
                 <Image 
                   src={getImagePath(4)} 
-                  alt="AI 智能拆解任务" 
+                  alt={getImageAlt('aiTaskBreakdown')}
                   width={300} 
                   height={600}
                   className="rounded-3xl shadow-xl"
@@ -228,7 +273,7 @@ export default async function HomePage({ params }: HomePageProps) {
               <div className="order-2 lg:order-1 flex items-center justify-center">
                 <Image 
                   src={getImagePath(5)} 
-                  alt="沉浸式专注模式" 
+                  alt={getImageAlt('focusMode')}
                   width={300} 
                   height={600}
                   className="rounded-3xl shadow-xl"
@@ -282,7 +327,7 @@ export default async function HomePage({ params }: HomePageProps) {
               <div className="relative">
                 <Image 
                   src={getImagePath(9)} 
-                  alt="日历全局视图" 
+                  alt={getImageAlt('calendarView')}
                   width={350} 
                   height={700}
                   className="rounded-3xl shadow-2xl"
@@ -317,7 +362,7 @@ export default async function HomePage({ params }: HomePageProps) {
                 <div className="mb-6">
                   <Image 
                     src={getImagePath(6)} 
-                    alt="习惯养成功能" 
+                    alt={getImageAlt('habitTracking')}
                     width={250} 
                     height={500}
                     className="rounded-xl mx-auto"
@@ -339,7 +384,7 @@ export default async function HomePage({ params }: HomePageProps) {
                 <div className="mb-6">
                   <Image 
                     src={getImagePath(7)} 
-                    alt="智能冰箱管家" 
+                    alt={getImageAlt('smartReminder')}
                     width={250} 
                     height={500}
                     className="rounded-xl mx-auto"
@@ -361,7 +406,7 @@ export default async function HomePage({ params }: HomePageProps) {
                 <div className="mb-6">
                   <Image 
                     src={getImagePath(8)} 
-                    alt="订阅管理功能" 
+                    alt={getImageAlt('subscriptionManagement')}
                     width={250} 
                     height={500}
                     className="rounded-xl mx-auto"
@@ -497,7 +542,7 @@ export default async function HomePage({ params }: HomePageProps) {
               <div className="flex items-center gap-2 mb-4">
                 <Image 
                   src="/dopamind-logo.png"
-                  alt="Dopamind Logo" 
+                  alt={getImageAlt('logo')}
                   width={24}
                   height={24}
                   className="rounded-[6px]"
