@@ -124,59 +124,31 @@ export default function PricingSection({ locale }: PricingSectionProps) {
   const plans: Plan[] = [
     {
       id: 'trial',
-      name: '7天 Premium 体验',
-      price: '¥0',
-      period: '7天',
-      buttonText: '开始7天免费体验',
+      name: t.pricing?.plans?.trial?.name || '7-Day Premium Trial',
+      price: t.pricing?.plans?.trial?.price || '$0',
+      period: t.pricing?.plans?.trial?.period || 'trial',
+      buttonText: t.pricing?.plans?.trial?.buttonText || 'Start Free Trial',
       isTrial: true,
-      features: [
-        'AI 对话式规划 (像聊天一样安排一切)',
-        '沉浸式专注圣所 (屏蔽干扰，进入心流状态)',
-        'AI 智能拆解 (将复杂项目分解为小步骤)',
-        '多设备云端同步 (所有数据，永不丢失)',
-        '可视化成长报告 (用热力图见证进步)',
-        '全能生活管家 (习惯、冰箱、订阅一站管理)',
-        '一对一 AI 教练支持 (获得个性化策略)'
-      ]
+      features: t.pricing?.plans?.trial?.features || []
     },
     {
       id: 'monthly',
-      name: '月度 Premium',
+      name: t.pricing?.plans?.monthly?.name || 'Monthly',
       priceId: prices.monthly?.id || process.env.NEXT_PUBLIC_STRIPE_MONTHLY_PRODUCT_ID || 'price_monthly_placeholder',
-      price: loading ? '加载中...' : formatPrice('monthly'),
-      period: '每月',
-      buttonText: '立即订阅月度计划',
-      features: [
-        'AI 对话式规划 (像聊天一样安排一切)',
-        '沉浸式专注圣所 (屏蔽干扰，进入心流状态)',
-        'AI 智能拆解 (将复杂项目分解为小步骤)',
-        '多设备云端同步 (所有数据，永不丢失)',
-        '可视化成长报告 (用热力图见证进步)',
-        '全能生活管家 (习惯、冰箱、订阅一站管理)',
-        '一对一 AI 教练支持 (获得个性化策略)',
-        '新功能抢先体验权 (第一时间试用黑科技)'
-      ]
+      price: loading ? 'Loading...' : formatPrice('monthly'),
+      period: t.pricing?.plans?.monthly?.period || 'month',
+      buttonText: t.pricing?.plans?.monthly?.buttonText || 'Choose Monthly',
+      features: t.pricing?.plans?.monthly?.features || []
     },
     {
       id: 'yearly',
-      name: '年度 Premium',
+      name: t.pricing?.plans?.yearly?.name || 'Yearly',
       priceId: prices.yearly?.id || process.env.NEXT_PUBLIC_STRIPE_YEARLY_PRICE_ID || 'price_yearly_placeholder', 
-      price: loading ? '加载中...' : formatPrice('yearly'),
-      period: '每年',
-      buttonText: '立即订阅年度计划',
+      price: loading ? 'Loading...' : formatPrice('yearly'),
+      period: t.pricing?.plans?.yearly?.period || 'year',
+      buttonText: t.pricing?.plans?.yearly?.buttonText || 'Choose Yearly',
       isPopular: true,
-      features: [
-        'AI 对话式规划 (像聊天一样安排一切)',
-        '沉浸式专注圣所 (屏蔽干扰，进入心流状态)',
-        'AI 智能拆解 (将复杂项目分解为小步骤)',
-        '多设备云端同步 (所有数据，永不丢失)',
-        '可视化成长报告 (用热力图见证进步)',
-        '全能生活管家 (习惯、冰箱、订阅一站管理)',
-        '一对一 AI 教练支持 (获得个性化策略)',
-        '新功能抢先体验权 (第一时间试用黑科技)',
-        '省下 2 个月费用 (相当于 88 折)',
-        '专属会员社群 (与高效人士交流心得)'
-      ]
+      features: t.pricing?.plans?.yearly?.features || []
     }
   ];
 
@@ -186,13 +158,13 @@ export default function PricingSection({ locale }: PricingSectionProps) {
       return (
         <>
           <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl mb-4">
-            {t.home.pricing.title}
+            {t.pricing?.title || 'Choose Your Plan'}
           </h2>
           <p className="text-lg text-muted md:text-xl">
-            {t.home.pricing.subtitle}
+            {t.pricing?.subtitle || 'Unlock your potential with AI-powered task management'}
           </p>
           <div className="mt-2 inline-block bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-medium">
-            💎 新用户注册即享 7 天免费试用
+            {t.pricing?.badges?.newUser || 'New User'}
           </div>
         </>
       );
@@ -204,13 +176,13 @@ export default function PricingSection({ locale }: PricingSectionProps) {
       return (
         <>
           <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl mb-4">
-            您的 Premium 试用还剩 {daysLeft} 天
+{(t.pricing?.status?.trial_active || 'Your Premium trial has {days} days left').replace('{days}', daysLeft.toString())}
           </h2>
           <p className="text-lg text-muted md:text-xl">
-            立即订阅，确保在试用结束后无缝衔接您的所有高级功能。继续享受 AI 智能建议、无限任务管理等强大功能。
+            {t.pricing?.status?.trial_subtitle || 'Subscribe now to continue enjoying premium features'}
           </p>
           <div className="mt-2 inline-block bg-orange-100 text-orange-700 px-4 py-2 rounded-full text-sm font-medium">
-            ⏰ 试用即将结束，立即升级享受持续服务
+            {t.pricing?.badges?.trialEnding || 'Trial Ending'}
           </div>
         </>
       );
@@ -221,13 +193,13 @@ export default function PricingSection({ locale }: PricingSectionProps) {
       return (
         <>
           <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl mb-4">
-            您已是 Premium 会员
+{t.pricing?.status?.premium_active || 'You are a Premium Member'}
           </h2>
           <p className="text-lg text-muted md:text-xl">
-            感谢您的支持！您正在享受 Dopamind 的全部高级功能。如需更改订阅计划，请联系客服。
+            {t.pricing?.status?.premium_subtitle || 'Thank you for your support! You are enjoying all premium features.'}
           </p>
           <div className="mt-2 inline-block bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium">
-            ✨ Premium 会员 - 享受全部功能
+            {t.pricing?.badges?.premium || 'Premium'}
           </div>
         </>
       );
@@ -238,13 +210,13 @@ export default function PricingSection({ locale }: PricingSectionProps) {
       return (
         <>
           <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl mb-4">
-            您的免费试用已结束
+{t.pricing?.status?.trial_ended || 'Your free trial has ended'}
           </h2>
           <p className="text-lg text-muted md:text-xl">
-            升级到 Premium，继续使用强大的 AI 功能来掌控您的生活。重新体验智能任务管理、专注模式等高级功能。
+            {t.pricing?.status?.trial_ended_subtitle || 'Upgrade to Premium to continue using powerful AI features'}
           </p>
           <div className="mt-2 inline-block bg-red-100 text-red-700 px-4 py-2 rounded-full text-sm font-medium">
-            🔒 升级解锁所有高级功能
+            {t.pricing?.badges?.upgrade || 'Upgrade'}
           </div>
         </>
       );
@@ -254,10 +226,10 @@ export default function PricingSection({ locale }: PricingSectionProps) {
     return (
       <>
         <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl mb-4">
-          {t.home.pricing.title}
+          {t.pricing?.title || 'Choose Your Plan'}
         </h2>
         <p className="text-lg text-muted md:text-xl">
-          {t.home.pricing.subtitle}
+          {t.pricing?.subtitle || 'Choose the plan that works for you'}
         </p>
       </>
     );
@@ -281,7 +253,7 @@ export default function PricingSection({ locale }: PricingSectionProps) {
               <p className="text-muted mb-6">您正在享受所有高级功能</p>
               
               <div className="space-y-3 mb-8">
-                {plans[2].features.map((feature, index) => (
+                {(plans[2]?.features || []).map((feature, index) => (
                   <div key={index} className="flex items-center gap-3">
                     <CheckCircle className="h-5 w-5 flex-shrink-0 text-green-600" />
                     <span className="text-muted">{feature}</span>
@@ -347,23 +319,23 @@ export default function PricingSection({ locale }: PricingSectionProps) {
     if (isCurrentPlan(planId)) {
       switch (currentUserPlan) {
         case 'trial':
-          return '您正在7天试用中';
+          return t.pricing?.buttons?.trial_active || 'Trial Active';
         case 'monthly':
-          return '您已经是月度会员';
+          return t.pricing?.buttons?.monthly_member || 'Monthly Member';
         case 'yearly':
-          return '您已经是年度会员';
+          return t.pricing?.buttons?.yearly_member || 'Yearly Member';
         default:
-          return '当前方案';
+          return t.pricing?.buttons?.current_plan || 'Current Plan';
       }
     }
     
     // 如果是升级方案
     if (isUpgradePlan(planId)) {
-      const planNames = {
-        monthly: '月度会员',
-        yearly: '年度会员'
-      };
-      return `立即升级到${planNames[planId as keyof typeof planNames]}`;
+      if (planId === 'monthly') {
+        return t.pricing?.buttons?.upgrade_to_monthly || 'Upgrade to Monthly';
+      } else if (planId === 'yearly') {
+        return t.pricing?.buttons?.upgrade_to_yearly || 'Upgrade to Yearly';
+      }
     }
     
     // 试用方案
@@ -411,7 +383,7 @@ export default function PricingSection({ locale }: PricingSectionProps) {
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                     <span className="bg-green-500 text-white px-6 py-2 rounded-full text-sm font-medium shadow-lg flex items-center gap-2">
                       <Crown className="w-4 h-4" />
-                      当前方案
+{t.pricing?.badges?.current || 'Current'}
                     </span>
                   </div>
                 )}
@@ -421,7 +393,7 @@ export default function PricingSection({ locale }: PricingSectionProps) {
                   <div className="absolute -top-4 right-4">
                     <span className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm font-medium shadow-lg flex items-center gap-1">
                       <TrendingUp className="w-3 h-3" />
-                      升级
+{t.pricing?.badges?.upgrade_label || 'Upgrade'}
                     </span>
                   </div>
                 )}
@@ -430,7 +402,7 @@ export default function PricingSection({ locale }: PricingSectionProps) {
                 {plan.isPopular && !isCurrent && !isUpgrade && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                     <span className="bg-primary text-white px-6 py-2 rounded-full text-sm font-medium shadow-lg">
-                      最受欢迎
+{t.pricing?.badges?.popular || 'Popular'}
                     </span>
                   </div>
                 )}
@@ -440,7 +412,7 @@ export default function PricingSection({ locale }: PricingSectionProps) {
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                     <span className="bg-green-500 text-white px-6 py-2 rounded-full text-sm font-medium shadow-lg flex items-center gap-2">
                       <Gift className="w-4 h-4" />
-                      免费试用
+{t.pricing?.badges?.trial || 'Trial'}
                     </span>
                   </div>
                 )}
@@ -456,7 +428,7 @@ export default function PricingSection({ locale }: PricingSectionProps) {
                   {plan.id === 'yearly' && (
                     <div className="mb-6">
                       <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
-                        省下 2 个月费用 (相当于 88 折)
+{t.pricing?.descriptions?.yearly_discount || 'Save 2 months'}
                       </span>
                     </div>
                   )}
@@ -542,14 +514,14 @@ export default function PricingSection({ locale }: PricingSectionProps) {
             
             <p className="text-sm text-muted mt-4">
               {isCurrentPlan(selectedPlanData.id)
-                ? "您正在使用此方案"
+                ? (t.pricing?.descriptions?.current || 'This is your current plan')
                 : selectedPlanData.isTrial 
-                ? "无需信用卡，立即体验完整 Premium 功能"
+                ? (t.pricing?.descriptions?.trial || 'Start your free trial today')
                 : isUpgradePlan(selectedPlanData.id)
-                ? `升级到 ${selectedPlanData.name} • 随时取消 • 安全支付`
+                ? (t.pricing?.descriptions?.upgrade || 'Upgrade to {plan}').replace('{plan}', selectedPlanData.name)
                 : selectedPlanData.id === 'yearly'
-                ? "年付专享特权 • 随时取消 • 省下 158 元 • 专属教练"
-                : "包含核心功能 • 随时取消 • 安全支付"
+                ? (t.pricing?.descriptions?.yearly_special || 'Best value - save 2 months')
+                : (t.pricing?.descriptions?.basic || 'Choose this plan')
               }
             </p>
           </div>

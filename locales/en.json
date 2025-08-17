@@ -758,6 +758,18 @@
     "tip": "💡 Special Offer for New Users",
     "savings": "Start with a 7-day free trial and save 33% with annual subscription"
   },
+  "verifyEmail": {
+    "title": "Verifying your email...",
+    "titleSuccess": "Email verified successfully!",
+    "titleError": "Verification failed",
+    "loading": "Loading...",
+    "verifyingMessage": "Please wait while we process your request.",
+    "successMessage": "You can now return to the Dopamind App to continue.",
+    "errorMessage": "Verification link is invalid or expired. Please request a new one in the app.",
+    "missingTokenMessage": "Verification link is incomplete or missing. Please check the link you clicked.",
+    "openApp": "Open Dopamind",
+    "logoAlt": "Dopamind Logo"
+  },
   "terms": {
     "title": "Terms of Service",
     "subtitle": "Please read these terms of service carefully before using our application",

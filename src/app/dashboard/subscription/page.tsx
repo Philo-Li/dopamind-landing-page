@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { usePremium } from "../../../hooks/usePremium";
 import { 
   Calendar, 
   DollarSign, 
@@ -13,7 +14,7 @@ import {
   Zap
 } from "lucide-react";
 
-interface Subscription {
+interface LocalSubscription {
   id: string;
   plan: 'free' | 'monthly' | 'yearly';
   status: 'active' | 'canceled' | 'expired' | 'trial';
@@ -37,9 +38,10 @@ interface User {
 
 export default function SubscriptionPage() {
   const [user, setUser] = useState<User | null>(null);
-  const [subscription, setSubscription] = useState<Subscription | null>(null);
+  const [subscription, setSubscription] = useState<LocalSubscription | null>(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const { premiumStatus, isPremium, loading: premiumLoading, refetch } = usePremium();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -54,18 +56,30 @@ export default function SubscriptionPage() {
       const parsedUser = JSON.parse(userData);
       setUser(parsedUser);
       
-      // 模拟订阅数据 - 实际应用中应该从 API 获取
-      const mockSubscription: Subscription = {
-        id: "sub_123456789",
-        plan: "yearly",
-        status: "active",
-        startDate: "2024-01-15T00:00:00Z",
-        nextBillingDate: "2025-01-15T00:00:00Z",
-        price: 159.99,
-        currency: "USD",
-        autoRenew: true
-      };
-      setSubscription(mockSubscription);
+      // 从 premium status 生成本地订阅数据用于显示
+      if (premiumStatus && premiumStatus.isPremium) {
+        const localSub: LocalSubscription = {
+          id: "sub_from_premium_status",
+          plan: premiumStatus.type === 'paid' ? (premiumStatus.store === 'STRIPE' ? 'yearly' : 'monthly') : 'free',
+          status: 'active',
+          startDate: new Date().toISOString(), // 这里可以根据实际情况调整
+          nextBillingDate: premiumStatus.expiresAt ? premiumStatus.expiresAt.toISOString() : undefined,
+          price: premiumStatus.type === 'paid' ? 159.99 : undefined, // 根据实际价格调整
+          currency: "USD",
+          autoRenew: premiumStatus.willRenew
+        };
+        setSubscription(localSub);
+      } else {
+        // 免费用户
+        const freeSub: LocalSubscription = {
+          id: "free_user",
+          plan: "free",
+          status: "active",
+          startDate: parsedUser.createdAt,
+          autoRenew: false
+        };
+        setSubscription(freeSub);
+      }
       
     } catch (error) {
       console.error('Error parsing user data:', error);
@@ -74,36 +88,25 @@ export default function SubscriptionPage() {
     }
     
     setLoading(false);
-  }, [router]);
+  }, [router, premiumStatus]);
 
   const handleCancelSubscription = async () => {
     if (!confirm("确定要取消订阅吗？取消后您仍可使用到当前计费周期结束。")) {
       return;
     }
     
-    // 这里应该调用 API 取消订阅
-    console.log("取消订阅");
+    // 这里应该调用后端 API 取消订阅
+    // 由于订阅管理通常在各个平台（App Store, Google Play, Stripe）上进行
+    // 这里主要是提示用户如何取消
+    alert("请前往对应平台取消订阅：\n- iOS: 设置 > Apple ID > 订阅\n- Android: Google Play > 订阅\n- 网页版: 联系客服");
     
-    if (subscription) {
-      setSubscription({
-        ...subscription,
-        status: "canceled",
-        autoRenew: false
-      });
-    }
+    console.log("取消订阅 - 引导用户到相应平台");
   };
 
   const handleReactivateSubscription = async () => {
-    // 这里应该调用 API 重新激活订阅
+    // 这里应该调用后端 API 重新激活订阅
+    alert("请重新购买订阅以激活 Premium 功能");
     console.log("重新激活订阅");
-    
-    if (subscription) {
-      setSubscription({
-        ...subscription,
-        status: "active",
-        autoRenew: true
-      });
-    }
   };
 
   const getStatusColor = (status: string) => {
@@ -157,8 +160,16 @@ export default function SubscriptionPage() {
     );
   }
 
-  if (!user || !subscription) {
+  if (!user) {
     return null;
+  }
+
+  if (loading || premiumLoading || !subscription) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-lg">加载中...</div>
+      </div>
+    );
   }
 
   return (
@@ -200,9 +211,14 @@ export default function SubscriptionPage() {
                     {getStatusText(subscription.status)}
                   </span>
                 </div>
-                {subscription.price && (
+                {subscription.price && subscription.plan !== 'free' && (
                   <p className="text-2xl font-bold text-primary">
                     ${subscription.price} <span className="text-sm text-muted font-normal">/ {subscription.plan === 'yearly' ? '年' : '月'}</span>
+                  </p>
+                )}
+                {subscription.plan === 'free' && (
+                  <p className="text-2xl font-bold text-muted">
+                    免费版
                   </p>
                 )}
               </div>
@@ -262,6 +278,38 @@ export default function SubscriptionPage() {
                 </div>
               </div>
             </div>
+
+            {/* Premium 状态详细信息 */}
+            {isPremium && premiumStatus && (
+              <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                <div className="flex items-start space-x-3">
+                  <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
+                  <div>
+                    <p className="text-sm font-medium text-green-800">
+                      {premiumStatus.type === 'paid' && 'Premium 订阅激活中'}
+                      {premiumStatus.type === 'trial' && '试用期激活中'}
+                      {premiumStatus.type === 'referral_credit' && '推荐奖励激活中'}
+                    </p>
+                    <div className="text-sm text-green-700 mt-1 space-y-1">
+                      {premiumStatus.expiresAt && (
+                        <p>到期时间: {new Date(premiumStatus.expiresAt).toLocaleDateString('zh-CN')}</p>
+                      )}
+                      {premiumStatus.store && (
+                        <p>订阅来源: {premiumStatus.store === 'APP_STORE' ? 'App Store' : premiumStatus.store === 'GOOGLE_PLAY' ? 'Google Play' : premiumStatus.store}</p>
+                      )}
+                      {premiumStatus.referralCreditDays && (
+                        <p>推荐奖励剩余: {premiumStatus.referralCreditDays} 天</p>
+                      )}
+                      {premiumStatus.willRenew ? (
+                        <p className="text-green-600">自动续费已开启</p>
+                      ) : (
+                        <p className="text-yellow-600">自动续费已关闭</p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* 取消订阅提示 */}
             {subscription.status === 'canceled' && (
@@ -352,7 +400,7 @@ export default function SubscriptionPage() {
         </div>
 
         {/* 升级订阅 */}
-        {subscription.plan === 'free' && (
+        {!isPremium && (
           <div className="mt-8 bg-gradient-to-r from-primary to-primary/80 rounded-lg p-6 text-white">
             <div className="text-center">
               <Crown className="h-12 w-12 mx-auto mb-4 text-white" />
@@ -369,6 +417,17 @@ export default function SubscriptionPage() {
             </div>
           </div>
         )}
+
+        {/* 刷新状态按钮 */}
+        <div className="mt-8 text-center">
+          <button
+            onClick={refetch}
+            className="text-muted hover:text-primary transition-colors"
+            disabled={premiumLoading}
+          >
+            {premiumLoading ? '刷新中...' : '刷新订阅状态'}
+          </button>
+        </div>
       </main>
     </div>
   );

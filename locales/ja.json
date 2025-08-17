@@ -758,6 +758,18 @@
     "tip": "💡 新規ユーザー限定特典",
     "savings": "7日間無料トライアルから始めて、年額プランで33%節約"
   },
+  "verifyEmail": {
+    "title": "メールアドレスを確認中...",
+    "titleSuccess": "メールアドレスの確認が完了しました！",
+    "titleError": "確認に失敗しました",
+    "loading": "読み込み中...",
+    "verifyingMessage": "リクエストを処理中です。しばらくお待ちください。",
+    "successMessage": "Dopamind アプリに戻って続行できます。",
+    "errorMessage": "確認リンクが無効か期限切れです。アプリで新しいリンクをリクエストしてください。",
+    "missingTokenMessage": "確認リンクが不完全または欠落しています。クリックしたリンクを確認してください。",
+    "openApp": "Dopamind を開く",
+    "logoAlt": "Dopamind ロゴ"
+  },
   "terms": {
     "title": "利用規約",
     "subtitle": "アプリをご利用になる前に、利用規約を必ずお読みください",

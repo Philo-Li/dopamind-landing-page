@@ -1,0 +1,878 @@
+{
+  "navigation": {
+    "home": "首頁",
+    "features": "功能特色",
+    "howItWorks": "如何使用",
+    "pricing": "價格方案",
+    "support": "幫助中心",
+    "login": "登入",
+    "signup": "立即註冊"
+  },
+  "auth": {
+    "login": "登入",
+    "register": "註冊",
+    "dashboard": "儀表板",
+    "logout": "登出"
+  },
+  "login": {
+    "title": "登入您的帳戶",
+    "or": "或",
+    "createAccount": "建立新帳戶",
+    "email": "電子信箱",
+    "password": "密碼",
+    "loginButton": "登入",
+    "loggingIn": "登入中...",
+    "backToHome": "← 返回首頁"
+  },
+  "register": {
+    "title": "建立新帳戶",
+    "or": "或",
+    "alreadyHaveAccount": "登入現有帳戶",
+    "nickname": "暱稱",
+    "email": "電子信箱",
+    "password": "密碼",
+    "confirmPassword": "確認密碼",
+    "referralCode": "邀請碼（可選）",
+    "registerButton": "建立帳戶",
+    "registering": "建立帳戶中...",
+    "backToHome": "← 返回首頁",
+    "errors": {
+      "passwordMismatch": "密碼不符合",
+      "passwordTooShort": "密碼至少需要6個字元",
+      "nicknameEmpty": "暱稱不能為空",
+      "nicknameTooLong": "暱稱不能超過20個字元"
+    }
+  },
+  "status": {
+    "title": "系統狀態",
+    "subtitle": "所有 Dopamind 服務的目前運行狀態和效能指標",
+    "allSystemsOperational": "所有系統正常運行",
+    "systemIssues": "部分系統存在問題",
+    "lastUpdated": "最後更新",
+    "metrics": {
+      "title": "效能指標",
+      "uptime": {
+        "title": "正常運行時間"
+      },
+      "responseTime": {
+        "title": "平均響應時間",
+        "unit": "毫秒"
+      },
+      "successRate": {
+        "title": "成功率"
+      }
+    }
+  },
+  "paymentSuccess": {
+    "title": "付款成功！",
+    "subtitle": "感謝您訂閱 Dopamind Premium。您的帳戶已成功升級。",
+    "confirmingPayment": "正在確認您的付款...",
+    "membershipActivated": "Premium 會員已啟用",
+    "paymentDetails": "付款詳情",
+    "paymentStatus": "付款狀態",
+    "paid": "已付款",
+    "subscriptionId": "訂閱 ID",
+    "sessionId": "會話 ID",
+    "premiumFeatures": "您現在可以存取所有 Premium 功能：",
+    "features": [
+      "AI 對話式規劃",
+      "沉浸式專注聖地",
+      "AI 智能分解",
+      "多裝置雲端同步",
+      "視覺化成長報告",
+      "一體化生活管理器",
+      "一對一 AI 教練支援"
+    ],
+    "startUsing": "開始使用 Dopamind Premium",
+    "manageSubscription": "管理訂閱",
+    "thankYou": "感謝您選擇 Dopamind Premium！",
+    "support": "如果您有任何問題或需要支援，請聯繫我們：support@dopamind.app",
+    "missingSessionId": "URL 參數中缺少會話 ID",
+    "fetchError": "取得付款會話資料時出錯"
+  },
+  "home": {
+    "hero": {
+      "badge": "專為 ADHD 使用者設計",
+      "title": "重新定義你的",
+      "titleHighlight": "專注與效率",
+      "subtitle": "透過 AI 對話和科學方法，讓任務管理變得簡單直觀。告別傳統複雜的任務工具，享受專注帶來的成就感。",
+      "downloadText": "支援 iOS 和 Android"
+    },
+    "features": {
+      "section1": {
+        "title": "AI 智能任務規劃",
+        "subtitle": "透過智能對話將複雜專案轉化為可管理的步驟",
+        "points": [
+          "與 AI 自然對話，分解令人困惑的任務",
+          "根據你的工作風格獲得個人化建議",
+          "按優先級和精力水平自動整理任務",
+          "語音輸入實現免手動任務建立"
+        ]
+      },
+      "section2": {
+        "title": "語音優先任務建立",
+        "subtitle": "透過語音命令輕鬆建立和整理任務",
+        "points": [
+          "說出你的想法，讓 AI 轉換為結構化任務",
+          "支援多種語言和自然語音模式",
+          "完美適合 ADHD 使用者的免手動操作",
+          "基於語音內容的智能分類"
+        ]
+      }
+    },
+    "howItWorks": {
+      "section1": {
+        "title": "AI 智能分解",
+        "subtitle": "透過智能分析將令人困惑的專案轉化為可管理的步驟",
+        "example": {
+          "title": "範例：規劃生日聚會",
+          "steps": [
+            "選擇場地並發送邀請",
+            "規劃菜單並訂購裝飾品",
+            "準備活動和音樂播放清單",
+            "當天布置並協調時間安排"
+          ]
+        }
+      },
+      "section2": {
+        "title": "沉浸式專注模式",
+        "subtitle": "屏蔽干擾，透過 AI 輔助專注進入深度工作狀態",
+        "stats": [
+          { "value": "25分鐘", "label": "專注時段" },
+          { "value": "85%", "label": "成功率" },
+          { "value": "3倍", "label": "生產力" }
+        ]
+      }
+    },
+    "globalView": {
+      "title": "行事曆全域檢視",
+      "subtitle": "透過智能調度和時間線管理一覽你的整個生活",
+      "badges": ["智能調度", "進度追蹤"]
+    },
+    "beyondTasks": {
+      "title": "超越任務管理",
+      "subtitle": "專為 ADHD 思維設計的綜合生活管理平台",
+      "features": [
+        {
+          "title": "習慣養成",
+          "description": "透過針對你的日常習慣的 AI 指導和智能提醒建立持久的積極習慣"
+        },
+        {
+          "title": "智能冰箱管理",
+          "description": "追蹤食物庫存，規劃膳食，透過智能建議減少浪費"
+        },
+        {
+          "title": "訂閱追蹤",
+          "description": "透過自動監控永遠不會錯過付款或忘記未使用的訂閱"
+        }
+      ]
+    },
+    "cloudSync": {
+      "title": "無縫雲端同步",
+      "subtitle": "你的資料始終可用、安全，並在所有裝置間同步",
+      "features": [
+        {
+          "title": "即時同步",
+          "description": "在所有裝置間即時同步，確保工作流程無縫銜接"
+        },
+        {
+          "title": "安全備份",
+          "description": "端到端加密確保你的個人資料保持私密和受保護"
+        },
+        {
+          "title": "跨平台存取",
+          "description": "從 iOS、Android 和網頁平台存取你的任務和資料"
+        }
+      ]
+    },
+    "finalCta": {
+      "title": "準備好改變你的專注力了嗎？",
+      "subtitle": "加入數千名已經發現 AI 輔助任務管理力量的使用者。今天就開始你的高效生產力之旅。",
+      "trial": "包含 7 天免費試用",
+      "users": "加入 10K+ 活躍使用者",
+      "termsAndPrivacy": "下載即表示你同意我們的{terms}和{privacy}",
+      "termsLink": "服務條款",
+      "privacyLink": "隱私政策",
+      "termsUrl": "dopamind.com/terms",
+      "privacyUrl": "dopamind.com/privacy",
+      "stats": [
+        { "value": "10K+", "label": "活躍使用者" },
+        { "value": "4.9★", "label": "應用程式評分" },
+        { "value": "95%", "label": "滿意度" }
+      ]
+    }
+  },
+  "hero": {
+    "badge": "專為 ADHD 使用者設計",
+    "title": "重新定義你的",
+    "titleHighlight1": "專注",
+    "titleHighlight2": "效率",
+    "subtitle": "透過 AI 對話和科學方法，讓任務管理變得簡單直觀。告別傳統複雜的任務工具，享受專注帶來的成就感。",
+    "ctaPrimary": "立即體驗",
+    "ctaSecondary": "了解功能"
+  },
+  "socialProof": [
+    { "value": "10K+", "label": "活躍使用者" },
+    { "value": "95%", "label": "使用者滿意度" },
+    { "value": "4.9", "label": "App Store 評分" }
+  ],
+  "features": {
+    "title": "一個真正懂你的 AI 夥伴",
+    "subtitle": "Dopamind 不僅僅是一個工具，它被設計成一個充滿同理心的教練，幫助你克服執行功能的挑戰，並在你最需要的時候提供支援。",
+    "list": [
+      "一個真正懂你的 AI 執行功能教練",
+      "從對話中輕鬆建立、分解和管理任務",
+      "在 AI 支援下建立改變人生的習慣",
+      "智能食物管理，減少浪費，規劃健康",
+      "沉浸式專注模式，提供情感支援"
+    ]
+  },
+  "cta": {
+    "title": "立即下載 Dopamind",
+    "subtitle": "加入成千上萬使用者的行列，開始你的高效專注之旅。"
+  },
+  "footer": {
+    "description": "專為 ADHD 使用者設計的 AI 專注夥伴",
+    "sections": {
+      "product": "產品",
+      "support": "支援",
+      "legal": "法律"
+    },
+    "links": {
+      "features": "功能特色",
+      "pricing": "價格方案",
+      "supportCenter": "幫助中心",
+      "contactUs": "聯繫我們",
+      "status": "狀態頁面",
+      "privacy": "隱私政策",
+      "terms": "服務條款",
+      "cookies": "Cookie 政策",
+      "accountDeletion": "帳戶刪除"
+    },
+    "copyright": "版權所有"
+  },
+  "support": {
+    "title": "Dopamind 支援中心",
+    "subtitle": "我們致力於為您提供最好的使用體驗。如果您遇到任何問題或需要幫助，這裡有您需要的所有答案。",
+    "contact": {
+      "email": {
+        "title": "電子信箱支援",
+        "description": "發送電子信箱至 support@dopamind.app",
+        "response": "24-48小時內回覆"
+      },
+      "feedback": {
+        "title": "應用程式內意見回饋",
+        "description": "在 App 的「我的」頁面找到「意見回饋」"
+      },
+      "guide": {
+        "title": "使用指南",
+        "description": "檢視詳細的功能使用教學"
+      }
+    },
+    "faq": {
+      "title": "常見問題解答",
+      "categories": {
+        "account": "帳戶與訂閱",
+        "features": "核心功能",
+        "privacy": "隱私與安全",
+        "technical": "技術問題"
+      }
+    },
+    "guides": {
+      "title": "深入了解 Dopamind",
+      "quickStart": {
+        "title": "🚀 快速上手指南",
+        "description": "從零開始，5分鐘內掌握 Dopamind 的核心功能"
+      },
+      "aiCoach": {
+        "title": "💡 AI 教練使用技巧",
+        "description": "如何與 AI 教練有效對話，拆解複雜任務"
+      },
+      "focus": {
+        "title": "🧘 專注模式進階設定",
+        "description": "打造你的完美「專注聖所」，提升專注效果"
+      }
+    },
+    "stillNeedHelp": {
+      "title": "仍然需要幫助？",
+      "subtitle": "如果您的問題沒有在上方得到解答，或者您有任何功能建議和意見回饋，我們非常樂意傾聽！",
+      "sendEmail": "發送電子信箱",
+      "responseTime": "我們會在 24-48 小時內回覆您的電子信箱"
+    }
+  },
+  "privacy": {
+    "title": "隱私政策",
+    "subtitle": "您的隱私對我們至關重要。本政策詳細說明我們如何收集、使用和保護您的個人資訊。",
+    "lastUpdated": "最後更新時間",
+    "sections": {
+      "introduction": {
+        "title": "引言",
+        "content": "歡迎使用 Dopamind！我們致力於為您提供一個安全、可靠的 AI 夥伴，幫助您管理任務、提升專注力。本隱私政策旨在向您說明，當您使用我們的服務時，我們如何收集、使用、保護和處理您的個人資訊。"
+      },
+      "dataCollection": {
+        "title": "我們收集的資訊",
+        "subtitle": "為了提供和改進服務，我們會收集以下類型的資訊：",
+        "directInfo": {
+          "title": "您直接提供的資訊",
+          "items": [
+            "帳戶資訊：暱稱、電子信箱地址和加密後的密碼",
+            "任務和習慣資料：您建立的任務、設定的習慣、完成記錄等",
+            "AI 對話記錄：您與 Dopamind AI 的對話歷史，用於提供個人化建議",
+            "偏好設定：應用程式設定、通知偏好、主題選擇等"
+          ]
+        },
+        "autoInfo": {
+          "title": "自動收集的資訊",
+          "items": [
+            "使用資料：應用程式使用時長、功能使用頻率等（已匿名化）",
+            "裝置資訊：裝置型號、作業系統版本、應用程式版本號",
+            "技術資料：IP 地址、裝置識別符（僅用於技術支援）"
+          ]
+        }
+      },
+      "dataUsage": {
+        "title": "我們如何使用您的資訊",
+        "items": [
+          {
+            "title": "提供和維護服務",
+            "description": "建立和管理您的帳戶，同步您的資料，並讓您能夠使用 App 的所有功能"
+          },
+          {
+            "title": "個人化您的體驗",
+            "description": "AI 利用您的任務和對話歷史提供更相關、更個人化的建議和鼓勵"
+          },
+          {
+            "title": "改進我們的產品",
+            "description": "透過分析匿名使用資料，了解功能使用情況，最佳化產品設計"
+          },
+          {
+            "title": "與您溝通",
+            "description": "發送重要服務通知、更新資訊，或在您聯繫我們時提供支援"
+          }
+        ]
+      },
+      "dataSharing": {
+        "title": "我們如何分享您的資訊",
+        "promise": "我們不會出售、租賃或以其他方式向第三方披露您的個人資訊，除以下情況外：",
+        "exceptions": [
+          "服務提供商：我們可能與可信的第三方服務提供商共享必要資訊，如雲端儲存、資料分析服務，但他們只能在我們的指示下使用這些資訊",
+          "法律要求：在法律要求或為保護我們的權利、財產或安全時，我們可能會披露資訊",
+          "業務轉讓：在合併、收購或資產出售的情況下，您的資訊可能會作為業務資產的一部分被轉讓"
+        ]
+      },
+      "dataSecurity": {
+        "title": "資料安全",
+        "subtitle": "我們採用行業標準的安全措施來保護您的個人資訊：",
+        "measures": [
+          {
+            "title": "資料加密",
+            "description": "傳輸和儲存過程中的端到端加密"
+          },
+          {
+            "title": "存取控制",
+            "description": "嚴格的員工存取權限和稽核制度"
+          },
+          {
+            "title": "安全監控",
+            "description": "24/7 安全監控和威脅偵測"
+          }
+        ]
+      },
+      "userRights": {
+        "title": "您的權利與選擇",
+        "subtitle": "您對您的資料擁有以下權利：",
+        "rights": [
+          {
+            "title": "📋 存取與更新",
+            "description": "您可以隨時在 App 的「帳戶資訊」頁面檢視和修改您的暱稱、電子信箱和頭像"
+          },
+          {
+            "title": "📤 資料匯出",
+            "description": "您可以聯繫我們，請求匯出您的個人資料副本"
+          },
+          {
+            "title": "🗑️ 帳戶刪除",
+            "description": "您可以在 App 的「帳戶資訊」頁面選擇永久刪除您的帳戶。此操作將刪除您的所有個人資料，且無法復原"
+          },
+          {
+            "title": "🔔 推播通知",
+            "description": "您可以隨時在裝置的系統設定中開啟或關閉 Dopamind 的推播通知權限"
+          }
+        ]
+      },
+      "childrenPrivacy": {
+        "title": "兒童隱私",
+        "content": "我們的服務不面向 13 歲以下的兒童。我們不會有意收集 13 歲以下兒童的個人身份資訊。如果我們發現無意中收集了此類資訊，我們將立即採取措施將其刪除。如果您是家長或監護人，並且您知道您的孩子向我們提供了個人資訊，請聯繫我們。"
+      },
+      "policyChanges": {
+        "title": "政策變更",
+        "content": "我們可能會不時更新本隱私政策。如果我們做出重大變更，我們將透過以下方式通知您：",
+        "methods": [
+          "在 App 內顯示通知",
+          "向您的註冊電子信箱發送電子信箱",
+          "在本網站上發布更新通知"
+        ]
+      },
+      "contact": {
+        "title": "聯繫我們",
+        "subtitle": "如果您對本隱私政策有任何疑問或疑慮，請隨時聯繫我們：",
+        "email": "privacy@dopamind.com",
+        "support": "support@dopamind.app",
+        "responseTime": "我們會在收到您的詢問後 48 小時內回覆。"
+      }
+    }
+  },
+  "download": {
+    "title": "下載 Android 版 Dopamind",
+    "subtitle": "在你的 Android 裝置上體驗 Dopamind 的強大功能",
+    "platforms": {
+      "ios": {
+        "title": "下載 iOS 版",
+        "description": "從 App Store 取得 Dopamind"
+      },
+      "android": {
+        "title": "下載 Android 版",
+        "description": "取得 Android 裝置的 APK 檔案"
+      }
+    },
+    "hero": {
+      "badge": "Android APK 下載",
+      "title": "隨時隨地，保持專注",
+      "description": "立即下載 Android 版 Dopamind，讓 AI 助手陪伴你的每一天。",
+      "downloadButton": "下載 APK 檔案",
+      "version": "版本",
+      "size": "檔案大小",
+      "lastUpdated": "更新時間"
+    },
+    "requirements": {
+      "title": "系統需求",
+      "items": [
+        "Android 8.0 (API 級別 26) 或更高版本",
+        "至少 100 MB 可用儲存空間",
+        "網路連線（用於同步和 AI 功能）",
+        "允許安裝未知來源應用程式"
+      ]
+    },
+    "installation": {
+      "title": "安裝步驟",
+      "warning": "⚠️ 安裝前請確保從官方管道下載 APK 檔案",
+      "steps": [
+        {
+          "number": 1,
+          "title": "下載 APK 檔案",
+          "description": "點擊上方下載按鈕，將 APK 檔案儲存到你的裝置"
+        },
+        {
+          "number": 2,
+          "title": "允許未知來源安裝",
+          "description": "前往設定 > 安全性 > 允許安裝未知應用程式，為你的瀏覽器或檔案管理器開啟權限"
+        },
+        {
+          "number": 3,
+          "title": "安裝應用程式",
+          "description": "找到下載的 APK 檔案，點擊並按照提示完成安裝"
+        },
+        {
+          "number": 4,
+          "title": "開始使用",
+          "description": "開啟應用程式，建立帳戶或登入現有帳戶，開始你的專注之旅"
+        }
+      ]
+    },
+    "security": {
+      "title": "安全保障",
+      "items": [
+        {
+          "icon": "🛡️",
+          "title": "數位簽名驗證",
+          "description": "所有 APK 檔案都經過官方數位簽名，確保檔案完整性和來源可信"
+        },
+        {
+          "icon": "🔒",
+          "title": "惡意軟體掃描",
+          "description": "每個發布版本都經過嚴格的安全掃描，確保無惡意程式碼"
+        },
+        {
+          "icon": "🔐",
+          "title": "隱私保護",
+          "description": "遵循相同的隱私政策，你的資料安全得到充分保障"
+        }
+      ]
+    },
+    "faq": {
+      "title": "常見問題",
+      "items": [
+        {
+          "question": "為什麼不在 Google Play Store 上架？",
+          "answer": "我們正在積極準備 Google Play Store 的上架流程。在此期間，你可以透過官方 APK 檔案體驗完整功能。"
+        },
+        {
+          "question": "APK 檔案安全嗎？",
+          "answer": "是的，我們的 APK 檔案經過官方簽名和嚴格的安全檢測。請確保從官方網站下載以保證安全性。"
+        },
+        {
+          "question": "如何更新應用程式？",
+          "answer": "當有新版本發布時，你可以重新造訪此頁面下載最新的 APK 檔案並安裝更新。"
+        },
+        {
+          "question": "遇到安裝問題怎麼辦？",
+          "answer": "請檢視上方的安裝步驟，確保已開啟未知來源安裝權限。如仍有問題，請聯繫我們的支援團隊。"
+        }
+      ]
+    },
+    "features": {
+      "title": "Android 版獨有特色",
+      "items": [
+        {
+          "icon": "🔄",
+          "title": "快捷操作",
+          "description": "支援 Android 快捷方式，快速新增任務和啟動專注模式"
+        },
+        {
+          "icon": "🔔",
+          "title": "智能通知",
+          "description": "與 Android 通知系統深度整合，提供更智能的提醒功能"
+        },
+        {
+          "icon": "🎨",
+          "title": "Material Design",
+          "description": "完全遵循 Material Design 設計規範，提供原生 Android 體驗"
+        }
+      ]
+    },
+    "support": {
+      "title": "需要幫助？",
+      "description": "如果你在下載或安裝過程中遇到任何問題，我們的支援團隊隨時為你服務。",
+      "contactButton": "聯繫支援",
+      "email": "support@dopamind.app"
+    }
+  },
+  "accountDeletion": {
+    "title": "Dopamind 帳戶與資料刪除指南",
+    "subtitle": "了解如何永久刪除您的 Dopamind 帳戶和所有相關資料",
+    "appInfo": {
+      "title": "應用程式資訊",
+      "appName": "應用程式名稱",
+      "developer": "開發者名稱",
+      "contact": "聯繫電子信箱"
+    },
+    "steps": {
+      "title": "帳戶刪除步驟",
+      "items": [
+        {
+          "number": 1,
+          "title": "開啟 Dopamind 應用程式並登入",
+          "description": "確保您已經登入到需要刪除的帳戶"
+        },
+        {
+          "number": 2,
+          "title": "前往「我的」頁面",
+          "description": "在應用程式底部導覽列中點擊「我的」(Profile) 頁面"
+        },
+        {
+          "number": 3,
+          "title": "點擊「帳戶資訊」",
+          "description": "在個人頁面中找到並點擊「帳戶資訊」(Account Info)"
+        },
+        {
+          "number": 4,
+          "title": "點擊「永久刪除帳戶」按鈕",
+          "description": "在帳戶資訊頁面底部，點擊紅色的「永久刪除帳戶」(Permanently Delete Account) 按鈕"
+        },
+        {
+          "number": 5,
+          "title": "輸入密碼進行最終確認",
+          "description": "按照螢幕提示，輸入您的帳戶密碼進行最終確認刪除操作"
+        }
+      ]
+    },
+    "dataInfo": {
+      "title": "重要資料說明",
+      "warning": "請注意：刪除帳戶是一個不可逆轉的操作！",
+      "description": "一旦確認刪除，將會永久刪除您的所有個人資訊和資料，且無法復原。",
+      "deletedData": {
+        "title": "以下資料將被永久刪除：",
+        "items": [
+          "所有個人資訊（暱稱、電子信箱、頭像等）",
+          "所有任務記錄和完成歷史",
+          "所有習慣資料和追蹤記錄",
+          "所有專注會話記錄",
+          "與 AI 教練的聊天歷史",
+          "應用程式偏好設定和自訂配置",
+          "訂閱和付費記錄",
+          "其他所有與您帳戶關聯的資料"
+        ]
+      }
+    },
+    "confirmation": {
+      "title": "確認要求",
+      "description": "為確保帳戶安全，刪除操作需要滿足以下條件：",
+      "requirements": [
+        "輸入目前帳戶的登入密碼",
+        "確認您理解此操作的不可逆性",
+        "同意放棄所有相關資料的復原權利"
+      ]
+    },
+    "support": {
+      "title": "需要幫助？",
+      "description": "如果您在刪除過程中遇到任何問題，或有任何疑問，請聯繫我們的支援團隊：",
+      "subject": "電子信箱主旨",
+      "subjectText": "帳戶刪除相關問題",
+      "responseTime": "我們會在 24-48 小時內回覆您的電子信箱"
+    },
+    "alternatives": {
+      "title": "刪除前的其他選擇",
+      "description": "在永久刪除帳戶之前，您也可以考慮以下替代方案：",
+      "options": [
+        {
+          "title": "暫停使用",
+          "description": "您可以刪除應用程式但保留帳戶，隨時可以重新安裝並復原資料"
+        },
+        {
+          "title": "資料匯出",
+          "description": "聯繫支援團隊匯出您的個人資料備份"
+        },
+        {
+          "title": "取消訂閱",
+          "description": "如果只是想停止付費，可以單獨取消訂閱而不刪除帳戶"
+        },
+        {
+          "title": "聯繫支援",
+          "description": "如果遇到問題，我們的團隊很樂意為您提供幫助"
+        }
+      ]
+    }
+  },
+  "pricing": {
+    "title": "選擇您的套餐",
+    "subtitle": "透過AI驅動的任務管理釋放您的潛力",
+    "plans": {
+      "trial": {
+        "name": "7天 Premium 體驗",
+        "price": "NT$0",
+        "period": "7天",
+        "buttonText": "開始7天免費體驗",
+        "features": [
+          "AI 對話式規劃 (像聊天一樣安排一切)",
+          "沉浸式專注聖所 (屏蔽干擾，進入心流狀態)",
+          "AI 智能拆解 (將複雜專案分解為小步驟)",
+          "多裝置雲端同步 (所有資料，永不遺失)",
+          "視覺化成長報告 (用熱力圖見證進步)",
+          "全能生活管家 (習慣、冰箱、訂閱一站管理)",
+          "一對一 AI 教練支援 (獲得個人化策略)"
+        ]
+      },
+      "monthly": {
+        "name": "月度 Premium",
+        "price": "NT$290",
+        "period": "每月",
+        "buttonText": "立即訂閱月度計劃",
+        "features": [
+          "AI 對話式規劃 (像聊天一樣安排一切)",
+          "沉浸式專注聖所 (屏蔽干擾，進入心流狀態)",
+          "AI 智能拆解 (將複雜專案分解為小步驟)",
+          "多裝置雲端同步 (所有資料，永不遺失)",
+          "視覺化成長報告 (用熱力圖見證進步)",
+          "全能生活管家 (習慣、冰箱、訂閱一站管理)",
+          "一對一 AI 教練支援 (獲得個人化策略)",
+          "新功能搶先體驗權 (第一時間試用黑科技)"
+        ]
+      },
+      "yearly": {
+        "name": "年度 Premium",
+        "price": "NT$2,890",
+        "period": "每年",
+        "buttonText": "立即訂閱年度計劃",
+        "features": [
+          "AI 對話式規劃 (像聊天一樣安排一切)",
+          "沉浸式專注聖所 (屏蔽干擾，進入心流狀態)",
+          "AI 智能拆解 (將複雜專案分解為小步驟)",
+          "多裝置雲端同步 (所有資料，永不遺失)",
+          "視覺化成長報告 (用熱力圖見證進步)",
+          "全能生活管家 (習慣、冰箱、訂閱一站管理)",
+          "一對一 AI 教練支援 (獲得個人化策略)",
+          "新功能搶先體驗權 (第一時間試用黑科技)",
+          "省下 2 個月費用 (相當於 88 折)",
+          "專屬會員社群 (與高效人士交流心得)"
+        ]
+      }
+    },
+    "badges": {
+      "newUser": "💎 新使用者註冊即享 7 天免費試用",
+      "trialEnding": "⏰ 試用即將結束，立即升級享受持續服務",
+      "premium": "✨ Premium 會員 - 享受全部功能",
+      "upgrade": "🔒 升級解鎖所有進階功能",
+      "popular": "最受歡迎",
+      "trial": "免費試用",
+      "current": "目前方案",
+      "upgrade_label": "升級"
+    },
+    "status": {
+      "trial_active": "您的 Premium 試用還剩 {days} 天",
+      "trial_subtitle": "立即訂閱，確保在試用結束後無縫銜接您的所有進階功能。繼續享受 AI 智能建議、無限任務管理等強大功能。",
+      "premium_active": "您已是 Premium 會員",
+      "premium_subtitle": "感謝您的支援！您正在享受 Dopamind 的全部進階功能。如需更改訂閱計劃，請聯繫客服。",
+      "trial_ended": "您的免費試用已結束",
+      "trial_ended_subtitle": "升級到 Premium，繼續使用強大的 AI 功能來掌控您的生活。重新體驗智能任務管理、專注模式等進階功能。"
+    },
+    "buttons": {
+      "trial_active": "您正在7天試用中",
+      "monthly_member": "您已經是月度會員",
+      "yearly_member": "您已經是年度會員",
+      "upgrade_to_monthly": "立即升級到月度會員",
+      "upgrade_to_yearly": "立即升級到年度會員",
+      "current_plan": "目前方案"
+    },
+    "descriptions": {
+      "trial": "無需信用卡，立即體驗完整 Premium 功能",
+      "upgrade": "升級到 {plan} • 隨時取消 • 安全付款",
+      "yearly_special": "年付專享特權 • 隨時取消 • 省下 NT$590 • 專屬教練",
+      "basic": "包含核心功能 • 隨時取消 • 安全付款",
+      "current": "您正在使用此方案",
+      "yearly_discount": "省下 2 個月費用 (相當於 88 折)"
+    }
+  },
+  "paymentCancelled": {
+    "title": "付款已取消",
+    "subtitle": "別擔心，您的付款已安全取消。",
+    "incompletePayment": "付款未完成",
+    "whatHappened": "發生了什麼？",
+    "explanation": [
+      "您選擇在完成前取消了付款流程",
+      "您的帳戶未產生任何費用",
+      "您目前的帳戶狀態保持不變"
+    ],
+    "whyPremium": "為什麼選擇 Premium？",
+    "premiumFeatures": [
+      "✨ AI 對話式規劃（像聊天一樣整理一切）",
+      "🧘 沉浸式專注聖域（屏蔽干擾，進入心流狀態）",
+      "🤖 AI 智能拆解（將複雜專案拆解成小步驟）",
+      "☁️ 多裝置雲端同步（所有資料，永久保存）",
+      "📊 視覺化成長報告（熱力圖看見進步）",
+      "🏠 一體化生活管理器（習慣、冰箱、訂閱一處管理）",
+      "🎯 一對一 AI 教練支援（獲得個人化策略）"
+    ],
+    "retryPayment": "重新嘗試付款",
+    "backToHome": "返回首頁",
+    "contactSupport": "聯繫客服",
+    "tip": "💡 新使用者專享優惠",
+    "savings": "從 7 天免費試用開始，年付方案省下 33%"
+  },
+  "verifyEmail": {
+    "title": "正在驗證您的信箱...",
+    "titleSuccess": "信箱驗證成功！",
+    "titleError": "驗證失敗",
+    "loading": "載入中...",
+    "verifyingMessage": "請稍候，我們正在處理您的請求。",
+    "successMessage": "您現在可以返回 Dopamind 應用程式繼續使用。",
+    "errorMessage": "驗證連結無效或已過期。請在應用程式內重新申請新的驗證連結。",
+    "missingTokenMessage": "驗證連結不完整或缺失。請檢查您點擊的連結。",
+    "openApp": "開啟 Dopamind",
+    "logoAlt": "Dopamind 標誌"
+  },
+  "terms": {
+    "title": "服務條款",
+    "subtitle": "使用我們的應用程式前，請仔細閱讀這些服務條款",
+    "lastUpdated": "最後更新",
+    "sections": {
+      "acceptance": {
+        "title": "條款接受",
+        "content": "透過下載、安裝或使用 Dopamind 應用程式，您同意受本服務條款的約束。如果您不同意這些條款，請不要使用我們的服務。"
+      },
+      "serviceDescription": {
+        "title": "服務描述",
+        "content": "Dopamind 是一款專為 ADHD 和執行功能障礙使用者設計的 AI 驅動任務管理和專注力增強應用程式。我們的服務提供：",
+        "features": {
+          "title": "核心功能",
+          "items": [
+            "AI 對話式任務規劃和管理",
+            "沉浸式專注模式與干擾屏蔽",
+            "習慣追蹤和生活管理工具",
+            "智能食物和訂閱管理",
+            "個人化 AI 指導和支援",
+            "跨裝置同步和雲端儲存"
+          ]
+        }
+      },
+      "userResponsibilities": {
+        "title": "使用者責任",
+        "content": "作為 Dopamind 的使用者，您同意：",
+        "items": [
+          {
+            "title": "帳戶安全",
+            "description": "維護您帳戶憑據的機密性，如發生未經授權的存取，請立即通知我們"
+          },
+          {
+            "title": "準確資訊",
+            "description": "在建立帳戶和使用我們的服務時提供準確和最新的資訊"
+          },
+          {
+            "title": "適當使用",
+            "description": "僅將服務用於其預期目的，並遵守所有適用法律"
+          },
+          {
+            "title": "內容責任",
+            "description": "對您使用我們的服務建立、分享或儲存的所有內容承擔責任"
+          }
+        ]
+      },
+      "prohibitedUses": {
+        "title": "禁止使用",
+        "content": "您不得將 Dopamind 用於任何非法目的或本條款禁止的任何目的。禁止使用包括但不限於：",
+        "items": [
+          "違反任何地方、州、國家或國際法律或法規",
+          "傳輸或儲存惡意程式碼、病毒或有害資料",
+          "試圖未經授權存取我們的系統或其他使用者的帳戶",
+          "使用服務騷擾、虐待或傷害他人",
+          "干擾或破壞服務或伺服器",
+          "建立多個帳戶以規避服務限制",
+          "未經許可使用自動化系統存取服務"
+        ]
+      },
+      "intellectualProperty": {
+        "title": "智慧財產權",
+        "content": "Dopamind 應用程式，包括其原創內容、功能和功能性，由我們擁有，受國際著作權、商標、專利、商業秘密和其他智慧財產權法保護。您保留使用我們服務建立的內容的所有權，但授予我們使用、儲存和處理此內容以向您提供服務的許可。"
+      },
+      "paidServices": {
+        "title": "付費服務和訂閱",
+        "content": "Dopamind 提供免費和進階訂閱服務。對於付費服務：",
+        "items": [
+          {
+            "title": "計費和付款",
+            "description": "訂閱費用以循環方式提前計費。所有付款均透過第三方付款處理商安全處理。"
+          },
+          {
+            "title": "取消",
+            "description": "您可以隨時取消訂閱。取消將在目前計費週期結束時生效。"
+          },
+          {
+            "title": "退款",
+            "description": "通常不提供部分訂閱期間的退款，除非法律要求或根據我們的獨自裁量權。"
+          },
+          {
+            "title": "價格變更",
+            "description": "我們保留在至少提前 30 天通知現有訂閱者的情況下更改訂閱價格的權利。"
+          }
+        ]
+      },
+      "disclaimer": {
+        "title": "免責聲明",
+        "content": "Dopamind 按\"現狀\"和\"可用\"狀態提供，不提供任何明示或暗示的保證。雖然我們努力提供可靠和有用的服務，但我們不保證服務將不會中斷、無錯誤或完全安全。AI 功能旨在協助任務管理和專注，但不應被視為專業醫療或治療建議的替代品。"
+      },
+      "serviceChanges": {
+        "title": "服務變更和終止",
+        "content": "我們保留隨時修改、暫停或停止我們服務的任何部分的權利，無論是否提前通知。如果您違反這些條款，我們也可能終止或暫停您的帳戶。終止後，您使用服務的權利將立即停止，儘管這些條款的某些條款將在終止後繼續有效。"
+      },
+      "governingLaw": {
+        "title": "適用法律和管轄權",
+        "content": "本服務條款受適用法律管轄和解釋。因這些條款或您使用服務而產生的任何爭議將透過適當的法律管道解決。"
+      },
+      "contact": {
+        "title": "聯繫資訊",
+        "content": "如果您對這些服務條款有任何疑問，請聯繫我們：",
+        "support": "support@dopamind.app",
+        "responseTime": "我們將在48小時內回覆您的詢問。"
+      }
+    }
+  }
+}
