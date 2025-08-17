@@ -88,14 +88,17 @@ export async function generateMetadata({ params }: {
       site: '@dopamind_app',
     },
     // 其他元标签
-    viewport: {
-      width: 'device-width',
-      initialScale: 1,
-      maximumScale: 5,
-    },
+    metadataBase: new URL('https://www.dopamind.app'),
+  };
+}
+
+export function generateViewport() {
+  return {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
     themeColor: '#F97316',
     colorScheme: 'light',
-    metadataBase: new URL('https://www.dopamind.app'),
   };
 }
 
@@ -129,10 +132,10 @@ export default async function LocaleLayout({
         <link rel="manifest" href="/manifest.json" />
         
         {/* hreflang tags for multilingual SEO */}
-        <link rel="alternate" hreflang="en" href="https://www.dopamind.app/en" />
-        <link rel="alternate" hreflang="zh" href="https://www.dopamind.app/zh" />
-        <link rel="alternate" hreflang="ja" href="https://www.dopamind.app/ja" />
-        <link rel="alternate" hreflang="x-default" href="https://www.dopamind.app/en" />
+        <link rel="alternate" hrefLang="en" href="https://www.dopamind.app/en" />
+        <link rel="alternate" hrefLang="zh" href="https://www.dopamind.app/zh" />
+        <link rel="alternate" hrefLang="ja" href="https://www.dopamind.app/ja" />
+        <link rel="alternate" hrefLang="x-default" href="https://www.dopamind.app/en" />
         
         {/* canonical tag */}
         <link rel="canonical" href={`https://www.dopamind.app/${locale}`} />
@@ -178,7 +181,7 @@ export default async function LocaleLayout({
                 "ADHD, focus, mind mapping, productivity, AI assistant, task management",
               "inLanguage": locale === 'zh' ? 'zh-CN' : locale === 'ja' ? 'ja-JP' : 'en-US',
               "datePublished": "2024-01-01",
-              "dateModified": new Date().toISOString().split('T')[0]
+              "dateModified": "2025-08-17"
             })
           }}
         />

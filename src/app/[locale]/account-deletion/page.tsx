@@ -33,7 +33,7 @@ export default async function AccountDeletionPage({ params }: AccountDeletionPag
             <a href={`/${locale}`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.home}</a>
             <a href={`/${locale}#features`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.features}</a>
             <a href={`/${locale}#how-it-works`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.howItWorks}</a>
-            <a href={`/${locale}#pricing`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.pricing}</a>
+            <a href={`/${locale}/pricing`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.pricing}</a>
             <a href={`/${locale}/support`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.support}</a>
           </nav>
           <div className="flex items-center gap-4">
@@ -218,7 +218,7 @@ export default async function AccountDeletionPage({ params }: AccountDeletionPag
               <ul className="space-y-2 text-sm text-muted">
                 <li><a href={`/${locale}/support`} className="hover:text-primary">{t.footer.links.supportCenter}</a></li>
                 <li><a href="mailto:support@dopamind.app" className="hover:text-primary">{t.footer.links.contactUs}</a></li>
-                <li><a href="#" className="hover:text-primary">{t.footer.links.status}</a></li>
+                <li><a href={`/${locale}/status`} className="hover:text-primary">{t.footer.links.status}</a></li>
               </ul>
             </div>
             <div>

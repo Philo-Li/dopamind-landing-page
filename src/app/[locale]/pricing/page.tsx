@@ -31,7 +31,7 @@ export default async function PricingPage({ params }: PricingPageProps) {
           <nav className="hidden items-center gap-6 md:flex">
             <Link href={`/${locale}#features`} className="text-sm font-medium text-muted transition-colors hover:text-primary">功能特性</Link>
             <Link href={`/${locale}#how-it-works`} className="text-sm font-medium text-muted transition-colors hover:text-primary">如何使用</Link>
-            <Link href={`/${locale}#pricing`} className="text-sm font-medium text-primary">定价方案</Link>
+            <Link href={`/${locale}/pricing`} className="text-sm font-medium text-primary">定价方案</Link>
             <Link href={`/${locale}/support`} className="text-sm font-medium text-muted transition-colors hover:text-primary">帮助中心</Link>
           </nav>
           <div className="flex items-center gap-4">

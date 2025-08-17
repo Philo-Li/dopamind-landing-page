@@ -49,7 +49,7 @@ export default async function TermsPage({ params }: TermsPageProps) {
           <nav className="hidden items-center gap-6 md:flex">
             <a href={`/${locale}`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.home}</a>
             <a href={`/${locale}#features`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.features}</a>
-            <a href={`/${locale}#pricing`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.pricing}</a>
+            <a href={`/${locale}/pricing`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.pricing}</a>
             <a href={`/${locale}/support`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.support}</a>
           </nav>
           <div className="flex items-center gap-4">
@@ -74,7 +74,7 @@ export default async function TermsPage({ params }: TermsPageProps) {
               {t.terms.subtitle}
             </p>
             <p className="text-sm text-muted mt-4">
-              {t.terms.lastUpdated}：{new Date().getFullYear()}年{new Date().getMonth() + 1}月{new Date().getDate()}日
+              {t.terms.lastUpdated}: {new Date().toLocaleDateString(locale === 'zh' ? 'zh-CN' : locale === 'ja' ? 'ja-JP' : 'en-US')}
             </p>
           </div>
         </section>
@@ -127,7 +127,7 @@ export default async function TermsPage({ params }: TermsPageProps) {
                   <h2 className="text-2xl font-bold text-foreground">3. {t.terms.sections.userResponsibilities.title}</h2>
                 </div>
                 <div className="space-y-4 text-muted leading-relaxed">
-                  <p>{t.terms.sections.userResponsibilities.subtitle}</p>
+                  <p>{t.terms.sections.userResponsibilities.content}</p>
                   <div className="space-y-4">
                     {t.terms.sections.userResponsibilities.items.map((item: {title: string, description: string}, index: number) => (
                       <div key={index} className="border border-gray-200 rounded-lg p-4">
@@ -149,8 +149,8 @@ export default async function TermsPage({ params }: TermsPageProps) {
                 </div>
                 <div className="space-y-4 text-muted leading-relaxed">
                   <div className="bg-red-50 border-l-4 border-red-400 p-4 rounded-r-lg">
-                    <p className="font-semibold text-red-800 mb-2">重要提醒</p>
-                    <p className="text-red-700">{t.terms.sections.prohibitedUses.warning}</p>
+                    <p className="font-semibold text-red-800 mb-2">{locale === 'zh' ? '重要提醒' : locale === 'ja' ? '重要な注意' : 'Important Notice'}</p>
+                    <p className="text-red-700">{t.terms.sections.prohibitedUses.content}</p>
                   </div>
                   <ul className="space-y-2 list-disc list-inside">
                     {t.terms.sections.prohibitedUses.items.map((item: string, index: number) => (
@@ -171,8 +171,8 @@ export default async function TermsPage({ params }: TermsPageProps) {
                 <div className="space-y-4 text-muted leading-relaxed">
                   <p>{t.terms.sections.intellectualProperty.content}</p>
                   <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                    <h4 className="font-semibold text-blue-800 mb-2">用户内容权利</h4>
-                    <p className="text-blue-700">{t.terms.sections.intellectualProperty.userContent}</p>
+                    <h4 className="font-semibold text-blue-800 mb-2">{locale === 'zh' ? '用户内容权利' : locale === 'ja' ? 'ユーザーコンテンツの権利' : 'User Content Rights'}</h4>
+                    <p className="text-blue-700">{t.terms.sections.intellectualProperty.content}</p>
                   </div>
                 </div>
               </div>
@@ -206,11 +206,6 @@ export default async function TermsPage({ params }: TermsPageProps) {
                   </div>
                   <div className="space-y-4 text-muted leading-relaxed">
                     <p>{t.terms.sections.disclaimer.content}</p>
-                    <ul className="space-y-2 list-disc list-inside">
-                      {t.terms.sections.disclaimer.items.map((item: string, index: number) => (
-                        <li key={index}>{item}</li>
-                      ))}
-                    </ul>
                   </div>
                 </div>
               </div>
@@ -226,12 +221,6 @@ export default async function TermsPage({ params }: TermsPageProps) {
                 <div className="space-y-4 text-muted leading-relaxed">
                   <p>{t.terms.sections.serviceChanges.content}</p>
                   <div className="space-y-2">
-                    <h4 className="font-semibold text-foreground">终止条件：</h4>
-                    <ul className="space-y-2 list-disc list-inside">
-                      {t.terms.sections.serviceChanges.terminationConditions.map((condition: string, index: number) => (
-                        <li key={index}>{condition}</li>
-                      ))}
-                    </ul>
                   </div>
                 </div>
               </div>
@@ -253,7 +242,6 @@ export default async function TermsPage({ params }: TermsPageProps) {
                   <h2 className="text-2xl font-bold text-foreground">10. {t.terms.sections.contact.title}</h2>
                 </div>
                 <div className="bg-gray-900 text-white rounded-lg p-6">
-                  <p className="mb-4">{t.terms.sections.contact.subtitle}</p>
                   <div className="space-y-2">
                     <p><strong>Email: </strong> {t.terms.sections.contact.support}</p>
                   </div>
@@ -292,7 +280,7 @@ export default async function TermsPage({ params }: TermsPageProps) {
               <ul className="space-y-2 text-sm text-muted">
                 <li><a href={`/${locale}`} className="hover:text-primary">{t.navigation.home}</a></li>
                 <li><a href={`/${locale}#features`} className="hover:text-primary">{t.footer.links.features}</a></li>
-                <li><a href={`/${locale}#pricing`} className="hover:text-primary">{t.footer.links.pricing}</a></li>
+                <li><a href={`/${locale}/pricing`} className="hover:text-primary">{t.footer.links.pricing}</a></li>
               </ul>
             </div>
             <div>
@@ -300,7 +288,7 @@ export default async function TermsPage({ params }: TermsPageProps) {
               <ul className="space-y-2 text-sm text-muted">
                 <li><a href={`/${locale}/support`} className="hover:text-primary">{t.footer.links.supportCenter}</a></li>
                 <li><a href="mailto:support@dopamind.com" className="hover:text-primary">{t.footer.links.contactUs}</a></li>
-                <li><a href="#" className="hover:text-primary">{t.footer.links.status}</a></li>
+                <li><a href={`/${locale}/status`} className="hover:text-primary">{t.footer.links.status}</a></li>
               </ul>
             </div>
             <div>

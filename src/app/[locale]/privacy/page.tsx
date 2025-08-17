@@ -32,7 +32,7 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
           <nav className="hidden items-center gap-6 md:flex">
             <a href={`/${locale}`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.home}</a>
             <a href={`/${locale}#features`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.features}</a>
-            <a href={`/${locale}#pricing`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.pricing}</a>
+            <a href={`/${locale}/pricing`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.pricing}</a>
             <a href={`/${locale}/support`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.support}</a>
           </nav>
           <div className="flex items-center gap-4">
@@ -57,7 +57,7 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
               {t.privacy.subtitle}
             </p>
             <p className="text-sm text-muted mt-4">
-              {t.privacy.lastUpdated}：{new Date().getFullYear()}年{new Date().getMonth() + 1}月{new Date().getDate()}日
+              {t.privacy.lastUpdated}: {new Date().toLocaleDateString(locale === 'zh' ? 'zh-CN' : locale === 'ja' ? 'ja-JP' : 'en-US')}
             </p>
           </div>
         </section>
@@ -141,7 +141,7 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
                 </div>
                 <div className="space-y-4 text-muted leading-relaxed">
                   <div className="bg-green-50 border-l-4 border-green-400 p-4 rounded-r-lg">
-                    <p className="font-semibold text-green-800 mb-2">我们的承诺</p>
+                    <p className="font-semibold text-green-800 mb-2">{locale === 'zh' ? '我们的承诺' : locale === 'ja' ? '私たちの約束' : 'Our Commitment'}</p>
                     <p className="text-green-700">{t.privacy.sections.dataSharing.promise}</p>
                   </div>
                   <ul className="space-y-3 list-disc list-inside">
@@ -269,7 +269,7 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
               <ul className="space-y-2 text-sm text-muted">
                 <li><a href={`/${locale}`} className="hover:text-primary">{t.navigation.home}</a></li>
                 <li><a href={`/${locale}#features`} className="hover:text-primary">{t.footer.links.features}</a></li>
-                <li><a href={`/${locale}#pricing`} className="hover:text-primary">{t.footer.links.pricing}</a></li>
+                <li><a href={`/${locale}/pricing`} className="hover:text-primary">{t.footer.links.pricing}</a></li>
               </ul>
             </div>
             <div>
@@ -277,7 +277,7 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
               <ul className="space-y-2 text-sm text-muted">
                 <li><a href={`/${locale}/support`} className="hover:text-primary">{t.footer.links.supportCenter}</a></li>
                 <li><a href="mailto:support@dopamind.com" className="hover:text-primary">{t.footer.links.contactUs}</a></li>
-                <li><a href="#" className="hover:text-primary">{t.footer.links.status}</a></li>
+                <li><a href={`/${locale}/status`} className="hover:text-primary">{t.footer.links.status}</a></li>
               </ul>
             </div>
             <div>

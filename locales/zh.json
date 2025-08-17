@@ -2,10 +2,205 @@
   "navigation": {
     "home": "首页",
     "features": "功能特性",
+    "howItWorks": "如何使用",
     "pricing": "价格方案",
     "support": "帮助中心",
     "login": "登录",
     "signup": "立即注册"
+  },
+  "auth": {
+    "login": "登录",
+    "register": "注册",
+    "dashboard": "仪表板",
+    "logout": "退出"
+  },
+  "login": {
+    "title": "登录您的账户",
+    "or": "或",
+    "createAccount": "创建新账户",
+    "email": "邮箱地址",
+    "password": "密码",
+    "loginButton": "登录",
+    "loggingIn": "登录中...",
+    "backToHome": "← 返回首页"
+  },
+  "register": {
+    "title": "创建新账户",
+    "or": "或",
+    "alreadyHaveAccount": "登录现有账户",
+    "nickname": "昵称",
+    "email": "邮箱地址",
+    "password": "密码",
+    "confirmPassword": "确认密码",
+    "referralCode": "邀请码（可选）",
+    "registerButton": "创建账户",
+    "registering": "创建账户中...",
+    "backToHome": "← 返回首页",
+    "errors": {
+      "passwordMismatch": "密码不匹配",
+      "passwordTooShort": "密码至少需要6个字符",
+      "nicknameEmpty": "昵称不能为空",
+      "nicknameTooLong": "昵称不能超过20个字符"
+    }
+  },
+  "status": {
+    "title": "系统状态",
+    "subtitle": "所有 Dopamind 服务的当前运行状态和性能指标",
+    "allSystemsOperational": "所有系统正常运行",
+    "systemIssues": "部分系统存在问题",
+    "lastUpdated": "最后更新",
+    "metrics": {
+      "title": "性能指标",
+      "uptime": {
+        "title": "正常运行时间"
+      },
+      "responseTime": {
+        "title": "平均响应时间",
+        "unit": "毫秒"
+      },
+      "successRate": {
+        "title": "成功率"
+      }
+    }
+  },
+  "paymentSuccess": {
+    "title": "支付成功！",
+    "subtitle": "感谢您订阅 Dopamind Premium。您的账户已成功升级。",
+    "confirmingPayment": "正在确认您的支付...",
+    "membershipActivated": "Premium 会员已激活",
+    "paymentDetails": "支付详情",
+    "paymentStatus": "支付状态",
+    "paid": "已支付",
+    "subscriptionId": "订阅 ID",
+    "sessionId": "会话 ID",
+    "premiumFeatures": "您现在可以访问所有 Premium 功能：",
+    "features": [
+      "AI 对话式规划",
+      "沉浸式专注圣地",
+      "AI 智能分解",
+      "多设备云端同步",
+      "可视化成长报告",
+      "一体化生活管理器",
+      "一对一 AI 教练支持"
+    ],
+    "startUsing": "开始使用 Dopamind Premium",
+    "manageSubscription": "管理订阅",
+    "thankYou": "感谢您选择 Dopamind Premium！",
+    "support": "如果您有任何问题或需要支持，请联系我们：support@dopamind.app",
+    "missingSessionId": "URL 参数中缺少会话 ID",
+    "fetchError": "获取支付会话数据时出错"
+  },
+  "home": {
+    "hero": {
+      "badge": "专为 ADHD 用户设计",
+      "title": "重新定义你的",
+      "titleHighlight": "专注与效率",
+      "subtitle": "通过 AI 对话和科学方法，让任务管理变得简单直观。告别传统复杂的任务工具，享受专注带来的成就感。",
+      "downloadText": "支持 iOS 和 Android"
+    },
+    "features": {
+      "section1": {
+        "title": "AI 智能任务规划",
+        "subtitle": "通过智能对话将复杂项目转化为可管理的步骤",
+        "points": [
+          "与 AI 自然对话，分解令人困惑的任务",
+          "根据你的工作风格获得个性化建议",
+          "按优先级和精力水平自动整理任务",
+          "语音输入实现免手动任务创建"
+        ]
+      },
+      "section2": {
+        "title": "语音优先任务创建",
+        "subtitle": "通过语音命令轻松创建和整理任务",
+        "points": [
+          "说出你的想法，让 AI 转换为结构化任务",
+          "支持多种语言和自然语音模式",
+          "完美适合 ADHD 用户的免手动操作",
+          "基于语音内容的智能分类"
+        ]
+      }
+    },
+    "howItWorks": {
+      "section1": {
+        "title": "AI 智能分解",
+        "subtitle": "通过智能分析将令人困惑的项目转化为可管理的步骤",
+        "example": {
+          "title": "示例：规划生日聚会",
+          "steps": [
+            "选择场地并发送邀请",
+            "规划菜单并订购装饰品",
+            "准备活动和音乐播放列表",
+            "当天布置并协调时间安排"
+          ]
+        }
+      },
+      "section2": {
+        "title": "沉浸式专注模式",
+        "subtitle": "屏蔽干扰，通过 AI 辅助专注进入深度工作状态",
+        "stats": [
+          { "value": "25分钟", "label": "专注时段" },
+          { "value": "85%", "label": "成功率" },
+          { "value": "3倍", "label": "生产力" }
+        ]
+      }
+    },
+    "globalView": {
+      "title": "日历全局视图",
+      "subtitle": "通过智能调度和时间线管理一览你的整个生活",
+      "badges": ["智能调度", "进度跟踪"]
+    },
+    "beyondTasks": {
+      "title": "超越任务管理",
+      "subtitle": "专为 ADHD 思维设计的综合生活管理平台",
+      "features": [
+        {
+          "title": "习惯养成",
+          "description": "通过针对你的日常习惯的 AI 指导和智能提醒建立持久的积极习惯"
+        },
+        {
+          "title": "智能冰箱管理",
+          "description": "追踪食物库存，规划膳食，通过智能建议减少浪费"
+        },
+        {
+          "title": "订阅跟踪",
+          "description": "通过自动监控永远不会错过付款或忘记未使用的订阅"
+        }
+      ]
+    },
+    "cloudSync": {
+      "title": "无缝云端同步",
+      "subtitle": "你的数据始终可用、安全，并在所有设备间同步",
+      "features": [
+        {
+          "title": "实时同步",
+          "description": "在所有设备间即时同步，确保工作流程无缝衔接"
+        },
+        {
+          "title": "安全备份",
+          "description": "端到端加密确保你的个人数据保持私密和受保护"
+        },
+        {
+          "title": "跨平台访问",
+          "description": "从 iOS、Android 和网页平台访问你的任务和数据"
+        }
+      ]
+    },
+    "finalCta": {
+      "title": "准备好改变你的专注力了吗？",
+      "subtitle": "加入数千名已经发现 AI 辅助任务管理力量的用户。今天就开始你的高效生产力之旅。",
+      "trial": "包含 7 天免费试用",
+      "users": "加入 10K+ 活跃用户",
+      "termsAndPrivacy": "下载即表示你同意我们的{terms}和{privacy}",
+      "termsLink": "服务条款",
+      "privacyLink": "隐私政策",
+      "termsUrl": "dopamind.com/terms",
+      "privacyUrl": "dopamind.com/privacy",
+      "stats": [
+        { "value": "10K+", "label": "活跃用户" },
+        { "value": "4.9★", "label": "应用评分" },
+        { "value": "95%", "label": "满意度" }
+      ]
+    }
   },
   "hero": {
     "badge": "专为 ADHD 用户设计",
@@ -62,7 +257,7 @@
     "contact": {
       "email": {
         "title": "邮件支持",
-        "description": "发送邮件至 support@dopamind.com",
+        "description": "发送邮件至 support@dopamind.app",
         "response": "24-48小时内回复"
       },
       "feedback": {
@@ -222,7 +417,7 @@
         "title": "联系我们",
         "subtitle": "如果您对本隐私政策有任何疑问或疑虑，请随时联系我们：",
         "email": "privacy@dopamind.com",
-        "support": "support@dopamind.com",
+        "support": "support@dopamind.app",
         "responseTime": "我们会在收到您的询问后 48 小时内回复。"
       }
     }
@@ -230,6 +425,16 @@
   "download": {
     "title": "下载 Android 版 Dopamind",
     "subtitle": "在你的 Android 设备上体验 Dopamind 的强大功能",
+    "platforms": {
+      "ios": {
+        "title": "下载 iOS 版",
+        "description": "从 App Store 获取 Dopamind"
+      },
+      "android": {
+        "title": "下载 Android 版",
+        "description": "获取 Android 设备的 APK 文件"
+      }
+    },
     "hero": {
       "badge": "Android APK 下载",
       "title": "随时随地，保持专注",
@@ -339,7 +544,7 @@
       "title": "需要帮助？",
       "description": "如果你在下载或安装过程中遇到任何问题，我们的支持团队随时为你服务。",
       "contactButton": "联系支持",
-      "email": "support@dopamind.com"
+      "email": "support@dopamind.app"
     }
   },
   "accountDeletion": {
@@ -436,6 +641,226 @@
           "description": "如果遇到问题，我们的团队很乐意为您提供帮助"
         }
       ]
+    }
+  },
+  "pricing": {
+    "title": "选择您的套餐",
+    "subtitle": "通过AI驱动的任务管理释放您的潜力",
+    "plans": {
+      "trial": {
+        "name": "7天 Premium 体验",
+        "price": "¥0",
+        "period": "7天",
+        "buttonText": "开始7天免费体验",
+        "features": [
+          "AI 对话式规划 (像聊天一样安排一切)",
+          "沉浸式专注圣所 (屏蔽干扰，进入心流状态)",
+          "AI 智能拆解 (将复杂项目分解为小步骤)",
+          "多设备云端同步 (所有数据，永不丢失)",
+          "可视化成长报告 (用热力图见证进步)",
+          "全能生活管家 (习惯、冰箱、订阅一站管理)",
+          "一对一 AI 教练支持 (获得个性化策略)"
+        ]
+      },
+      "monthly": {
+        "name": "月度 Premium",
+        "price": "¥79",
+        "period": "每月",
+        "buttonText": "立即订阅月度计划",
+        "features": [
+          "AI 对话式规划 (像聊天一样安排一切)",
+          "沉浸式专注圣所 (屏蔽干扰，进入心流状态)",
+          "AI 智能拆解 (将复杂项目分解为小步骤)",
+          "多设备云端同步 (所有数据，永不丢失)",
+          "可视化成长报告 (用热力图见证进步)",
+          "全能生活管家 (习惯、冰箱、订阅一站管理)",
+          "一对一 AI 教练支持 (获得个性化策略)",
+          "新功能抢先体验权 (第一时间试用黑科技)"
+        ]
+      },
+      "yearly": {
+        "name": "年度 Premium",
+        "price": "¥788",
+        "period": "每年",
+        "buttonText": "立即订阅年度计划",
+        "features": [
+          "AI 对话式规划 (像聊天一样安排一切)",
+          "沉浸式专注圣所 (屏蔽干扰，进入心流状态)",
+          "AI 智能拆解 (将复杂项目分解为小步骤)",
+          "多设备云端同步 (所有数据，永不丢失)",
+          "可视化成长报告 (用热力图见证进步)",
+          "全能生活管家 (习惯、冰箱、订阅一站管理)",
+          "一对一 AI 教练支持 (获得个性化策略)",
+          "新功能抢先体验权 (第一时间试用黑科技)",
+          "省下 2 个月费用 (相当于 88 折)",
+          "专属会员社群 (与高效人士交流心得)"
+        ]
+      }
+    },
+    "badges": {
+      "newUser": "💎 新用户注册即享 7 天免费试用",
+      "trialEnding": "⏰ 试用即将结束，立即升级享受持续服务",
+      "premium": "✨ Premium 会员 - 享受全部功能",
+      "upgrade": "🔒 升级解锁所有高级功能",
+      "popular": "最受欢迎",
+      "trial": "免费试用",
+      "current": "当前方案",
+      "upgrade_label": "升级"
+    },
+    "status": {
+      "trial_active": "您的 Premium 试用还剩 {days} 天",
+      "trial_subtitle": "立即订阅，确保在试用结束后无缝衔接您的所有高级功能。继续享受 AI 智能建议、无限任务管理等强大功能。",
+      "premium_active": "您已是 Premium 会员",
+      "premium_subtitle": "感谢您的支持！您正在享受 Dopamind 的全部高级功能。如需更改订阅计划，请联系客服。",
+      "trial_ended": "您的免费试用已结束",
+      "trial_ended_subtitle": "升级到 Premium，继续使用强大的 AI 功能来掌控您的生活。重新体验智能任务管理、专注模式等高级功能。"
+    },
+    "buttons": {
+      "trial_active": "您正在7天试用中",
+      "monthly_member": "您已经是月度会员",
+      "yearly_member": "您已经是年度会员",
+      "upgrade_to_monthly": "立即升级到月度会员",
+      "upgrade_to_yearly": "立即升级到年度会员",
+      "current_plan": "当前方案"
+    },
+    "descriptions": {
+      "trial": "无需信用卡，立即体验完整 Premium 功能",
+      "upgrade": "升级到 {plan} • 随时取消 • 安全支付",
+      "yearly_special": "年付专享特权 • 随时取消 • 省下 158 元 • 专属教练",
+      "basic": "包含核心功能 • 随时取消 • 安全支付",
+      "current": "您正在使用此方案",
+      "yearly_discount": "省下 2 个月费用 (相当于 88 折)"
+    }
+  },
+  "paymentCancelled": {
+    "title": "支付已取消",
+    "subtitle": "别担心，您的支付已安全取消。",
+    "incompletePayment": "支付未完成",
+    "whatHappened": "发生了什么？",
+    "explanation": [
+      "您选择在完成前取消了支付流程",
+      "您的账户未产生任何费用",
+      "您当前的账户状态保持不变"
+    ],
+    "whyPremium": "为什么选择 Premium？",
+    "premiumFeatures": [
+      "✨ AI 对话式规划（像聊天一样整理一切）",
+      "🧘 沉浸式专注圣域（屏蔽干扰，进入心流状态）",
+      "🤖 AI 智能拆解（将复杂项目拆解成小步骤）",
+      "☁️ 多设备云端同步（所有数据，永久保存）",
+      "📊 可视化成长报告（热力图看见进步）",
+      "🏠 一体化生活管理器（习惯、冰箱、订阅一处管理）",
+      "🎯 一对一 AI 教练支持（获得个性化策略）"
+    ],
+    "retryPayment": "重新尝试支付",
+    "backToHome": "返回首页",
+    "contactSupport": "联系客服",
+    "tip": "💡 新用户专享优惠",
+    "savings": "从 7 天免费试用开始，年付方案省下 33%"
+  },
+  "terms": {
+    "title": "服务条款",
+    "subtitle": "使用我们的应用前，请仔细阅读这些服务条款",
+    "lastUpdated": "最后更新",
+    "sections": {
+      "acceptance": {
+        "title": "条款接受",
+        "content": "通过下载、安装或使用 Dopamind 应用程序，您同意受本服务条款的约束。如果您不同意这些条款，请不要使用我们的服务。"
+      },
+      "serviceDescription": {
+        "title": "服务描述",
+        "content": "Dopamind 是一款专为 ADHD 和执行功能障碍用户设计的 AI 驱动任务管理和专注力增强应用程序。我们的服务提供：",
+        "features": {
+          "title": "核心功能",
+          "items": [
+            "AI 对话式任务规划和管理",
+            "沉浸式专注模式与干扰屏蔽",
+            "习惯追踪和生活管理工具",
+            "智能食物和订阅管理",
+            "个性化 AI 指导和支持",
+            "跨设备同步和云端存储"
+          ]
+        }
+      },
+      "userResponsibilities": {
+        "title": "用户责任",
+        "content": "作为 Dopamind 的用户，您同意：",
+        "items": [
+          {
+            "title": "账户安全",
+            "description": "维护您账户凭据的机密性，如发生未经授权的访问，请立即通知我们"
+          },
+          {
+            "title": "准确信息",
+            "description": "在创建账户和使用我们的服务时提供准确和最新的信息"
+          },
+          {
+            "title": "适当使用",
+            "description": "仅将服务用于其预期目的，并遵守所有适用法律"
+          },
+          {
+            "title": "内容责任",
+            "description": "对您使用我们的服务创建、分享或存储的所有内容承担责任"
+          }
+        ]
+      },
+      "prohibitedUses": {
+        "title": "禁止使用",
+        "content": "您不得将 Dopamind 用于任何非法目的或本条款禁止的任何目的。禁止使用包括但不限于：",
+        "items": [
+          "违反任何地方、州、国家或国际法律或法规",
+          "传输或存储恶意代码、病毒或有害数据",
+          "试图未经授权访问我们的系统或其他用户的账户",
+          "使用服务骚扰、虐待或伤害他人",
+          "干扰或破坏服务或服务器",
+          "创建多个账户以规避服务限制",
+          "未经许可使用自动化系统访问服务"
+        ]
+      },
+      "intellectualProperty": {
+        "title": "知识产权",
+        "content": "Dopamind 应用程序，包括其原创内容、功能和功能性，由我们拥有，受国际版权、商标、专利、商业秘密和其他知识产权法保护。您保留使用我们服务创建的内容的所有权，但授予我们使用、存储和处理此内容以向您提供服务的许可。"
+      },
+      "paidServices": {
+        "title": "付费服务和订阅",
+        "content": "Dopamind 提供免费和高级订阅服务。对于付费服务：",
+        "items": [
+          {
+            "title": "计费和付款",
+            "description": "订阅费用以循环方式提前计费。所有付款均通过第三方支付处理商安全处理。"
+          },
+          {
+            "title": "取消",
+            "description": "您可以随时取消订阅。取消将在当前计费周期结束时生效。"
+          },
+          {
+            "title": "退款",
+            "description": "通常不提供部分订阅期间的退款，除非法律要求或根据我们的独自裁量权。"
+          },
+          {
+            "title": "价格变更",
+            "description": "我们保留在至少提前 30 天通知现有订阅者的情况下更改订阅价格的权利。"
+          }
+        ]
+      },
+      "disclaimer": {
+        "title": "免责声明",
+        "content": "Dopamind 按\"现状\"和\"可用\"状态提供，不提供任何明示或暗示的保证。虽然我们努力提供可靠和有用的服务，但我们不保证服务将不会中断、无错误或完全安全。AI 功能旨在协助任务管理和专注，但不应被视为专业医疗或治疗建议的替代品。"
+      },
+      "serviceChanges": {
+        "title": "服务变更和终止",
+        "content": "我们保留随时修改、暂停或停止我们服务的任何部分的权利，无论是否提前通知。如果您违反这些条款，我们也可能终止或暂停您的账户。终止后，您使用服务的权利将立即停止，尽管这些条款的某些条款将在终止后继续有效。"
+      },
+      "governingLaw": {
+        "title": "适用法律和管辖权",
+        "content": "本服务条款受适用法律管辖和解释。因这些条款或您使用服务而产生的任何争议将通过适当的法律渠道解决。"
+      },
+      "contact": {
+        "title": "联系信息",
+        "content": "如果您对这些服务条款有任何疑问，请联系我们：",
+        "support": "support@dopamind.app",
+        "responseTime": "我们将在48小时内回复您的询问。"
+      }
     }
   }
 }

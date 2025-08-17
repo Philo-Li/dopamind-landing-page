@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { usePremium } from "../../hooks/usePremium";
 import { 
   User, 
   CreditCard, 
@@ -31,7 +32,6 @@ interface DashboardStats {
   tasksCompleted: number;
   focusMinutes: number;
   streakDays: number;
-  subscriptionStatus: 'free' | 'premium';
 }
 
 export default function DashboardPage() {
@@ -39,11 +39,11 @@ export default function DashboardPage() {
   const [stats, setStats] = useState<DashboardStats>({
     tasksCompleted: 0,
     focusMinutes: 0,
-    streakDays: 0,
-    subscriptionStatus: 'free'
+    streakDays: 0
   });
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const { premiumStatus, isPremium, loading: premiumLoading } = usePremium();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -62,8 +62,7 @@ export default function DashboardPage() {
       setStats({
         tasksCompleted: 42,
         focusMinutes: 360,
-        streakDays: 7,
-        subscriptionStatus: 'premium'
+        streakDays: 7
       });
       
     } catch (error) {
@@ -115,7 +114,7 @@ export default function DashboardPage() {
             </div>
             
             <div className="flex items-center space-x-4">
-              {stats.subscriptionStatus === 'premium' && (
+              {isPremium && (
                 <div className="flex items-center space-x-1 bg-gradient-to-r from-primary to-primary/80 text-white px-3 py-1 rounded-full text-sm">
                   <Crown className="h-4 w-4" />
                   <span>Premium</span>
@@ -326,7 +325,7 @@ export default function DashboardPage() {
             </div>
 
             {/* 订阅状态提示 */}
-            {stats.subscriptionStatus === 'free' && (
+            {!isPremium && !premiumLoading && (
               <div className="bg-gradient-to-r from-primary to-primary/80 rounded-lg p-6 text-white">
                 <div className="flex items-center justify-between">
                   <div>
@@ -341,6 +340,45 @@ export default function DashboardPage() {
                       <Crown className="h-4 w-4" />
                       <span>立即升级</span>
                     </Link>
+                  </div>
+                  <div className="hidden sm:block">
+                    <Crown className="h-16 w-16 text-white/20" />
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Premium 用户状态显示 */}
+            {isPremium && premiumStatus && (
+              <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-lg p-6 text-white">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-lg font-bold mb-2 flex items-center">
+                      <Crown className="h-5 w-5 mr-2" />
+                      Premium 会员
+                    </h3>
+                    <div className="space-y-1">
+                      {premiumStatus.type === 'paid' && (
+                        <p className="text-white/90">
+                          到期时间: {premiumStatus.expiresAt ? new Date(premiumStatus.expiresAt).toLocaleDateString('zh-CN') : '永不过期'}
+                        </p>
+                      )}
+                      {premiumStatus.type === 'trial' && (
+                        <p className="text-white/90">
+                          试用期剩余: {premiumStatus.expiresAt ? Math.ceil((new Date(premiumStatus.expiresAt).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)) : 0} 天
+                        </p>
+                      )}
+                      {premiumStatus.type === 'referral_credit' && (
+                        <p className="text-white/90">
+                          推荐奖励剩余: {premiumStatus.referralCreditDays || 0} 天
+                        </p>
+                      )}
+                      {premiumStatus.willRenew && (
+                        <p className="text-white/90 text-sm">
+                          自动续费已开启
+                        </p>
+                      )}
+                    </div>
                   </div>
                   <div className="hidden sm:block">
                     <Crown className="h-16 w-16 text-white/20" />

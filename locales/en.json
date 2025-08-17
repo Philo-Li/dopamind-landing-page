@@ -2,10 +2,205 @@
   "navigation": {
     "home": "Home",
     "features": "Features",
+    "howItWorks": "How It Works",
     "pricing": "Pricing",
     "support": "Support",
     "login": "Login",
     "signup": "Sign Up"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Sign Up",
+    "dashboard": "Dashboard",
+    "logout": "Logout"
+  },
+  "login": {
+    "title": "Sign in to your account",
+    "or": "Or",
+    "createAccount": "create a new account",
+    "email": "Email address",
+    "password": "Password",
+    "loginButton": "Sign in",
+    "loggingIn": "Signing in...",
+    "backToHome": "← Back to Home"
+  },
+  "register": {
+    "title": "Create a new account",
+    "or": "Or",
+    "alreadyHaveAccount": "sign in to existing account",
+    "nickname": "Nickname",
+    "email": "Email address",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "referralCode": "Referral Code (Optional)",
+    "registerButton": "Create Account",
+    "registering": "Creating Account...",
+    "backToHome": "← Back to Home",
+    "errors": {
+      "passwordMismatch": "Passwords do not match",
+      "passwordTooShort": "Password must be at least 6 characters",
+      "nicknameEmpty": "Nickname cannot be empty",
+      "nicknameTooLong": "Nickname cannot exceed 20 characters"
+    }
+  },
+  "status": {
+    "title": "System Status",
+    "subtitle": "Current operational status and performance metrics for all Dopamind services",
+    "allSystemsOperational": "All Systems Operational",
+    "systemIssues": "Some Systems Experiencing Issues",
+    "lastUpdated": "Last Updated",
+    "metrics": {
+      "title": "Performance Metrics",
+      "uptime": {
+        "title": "Uptime"
+      },
+      "responseTime": {
+        "title": "Avg Response Time",
+        "unit": "ms"
+      },
+      "successRate": {
+        "title": "Success Rate"
+      }
+    }
+  },
+  "paymentSuccess": {
+    "title": "Payment Successful!",
+    "subtitle": "Thank you for subscribing to Dopamind Premium. Your account has been upgraded successfully.",
+    "confirmingPayment": "Confirming your payment...",
+    "membershipActivated": "Premium membership activated",
+    "paymentDetails": "Payment Details",
+    "paymentStatus": "Payment Status",
+    "paid": "Paid",
+    "subscriptionId": "Subscription ID",
+    "sessionId": "Session ID",
+    "premiumFeatures": "You now have access to all Premium features:",
+    "features": [
+      "AI Conversational Planning",
+      "Immersive Focus Sanctuary",
+      "AI Smart Breakdown",
+      "Multi-device Cloud Sync",
+      "Visual Growth Reports",
+      "All-in-One Life Manager",
+      "One-on-One AI Coach Support"
+    ],
+    "startUsing": "Start Using Dopamind Premium",
+    "manageSubscription": "Manage Subscription",
+    "thankYou": "Thank you for choosing Dopamind Premium!",
+    "support": "If you have any questions or need support, please contact us at support@dopamind.app",
+    "missingSessionId": "Missing session ID in URL parameters",
+    "fetchError": "Error fetching payment session data"
+  },
+  "home": {
+    "hero": {
+      "badge": "Designed for ADHD Users",
+      "title": "Redefine Your",
+      "titleHighlight": "Focus & Efficiency",
+      "subtitle": "Through AI conversations and scientific methods, make task management simple and intuitive. Say goodbye to traditional complex task tools and enjoy the sense of accomplishment that focus brings.",
+      "downloadText": "Available on iOS and Android"
+    },
+    "features": {
+      "section1": {
+        "title": "AI-Powered Task Planning",
+        "subtitle": "Transform complex projects into manageable steps with intelligent conversation",
+        "points": [
+          "Chat naturally with AI to break down overwhelming tasks",
+          "Get personalized suggestions based on your working style",
+          "Automatically organize tasks by priority and energy level",
+          "Voice input for hands-free task creation"
+        ]
+      },
+      "section2": {
+        "title": "Voice-First Task Creation",
+        "subtitle": "Create and organize tasks effortlessly with voice commands",
+        "points": [
+          "Speak your thoughts and let AI convert them to structured tasks",
+          "Support for multiple languages and natural speech patterns",
+          "Hands-free operation perfect for ADHD users",
+          "Smart categorization based on voice content"
+        ]
+      }
+    },
+    "howItWorks": {
+      "section1": {
+        "title": "AI Smart Breakdown",
+        "subtitle": "Transform overwhelming projects into manageable steps with intelligent analysis",
+        "example": {
+          "title": "Example: Plan a birthday party",
+          "steps": [
+            "Choose venue and send invitations",
+            "Plan menu and order decorations",
+            "Prepare activities and music playlist",
+            "Set up on the day and coordinate timing"
+          ]
+        }
+      },
+      "section2": {
+        "title": "Immersive Focus Mode",
+        "subtitle": "Block distractions and enter deep work state with AI-powered focus assistance",
+        "stats": [
+          { "value": "25min", "label": "Focus Sessions" },
+          { "value": "85%", "label": "Success Rate" },
+          { "value": "3x", "label": "Productivity" }
+        ]
+      }
+    },
+    "globalView": {
+      "title": "Calendar Global View",
+      "subtitle": "Visualize your entire life at a glance with intelligent scheduling and timeline management",
+      "badges": ["Smart Scheduling", "Progress Tracking"]
+    },
+    "beyondTasks": {
+      "title": "Beyond Task Management",
+      "subtitle": "A comprehensive life management platform designed for the ADHD mind",
+      "features": [
+        {
+          "title": "Habit Formation",
+          "description": "Build lasting positive habits with AI coaching and smart reminders tailored to your routine"
+        },
+        {
+          "title": "Smart Fridge Manager",
+          "description": "Track food inventory, plan meals, and reduce waste with intelligent suggestions"
+        },
+        {
+          "title": "Subscription Tracker",
+          "description": "Never miss a payment or forget about unused subscriptions with automatic monitoring"
+        }
+      ]
+    },
+    "cloudSync": {
+      "title": "Seamless Cloud Synchronization",
+      "subtitle": "Your data is always available, secure, and synchronized across all your devices",
+      "features": [
+        {
+          "title": "Real-time Sync",
+          "description": "Instant synchronization across all your devices for seamless workflow"
+        },
+        {
+          "title": "Secure Backup",
+          "description": "End-to-end encryption ensures your personal data remains private and protected"
+        },
+        {
+          "title": "Cross-platform Access",
+          "description": "Access your tasks and data from iOS, Android, and web platforms"
+        }
+      ]
+    },
+    "finalCta": {
+      "title": "Ready to Transform Your Focus?",
+      "subtitle": "Join thousands of users who have already discovered the power of AI-assisted task management. Start your journey to enhanced productivity today.",
+      "trial": "7-day free trial included",
+      "users": "Join 10K+ active users",
+      "termsAndPrivacy": "By downloading, you agree to our {terms} and {privacy}",
+      "termsLink": "Terms of Service",
+      "privacyLink": "Privacy Policy",
+      "termsUrl": "dopamind.com/terms",
+      "privacyUrl": "dopamind.com/privacy",
+      "stats": [
+        { "value": "10K+", "label": "Active Users" },
+        { "value": "4.9★", "label": "App Rating" },
+        { "value": "95%", "label": "Satisfaction" }
+      ]
+    }
   },
   "hero": {
     "badge": "Designed for ADHD Users",
@@ -62,7 +257,7 @@
     "contact": {
       "email": {
         "title": "Email Support",
-        "description": "Send email to support@dopamind.com",
+        "description": "Send email to support@dopamind.app",
         "response": "Reply within 24-48 hours"
       },
       "feedback": {
@@ -222,7 +417,7 @@
         "title": "Contact Us",
         "subtitle": "If you have any questions or concerns about this Privacy Policy, please feel free to contact us:",
         "email": "privacy@dopamind.com",
-        "support": "support@dopamind.com",
+        "support": "support@dopamind.app",
         "responseTime": "We will respond to your inquiry within 48 hours."
       }
     }
@@ -230,6 +425,16 @@
   "download": {
     "title": "Download Dopamind for Android",
     "subtitle": "Experience Dopamind's powerful features on your Android device",
+    "platforms": {
+      "ios": {
+        "title": "Download for iOS",
+        "description": "Get Dopamind from the App Store"
+      },
+      "android": {
+        "title": "Download for Android",
+        "description": "Get the APK file for Android devices"
+      }
+    },
     "hero": {
       "badge": "Android APK Download",
       "title": "Stay Focused, Anywhere",
@@ -339,7 +544,7 @@
       "title": "Need Help?",
       "description": "If you encounter any issues during download or installation, our support team is here to help.",
       "contactButton": "Contact Support",
-      "email": "support@dopamind.com"
+      "email": "support@dopamind.app"
     }
   },
   "accountDeletion": {
@@ -436,6 +641,226 @@
           "description": "If you encounter issues, our team is happy to help you"
         }
       ]
+    }
+  },
+  "pricing": {
+    "title": "Choose Your Plan",
+    "subtitle": "Unlock your potential with AI-powered task management",
+    "plans": {
+      "trial": {
+        "name": "7-Day Premium Trial",
+        "price": "$0",
+        "period": "7 days",
+        "buttonText": "Start 7-Day Free Trial",
+        "features": [
+          "AI Conversational Planning (Organize everything like chatting)",
+          "Immersive Focus Sanctuary (Block distractions, enter flow state)",
+          "AI Smart Breakdown (Break complex projects into small steps)",
+          "Multi-device Cloud Sync (All data, never lost)",
+          "Visual Growth Reports (Witness progress with heatmaps)",
+          "All-in-One Life Manager (Habits, fridge, subscriptions in one place)",
+          "One-on-One AI Coach Support (Get personalized strategies)"
+        ]
+      },
+      "monthly": {
+        "name": "Monthly Premium",
+        "price": "$9.99",
+        "period": "per month",
+        "buttonText": "Subscribe to Monthly Plan",
+        "features": [
+          "AI Conversational Planning (Organize everything like chatting)",
+          "Immersive Focus Sanctuary (Block distractions, enter flow state)",
+          "AI Smart Breakdown (Break complex projects into small steps)",
+          "Multi-device Cloud Sync (All data, never lost)",
+          "Visual Growth Reports (Witness progress with heatmaps)",
+          "All-in-One Life Manager (Habits, fridge, subscriptions in one place)",
+          "One-on-One AI Coach Support (Get personalized strategies)",
+          "Early Access to New Features (First to try cutting-edge tech)"
+        ]
+      },
+      "yearly": {
+        "name": "Annual Premium",
+        "price": "$79.99",
+        "period": "per year",
+        "buttonText": "Subscribe to Annual Plan",
+        "features": [
+          "AI Conversational Planning (Organize everything like chatting)",
+          "Immersive Focus Sanctuary (Block distractions, enter flow state)",
+          "AI Smart Breakdown (Break complex projects into small steps)",
+          "Multi-device Cloud Sync (All data, never lost)",
+          "Visual Growth Reports (Witness progress with heatmaps)",
+          "All-in-One Life Manager (Habits, fridge, subscriptions in one place)",
+          "One-on-One AI Coach Support (Get personalized strategies)",
+          "Early Access to New Features (First to try cutting-edge tech)",
+          "Save 2 Months' Cost (Equivalent to 33% off)",
+          "Exclusive Member Community (Connect with high-achievers)"
+        ]
+      }
+    },
+    "badges": {
+      "newUser": "💎 New users get 7 days free trial upon registration",
+      "trialEnding": "⏰ Trial ending soon, upgrade now for continuous service",
+      "premium": "✨ Premium Member - Enjoy all features",
+      "upgrade": "🔒 Upgrade to unlock all premium features",
+      "popular": "Most Popular",
+      "trial": "Free Trial",
+      "current": "Current Plan",
+      "upgrade_label": "Upgrade"
+    },
+    "status": {
+      "trial_active": "Your Premium trial has {days} days left",
+      "trial_subtitle": "Subscribe now to ensure seamless continuation of all your premium features after trial ends. Continue enjoying AI smart suggestions, unlimited task management and other powerful features.",
+      "premium_active": "You are a Premium Member",
+      "premium_subtitle": "Thank you for your support! You're enjoying all of Dopamind's premium features. To change subscription plans, please contact customer service.",
+      "trial_ended": "Your free trial has ended",
+      "trial_ended_subtitle": "Upgrade to Premium to continue using powerful AI features to control your life. Re-experience intelligent task management, focus mode and other premium features."
+    },
+    "buttons": {
+      "trial_active": "You're in 7-day trial",
+      "monthly_member": "You're already a monthly member",
+      "yearly_member": "You're already an annual member",
+      "upgrade_to_monthly": "Upgrade to Monthly",
+      "upgrade_to_yearly": "Upgrade to Annual",
+      "current_plan": "Current Plan"
+    },
+    "descriptions": {
+      "trial": "No credit card required, experience complete Premium features instantly",
+      "upgrade": "Upgrade to {plan} • Cancel anytime • Secure payment",
+      "yearly_special": "Annual exclusive benefits • Cancel anytime • Save $40 • Dedicated coach",
+      "basic": "Includes core features • Cancel anytime • Secure payment",
+      "current": "You are using this plan",
+      "yearly_discount": "Save 2 Months' Cost (Equivalent to 33% off)"
+    }
+  },
+  "paymentCancelled": {
+    "title": "Payment Cancelled",
+    "subtitle": "Don't worry, your payment has been safely cancelled.",
+    "incompletePayment": "Payment Incomplete",
+    "whatHappened": "What Happened?",
+    "explanation": [
+      "You chose to cancel the payment process before completion",
+      "No charges have been made to your account",
+      "Your current account status remains unchanged"
+    ],
+    "whyPremium": "Why Choose Premium?",
+    "premiumFeatures": [
+      "✨ AI conversational planning (organize everything like chatting)",
+      "🧘 Immersive Focus Sanctuary (block distractions, enter flow state)",
+      "🤖 AI smart breakdown (break complex projects into small steps)",
+      "☁️ Multi-device cloud sync (all data, permanently saved)",
+      "📊 Visual growth reports (see progress with heatmaps)",
+      "🏠 All-in-one life manager (manage habits, fridge, subscriptions in one place)",
+      "🎯 One-on-one AI coach support (get personalized strategies)"
+    ],
+    "retryPayment": "Try Payment Again",
+    "backToHome": "Back to Home",
+    "contactSupport": "Contact Support",
+    "tip": "💡 Special Offer for New Users",
+    "savings": "Start with a 7-day free trial and save 33% with annual subscription"
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "subtitle": "Please read these terms of service carefully before using our application",
+    "lastUpdated": "Last Updated",
+    "sections": {
+      "acceptance": {
+        "title": "Acceptance of Terms",
+        "content": "By downloading, installing, or using the Dopamind application, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our service."
+      },
+      "serviceDescription": {
+        "title": "Service Description",
+        "content": "Dopamind is an AI-powered task management and focus enhancement application designed specifically for users with ADHD and executive function challenges. Our service provides:",
+        "features": {
+          "title": "Core Features",
+          "items": [
+            "AI conversational task planning and management",
+            "Immersive focus mode with distraction blocking",
+            "Habit tracking and life management tools",
+            "Smart food and subscription management",
+            "Personalized AI coaching and support",
+            "Cross-device synchronization and cloud storage"
+          ]
+        }
+      },
+      "userResponsibilities": {
+        "title": "User Responsibilities",
+        "content": "As a user of Dopamind, you agree to:",
+        "items": [
+          {
+            "title": "Account Security",
+            "description": "Maintain the confidentiality of your account credentials and notify us immediately of any unauthorized access"
+          },
+          {
+            "title": "Accurate Information",
+            "description": "Provide accurate and up-to-date information when creating your account and using our services"
+          },
+          {
+            "title": "Appropriate Use",
+            "description": "Use the service only for its intended purposes and in compliance with all applicable laws"
+          },
+          {
+            "title": "Content Responsibility",
+            "description": "Take responsibility for all content you create, share, or store using our service"
+          }
+        ]
+      },
+      "prohibitedUses": {
+        "title": "Prohibited Uses",
+        "content": "You may not use Dopamind for any unlawful purpose or any purpose prohibited under this clause. Prohibited uses include but are not limited to:",
+        "items": [
+          "Violating any local, state, national, or international law or regulation",
+          "Transmitting or storing malicious code, viruses, or harmful data",
+          "Attempting to gain unauthorized access to our systems or other users' accounts",
+          "Using the service to harass, abuse, or harm others",
+          "Interfering with or disrupting the service or servers",
+          "Creating multiple accounts to circumvent service limitations",
+          "Using automated systems to access the service without permission"
+        ]
+      },
+      "intellectualProperty": {
+        "title": "Intellectual Property Rights",
+        "content": "The Dopamind application, including its original content, features, and functionality, is owned by us and is protected by international copyright, trademark, patent, trade secret, and other intellectual property laws. You retain ownership of the content you create using our service, but grant us a license to use, store, and process this content to provide our services to you."
+      },
+      "paidServices": {
+        "title": "Paid Services and Subscriptions",
+        "content": "Dopamind offers both free and premium subscription services. For paid services:",
+        "items": [
+          {
+            "title": "Billing and Payments",
+            "description": "Subscription fees are billed in advance on a recurring basis. All payments are processed securely through third-party payment processors."
+          },
+          {
+            "title": "Cancellation",
+            "description": "You may cancel your subscription at any time. Cancellation will take effect at the end of your current billing period."
+          },
+          {
+            "title": "Refunds",
+            "description": "Refunds are generally not provided for partial subscription periods, except where required by law or at our sole discretion."
+          },
+          {
+            "title": "Price Changes",
+            "description": "We reserve the right to change subscription prices with at least 30 days' notice to existing subscribers."
+          }
+        ]
+      },
+      "disclaimer": {
+        "title": "Disclaimer of Warranties",
+        "content": "Dopamind is provided 'as is' and 'as available' without any warranties of any kind, either express or implied. While we strive to provide a reliable and helpful service, we do not guarantee that the service will be uninterrupted, error-free, or completely secure. The AI features are designed to assist with task management and focus, but should not be considered a substitute for professional medical or therapeutic advice."
+      },
+      "serviceChanges": {
+        "title": "Service Changes and Termination",
+        "content": "We reserve the right to modify, suspend, or discontinue any part of our service at any time with or without notice. We may also terminate or suspend your account if you violate these terms. Upon termination, your right to use the service will cease immediately, though certain provisions of these terms will survive termination."
+      },
+      "governingLaw": {
+        "title": "Governing Law and Jurisdiction",
+        "content": "These Terms of Service are governed by and construed in accordance with applicable laws. Any disputes arising from these terms or your use of the service will be resolved through appropriate legal channels."
+      },
+      "contact": {
+        "title": "Contact Information",
+        "content": "If you have any questions about these Terms of Service, please contact us at:",
+        "support": "support@dopamind.app",
+        "responseTime": "We will respond to your inquiry within 48 hours."
+      }
     }
   }
 }

@@ -17,8 +17,10 @@ const nextConfig: NextConfig = {
   // PWA支持准备
   experimental: {
     // optimizeCss: true, // CSS优化
-    serverComponentsExternalPackages: [],
   },
+  
+  // 外部包配置
+  serverExternalPackages: [],
 
   // 压缩和优化
   poweredByHeader: false, // 移除 X-Powered-By 头

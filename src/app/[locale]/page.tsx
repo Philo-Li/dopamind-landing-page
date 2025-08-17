@@ -3,7 +3,6 @@ import { CheckCircle, Calendar, Brain, Clock, TrendingUp, Cloud, RefreshCw, Shie
 import { getTranslation } from '../../lib/i18n';
 import LanguageSwitcher from '../../../components/LanguageSwitcher';
 import AuthButton from '../../../components/AuthButton';
-import PricingSection from '../../components/PricingSection';
 import AppStoreButton from '../../components/AppStoreButton';
 import AndroidDownloadLink from '../../components/AndroidDownloadLink';
 
@@ -91,7 +90,7 @@ export default async function HomePage({ params }: HomePageProps) {
           <nav className="hidden items-center gap-6 md:flex">
             <a href={`/${locale}#features`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.features}</a>
             <a href={`/${locale}#how-it-works`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.howItWorks}</a>
-            <a href={`/${locale}#pricing`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.pricing}</a>
+            <a href={`/${locale}/pricing`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.pricing}</a>
             <a href={`/${locale}/download`} className="text-sm font-medium text-muted transition-colors hover:text-primary">Download</a>
             <a href={`/${locale}/support`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.support}</a>
           </nav>
@@ -475,8 +474,6 @@ export default async function HomePage({ params }: HomePageProps) {
           </div>
         </section>
 
-        {/* 7. 定价方案 Section */}
-        <PricingSection locale={locale} />
 
         {/* 8. 最终 CTA Section */}
         <section className="w-full py-20 md:py-32 bg-gradient-to-br from-primary/10 to-orange-100 relative overflow-hidden">
@@ -566,7 +563,7 @@ export default async function HomePage({ params }: HomePageProps) {
               <ul className="space-y-2 text-sm text-muted">
                 <li><a href={`/${locale}/support`} className="hover:text-primary">{t.footer.links.supportCenter}</a></li>
                 <li><a href="mailto:support@dopamind.com" className="hover:text-primary">{t.footer.links.contactUs}</a></li>
-                <li><a href="#" className="hover:text-primary">{t.footer.links.status}</a></li>
+                <li><a href={`/${locale}/status`} className="hover:text-primary">{t.footer.links.status}</a></li>
               </ul>
             </div>
             <div>
