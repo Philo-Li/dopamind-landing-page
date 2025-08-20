@@ -540,6 +540,33 @@
         }
       ]
     },
+    "changelog": {
+      "title": "📝 What's New",
+      "description": "Discover the latest features and improvements in every Dopamind release",
+      "v1_5_15": {
+        "version": "v1.5.15 (August 18, 2025)",
+        "title": "🔄 Latest Update",
+        "features": {
+          "traditional_chinese": "• Traditional Chinese support! We've added full support for Traditional Chinese",
+          "timezone_fixes": "• Timezone fixes: Task creation now fully supports timezone awareness, ensuring accurate due dates for all global users",
+          "finish_early": "• Early focus completion: You can now finish focus sessions early while still saving progress",
+          "email_verification": "• Email verification: We've added email verification to enhance account security",
+          "polished_experience": "• Experience improvements: We've fixed numerous small bugs and improved overall app stability and localization coverage"
+        }
+      },
+      "v1_5_13": {
+        "version": "v1.5.13 (August 10, 2025)",
+        "title": "🎉 Official Release",
+        "features": {
+          "ai_companion": "• AI companion designed for ADHD and busy minds",
+          "voice_text_capture": "• Voice and text capture for fleeting thoughts and tasks",
+          "task_breakdown": "• AI-powered task breakdown to beat procrastination",
+          "focus_mode": "• Immersive focus mode with continuous AI encouragement",
+          "life_management": "• Subscription tracking and smart fridge management",
+          "progress_visualization": "• Visual heatmaps and progress tracking for motivation"
+        }
+      }
+    },
     "support": {
       "title": "Need Help?",
       "description": "If you encounter any issues during download or installation, our support team is here to help.",

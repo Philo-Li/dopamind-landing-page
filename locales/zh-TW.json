@@ -540,6 +540,33 @@
         }
       ]
     },
+    "changelog": {
+      "title": "📝 更新日誌",
+      "description": "了解 Dopamind 每個版本的新功能和改進",
+      "v1_5_15": {
+        "version": "v1.5.15 (2025-08-18)",
+        "title": "🔄 最新更新",
+        "features": {
+          "traditional_chinese": "• 現已支持繁體中文！我們添加了對繁體中文的完整支持",
+          "timezone_fixes": "• 時區修復：任務創建現已完全支持時區感知，確保所有全球用戶的到期日期準確無誤",
+          "finish_early": "• 專注模式提前完成：現在可以提前結束專注會話，同時仍能保存進度",
+          "email_verification": "• 郵箱驗證：我們添加了郵箱驗證以增強帳戶安全性",
+          "polished_experience": "• 體驗優化：我們修復了大量小錯誤，提升了整體應用穩定性和本地化覆蓋率"
+        }
+      },
+      "v1_5_13": {
+        "version": "v1.5.13 (2025-08-10)",
+        "title": "🎉 正式發布",
+        "features": {
+          "ai_companion": "• 專為 ADHD 和忙碌大腦設計的 AI 夥伴",
+          "voice_text_capture": "• 語音和文字捕捉稍縱即逗的想法和任務",
+          "task_breakdown": "• AI 驅動的任務分解，擊敗拖延症",
+          "focus_mode": "• 沉浸式專注模式，持續的 AI 鼓勵",
+          "life_management": "• 訂閱追蹤和智能冰箱管理",
+          "progress_visualization": "• 可視化熱力圖和進度追蹤提供動力"
+        }
+      }
+    },
     "support": {
       "title": "需要幫助？",
       "description": "如果你在下載或安裝過程中遇到任何問題，我們的支援團隊隨時為你服務。",
