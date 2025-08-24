@@ -543,6 +543,31 @@
     "changelog": {
       "title": "📝 What's New",
       "description": "Discover the latest features and improvements in every Dopamind release",
+      "v1_6_1": {
+        "version": "v1.6.1 (August 23, 2025)",
+        "title": "🔧 Core Experience Enhancement",
+        "features": {
+          "multi_checkin": "• Multiple Habit Check-ins: You can now check in multiple times for the same habit in one day",
+          "smart_habit": "• Optimized natural language habit check-in process",
+          "reminder_sync": "• Task Reminder Sync: All task due reminders will now automatically save a copy in your chat history",
+          "daily_report": "• Daily Report Upgrade: Redesigned the daily report generation template for more insightful daily reviews",
+          "android_screen_fix": "• Fixed screen adaptation issues on some Android devices",
+          "notification_fix": "• Fixed issues that could prevent Android users from receiving system push notifications",
+          "network_stability": "• Resolved unnecessary frequent network checks, improving overall app stability"
+        }
+      },
+      "v1_6_0": {
+        "version": "v1.6.0 (August 21, 2025)",
+        "title": "📱 Major Update - Phone Login System",
+        "features": {
+          "phone_login": "• Phone Login: Support for quick registration and login using phone numbers, no need to remember complex passwords",
+          "sms_verification": "• SMS Verification: Integrated Tencent Cloud and Twilio dual SMS services - Chinese users use Tencent Cloud, international users use Twilio",
+          "country_picker": "• International Support: Added country code picker with support for global phone number formats",
+          "account_binding": "• Account Binding: Existing users can now bind phone numbers for multiple login options",
+          "eas_updates": "• In-App Updates: Support for EAS hot updates - get new features without re-downloading the app",
+          "ui_improvements": "• UI Improvements: Optimized interaction experience across multiple pages, fixed calendar page crashes"
+        }
+      },
       "v1_5_15": {
         "version": "v1.5.15 (August 18, 2025)",
         "title": "🔄 Latest Update",
