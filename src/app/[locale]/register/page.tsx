@@ -48,7 +48,8 @@ function RegisterForm({ locale }: { locale: Locale }) {
     }
 
     try {
-      await register(email, password, nickname.trim(), referralCode.trim() || undefined);
+      // 将当前语言作为 preferredLanguage 传递给注册接口
+      await register(email, password, nickname.trim(), referralCode.trim() || undefined, locale);
       
       // 检查是否需要跳转到支付流程
       const redirectTo = searchParams.get('redirect_to');

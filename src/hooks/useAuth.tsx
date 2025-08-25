@@ -8,6 +8,10 @@ interface User {
   email: string;
   nickname: string;
   avatarUrl?: string;
+  phoneNumber?: string;
+  phoneVerified?: boolean;
+  emailVerified?: boolean;
+  preferredLanguage?: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -24,8 +28,8 @@ interface AuthContextType {
   user: User | null;
   premiumStatus: PremiumStatus | null;
   isLoading: boolean;
-  login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string, nickname: string, referralCode?: string) => Promise<void>;
+  login: (email: string, password: string, preferredLanguage?: string) => Promise<void>;
+  register: (email: string, password: string, nickname: string, referralCode?: string, preferredLanguage?: string) => Promise<void>;
   logout: () => void;
   refreshPremiumStatus: () => Promise<void>;
 }
@@ -80,10 +84,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     initializeAuth();
   }, []);
 
-  const login = async (email: string, password: string): Promise<void> => {
+  const login = async (email: string, password: string, preferredLanguage?: string): Promise<void> => {
     setIsLoading(true);
     try {
-      const response: LoginResponse = await apiService.login(email, password);
+      const response: LoginResponse = await apiService.login(email, password, preferredLanguage);
       
       // 保存到 localStorage
       localStorage.setItem('token', response.token);
@@ -105,11 +109,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     email: string, 
     password: string, 
     nickname: string, 
-    referralCode?: string
+    referralCode?: string,
+    preferredLanguage?: string
   ): Promise<void> => {
     setIsLoading(true);
     try {
-      const response: RegisterResponse = await apiService.register(email, password, nickname, referralCode);
+      const response: RegisterResponse = await apiService.register(email, password, nickname, referralCode, preferredLanguage);
       
       // 保存到 localStorage
       localStorage.setItem('token', response.token);

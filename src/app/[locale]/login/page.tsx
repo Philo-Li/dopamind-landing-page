@@ -27,7 +27,8 @@ export default function LoginPage({ params }: LoginPageProps) {
     setError("");
 
     try {
-      await login(email, password);
+      // 将当前语言作为 preferredLanguage 传递给登录接口
+      await login(email, password, locale);
       // 跳转到仪表板
       router.push("/dashboard");
     } catch (error) {

@@ -8,6 +8,10 @@ export interface LoginResponse {
     email: string;
     nickname: string;
     avatarUrl?: string;
+    phoneNumber?: string;
+    phoneVerified?: boolean;
+    emailVerified?: boolean;
+    preferredLanguage?: string;
     createdAt: string;
     updatedAt: string;
   };
@@ -21,6 +25,10 @@ export interface RegisterResponse {
     email: string;
     nickname: string;
     avatarUrl?: string;
+    phoneNumber?: string;
+    phoneVerified?: boolean;
+    emailVerified?: boolean;
+    preferredLanguage?: string;
     createdAt: string;
     updatedAt: string;
   };
@@ -32,6 +40,10 @@ export interface ProfileResponse {
     email: string;
     nickname: string;
     avatarUrl?: string;
+    phoneNumber?: string;
+    phoneVerified?: boolean;
+    emailVerified?: boolean;
+    preferredLanguage?: string;
     createdAt: string;
     updatedAt: string;
   };
@@ -110,10 +122,10 @@ class ApiService {
     }
   }
 
-  async login(email: string, password: string): Promise<LoginResponse> {
+  async login(email: string, password: string, preferredLanguage?: string): Promise<LoginResponse> {
     return this.makeRequest<LoginResponse>('/api/auth/login', {
       method: 'POST',
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, password, preferredLanguage }),
     });
   }
 
@@ -121,11 +133,12 @@ class ApiService {
     email: string,
     password: string,
     nickname: string,
-    referralCode?: string
+    referralCode?: string,
+    preferredLanguage?: string
   ): Promise<RegisterResponse> {
     return this.makeRequest<RegisterResponse>('/api/auth/register', {
       method: 'POST',
-      body: JSON.stringify({ email, password, nickname, referralCode }),
+      body: JSON.stringify({ email, password, nickname, referralCode, preferredLanguage }),
     });
   }
 
