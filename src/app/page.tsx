@@ -11,6 +11,7 @@ export const metadata: Metadata = {
     languages: {
       'en': 'https://www.dopamind.app/en',
       'zh': 'https://www.dopamind.app/zh',
+      'zh-TW': 'https://www.dopamind.app/zh-TW',
       'ja': 'https://www.dopamind.app/ja',
       'x-default': 'https://www.dopamind.app/',
     },
@@ -26,9 +27,15 @@ const languages = [
   },
   {
     code: 'zh',
-    name: 'Chinese',
-    nativeName: '中文',
+    name: 'Chinese (Simplified)',
+    nativeName: '简体中文',
     flag: '🇨🇳',
+  },
+  {
+    code: 'zh-TW',
+    name: 'Chinese (Traditional)',
+    nativeName: '繁體中文',
+    flag: '🇹🇼',
   },
   {
     code: 'ja',
