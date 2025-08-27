@@ -190,17 +190,17 @@
       "title": "Ready to Transform Your Focus?",
       "subtitle": "Join thousands of users who have already discovered the power of AI-assisted task management. Start your journey to enhanced productivity today.",
       "trial": "7-day free trial included",
-      "users": "Join 10K+ active users",
+      "users": "Join {count} active users",
       "termsAndPrivacy": "By downloading, you agree to our {terms} and {privacy}",
       "termsLink": "Terms of Service",
       "privacyLink": "Privacy Policy",
       "termsUrl": "dopamind.com/terms",
       "privacyUrl": "dopamind.com/privacy",
-      "stats": [
-        { "value": "10K+", "label": "Active Users" },
-        { "value": "4.9★", "label": "App Rating" },
-        { "value": "95%", "label": "Satisfaction" }
-      ]
+      "statsLabels": {
+        "activeUsers": "Active Users",
+        "appRating": "App Rating",
+        "satisfaction": "Satisfaction"
+      }
     }
   },
   "hero": {
@@ -212,11 +212,13 @@
     "ctaPrimary": "Get Started",
     "ctaSecondary": "Learn More"
   },
-  "socialProof": [
-    { "value": "10K+", "label": "Active Users" },
-    { "value": "95%", "label": "User Satisfaction" },
-    { "value": "4.9", "label": "App Store Rating" }
-  ],
+  "stats": {
+    "activeUsers": "Active Users",
+    "userSatisfaction": "User Satisfaction",
+    "appStoreRating": "App Store Rating",
+    "appRating": "App Rating",
+    "satisfaction": "Satisfaction"
+  },
   "features": {
     "title": "An AI Companion That Truly Understands You",
     "subtitle": "Dopamind is more than just a tool—it's designed as an empathetic coach to help you overcome executive function challenges and provide support when you need it most.",
@@ -521,28 +523,8 @@
         }
       ]
     },
-    "features": {
-      "title": "Android-Exclusive Features",
-      "items": [
-        {
-          "icon": "🔄",
-          "title": "Quick Actions",
-          "description": "Support Android shortcuts for quickly adding tasks and launching focus mode"
-        },
-        {
-          "icon": "🔔",
-          "title": "Smart Notifications",
-          "description": "Deep integration with Android notification system for smarter reminder functionality"
-        },
-        {
-          "icon": "🎨",
-          "title": "Material Design",
-          "description": "Fully compliant with Material Design guidelines for a native Android experience"
-        }
-      ]
-    },
     "changelog": {
-      "title": "📝 What's New",
+      "title": "What's New",
       "description": "Discover the latest features and improvements in every Dopamind release",
       "v1_6_1": {
         "version": "v1.6.1 (August 23, 2025)",
@@ -592,12 +574,6 @@
           "progress_visualization": "• Visual heatmaps and progress tracking for motivation"
         }
       }
-    },
-    "support": {
-      "title": "Need Help?",
-      "description": "If you encounter any issues during download or installation, our support team is here to help.",
-      "contactButton": "Contact Support",
-      "email": "support@dopamind.app"
     }
   },
   "accountDeletion": {

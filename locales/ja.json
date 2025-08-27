@@ -190,17 +190,17 @@
       "title": "集中力を変革する準備はできましたか？",
       "subtitle": "AI 支援タスク管理の力をすでに発見した数千人のユーザーに参加しましょう。今日から生産性向上の旅を始めてください。",
       "trial": "7日間無料トライアル付き",
-      "users": "10K+ アクティブユーザーに参加",
+      "users": "{count} アクティブユーザーに参加",
       "termsAndPrivacy": "ダウンロードすることで、私たちの{terms}と{privacy}に同意したものとみなします",
       "termsLink": "利用規約",
       "privacyLink": "プライバシーポリシー",
       "termsUrl": "dopamind.com/terms",
       "privacyUrl": "dopamind.com/privacy",
-      "stats": [
-        { "value": "10K+", "label": "アクティブユーザー" },
-        { "value": "4.9★", "label": "アプリ評価" },
-        { "value": "95%", "label": "満足度" }
-      ]
+      "statsLabels": {
+        "activeUsers": "アクティブユーザー",
+        "appRating": "アプリ評価",
+        "satisfaction": "満足度"
+      }
     }
   },
   "hero": {
@@ -212,11 +212,13 @@
     "ctaPrimary": "今すぐ体験",
     "ctaSecondary": "機能を見る"
   },
-  "socialProof": [
-    { "value": "1万+", "label": "アクティブユーザー" },
-    { "value": "95%", "label": "ユーザー満足度" },
-    { "value": "4.9", "label": "App Store 評価" }
-  ],
+  "stats": {
+    "activeUsers": "アクティブユーザー",
+    "userSatisfaction": "ユーザー満足度",
+    "appStoreRating": "App Store 評価",
+    "appRating": "アプリ評価",
+    "satisfaction": "満足度"
+  },
   "features": {
     "title": "あなたを本当に理解する AI パートナー",
     "subtitle": "Dopamind は単なるツールではありません。実行機能の課題を克服し、最も必要なときにサポートを提供する共感的なコーチとして設計されています。",
@@ -521,28 +523,8 @@
         }
       ]
     },
-    "features": {
-      "title": "Android専用機能",
-      "items": [
-        {
-          "icon": "🔄",
-          "title": "クイックアクション",
-          "description": "Androidショートカットをサポートし、タスクの素早い追加と集中モードの起動が可能"
-        },
-        {
-          "icon": "🔔",
-          "title": "スマート通知",
-          "description": "Android通知システムとの深い統合により、よりスマートなリマインダー機能を提供"
-        },
-        {
-          "icon": "🎨",
-          "title": "Material Design",
-          "description": "Material Design ガイドラインに完全準拠し、ネイティブAndroid体験を提供"
-        }
-      ]
-    },
     "changelog": {
-      "title": "📝 新機能",
+      "title": "新機能",
       "description": "Dopamind の各バージョンの新機能と改善点をご紹介します",
       "v1_6_1": {
         "version": "v1.6.1 (2025年8月23日)",
@@ -592,12 +574,6 @@
           "progress_visualization": "• モチベーションのための視覚的ヒートマップと進捗追跡"
         }
       }
-    },
-    "support": {
-      "title": "ヘルプが必要ですか？",
-      "description": "ダウンロードまたはインストール中に何か問題が発生した場合、サポートチームがお手伝いします。",
-      "contactButton": "サポートに問い合わせ",
-      "email": "support@dopamind.app"
     }
   },
   "accountDeletion": {
