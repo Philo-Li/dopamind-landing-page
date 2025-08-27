@@ -1,8 +1,5 @@
-import Image from 'next/image';
 import { CheckCircle, AlertTriangle } from 'lucide-react';
 import { getTranslation } from '../../../lib/i18n';
-import LanguageSwitcher from '../../../../components/LanguageSwitcher';
-import AuthButton from '../../../../components/AuthButton';
 import AndroidDownloadButton from '../../../components/AndroidDownloadButton';
 import AppStoreButton from '../../../components/AppStoreButton';
 
@@ -30,35 +27,7 @@ export default async function DownloadPage({ params }: DownloadPageProps) {
   };
 
   return (
-    <div className="flex min-h-screen flex-col">
-      {/* 导航栏 */}
-      <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/80 backdrop-blur-md">
-        <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
-          <a href={`/${locale}`} className="flex items-center gap-2">
-            <Image 
-              src="/dopamind-logo.png"
-              alt="Dopamind Logo" 
-              width={32}
-              height={32}
-              className="rounded-[8px]"
-            />
-            <span className="text-xl font-bold text-foreground">Dopamind</span>
-          </a>
-          <nav className="hidden items-center gap-6 md:flex">
-            <a href={`/${locale}#features`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.features}</a>
-            <a href={`/${locale}#how-it-works`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.howItWorks}</a>
-            <a href={`/${locale}/pricing`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.pricing}</a>
-            <a href={`/${locale}/download`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.download}</a>
-            <a href={`/${locale}/support`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.support}</a>
-          </nav>
-          <div className="flex items-center gap-4">
-            <LanguageSwitcher currentLocale={locale} />
-            <AuthButton locale={locale} />
-          </div>
-        </div>
-      </header>
-
-      <main className="flex-1">
+    <>
         {/* Hero Section */}
         <section className="w-full py-16 md:py-24 lg:py-32 bg-gradient-to-br from-blue-50 to-purple-50 overflow-hidden">
           <div className="container mx-auto px-4 md:px-6">
@@ -395,27 +364,6 @@ export default async function DownloadPage({ params }: DownloadPageProps) {
           </div>
         </section>
 
-        {/* Android 专属特性 Section */}
-        <section className="w-full py-16 md:py-24">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl mb-4">
-                {t.download.features.title}
-              </h2>
-            </div>
-            
-            <div className="grid gap-8 md:grid-cols-3 max-w-4xl mx-auto">
-              {t.download.features.items.map((feature, index) => (
-                <div key={index} className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all border border-gray-100 text-center">
-                  <div className="text-4xl mb-4">{feature.icon}</div>
-                  <h3 className="text-xl font-bold text-foreground mb-4">{feature.title}</h3>
-                  <p className="text-muted">{feature.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* FAQ Section */}
         <section className="w-full py-16 md:py-24 bg-gray-50">
           <div className="container mx-auto px-4 md:px-6">
@@ -436,78 +384,6 @@ export default async function DownloadPage({ params }: DownloadPageProps) {
           </div>
         </section>
 
-        {/* 支持 Section */}
-        <section className="w-full py-16 md:py-24">
-          <div className="container mx-auto px-4 md:px-6 text-center">
-            <div className="max-w-2xl mx-auto">
-              <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl mb-6">
-                {t.download.support.title}
-              </h2>
-              <p className="text-lg text-muted mb-8">
-                {t.download.support.description}
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a 
-                  href={`mailto:${t.download.support.email}`}
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-semibold rounded-2xl hover:bg-primary/90 transition-colors"
-                >
-                  {t.download.support.contactButton}
-                </a>
-                <p className="text-sm text-muted">{t.download.support.email}</p>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      {/* 页脚 */}
-      <footer className="w-full border-t border-gray-200 bg-white py-8">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid gap-8 md:grid-cols-4">
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <Image 
-                  src="/dopamind-logo.png"
-                  alt="Dopamind Logo" 
-                  width={24}
-                  height={24}
-                  className="rounded-[6px]"
-                />
-                <span className="font-bold text-foreground">Dopamind</span>
-              </div>
-              <p className="text-sm text-muted">
-                {t.footer.description}
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold text-foreground mb-3">{t.footer.sections.product}</h4>
-              <ul className="space-y-2 text-sm text-muted">
-                <li><a href={`/${locale}`} className="hover:text-primary">{t.navigation.home}</a></li>
-                <li><a href={`/${locale}#features`} className="hover:text-primary">{t.footer.links.features}</a></li>
-                <li><a href={`/${locale}/download`} className="hover:text-primary">{t.navigation.download}</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold text-foreground mb-3">{t.footer.sections.support}</h4>
-              <ul className="space-y-2 text-sm text-muted">
-                <li><a href={`/${locale}/support`} className="hover:text-primary">{t.footer.links.supportCenter}</a></li>
-                <li><a href="mailto:support@dopamind.com" className="hover:text-primary">{t.footer.links.contactUs}</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold text-foreground mb-3">{t.footer.sections.legal}</h4>
-              <ul className="space-y-2 text-sm text-muted">
-                <li><a href={`/${locale}/privacy`} className="hover:text-primary">{t.footer.links.privacy}</a></li>
-                <li><a href={`/${locale}/terms`} className="hover:text-primary">{t.footer.links.terms}</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="mt-8 pt-6 border-t border-gray-200 text-center text-sm text-muted">
-            <p>&copy; {new Date().getFullYear()} Dopamind Inc. {t.footer.copyright}.</p>
-          </div>
-        </div>
-      </footer>
-    </div>
+      </>
   );
 }

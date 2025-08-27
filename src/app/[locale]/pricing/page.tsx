@@ -1,8 +1,4 @@
 import PricingSection from '../../../components/PricingSection';
-import AuthButton from '../../../../components/AuthButton';
-import LanguageSwitcher from '../../../../components/LanguageSwitcher';
-import Image from 'next/image';
-import Link from 'next/link';
 
 interface PricingPageProps {
   params: Promise<{
@@ -14,34 +10,7 @@ export default async function PricingPage({ params }: PricingPageProps) {
   const { locale } = await params;
 
   return (
-    <div className="flex min-h-screen flex-col">
-      {/* 导航栏 */}
-      <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/80 backdrop-blur-md">
-        <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
-          <Link href={`/${locale}`} className="flex items-center gap-2">
-            <Image 
-              src="/dopamind-logo.png"
-              alt="Dopamind Logo" 
-              width={32}
-              height={32}
-              className="rounded-[8px]"
-            />
-            <span className="text-xl font-bold text-foreground">Dopamind</span>
-          </Link>
-          <nav className="hidden items-center gap-6 md:flex">
-            <Link href={`/${locale}#features`} className="text-sm font-medium text-muted transition-colors hover:text-primary">功能特性</Link>
-            <Link href={`/${locale}#how-it-works`} className="text-sm font-medium text-muted transition-colors hover:text-primary">如何使用</Link>
-            <Link href={`/${locale}/pricing`} className="text-sm font-medium text-primary">定价方案</Link>
-            <Link href={`/${locale}/support`} className="text-sm font-medium text-muted transition-colors hover:text-primary">帮助中心</Link>
-          </nav>
-          <div className="flex items-center gap-4">
-            <LanguageSwitcher currentLocale={locale} />
-            <AuthButton locale={locale} />
-          </div>
-        </div>
-      </header>
-
-      <main className="flex-1">
+    <>
         <PricingSection locale={locale} />
         
         {/* FAQ 或其他内容可以在这里添加 */}
@@ -79,31 +48,6 @@ export default async function PricingPage({ params }: PricingPageProps) {
             </div>
           </div>
         </section>
-      </main>
-
-      {/* 页脚 */}
-      <footer className="w-full border-t border-gray-200 bg-white py-8">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <Image 
-                src="/dopamind-logo.png"
-                alt="Dopamind Logo" 
-                width={24}
-                height={24}
-                className="rounded-[6px]"
-              />
-              <span className="font-bold text-foreground">Dopamind</span>
-            </div>
-            <p className="text-sm text-muted mb-4">
-              专为 ADHD 用户设计的 AI 专注伙伴
-            </p>
-            <p className="text-sm text-muted">
-              &copy; {new Date().getFullYear()} Dopamind Inc. 版权所有.
-            </p>
-          </div>
-        </div>
-      </footer>
-    </div>
+    </>
   );
 }
