@@ -490,7 +490,11 @@ export default async function HomePage({ params }: HomePageProps) {
               {stats.finalCta.map((stat, index) => (
                 <div key={index} className="text-center">
                   <div className="text-3xl font-bold text-primary">{stat.value}</div>
-                  <div className="text-sm text-muted">{(t as any).stats[stat.labelKey.split('.')[1]]}</div>
+                  <div className="text-sm text-muted">
+                    {t.stats && stat.labelKey.includes('.') 
+                      ? t.stats[stat.labelKey.split('.')[1] as keyof typeof t.stats]
+                      : ''}
+                  </div>
                 </div>
               ))}
             </div>

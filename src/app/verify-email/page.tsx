@@ -124,6 +124,7 @@ function VerifyEmailContent() {
       setStatus('error');
       setMessage(t.verifyEmail.missingTokenMessage);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   const renderContent = () => {
