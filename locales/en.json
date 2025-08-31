@@ -526,6 +526,17 @@
     "changelog": {
       "title": "What's New",
       "description": "Discover the latest features and improvements in every Dopamind release",
+      "v1_6_2": {
+        "version": "v1.6.2 (August 31, 2025)",
+        "title": "✨ Experience Optimization Update",
+        "features": {
+          "network_detection": "• Improved Network Detection: Enhanced network detection logic for better connectivity handling",
+          "local_time_fix": "• Accurate Local Time: Manual task creation now correctly uses your local timezone",
+          "smooth_animations": "• Smooth Input Animations: Chat input box now features silky smooth popup animations",
+          "screen_wake": "• Screen Keep-Awake: Screen stays on during focus sessions with the Pomodoro timer",
+          "chat_cache": "• Reliable Chat Cache: Refactored chat history caching for more reliable conversation persistence"
+        }
+      },
       "v1_6_1": {
         "version": "v1.6.1 (August 23, 2025)",
         "title": "🔧 Core Experience Enhancement",

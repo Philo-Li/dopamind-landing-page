@@ -15,14 +15,14 @@ export default async function DownloadPage({ params }: DownloadPageProps) {
   
   // 应用信息
   const appInfo = {
-    version: '1.6.1',
-    lastUpdated: '2025-08-23',
+    version: '1.6.2',
+    lastUpdated: '2025-08-31',
     ios: {
       size: '28.9 MB'
     },
     android: {
       size: '87.4 MB',
-      downloadUrl: 'https://r2.dopamind.app/dopamind-android-release-1.6.1.apk'
+      downloadUrl: 'https://r2.dopamind.app/dopamind-android-release-1.6.2.apk'
     }
   };
 
@@ -130,7 +130,7 @@ export default async function DownloadPage({ params }: DownloadPageProps) {
             </div>
             
             <div className="max-w-3xl mx-auto space-y-8">
-              {/* Latest Version - v1.6.1 */}
+              {/* Latest Version - v1.6.2 */}
               <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
                 <div className="flex items-start gap-4 mb-6">
                   <div className="flex items-center justify-center w-12 h-12 bg-green-100 rounded-xl">
@@ -139,9 +139,46 @@ export default async function DownloadPage({ params }: DownloadPageProps) {
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
                       <h3 className="text-xl font-bold text-foreground">
-                        {t.download.changelog.v1_6_1.version}
+                        {t.download.changelog.v1_6_2.version}
                       </h3>
                       <span className="px-3 py-1 bg-green-100 text-green-600 text-sm font-medium rounded-full">
+                        {t.download.changelog.v1_6_2.title.replace('✨ ', '')}
+                      </span>
+                    </div>
+                    
+                    <div className="space-y-3">
+                      <div className="text-muted">
+                        {t.download.changelog.v1_6_2.features.network_detection}
+                      </div>
+                      <div className="text-muted">
+                        {t.download.changelog.v1_6_2.features.local_time_fix}
+                      </div>
+                      <div className="text-muted">
+                        {t.download.changelog.v1_6_2.features.smooth_animations}
+                      </div>
+                      <div className="text-muted">
+                        {t.download.changelog.v1_6_2.features.screen_wake}
+                      </div>
+                      <div className="text-muted">
+                        {t.download.changelog.v1_6_2.features.chat_cache}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Previous Version - v1.6.1 */}
+              <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-xl">
+                    <span className="text-2xl">🔧</span>
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-2">
+                      <h3 className="text-xl font-bold text-foreground">
+                        {t.download.changelog.v1_6_1.version}
+                      </h3>
+                      <span className="px-3 py-1 bg-blue-100 text-blue-600 text-sm font-medium rounded-full">
                         {t.download.changelog.v1_6_1.title.replace('🔧 ', '')}
                       </span>
                     </div>
@@ -176,7 +213,7 @@ export default async function DownloadPage({ params }: DownloadPageProps) {
               {/* Previous Version - v1.6.0 */}
               <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
                 <div className="flex items-start gap-4 mb-6">
-                  <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-xl">
+                  <div className="flex items-center justify-center w-12 h-12 bg-purple-100 rounded-xl">
                     <span className="text-2xl">📱</span>
                   </div>
                   <div className="flex-1">
@@ -184,7 +221,7 @@ export default async function DownloadPage({ params }: DownloadPageProps) {
                       <h3 className="text-xl font-bold text-foreground">
                         {t.download.changelog.v1_6_0.version}
                       </h3>
-                      <span className="px-3 py-1 bg-blue-100 text-blue-600 text-sm font-medium rounded-full">
+                      <span className="px-3 py-1 bg-purple-100 text-purple-600 text-sm font-medium rounded-full">
                         {t.download.changelog.v1_6_0.title.replace('📱 ', '')}
                       </span>
                     </div>
@@ -207,43 +244,6 @@ export default async function DownloadPage({ params }: DownloadPageProps) {
                       </div>
                       <div className="text-muted">
                         {t.download.changelog.v1_6_0.features.ui_improvements}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Previous Version - v1.5.15 */}
-              <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
-                <div className="flex items-start gap-4 mb-6">
-                  <div className="flex items-center justify-center w-12 h-12 bg-purple-100 rounded-xl">
-                    <span className="text-2xl">🔄</span>
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
-                      <h3 className="text-xl font-bold text-foreground">
-                        {t.download.changelog.v1_5_15.version}
-                      </h3>
-                      <span className="px-3 py-1 bg-purple-100 text-purple-600 text-sm font-medium rounded-full">
-                        {t.download.changelog.v1_5_15.title.replace('🔄 ', '')}
-                      </span>
-                    </div>
-                    
-                    <div className="space-y-3">
-                      <div className="text-muted">
-                        {t.download.changelog.v1_5_15.features.traditional_chinese}
-                      </div>
-                      <div className="text-muted">
-                        {t.download.changelog.v1_5_15.features.timezone_fixes}
-                      </div>
-                      <div className="text-muted">
-                        {t.download.changelog.v1_5_15.features.finish_early}
-                      </div>
-                      <div className="text-muted">
-                        {t.download.changelog.v1_5_15.features.email_verification}
-                      </div>
-                      <div className="text-muted">
-                        {t.download.changelog.v1_5_15.features.polished_experience}
                       </div>
                     </div>
                   </div>
