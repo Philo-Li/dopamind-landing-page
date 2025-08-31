@@ -15,14 +15,14 @@ export default async function DownloadPage({ params }: DownloadPageProps) {
   
   // 应用信息
   const appInfo = {
-    version: '1.6.2',
-    lastUpdated: '2025-08-31',
+    version: '1.6.3',
+    lastUpdated: '2025-09-05',
     ios: {
-      size: '28.9 MB'
+      size: '29.2 MB'
     },
     android: {
-      size: '87.4 MB',
-      downloadUrl: 'https://r2.dopamind.app/dopamind-android-release-1.6.2.apk'
+      size: '88.1 MB',
+      downloadUrl: 'https://r2.dopamind.app/dopamind-android-release-1.6.3.apk'
     }
   };
 
@@ -130,37 +130,54 @@ export default async function DownloadPage({ params }: DownloadPageProps) {
             </div>
             
             <div className="max-w-3xl mx-auto space-y-8">
-              {/* Latest Version - v1.6.2 */}
+              {/* Latest Version - v1.6.3 */}
               <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
                 <div className="flex items-start gap-4 mb-6">
-                  <div className="flex items-center justify-center w-12 h-12 bg-green-100 rounded-xl">
-                    <span className="text-2xl">🔧</span>
+                  <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-xl">
+                    <span className="text-2xl">🚀</span>
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
                       <h3 className="text-xl font-bold text-foreground">
-                        {t.download.changelog.v1_6_2.version}
+                        {t.download.changelog.v1_6_3.version}
                       </h3>
-                      <span className="px-3 py-1 bg-green-100 text-green-600 text-sm font-medium rounded-full">
-                        {t.download.changelog.v1_6_2.title.replace('✨ ', '')}
+                      <span className="px-3 py-1 bg-blue-100 text-blue-600 text-sm font-medium rounded-full">
+                        Latest
                       </span>
+                    </div>
+                    
+                    <div className="mb-4">
+                      <h4 className="text-lg font-semibold text-foreground mb-2">
+                        {t.download.changelog.v1_6_3.title}
+                      </h4>
+                      {t.download.changelog.v1_6_3.subtitle && (
+                        <p className="text-sm text-muted mb-3">
+                          {t.download.changelog.v1_6_3.subtitle}
+                        </p>
+                      )}
                     </div>
                     
                     <div className="space-y-3">
                       <div className="text-muted">
-                        {t.download.changelog.v1_6_2.features.network_detection}
+                        {t.download.changelog.v1_6_3.features.ai_pep_talk}
                       </div>
                       <div className="text-muted">
-                        {t.download.changelog.v1_6_2.features.local_time_fix}
+                        {t.download.changelog.v1_6_3.features.clear_focus}
                       </div>
                       <div className="text-muted">
-                        {t.download.changelog.v1_6_2.features.smooth_animations}
+                        {t.download.changelog.v1_6_3.features.smart_network}
                       </div>
                       <div className="text-muted">
-                        {t.download.changelog.v1_6_2.features.screen_wake}
+                        {t.download.changelog.v1_6_3.features.local_timezone}
                       </div>
                       <div className="text-muted">
-                        {t.download.changelog.v1_6_2.features.chat_cache}
+                        {t.download.changelog.v1_6_3.features.smooth_animations}
+                      </div>
+                      <div className="text-muted">
+                        {t.download.changelog.v1_6_3.features.screen_awake}
+                      </div>
+                      <div className="text-muted">
+                        {t.download.changelog.v1_6_3.features.reliable_history}
                       </div>
                     </div>
                   </div>

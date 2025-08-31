@@ -526,15 +526,19 @@
     "changelog": {
       "title": "What's New",
       "description": "Discover the latest features and improvements in every Dopamind release",
-      "v1_6_2": {
-        "version": "v1.6.2 (August 31, 2025)",
-        "title": "✨ Experience Optimization Update",
+      "v1_6_3": {
+        "version": "v1.6.3 (September 5, 2025)",
+        "title": "🚀 Dopamind Experience Evolution: Your Smarter Focus Companion",
+        "subtitle": "We've listened to your feedback and refined the core experience with another round of careful polish. This update focuses on making your focus journey more intelligent and motivating, while improving app stability and fluidity.",
+        "highlights": "Update Highlights:",
         "features": {
-          "network_detection": "• Improved Network Detection: Enhanced network detection logic for better connectivity handling",
-          "local_time_fix": "• Accurate Local Time: Manual task creation now correctly uses your local timezone",
-          "smooth_animations": "• Smooth Input Animations: Chat input box now features silky smooth popup animations",
-          "screen_wake": "• Screen Keep-Awake: Screen stays on during focus sessions with the Pomodoro timer",
-          "chat_cache": "• Reliable Chat Cache: Refactored chat history caching for more reliable conversation persistence"
+          "ai_pep_talk": "• Smarter AI Pep Talks: Your AI Coach now delivers more personalized and context-aware pep talks based on your specific task, giving you the perfect motivation boost before you begin.",
+          "clear_focus": "• Clearer Focus View: The Focus screen now displays your current task's subtasks and a progress bar, so you can see your progress at a glance without breaking your flow.",
+          "smart_network": "• Improved Network Handling: We've enhanced our network detection logic to provide smarter and more stable connectivity, reducing unnecessary error messages.",
+          "local_timezone": "• Accurate Local Time for Tasks: Manually created tasks now correctly capture your local timezone, ensuring your deadlines are always in sync with you, wherever you are.",
+          "smooth_animations": "• Silky-Smooth Chat Animations: The chat input animation is now incredibly smooth, making every conversation feel more fluid and responsive.",
+          "screen_awake": "• Screen Stays On During Focus: No more interruptions. The screen will now stay awake during your Pomodoro focus sessions, helping you maintain your flow.",
+          "reliable_history": "• More Reliable Chat History: We've completely refactored the chat record system to ensure every conversation with your AI coach is reliably saved."
         }
       },
       "v1_6_1": {
