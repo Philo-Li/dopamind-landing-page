@@ -1,5 +1,6 @@
 import { CheckCircle, AlertTriangle } from 'lucide-react';
 import { getTranslation } from '../../../lib/i18n';
+import { getChangelog } from '../../../lib/changelog';
 import AndroidDownloadButton from '../../../components/AndroidDownloadButton';
 import AppStoreButton from '../../../components/AppStoreButton';
 
@@ -12,6 +13,7 @@ interface DownloadPageProps {
 export default async function DownloadPage({ params }: DownloadPageProps) {
   const { locale } = await params;
   const t = getTranslation(locale);
+  const changelog = getChangelog(locale);
   
   // 应用信息
   const appInfo = {
@@ -122,190 +124,49 @@ export default async function DownloadPage({ params }: DownloadPageProps) {
           <div className="container mx-auto px-4 md:px-6">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl mb-4">
-                {t.download.changelog.title}
+                {changelog.title}
               </h2>
               <p className="text-lg text-muted max-w-2xl mx-auto">
-                {t.download.changelog.description}
+                {changelog.description}
               </p>
             </div>
             
             <div className="max-w-3xl mx-auto space-y-8">
-              {/* Latest Version - v1.6.3 */}
-              <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
-                <div className="flex items-start gap-4 mb-6">
-                  <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-xl">
-                    <span className="text-2xl">🚀</span>
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
-                      <h3 className="text-xl font-bold text-foreground">
-                        {t.download.changelog.v1_6_3.version}
-                      </h3>
-                      <span className="px-3 py-1 bg-blue-100 text-blue-600 text-sm font-medium rounded-full">
-                        Latest
-                      </span>
+              {changelog.versions.map((version, index) => (
+                <div key={version.version} className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
+                  <div className="flex items-start gap-4 mb-6">
+                    <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-xl">
+                      <span className="text-2xl">{version.emoji}</span>
                     </div>
-                    
-                    <div className="mb-4">
-                      <h4 className="text-lg font-semibold text-foreground mb-2">
-                        {t.download.changelog.v1_6_3.title}
-                      </h4>
-                      {t.download.changelog.v1_6_3.subtitle && (
-                        <p className="text-sm text-muted mb-3">
-                          {t.download.changelog.v1_6_3.subtitle}
-                        </p>
-                      )}
-                    </div>
-                    
-                    <div className="space-y-3">
-                      <div className="text-muted">
-                        {t.download.changelog.v1_6_3.features.ai_pep_talk}
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <h3 className="text-xl font-bold text-foreground">
+                          {version.version} ({version.date})
+                        </h3>
+                        {index === 0 && (
+                          <span className="px-3 py-1 bg-blue-100 text-blue-600 text-sm font-medium rounded-full">
+                            Latest
+                          </span>
+                        )}
                       </div>
-                      <div className="text-muted">
-                        {t.download.changelog.v1_6_3.features.clear_focus}
+                      
+                      <div className="mb-4">
+                        <h4 className="text-lg font-semibold text-foreground mb-2">
+                          {version.title}
+                        </h4>
                       </div>
-                      <div className="text-muted">
-                        {t.download.changelog.v1_6_3.features.smart_network}
-                      </div>
-                      <div className="text-muted">
-                        {t.download.changelog.v1_6_3.features.local_timezone}
-                      </div>
-                      <div className="text-muted">
-                        {t.download.changelog.v1_6_3.features.smooth_animations}
-                      </div>
-                      <div className="text-muted">
-                        {t.download.changelog.v1_6_3.features.screen_awake}
-                      </div>
-                      <div className="text-muted">
-                        {t.download.changelog.v1_6_3.features.reliable_history}
+                      
+                      <div className="space-y-3">
+                        {version.features.map((feature, featureIndex) => (
+                          <div key={featureIndex} className="text-muted">
+                            • {feature}
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-
-              {/* Previous Version - v1.6.1 */}
-              <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
-                <div className="flex items-start gap-4 mb-6">
-                  <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-xl">
-                    <span className="text-2xl">🔧</span>
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
-                      <h3 className="text-xl font-bold text-foreground">
-                        {t.download.changelog.v1_6_1.version}
-                      </h3>
-                      <span className="px-3 py-1 bg-blue-100 text-blue-600 text-sm font-medium rounded-full">
-                        {t.download.changelog.v1_6_1.title.replace('🔧 ', '')}
-                      </span>
-                    </div>
-                    
-                    <div className="space-y-3">
-                      <div className="text-muted">
-                        {t.download.changelog.v1_6_1.features.multi_checkin}
-                      </div>
-                      <div className="text-muted">
-                        {t.download.changelog.v1_6_1.features.smart_habit}
-                      </div>
-                      <div className="text-muted">
-                        {t.download.changelog.v1_6_1.features.reminder_sync}
-                      </div>
-                      <div className="text-muted">
-                        {t.download.changelog.v1_6_1.features.daily_report}
-                      </div>
-                      <div className="text-muted">
-                        {t.download.changelog.v1_6_1.features.android_screen_fix}
-                      </div>
-                      <div className="text-muted">
-                        {t.download.changelog.v1_6_1.features.notification_fix}
-                      </div>
-                      <div className="text-muted">
-                        {t.download.changelog.v1_6_1.features.network_stability}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Previous Version - v1.6.0 */}
-              <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
-                <div className="flex items-start gap-4 mb-6">
-                  <div className="flex items-center justify-center w-12 h-12 bg-purple-100 rounded-xl">
-                    <span className="text-2xl">📱</span>
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
-                      <h3 className="text-xl font-bold text-foreground">
-                        {t.download.changelog.v1_6_0.version}
-                      </h3>
-                      <span className="px-3 py-1 bg-purple-100 text-purple-600 text-sm font-medium rounded-full">
-                        {t.download.changelog.v1_6_0.title.replace('📱 ', '')}
-                      </span>
-                    </div>
-                    
-                    <div className="space-y-3">
-                      <div className="text-muted">
-                        {t.download.changelog.v1_6_0.features.phone_login}
-                      </div>
-                      <div className="text-muted">
-                        {t.download.changelog.v1_6_0.features.sms_verification}
-                      </div>
-                      <div className="text-muted">
-                        {t.download.changelog.v1_6_0.features.country_picker}
-                      </div>
-                      <div className="text-muted">
-                        {t.download.changelog.v1_6_0.features.account_binding}
-                      </div>
-                      <div className="text-muted">
-                        {t.download.changelog.v1_6_0.features.eas_updates}
-                      </div>
-                      <div className="text-muted">
-                        {t.download.changelog.v1_6_0.features.ui_improvements}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Previous Version - v1.5.13 */}
-              <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
-                <div className="flex items-start gap-4 mb-6">
-                  <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-xl">
-                    <span className="text-2xl">🎉</span>
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
-                      <h3 className="text-xl font-bold text-foreground">
-                        {t.download.changelog.v1_5_13.version}
-                      </h3>
-                      <span className="px-3 py-1 bg-blue-100 text-blue-600 text-sm font-medium rounded-full">
-                        {t.download.changelog.v1_5_13.title.replace('🎉 ', '')}
-                      </span>
-                    </div>
-                    
-                    <div className="space-y-3">
-                      <div className="text-muted">
-                        {t.download.changelog.v1_5_13.features.ai_companion}
-                      </div>
-                      <div className="text-muted">
-                        {t.download.changelog.v1_5_13.features.voice_text_capture}
-                      </div>
-                      <div className="text-muted">
-                        {t.download.changelog.v1_5_13.features.task_breakdown}
-                      </div>
-                      <div className="text-muted">
-                        {t.download.changelog.v1_5_13.features.focus_mode}
-                      </div>
-                      <div className="text-muted">
-                        {t.download.changelog.v1_5_13.features.life_management}
-                      </div>
-                      <div className="text-muted">
-                        {t.download.changelog.v1_5_13.features.progress_visualization}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
