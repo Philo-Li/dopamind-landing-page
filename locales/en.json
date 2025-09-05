@@ -239,7 +239,8 @@
     "sections": {
       "product": "Product",
       "support": "Support",
-      "legal": "Legal"
+      "legal": "Legal",
+      "community": "Community"
     },
     "links": {
       "features": "Features",
@@ -250,7 +251,9 @@
       "privacy": "Privacy Policy",
       "terms": "Terms of Service",
       "cookies": "Cookie Policy",
-      "accountDeletion": "Account Deletion"
+      "accountDeletion": "Account Deletion",
+      "discord": "Discord",
+      "twitter": "X / Twitter"
     },
     "copyright": "All rights reserved"
   },

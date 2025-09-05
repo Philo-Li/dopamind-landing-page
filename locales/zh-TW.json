@@ -239,7 +239,8 @@
     "sections": {
       "product": "產品",
       "support": "支援",
-      "legal": "法律"
+      "legal": "法律",
+      "community": "社群"
     },
     "links": {
       "features": "功能特色",
@@ -250,7 +251,9 @@
       "privacy": "隱私政策",
       "terms": "服務條款",
       "cookies": "Cookie 政策",
-      "accountDeletion": "帳戶刪除"
+      "accountDeletion": "帳戶刪除",
+      "discord": "Discord",
+      "twitter": "X / Twitter"
     },
     "copyright": "版權所有"
   },

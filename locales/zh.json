@@ -239,7 +239,8 @@
     "sections": {
       "product": "产品",
       "support": "支持",
-      "legal": "法律"
+      "legal": "法律",
+      "community": "社区"
     },
     "links": {
       "features": "功能特性",
@@ -250,7 +251,9 @@
       "privacy": "隐私政策",
       "terms": "服务条款",
       "cookies": "Cookie 政策",
-      "accountDeletion": "账户删除"
+      "accountDeletion": "账户删除",
+      "discord": "Discord",
+      "twitter": "X / Twitter"
     },
     "copyright": "版权所有"
   },

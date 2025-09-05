@@ -239,7 +239,8 @@
     "sections": {
       "product": "プロダクト",
       "support": "サポート",
-      "legal": "法的事項"
+      "legal": "法的事項",
+      "community": "コミュニティ"
     },
     "links": {
       "features": "機能",
@@ -250,7 +251,9 @@
       "privacy": "プライバシーポリシー",
       "terms": "利用規約",
       "cookies": "Cookie ポリシー",
-      "accountDeletion": "アカウント削除"
+      "accountDeletion": "アカウント削除",
+      "discord": "Discord",
+      "twitter": "X / Twitter"
     },
     "copyright": "全著作権所有"
   },

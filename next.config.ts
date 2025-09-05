@@ -25,6 +25,17 @@ const nextConfig: NextConfig = {
   // 压缩和优化
   poweredByHeader: false, // 移除 X-Powered-By 头
   
+  // 重定向配置
+  async redirects() {
+    return [
+      {
+        source: '/discord',
+        destination: 'https://discord.gg/E9tEAYNaqK',
+        permanent: true
+      }
+    ];
+  },
+
   // 静态文件缓存
   async headers() {
     return [

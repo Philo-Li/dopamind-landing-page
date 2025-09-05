@@ -12,7 +12,7 @@ export default function Footer({ locale, logoAlt = "Dopamind Logo" }: FooterProp
   return (
     <footer className="w-full border-t border-gray-200 bg-white py-8">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="grid gap-8 md:grid-cols-4">
+        <div className="grid gap-8 md:grid-cols-5">
           <div>
             <div className="flex items-center gap-2 mb-4">
               <Image 
@@ -44,6 +44,13 @@ export default function Footer({ locale, logoAlt = "Dopamind Logo" }: FooterProp
               <li><a href={`/${locale}/support`} className="hover:text-primary transition-colors">{t.footer.links.supportCenter}</a></li>
               <li><a href="mailto:support@dopamind.com" className="hover:text-primary transition-colors">{t.footer.links.contactUs}</a></li>
               <li><a href={`/${locale}/status`} className="hover:text-primary transition-colors">{t.footer.links.status}</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-semibold text-foreground mb-3">{t.footer.sections.community}</h4>
+            <ul className="space-y-2 text-sm text-muted">
+              <li><a href="https://discord.gg/E9tEAYNaqK" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">{t.footer.links.discord}</a></li>
+              <li><a href="https://x.com/dopamindai" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">{t.footer.links.twitter}</a></li>
             </ul>
           </div>
           <div>
