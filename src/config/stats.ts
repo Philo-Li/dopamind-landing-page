@@ -18,7 +18,7 @@ export const stats = {
       labelKey: "stats.userSatisfaction"
     },
     {
-      value: "4.9",
+      value: "5.0",
       labelKey: "stats.appStoreRating"
     }
   ] as StatItem[],
@@ -30,7 +30,7 @@ export const stats = {
       labelKey: "stats.activeUsers"
     },
     {
-      value: "4.9★",
+      value: "5.0★",
       labelKey: "stats.appRating"
     },
     {
