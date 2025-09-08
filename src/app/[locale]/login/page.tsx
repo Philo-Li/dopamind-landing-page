@@ -122,13 +122,21 @@ export default function LoginPage({ params }: LoginPageProps) {
             </button>
           </div>
 
-          <div className="text-center">
+          <div className="text-center space-y-2">
             <Link
-              href={`/${locale}`}
-              className="font-medium text-primary hover:text-primary-600"
+              href={`/${locale}/forgot-password`}
+              className="text-sm font-medium text-primary hover:text-primary-600"
             >
-              {t.login.backToHome}
+              {t.login.forgotPassword}
             </Link>
+            <div>
+              <Link
+                href={`/${locale}`}
+                className="font-medium text-primary hover:text-primary-600"
+              >
+                {t.login.backToHome}
+              </Link>
+            </div>
           </div>
         </form>
       </div>

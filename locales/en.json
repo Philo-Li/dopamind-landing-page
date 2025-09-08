@@ -23,7 +23,33 @@
     "password": "Password",
     "loginButton": "Sign in",
     "loggingIn": "Signing in...",
-    "backToHome": "← Back to Home"
+    "backToHome": "← Back to Home",
+    "forgotPassword": "Forgot your password?"
+  },
+  "forgotPassword": {
+    "title": "Forgot Password",
+    "subtitle": "Enter your email address and we'll send you a link to reset your password.",
+    "email": "Email address",
+    "sendButton": "Send Reset Link",
+    "sending": "Sending...",
+    "backToLogin": "← Back to Login",
+    "emailSent": "Reset email sent! Please check your email and click the link to reset your password.",
+    "emailNotFound": "No account found with this email address.",
+    "error": "An error occurred while sending the reset email. Please try again later."
+  },
+  "resetPassword": {
+    "title": "Reset Password",
+    "subtitle": "Please enter your new password.",
+    "newPassword": "New Password",
+    "confirmNewPassword": "Confirm New Password",
+    "resetButton": "Reset Password",
+    "resetting": "Resetting...",
+    "success": "Password reset successfully! You can now login with your new password.",
+    "goToLogin": "Go to Login",
+    "invalidToken": "Reset link is invalid or has expired.",
+    "error": "An error occurred while resetting your password. Please try again later.",
+    "passwordMismatch": "Passwords do not match.",
+    "passwordTooShort": "Password must be at least 6 characters."
   },
   "register": {
     "title": "Create a new account",

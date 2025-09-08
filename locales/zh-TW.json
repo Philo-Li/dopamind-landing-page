@@ -23,7 +23,33 @@
     "password": "密碼",
     "loginButton": "登入",
     "loggingIn": "登入中...",
-    "backToHome": "← 返回首頁"
+    "backToHome": "← 返回首頁",
+    "forgotPassword": "忘記密碼？"
+  },
+  "forgotPassword": {
+    "title": "忘記密碼",
+    "subtitle": "輸入您的電子信箱地址，我們將發送重設密碼的連結給您。",
+    "email": "電子信箱",
+    "sendButton": "發送重設連結",
+    "sending": "發送中...",
+    "backToLogin": "← 返回登入",
+    "emailSent": "重設郵件已發送！請檢查您的信箱並點擊連結重設密碼。",
+    "emailNotFound": "未找到該信箱地址對應的帳戶。",
+    "error": "發送重設郵件時出現錯誤，請稍後重試。"
+  },
+  "resetPassword": {
+    "title": "重設密碼",
+    "subtitle": "請輸入您的新密碼。",
+    "newPassword": "新密碼",
+    "confirmNewPassword": "確認新密碼",
+    "resetButton": "重設密碼",
+    "resetting": "重設中...",
+    "success": "密碼重設成功！現在您可以使用新密碼登入了。",
+    "goToLogin": "前往登入",
+    "invalidToken": "重設連結無效或已過期。",
+    "error": "重設密碼時出現錯誤，請稍後重試。",
+    "passwordMismatch": "兩次輸入的密碼不一致。",
+    "passwordTooShort": "密碼至少需要6個字元。"
   },
   "register": {
     "title": "建立新帳戶",

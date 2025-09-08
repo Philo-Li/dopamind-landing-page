@@ -23,7 +23,33 @@
     "password": "パスワード",
     "loginButton": "サインイン",
     "loggingIn": "サインイン中...",
-    "backToHome": "← ホームに戻る"
+    "backToHome": "← ホームに戻る",
+    "forgotPassword": "パスワードをお忘れですか？"
+  },
+  "forgotPassword": {
+    "title": "パスワードを忘れた場合",
+    "subtitle": "メールアドレスを入力してください。パスワードリセット用のリンクをお送りします。",
+    "email": "メールアドレス",
+    "sendButton": "リセットリンクを送信",
+    "sending": "送信中...",
+    "backToLogin": "← ログインに戻る",
+    "emailSent": "リセットメールを送信しました！メールをご確認いただき、リンクをクリックしてパスワードをリセットしてください。",
+    "emailNotFound": "このメールアドレスに対応するアカウントが見つかりません。",
+    "error": "リセットメールの送信中にエラーが発生しました。後でもう一度お試しください。"
+  },
+  "resetPassword": {
+    "title": "パスワードリセット",
+    "subtitle": "新しいパスワードを入力してください。",
+    "newPassword": "新しいパスワード",
+    "confirmNewPassword": "新しいパスワードの確認",
+    "resetButton": "パスワードをリセット",
+    "resetting": "リセット中...",
+    "success": "パスワードのリセットが完了しました！新しいパスワードでログインできます。",
+    "goToLogin": "ログインへ",
+    "invalidToken": "リセットリンクが無効であるか期限切れです。",
+    "error": "パスワードのリセット中にエラーが発生しました。後でもう一度お試しください。",
+    "passwordMismatch": "パスワードが一致しません。",
+    "passwordTooShort": "パスワードは最低6文字必要です。"
   },
   "register": {
     "title": "新しいアカウントを作成",
