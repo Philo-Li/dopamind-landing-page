@@ -4,6 +4,103 @@ import { getChangelog } from '../../../lib/changelog';
 import AndroidDownloadButton from '../../../components/AndroidDownloadButton';
 import AppStoreButton from '../../../components/AppStoreButton';
 
+// 格式化 changelog 内容为 HTML
+function formatChangelogContent(content: string): string {
+  if (!content) return '';
+  
+  const lines = content.split('\n');
+  const formattedLines: string[] = [];
+  let inList = false;
+  
+  for (const line of lines) {
+    const trimmedLine = line.trim();
+    
+    // 跳过版本标题行
+    if (trimmedLine.startsWith('##') || trimmedLine.startsWith('###') || trimmedLine === '---') {
+      continue;
+    }
+    
+    // 处理粗体段落标题 (e.g., **【New Features & Major Improvements】**)
+    if (trimmedLine.match(/^\*\*【.+】\*\*$/) || trimmedLine.match(/^\*\*[^*]+:\*\*$/)) {
+      if (inList) {
+        formattedLines.push('</ul>');
+        inList = false;
+      }
+      const text = trimmedLine.replace(/^\*\*(.+)\*\*$/, '$1');
+      formattedLines.push(`<h4 class="font-semibold text-foreground mt-4 mb-2">${text}</h4>`);
+      continue;
+    }
+    
+    // 处理主要功能点 (• **🚀 Complete Focus Mode Overhaul:**)
+    if (trimmedLine.match(/^• \*\*[^:]+:\*\*/)) {
+      if (!inList) {
+        formattedLines.push('<ul class="space-y-3">');
+        inList = true;
+      }
+      const match = trimmedLine.match(/^• \*\*([^:]+):\*\*(.*)/);
+      if (match) {
+        const title = match[1];
+        const description = match[2].trim();
+        formattedLines.push(`<li class="text-sm"><strong class="text-foreground">${title}:</strong>${description ? ' ' + description : ''}</li>`);
+      }
+      continue;
+    }
+    
+    // 处理子功能点 (  - **New Stopwatch Mode**: description)
+    if (trimmedLine.match(/^\s*-\s+\*\*[^:]+\*\*:/)) {
+      if (!inList) {
+        formattedLines.push('<ul class="space-y-2 ml-4">');
+        inList = true;
+      }
+      const match = trimmedLine.match(/^\s*-\s+\*\*([^:]+)\*\*:\s*(.*)/);
+      if (match) {
+        const title = match[1];
+        const description = match[2];
+        formattedLines.push(`<li class="text-sm"><strong class="text-primary">${title}</strong>: ${description}</li>`);
+      }
+      continue;
+    }
+    
+    // 处理简单的子点 (  - description)
+    if (trimmedLine.match(/^\s*-\s+/)) {
+      if (!inList) {
+        formattedLines.push('<ul class="space-y-1 ml-4">');
+        inList = true;
+      }
+      const description = trimmedLine.replace(/^\s*-\s+/, '');
+      formattedLines.push(`<li class="text-sm text-muted">${description}</li>`);
+      continue;
+    }
+    
+    // 处理简单的功能点 (• description)
+    if (trimmedLine.startsWith('• ')) {
+      if (!inList) {
+        formattedLines.push('<ul class="space-y-2">');
+        inList = true;
+      }
+      const description = trimmedLine.substring(2);
+      formattedLines.push(`<li class="text-sm">${description}</li>`);
+      continue;
+    }
+    
+    // 处理普通段落
+    if (trimmedLine && !trimmedLine.startsWith('#')) {
+      if (inList) {
+        formattedLines.push('</ul>');
+        inList = false;
+      }
+      formattedLines.push(`<p class="text-sm text-muted mb-2">${trimmedLine}</p>`);
+    }
+  }
+  
+  // 确保最后的列表被关闭
+  if (inList) {
+    formattedLines.push('</ul>');
+  }
+  
+  return formattedLines.join('\n');
+}
+
 interface DownloadPageProps {
   params: Promise<{
     locale: string;
@@ -156,12 +253,13 @@ export default async function DownloadPage({ params }: DownloadPageProps) {
                         </h4>
                       </div>
                       
-                      <div className="space-y-3">
-                        {version.features.map((feature, featureIndex) => (
-                          <div key={featureIndex} className="text-muted">
-                            • {feature}
-                          </div>
-                        ))}
+                      <div className="space-y-4">
+                        <div 
+                          className="prose prose-sm max-w-none text-muted"
+                          dangerouslySetInnerHTML={{ 
+                            __html: formatChangelogContent(version.content) 
+                          }} 
+                        />
                       </div>
                     </div>
                   </div>

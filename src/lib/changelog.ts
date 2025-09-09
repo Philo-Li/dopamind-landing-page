@@ -7,6 +7,7 @@ export interface ChangelogVersion {
   date: string;
   emoji: string;
   features: string[];
+  content: string; // 完整的原始内容
 }
 
 export interface ChangelogData {
@@ -23,10 +24,11 @@ const parseMarkdownChangelog = (content: string): ChangelogData => {
   const versions: ChangelogVersion[] = [];
   
   let currentVersion: Partial<ChangelogVersion> = {};
-  let currentFeatures: string[] = [];
-  let inFeatures = false;
+  let currentVersionContent: string[] = [];
+  let versionStartIndex = -1;
   
-  for (const line of lines) {
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
     const trimmedLine = line.trim();
     
     // Extract main title
@@ -44,10 +46,15 @@ const parseMarkdownChangelog = (content: string): ChangelogData => {
     // Extract version headers (## v1.6.3...)
     if (trimmedLine.startsWith('## v')) {
       // Save previous version if exists
-      if (currentVersion.version && currentVersion.title) {
+      if (currentVersion.version && versionStartIndex !== -1) {
+        const versionEndIndex = i - 1;
+        const versionLines = lines.slice(versionStartIndex, versionEndIndex + 1);
+        const versionContent = versionLines.join('\n').trim();
+        
         versions.push({
           ...currentVersion,
-          features: currentFeatures,
+          content: versionContent,
+          features: extractFeatures(versionContent),
         } as ChangelogVersion);
       }
       
@@ -60,15 +67,15 @@ const parseMarkdownChangelog = (content: string): ChangelogData => {
           title: '', // Will be filled by the next ### line
           emoji: '',
           features: [],
+          content: '',
         };
-        currentFeatures = [];
-        inFeatures = false;
+        versionStartIndex = i;
       }
       continue;
     }
     
     // Extract version title (### 🚀 Title...)
-    if (trimmedLine.startsWith('### ') && currentVersion.version) {
+    if (trimmedLine.startsWith('### ') && currentVersion.version && !currentVersion.title) {
       const titleMatch = trimmedLine.match(/^### (.+)/);
       if (titleMatch) {
         const fullTitle = titleMatch[1];
@@ -82,27 +89,19 @@ const parseMarkdownChangelog = (content: string): ChangelogData => {
           currentVersion.title = fullTitle;
         }
       }
-      inFeatures = true;
       continue;
-    }
-    
-    // Extract features (bullet points)
-    if (inFeatures && trimmedLine.startsWith('• ')) {
-      currentFeatures.push(trimmedLine.substring(2));
-      continue;
-    }
-    
-    // Stop collecting features when we hit a separator or empty line after features
-    if (inFeatures && (trimmedLine === '---' || (trimmedLine === '' && currentFeatures.length > 0))) {
-      inFeatures = false;
     }
   }
   
   // Add the last version
-  if (currentVersion.version && currentVersion.title) {
+  if (currentVersion.version && versionStartIndex !== -1) {
+    const versionLines = lines.slice(versionStartIndex);
+    const versionContent = versionLines.join('\n').trim();
+    
     versions.push({
       ...currentVersion,
-      features: currentFeatures,
+      content: versionContent,
+      features: extractFeatures(versionContent),
     } as ChangelogVersion);
   }
   
@@ -111,6 +110,27 @@ const parseMarkdownChangelog = (content: string): ChangelogData => {
     description,
     versions,
   };
+};
+
+// 提取功能点的辅助函数
+const extractFeatures = (content: string): string[] => {
+  const features: string[] = [];
+  const lines = content.split('\n');
+  
+  for (const line of lines) {
+    const trimmedLine = line.trim();
+    
+    // 匹配简单的 bullet points
+    if (trimmedLine.startsWith('• ')) {
+      features.push(trimmedLine.substring(2));
+    }
+    // 匹配带子项的功能点 (e.g., • **🚀 Complete Focus Mode Overhaul:**)
+    else if (trimmedLine.match(/^• \*\*[^:]+:\*\*/)) {
+      features.push(trimmedLine.substring(2));
+    }
+  }
+  
+  return features;
 };
 
 export const getChangelog = (locale: string): ChangelogData => {

@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Work/CS/GitHub/dopamind/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
