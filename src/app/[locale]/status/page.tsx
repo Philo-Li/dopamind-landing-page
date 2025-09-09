@@ -3,6 +3,9 @@ import { getTranslation } from '../../../lib/i18n';
 import { fetchHealthStatus, getFallbackHealthStatus, isSystemOperational } from '../../../lib/healthApi';
 import { Metadata } from 'next';
 
+// Force dynamic rendering for this page
+export const dynamic = 'force-dynamic';
+
 interface StatusPageProps {
   params: Promise<{
     locale: string;

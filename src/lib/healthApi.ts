@@ -44,8 +44,8 @@ export async function fetchHealthStatus(): Promise<HealthApiResponse> {
         'Content-Type': 'application/json',
       },
       signal: controller.signal,
-      // Add cache control to ensure fresh data
-      cache: 'no-store',
+      // Use revalidate instead of no-store for better Next.js compatibility
+      next: { revalidate: 60 },
     });
 
     clearTimeout(timeoutId);

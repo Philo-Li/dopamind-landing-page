@@ -24,7 +24,6 @@ const parseMarkdownChangelog = (content: string): ChangelogData => {
   const versions: ChangelogVersion[] = [];
   
   let currentVersion: Partial<ChangelogVersion> = {};
-  let currentVersionContent: string[] = [];
   let versionStartIndex = -1;
   
   for (let i = 0; i < lines.length; i++) {
