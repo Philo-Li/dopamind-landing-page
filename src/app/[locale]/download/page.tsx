@@ -17,14 +17,14 @@ export default async function DownloadPage({ params }: DownloadPageProps) {
   
   // 应用信息
   const appInfo = {
-    version: '1.6.3',
-    lastUpdated: '2025-08-31',
+    version: '1.7.0',
+    lastUpdated: '2025-09-09',
     ios: {
       size: '29.2 MB'
     },
     android: {
       size: '95 MB',
-      downloadUrl: 'https://r2.dopamind.app/dopamind-android-release-1.6.3.apk'
+      downloadUrl: 'https://r2.dopamind.app/dopamind-android-release-1.7.0.apk'
     }
   };
 
