@@ -3,16 +3,31 @@ import React from 'react';
 interface AppStoreButtonProps {
   size?: 'small' | 'large';
   className?: string;
+  locale?: string;
 }
 
-export default function AppStoreButton({ size = 'small', className = '' }: AppStoreButtonProps) {
+export default function AppStoreButton({ size = 'small', className = '', locale = 'en' }: AppStoreButtonProps) {
   const sizeClasses = size === 'large' 
     ? 'px-10 py-5 text-base' 
     : 'px-8 py-4 text-sm';
 
+  const getAppStoreLink = (locale: string) => {
+    switch (locale) {
+      case 'zh':
+        return 'https://apps.apple.com/cn/app/dopamind-ai/id6747915249';
+      case 'zh-TW':
+        return 'https://apps.apple.com/tw/app/dopamind-ai/id6747915249';
+      case 'ja':
+        return 'https://apps.apple.com/jp/app/dopamind-ai/id6747915249';
+      case 'en':
+      default:
+        return 'https://apps.apple.com/us/app/dopamind-ai/id6747915249';
+    }
+  };
+
   return (
     <a 
-      href="https://apps.apple.com/jp/app/dopamind-ai/id6747915249?l=en-US" 
+      href={getAppStoreLink(locale)} 
       className={`
         group relative inline-flex items-center justify-center 
         ${sizeClasses}

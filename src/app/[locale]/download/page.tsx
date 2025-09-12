@@ -183,7 +183,7 @@ export default async function DownloadPage({ params }: DownloadPageProps) {
                 </div>
                 
                 <div className="flex justify-center">
-                  <AppStoreButton size="large" />
+                  <AppStoreButton size="large" locale={locale} />
                 </div>
               </div>
 

@@ -91,7 +91,7 @@ export default async function HomePage({ params }: HomePageProps) {
                 </p>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-4">
                   <div className="flex flex-col sm:flex-row gap-3">
-                    <AppStoreButton size="small" />
+                    <AppStoreButton size="small" locale={locale} />
                     <AndroidDownloadLink size="small" locale={locale} />
                   </div>
                   <div className="flex flex-col justify-center">
@@ -465,7 +465,7 @@ export default async function HomePage({ params }: HomePageProps) {
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
               <div className="flex flex-col sm:flex-row gap-4">
-                <AppStoreButton size="large" />
+                <AppStoreButton size="large" locale={locale} />
                 <AndroidDownloadLink size="large" locale={locale} />
               </div>
               <div className="text-center">
