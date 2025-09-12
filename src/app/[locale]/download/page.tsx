@@ -41,7 +41,9 @@ function formatChangelogContent(content: string): string {
       if (match) {
         const title = match[1];
         const description = match[2].trim();
-        formattedLines.push(`<li class="text-sm"><strong class="text-foreground">${title}:</strong>${description ? ' ' + description : ''}</li>`);
+        // 处理描述中的markdown粗体语法
+        const processedDescription = description ? ' ' + description.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>') : '';
+        formattedLines.push(`<li class="text-sm"><strong class="text-foreground">${title}:</strong>${processedDescription}</li>`);
       }
       continue;
     }
@@ -56,7 +58,9 @@ function formatChangelogContent(content: string): string {
       if (match) {
         const title = match[1];
         const description = match[2];
-        formattedLines.push(`<li class="text-sm"><strong class="text-primary">${title}</strong>: ${description}</li>`);
+        // 处理描述中的markdown粗体语法
+        const processedDescription = description.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+        formattedLines.push(`<li class="text-sm"><strong class="text-primary">${title}</strong>: ${processedDescription}</li>`);
       }
       continue;
     }
@@ -68,7 +72,9 @@ function formatChangelogContent(content: string): string {
         inList = true;
       }
       const description = trimmedLine.replace(/^\s*-\s+/, '');
-      formattedLines.push(`<li class="text-sm text-muted">${description}</li>`);
+      // 处理描述中的markdown粗体语法
+      const processedDescription = description.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      formattedLines.push(`<li class="text-sm text-muted">${processedDescription}</li>`);
       continue;
     }
     
@@ -79,7 +85,9 @@ function formatChangelogContent(content: string): string {
         inList = true;
       }
       const description = trimmedLine.substring(2);
-      formattedLines.push(`<li class="text-sm">${description}</li>`);
+      // 处理描述中的markdown粗体语法
+      const processedDescription = description.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      formattedLines.push(`<li class="text-sm">${processedDescription}</li>`);
       continue;
     }
     
@@ -89,7 +97,9 @@ function formatChangelogContent(content: string): string {
         formattedLines.push('</ul>');
         inList = false;
       }
-      formattedLines.push(`<p class="text-sm text-muted mb-2">${trimmedLine}</p>`);
+      // 处理段落中的markdown粗体语法
+      const processedLine = trimmedLine.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      formattedLines.push(`<p class="text-sm text-muted mb-2">${processedLine}</p>`);
     }
   }
   
