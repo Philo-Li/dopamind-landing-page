@@ -9,3 +9,13 @@
     @apply antialiased; /* 抗锯齿，让字体更平滑 */
   }
 }
+
+/* 智能语言横幅样式 */
+body.has-language-banner {
+  --language-banner-height: 48px;
+}
+
+/* 当有语言横幅时，调整导航栏位置 */
+body.has-language-banner .sticky {
+  top: var(--language-banner-height, 0px) !important;
+}
