@@ -35,15 +35,21 @@ export default function Navigation({ locale, logoAlt }: NavigationProps) {
           <a href={`/${locale}#features`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.features}</a>
           <a href={`/${locale}#how-it-works`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.howItWorks}</a>
           <a href={`/${locale}/pricing`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.pricing}</a>
-          <a href={`/${locale}/download`} className="text-sm font-medium text-muted transition-colors hover:text-primary">Download</a>
+          <a href={`/${locale}/download`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.download}</a>
           <a href={`/${locale}/support`} className="text-sm font-medium text-muted transition-colors hover:text-primary">{t.navigation.support}</a>
         </nav>
         
         {/* 右侧工具栏 */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
+          {/* 桌面端工具栏 */}
           <div className="hidden md:flex items-center gap-4">
             <LanguageSwitcher currentLocale={locale} />
             <AuthButton locale={locale} />
+          </div>
+          
+          {/* 移动端语言选择器 - 只显示国旗 */}
+          <div className="md:hidden">
+            <LanguageSwitcher currentLocale={locale} compact={true} />
           </div>
           
           {/* 移动端汉堡菜单按钮 */}
@@ -87,7 +93,7 @@ export default function Navigation({ locale, logoAlt }: NavigationProps) {
               className="px-4 py-2 text-sm font-medium text-muted hover:bg-gray-50 hover:text-primary transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Download
+              {t.navigation.download}
             </a>
             <a 
               href={`/${locale}/support`} 
@@ -96,8 +102,7 @@ export default function Navigation({ locale, logoAlt }: NavigationProps) {
             >
               {t.navigation.support}
             </a>
-            <div className="px-4 pt-4 pb-2 border-t border-gray-200 mt-2 flex items-center gap-4">
-              <LanguageSwitcher currentLocale={locale} />
+            <div className="px-4 pt-4 pb-2 border-t border-gray-200 mt-2 flex items-center justify-center">
               <AuthButton locale={locale} />
             </div>
           </nav>

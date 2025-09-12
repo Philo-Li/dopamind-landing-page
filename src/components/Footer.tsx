@@ -35,7 +35,7 @@ export default function Footer({ locale, logoAlt = "Dopamind Logo" }: FooterProp
               <li><a href={`/${locale}#features`} className="hover:text-primary transition-colors">{t.navigation.features}</a></li>
               <li><a href={`/${locale}#how-it-works`} className="hover:text-primary transition-colors">{t.navigation.howItWorks}</a></li>
               <li><a href={`/${locale}/pricing`} className="hover:text-primary transition-colors">{t.navigation.pricing}</a></li>
-              <li><a href={`/${locale}/download`} className="hover:text-primary transition-colors">Download</a></li>
+              <li><a href={`/${locale}/download`} className="hover:text-primary transition-colors">{t.navigation.download}</a></li>
             </ul>
           </div>
           <div>
