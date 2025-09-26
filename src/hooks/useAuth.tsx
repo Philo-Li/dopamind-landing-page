@@ -41,13 +41,46 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [premiumStatus, setPremiumStatus] = useState<PremiumStatus | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // 初始化时从 localStorage 恢复用户状态
+  // 从cookie中获取值的辅助函数
+  const getCookie = (name: string): string | null => {
+    if (typeof document === 'undefined') return null;
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop()?.split(';').shift() || null;
+    return null;
+  };
+
+  // 设置cookie的辅助函数（支持跨子域名）
+  const setCookie = (name: string, value: string, days: number = 30) => {
+    if (typeof document === 'undefined') return;
+    const expires = new Date();
+    expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+
+    // 判断是否在生产环境
+    const isProduction = window.location.hostname.includes('dopamind.app');
+    const domain = isProduction ? '.dopamind.app' : '';
+    const secure = isProduction ? ';Secure' : '';
+
+    // 设置cookie，在生产环境下支持跨子域名共享
+    document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/${domain ? `;domain=${domain}` : ''};SameSite=Lax${secure}`;
+  };
+
+  // 删除cookie的辅助函数
+  const deleteCookie = (name: string) => {
+    if (typeof document === 'undefined') return;
+    const isProduction = window.location.hostname.includes('dopamind.app');
+    const domain = isProduction ? '.dopamind.app' : '';
+    document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/${domain ? `;domain=${domain}` : ''}`;
+  };
+
+  // 初始化时从 localStorage 和 cookie 恢复用户状态
   useEffect(() => {
     const initializeAuth = async () => {
       try {
-        const token = localStorage.getItem('token');
-        const userData = localStorage.getItem('user');
-        const premiumData = localStorage.getItem('premiumStatus');
+        // 优先从cookie读取，fallback到localStorage
+        const token = getCookie('token') || localStorage.getItem('token');
+        const userData = getCookie('user') || localStorage.getItem('user');
+        const premiumData = getCookie('premiumStatus') || localStorage.getItem('premiumStatus');
         
         if (token && userData) {
           const parsedUser = JSON.parse(userData);
@@ -63,7 +96,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             const response = await apiService.getProfile(token);
             if (response.user) {
               setUser(response.user);
-              localStorage.setItem('user', JSON.stringify(response.user));
+              const userJson = JSON.stringify(response.user);
+              localStorage.setItem('user', userJson);
+              setCookie('user', userJson);
             }
             
             // 同时获取 premium 状态
@@ -88,11 +123,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsLoading(true);
     try {
       const response: LoginResponse = await apiService.login(email, password, preferredLanguage);
-      
-      // 保存到 localStorage
+
+      // 保存到 localStorage 和 cookie（跨子域名共享）
       localStorage.setItem('token', response.token);
       localStorage.setItem('user', JSON.stringify(response.user));
-      
+      setCookie('token', response.token);
+      setCookie('user', JSON.stringify(response.user));
+
       // 更新状态
       setUser(response.user);
       
@@ -115,11 +152,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsLoading(true);
     try {
       const response: RegisterResponse = await apiService.register(email, password, nickname, referralCode, preferredLanguage);
-      
-      // 保存到 localStorage
+
+      // 保存到 localStorage 和 cookie（跨子域名共享）
       localStorage.setItem('token', response.token);
       localStorage.setItem('user', JSON.stringify(response.user));
-      
+      setCookie('token', response.token);
+      setCookie('user', JSON.stringify(response.user));
+
       // 更新状态
       setUser(response.user);
       
@@ -130,7 +169,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(), // 7 天后
       };
       setPremiumStatus(trialPremium);
-      localStorage.setItem('premiumStatus', JSON.stringify(trialPremium));
+      const premiumJson = JSON.stringify(trialPremium);
+      localStorage.setItem('premiumStatus', premiumJson);
+      setCookie('premiumStatus', premiumJson);
       
     } catch (error) {
       throw error;
@@ -140,24 +181,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const logout = () => {
+    // 清除 localStorage
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     localStorage.removeItem('premiumStatus');
+
+    // 清除 cookies
+    deleteCookie('token');
+    deleteCookie('user');
+    deleteCookie('premiumStatus');
+
     setUser(null);
     setPremiumStatus(null);
   };
 
   const refreshPremiumStatus = async (): Promise<void> => {
-    const token = localStorage.getItem('token');
+    const token = getCookie('token') || localStorage.getItem('token');
     if (!token) return;
 
     try {
       // 这里应该调用获取 premium 状态的 API
       // const premiumResponse = await apiService.getPremiumStatus(token);
       // 暂时使用模拟数据
-      
-      // 检查是否有存储的 premium 状态
-      const storedPremium = localStorage.getItem('premiumStatus');
+
+      // 检查是否有存储的 premium 状态（优先从cookie读取）
+      const storedPremium = getCookie('premiumStatus') || localStorage.getItem('premiumStatus');
       if (storedPremium) {
         const parsedPremium: PremiumStatus = JSON.parse(storedPremium);
         
@@ -172,7 +220,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               isPremium: false,
             };
             setPremiumStatus(expiredStatus);
-            localStorage.setItem('premiumStatus', JSON.stringify(expiredStatus));
+            const expiredJson = JSON.stringify(expiredStatus);
+            localStorage.setItem('premiumStatus', expiredJson);
+            setCookie('premiumStatus', expiredJson);
           } else {
             setPremiumStatus(parsedPremium);
           }

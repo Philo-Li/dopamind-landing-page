@@ -29,8 +29,9 @@ export default function LoginPage({ params }: LoginPageProps) {
     try {
       // 将当前语言作为 preferredLanguage 传递给登录接口
       await login(email, password, locale);
-      // 跳转到仪表板
-      router.push("/dashboard");
+      // 跳转到子域名的仪表盘
+      const webAppUrl = process.env.NEXT_PUBLIC_WEB_APP_URL || "https://web.dopamind.app";
+      window.location.href = `${webAppUrl}/dashboard`;
     } catch (error) {
       setError(error instanceof Error ? error.message : "登录过程中出现错误");
     }

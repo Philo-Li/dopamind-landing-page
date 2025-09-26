@@ -17,14 +17,15 @@ export default function AuthButton({ locale }: AuthButtonProps) {
   }
 
   if (user) {
+    const webAppUrl = process.env.NEXT_PUBLIC_WEB_APP_URL || "https://web.dopamind.app";
     return (
       <div className="flex items-center space-x-4">
-        <Link
-          href="/dashboard"
+        <a
+          href={`${webAppUrl}/dashboard`}
           className="text-sm font-medium text-muted hover:text-foreground"
         >
           {t.auth.dashboard}
-        </Link>
+        </a>
         <span className="text-sm text-muted">
           {user.nickname}
         </span>

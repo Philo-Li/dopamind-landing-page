@@ -126,8 +126,9 @@ function RegisterForm({ locale }: { locale: Locale }) {
         return;
       }
       
-      // 默认跳转到仪表板
-      router.push("/dashboard");
+      // 默认跳转到子域名的仪表盘
+      const webAppUrl = process.env.NEXT_PUBLIC_WEB_APP_URL || "https://web.dopamind.app";
+      window.location.href = `${webAppUrl}/dashboard`;
     } catch (error) {
       setError(error instanceof Error ? error.message : "注册过程中出现错误");
     }
