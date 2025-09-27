@@ -11,6 +11,61 @@ import { getTranslation } from "../../lib/i18n";
 const locale = 'en';
 const t = getTranslation(locale);
 
+const fullyDecode = (raw: string): string => {
+  let current = raw;
+  while (true) {
+    try {
+      const next = decodeURIComponent(current);
+      if (next === current) {
+        return current;
+      }
+      current = next;
+    } catch {
+      return current;
+    }
+  }
+};
+
+const sanitizeRedirectTarget = (rawRedirect: string | null, baseUrl: string): string => {
+  const trimmedBase = baseUrl.replace(/\/$/, "");
+  const fallback = `${trimmedBase}/dashboard`;
+
+  if (!rawRedirect) {
+    return fallback;
+  }
+
+  const decoded = fullyDecode(rawRedirect).trim();
+  if (!decoded) {
+    return fallback;
+  }
+
+  if (decoded.startsWith("/")) {
+    return `${trimmedBase}${decoded}`;
+  }
+
+  try {
+    const baseForUrl = new URL(`${trimmedBase}/`);
+    const candidate = new URL(decoded, baseForUrl);
+    const baseHost = baseForUrl.hostname;
+    const candidateHost = candidate.hostname;
+    const hostParts = baseHost.split(".");
+    const allowedSuffix = hostParts.length >= 2 ? hostParts.slice(-2).join(".") : baseHost;
+
+    const isAllowedHost =
+      candidateHost === baseHost ||
+      candidateHost === allowedSuffix ||
+      candidateHost.endsWith(`.${allowedSuffix}`);
+
+    if (isAllowedHost) {
+      return candidate.toString();
+    }
+  } catch (error) {
+    console.warn("Invalid redirect parameter ignored", error);
+  }
+
+  return fallback;
+};
+
 function RegisterForm() {
   const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
@@ -127,7 +182,28 @@ function RegisterForm() {
 
       // 默认跳转到子域名的仪表盘
       const webAppUrl = process.env.NEXT_PUBLIC_WEB_APP_URL || "https://web.dopamind.app";
-      window.location.href = `${webAppUrl}/dashboard`;
+      const redirectParam = typeof window !== "undefined"
+        ? new URLSearchParams(window.location.search).get('redirect')
+        : null;
+      const targetUrl = sanitizeRedirectTarget(redirectParam, webAppUrl);
+
+      const token = typeof window !== "undefined" ? localStorage.getItem('token') : null;
+      const userJson = typeof window !== "undefined" ? localStorage.getItem('user') : null;
+      const refreshToken = typeof window !== "undefined" ? localStorage.getItem('refreshToken') : null;
+
+      if (token && userJson) {
+        const callbackUrl = new URL('/auth/callback', webAppUrl);
+        callbackUrl.searchParams.set('token', token);
+        if (refreshToken) {
+          callbackUrl.searchParams.set('refreshToken', refreshToken);
+        }
+        callbackUrl.searchParams.set('user', encodeURIComponent(userJson));
+        callbackUrl.searchParams.set('redirect', encodeURIComponent(targetUrl));
+        window.location.href = callbackUrl.toString();
+        return;
+      }
+
+      window.location.href = targetUrl;
     } catch (error) {
       setError(error instanceof Error ? error.message : "An error occurred during registration");
     }

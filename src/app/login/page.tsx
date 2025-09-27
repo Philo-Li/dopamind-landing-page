@@ -83,6 +83,23 @@ export default function LoginPage() {
         ? new URLSearchParams(window.location.search).get("redirect")
         : null;
       const targetUrl = sanitizeRedirectTarget(redirectParam, webAppBaseUrl);
+
+      const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
+      const userJson = typeof window !== "undefined" ? localStorage.getItem("user") : null;
+      const refreshToken = typeof window !== "undefined" ? localStorage.getItem("refreshToken") : null;
+
+      if (token && userJson) {
+        const callbackUrl = new URL("/auth/callback", webAppBaseUrl);
+        callbackUrl.searchParams.set("token", token);
+        if (refreshToken) {
+          callbackUrl.searchParams.set("refreshToken", refreshToken);
+        }
+        callbackUrl.searchParams.set("user", encodeURIComponent(userJson));
+        callbackUrl.searchParams.set("redirect", encodeURIComponent(targetUrl));
+        window.location.href = callbackUrl.toString();
+        return;
+      }
+
       window.location.href = targetUrl;
     } catch (error) {
       setError(error instanceof Error ? error.message : "An error occurred during login");
