@@ -1,5 +1,5 @@
 import { CheckCircle, AlertTriangle } from 'lucide-react';
-import { getTranslation } from '../../../lib/i18n';
+import { getTranslation } from '@/lib/i18n';
 import { getChangelog } from '../../../lib/changelog';
 import AndroidDownloadButton from '../../../components/AndroidDownloadButton';
 import AppStoreButton from '../../../components/AppStoreButton';
@@ -288,7 +288,7 @@ export default async function DownloadPage({ params }: DownloadPageProps) {
                   {t.download.requirements.title}
                 </h2>
                 <ul className="space-y-4">
-                  {t.download.requirements.items.map((requirement, index) => (
+                  {t.download.requirements.items.map((requirement: any, index: number) => (
                     <li key={index} className="flex items-start gap-3">
                       <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-green-500" />
                       <span className="text-muted">{requirement}</span>
@@ -299,7 +299,7 @@ export default async function DownloadPage({ params }: DownloadPageProps) {
               
               {/* 安全保障卡片 */}
               <div className="grid gap-4">
-                {t.download.security.items.map((item, index) => (
+                {t.download.security.items.map((item: any, index: number) => (
                   <div key={index} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
                     <div className="flex items-start gap-4">
                       <div className="text-2xl">{item.icon}</div>
@@ -334,7 +334,7 @@ export default async function DownloadPage({ params }: DownloadPageProps) {
             
             <div className="max-w-4xl mx-auto">
               <div className="grid gap-8 md:grid-cols-2">
-                {t.download.installation.steps.map((step, index) => (
+                {t.download.installation.steps.map((step: any, index: number) => (
                   <div key={index} className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
                     <div className="flex items-center gap-4 mb-4">
                       <div className="flex items-center justify-center w-10 h-10 bg-green-100 rounded-full font-bold text-green-600">
@@ -360,7 +360,7 @@ export default async function DownloadPage({ params }: DownloadPageProps) {
             </div>
             
             <div className="max-w-4xl mx-auto space-y-6">
-              {t.download.faq.items.map((faq, index) => (
+              {t.download.faq.items.map((faq: any, index: number) => (
                 <div key={index} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
                   <h3 className="font-bold text-foreground mb-3 text-lg">{faq.question}</h3>
                   <p className="text-muted">{faq.answer}</p>
@@ -373,3 +373,6 @@ export default async function DownloadPage({ params }: DownloadPageProps) {
       </>
   );
 }
+
+
+

@@ -1,12 +1,130 @@
-/* src/app/globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 24 95% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 24 95% 55%;
+    --scrollbar-track: 0 0% 92%;
+    --scrollbar-thumb: 0 0% 46%;
+    --scrollbar-thumb-hover: 0 0% 16%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 220 26% 7%;
+    --foreground: 220 9% 98%;
+    --card: 220 20% 14%;
+    --card-foreground: 220 9% 98%;
+    --popover: 220 20% 14%;
+    --popover-foreground: 220 9% 98%;
+    --primary: 22 89% 52%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 13% 20%;
+    --secondary-foreground: 220 9% 98%;
+    --muted: 220 13% 20%;
+    --muted-foreground: 220 9% 65%;
+    --accent: 220 13% 20%;
+    --accent-foreground: 220 9% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 220 9% 98%;
+    --border: 220 13% 28%;
+    --input: 220 13% 28%;
+    --ring: 22 89% 52%;
+    --scrollbar-track: 0 0% 12%;
+    --scrollbar-thumb: 0 0% 65%;
+    --scrollbar-thumb-hover: 0 0% 92%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html[data-i18n='pending'] body {
+    visibility: hidden;
+  }
+
+  html,
+  body {
+    min-height: 100%;
+  }
+
   body {
     @apply bg-background text-foreground;
-    @apply antialiased; /* 抗锯齿，让字体更平滑 */
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  body.marketing-page {
+    overflow: auto;
+  }
+
+  body.app-shell {
+    overflow: hidden;
+  }
+
+  #root {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  body.marketing-page #root {
+    min-height: 100vh;
+  }
+}
+
+@layer base {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--scrollbar-thumb)) hsl(var(--scrollbar-track));
+  }
+
+  *::-webkit-scrollbar {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: hsl(var(--scrollbar-track));
+    border-radius: 9999px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, hsl(var(--scrollbar-thumb)) 0%, hsl(var(--scrollbar-thumb-hover)) 100%);
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--scrollbar-thumb-hover));
+  }
+
+  *::-webkit-scrollbar-corner {
+    background: transparent;
   }
 }
 
@@ -19,3 +137,8 @@ body.has-language-banner {
 body.has-language-banner .sticky {
   top: var(--language-banner-height, 0px) !important;
 }
+
+
+
+
+

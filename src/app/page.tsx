@@ -4,15 +4,19 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { CheckCircle, Calendar, Brain, Clock, TrendingUp, Cloud, RefreshCw, Shield, X, Globe } from 'lucide-react';
-import { getTranslation } from '../lib/i18n';
+import { getLandingTranslation } from '@/lib/i18n';
+import { defaultHomeContent, defaultFooterContent, defaultNavigationContent, deepMerge, cloneDeep } from '@/content/defaultLandingContent';
 import { stats } from '../config/stats';
 import AppStoreButton from '../components/AppStoreButton';
 import AndroidDownloadLink from '../components/AndroidDownloadLink';
 import Footer from '../components/Footer';
 import Navigation from '../components/Navigation';
+import MarketingBodyClass from '@/components/MarketingBodyClass';
 
 // 获取英文翻译内容
-const t = getTranslation('en');
+const translations = getLandingTranslation('en');
+const t = translations.home ?? defaultHomeContent;
+const pricingStrings = translations.pricing ?? {};
 const locale = 'en';
 
 // 图片路径生成函数
@@ -128,7 +132,7 @@ function SmartLanguageBanner() {
   if (!isVisible) return null;
 
   const languageInfo = getLanguageInfo();
-  
+
   return (
     <>
       {/* 智能语言提示横幅 */}
@@ -137,7 +141,7 @@ function SmartLanguageBanner() {
           <div className="flex items-center justify-between h-12">
             <div className="flex items-center gap-3 text-sm">
               <span className="text-lg">{languageInfo.flag}</span>
-              <span className="text-gray-700">
+              <span className="text-muted-foreground">
                 <span className="font-medium">{languageInfo.greeting}!</span> Dopamind is now available in {languageInfo.name}
               </span>
             </div>
@@ -150,13 +154,13 @@ function SmartLanguageBanner() {
               </button>
               <button
                 onClick={dismissBanner}
-                className="px-3 py-1 text-sm font-medium text-gray-600 hover:text-gray-700 hover:bg-gray-100 rounded-md transition-colors"
+                className="px-3 py-1 text-sm font-medium text-muted-foreground hover:text-muted-foreground hover:bg-gray-100 rounded-md transition-colors"
               >
                 Stay in English
               </button>
               <button
                 onClick={dismissBanner}
-                className="p-1 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-md transition-colors"
+                className="p-1 text-muted-foreground hover:text-muted-foreground hover:bg-gray-100 rounded-md transition-colors"
                 aria-label="Close language banner"
               >
                 <X className="h-4 w-4" />
@@ -165,23 +169,26 @@ function SmartLanguageBanner() {
           </div>
         </div>
       </div>
-      
+
       {/* 占位符 */}
       <div className="h-12" />
     </>
   );
+
 }
 
 export default function HomePage() {
   return (
-    <div className="flex min-h-screen flex-col bg-gradient-to-b from-white to-gray-50">
+    <>
+      <MarketingBodyClass />
+      <div className="flex min-h-screen flex-col bg-gradient-to-b from-white to-gray-50">
       {/* 智能语言提示横幅 */}
       <SmartLanguageBanner />
       
       {/* Header */}
       <Navigation locale={locale} logoAlt={getImageAlt('logo')} />
 
-      <main>
+            <main>
         {/* 1. Hero Section - 使用图1 */}
         <section className="w-full py-16 md:py-24 lg:py-32 bg-gradient-to-br from-orange-50 to-orange-100 overflow-hidden">
           <div className="container mx-auto px-4 md:px-6">
@@ -189,14 +196,14 @@ export default function HomePage() {
               {/* 左侧文案 */}
               <div className="lg:col-span-7 flex flex-col justify-center space-y-6">
                 <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm font-medium text-primary w-fit">
-                  {t.home.hero.badge}
+                  {t.hero?.badge ?? 'ADHD Support'}
                 </div>
                 <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-                  {t.home.hero.title}<br />
-                  <span className="text-primary">{t.home.hero.titleHighlight}</span>
+                  {t.hero?.title ?? 'Focus Better with Dopamind'}<br />
+                  <span className="text-primary">{t.hero?.titleHighlight ?? 'Built for ADHD brains'}</span>
                 </h1>
-                <p className="text-lg text-muted md:text-xl max-w-2xl">
-                  {t.home.hero.subtitle}
+                <p className="text-lg text-muted-foreground md:text-xl max-w-2xl">
+                  {t.hero?.subtitle ?? 'AI-powered focus companion to help you plan, start, and finish your day.'}
                 </p>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-4">
                   <div className="flex flex-col sm:flex-row gap-3">
@@ -204,7 +211,7 @@ export default function HomePage() {
                     <AndroidDownloadLink size="small" locale={locale} />
                   </div>
                   <div className="flex flex-col justify-center">
-                    <p className="text-sm text-muted">{t.home.hero.downloadText}</p>
+                    <p className="text-sm text-muted-foreground">{t.hero.downloadText}</p>
                   </div>
                 </div>
               </div>
@@ -250,16 +257,16 @@ export default function HomePage() {
             <div className="grid gap-12 lg:grid-cols-2 lg:gap-20 items-center mb-20">
               <div className="flex flex-col justify-center space-y-6">
                 <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-                  {t.home.features.section1.title}
+                  {t.features.section1.title}
                 </h2>
-                <p className="text-lg text-muted md:text-xl">
-                  {t.home.features.section1.subtitle}
+                <p className="text-lg text-muted-foreground md:text-xl">
+                  {t.features.section1.subtitle}
                 </p>
                 <ul className="space-y-3">
-                  {t.home.features.section1.points.map((point, index) => (
+                  {t.features.section1.points.map((point: any, index: number) => (
                     <li key={index} className="flex items-start gap-3">
                       <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
-                      <span className="text-muted">{point}</span>
+                      <span className="text-muted-foreground">{point}</span>
                     </li>
                   ))}
                 </ul>
@@ -288,16 +295,16 @@ export default function HomePage() {
               </div>
               <div className="order-1 lg:order-2 flex flex-col justify-center space-y-6">
                 <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-                  {t.home.features.section2.title}
+                  {t.features.section2.title}
                 </h2>
-                <p className="text-lg text-muted md:text-xl">
-                  {t.home.features.section2.subtitle}
+                <p className="text-lg text-muted-foreground md:text-xl">
+                  {t.features.section2.subtitle}
                 </p>
                 <ul className="space-y-3">
-                  {t.home.features.section2.points.map((point, index) => (
+                  {t.features.section2.points.map((point: any, index: number) => (
                     <li key={index} className="flex items-start gap-3">
                       <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
-                      <span className="text-muted">{point}</span>
+                      <span className="text-muted-foreground">{point}</span>
                     </li>
                   ))}
                 </ul>
@@ -318,19 +325,19 @@ export default function HomePage() {
                     <Brain className="h-5 w-5 text-primary" />
                   </div>
                   <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-                    {t.home.howItWorks.section1.title}
+                    {t.howItWorks.section1.title}
                   </h2>
                 </div>
-                <p className="text-lg text-muted md:text-xl">
-                  {t.home.howItWorks.section1.subtitle}
+                <p className="text-lg text-muted-foreground md:text-xl">
+                  {t.howItWorks.section1.subtitle}
                 </p>
                 <div className="bg-white rounded-lg p-6 shadow-sm">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                    <span className="font-medium text-foreground">{t.home.howItWorks.section1.example.title}</span>
+                    <span className="font-medium text-foreground">{t.howItWorks.section1.example.title}</span>
                   </div>
-                  <div className="space-y-2 text-sm text-muted ml-6">
-                    {t.home.howItWorks.section1.example.steps.map((step, index) => (
+                  <div className="space-y-2 text-sm text-muted-foreground ml-6">
+                    {t.howItWorks.section1.example.steps.map((step: any, index: number) => (
                       <p key={index}>• {step}</p>
                     ))}
                   </div>
@@ -364,20 +371,20 @@ export default function HomePage() {
                     <Clock className="h-5 w-5 text-primary" />
                   </div>
                   <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-                    {t.home.howItWorks.section2.title}
+                    {t.howItWorks.section2.title}
                   </h2>
                 </div>
-                <p className="text-lg text-muted md:text-xl">
-                  {t.home.howItWorks.section2.subtitle}
+                <p className="text-lg text-muted-foreground md:text-xl">
+                  {t.howItWorks.section2.subtitle}
                 </p>
                 <div className="grid grid-cols-3 gap-4">
-                  {t.home.howItWorks.section2.stats.map((stat, index) => (
+                  {t.howItWorks?.section2?.stats?.map((stat: any, index: number) => (
                     <div key={index} className="bg-white rounded-lg p-4 text-center shadow-sm">
                       <div className={`text-2xl font-bold ${
-                        index === 0 ? 'text-primary' : 
+                        index === 0 ? 'text-primary' :
                         index === 1 ? 'text-green-500' : 'text-blue-500'
                       }`}>{stat.value}</div>
-                      <div className="text-sm text-muted">{stat.label}</div>
+                      <div className="text-sm text-muted-foreground">{stat.label}</div>
                     </div>
                   ))}
                 </div>
@@ -395,11 +402,11 @@ export default function HomePage() {
                   <Calendar className="h-6 w-6 text-primary" />
                 </div>
                 <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-                  {t.home.globalView.title}
+                  {t.globalView.title}
                 </h2>
               </div>
-              <p className="text-lg text-muted md:text-xl max-w-3xl mx-auto">
-                {t.home.globalView.subtitle}
+              <p className="text-lg text-muted-foreground md:text-xl max-w-3xl mx-auto">
+                {t.globalView.subtitle}
               </p>
             </div>
             <div className="flex items-center justify-center">
@@ -413,10 +420,10 @@ export default function HomePage() {
                 />
                 {/* 特色标注 */}
                 <div className="absolute top-4 left-4 bg-primary text-white px-3 py-1 rounded-full text-sm font-medium">
-                  {t.home.globalView.badges[0]}
+                  {t.globalView.badges[0]}
                 </div>
                 <div className="absolute bottom-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                  {t.home.globalView.badges[1]}
+                  {t.globalView.badges[1]}
                 </div>
               </div>
             </div>
@@ -428,10 +435,10 @@ export default function HomePage() {
           <div className="container mx-auto px-4 md:px-6">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl mb-4">
-                {t.home.beyondTasks.title}
+                {t.beyondTasks.title}
               </h2>
-              <p className="text-lg text-muted md:text-xl">
-                {t.home.beyondTasks.subtitle}
+              <p className="text-lg text-muted-foreground md:text-xl">
+                {t.beyondTasks.subtitle}
               </p>
             </div>
             
@@ -451,10 +458,10 @@ export default function HomePage() {
                   <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-green-100">
                     <TrendingUp className="h-4 w-4 text-green-600" />
                   </div>
-                  <h3 className="text-xl font-bold text-foreground">{t.home.beyondTasks.features[0].title}</h3>
+                  <h3 className="text-xl font-bold text-foreground">{t.beyondTasks.features[0].title}</h3>
                 </div>
-                <p className="text-muted">
-                  {t.home.beyondTasks.features[0].description}
+                <p className="text-muted-foreground">
+                  {t.beyondTasks.features[0].description}
                 </p>
               </div>
 
@@ -473,10 +480,10 @@ export default function HomePage() {
                   <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100">
                     <span className="text-blue-600">🧊</span>
                   </div>
-                  <h3 className="text-xl font-bold text-foreground">{t.home.beyondTasks.features[1].title}</h3>
+                  <h3 className="text-xl font-bold text-foreground">{t.beyondTasks.features[1].title}</h3>
                 </div>
-                <p className="text-muted">
-                  {t.home.beyondTasks.features[1].description}
+                <p className="text-muted-foreground">
+                  {t.beyondTasks.features[1].description}
                 </p>
               </div>
 
@@ -495,10 +502,10 @@ export default function HomePage() {
                   <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-100">
                     <span className="text-purple-600">💳</span>
                   </div>
-                  <h3 className="text-xl font-bold text-foreground">{t.home.beyondTasks.features[2].title}</h3>
+                  <h3 className="text-xl font-bold text-foreground">{t.beyondTasks.features[2].title}</h3>
                 </div>
-                <p className="text-muted">
-                  {t.home.beyondTasks.features[2].description}
+                <p className="text-muted-foreground">
+                  {t.beyondTasks.features[2].description}
                 </p>
               </div>
             </div>
@@ -510,10 +517,10 @@ export default function HomePage() {
           <div className="container mx-auto px-4 md:px-6">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl mb-4">
-                {t.home.cloudSync.title}
+                {t.cloudSync.title}
               </h2>
-              <p className="text-lg text-muted md:text-xl max-w-2xl mx-auto">
-                {t.home.cloudSync.subtitle}
+              <p className="text-lg text-muted-foreground md:text-xl max-w-2xl mx-auto">
+                {t.cloudSync.subtitle}
               </p>
             </div>
             
@@ -523,9 +530,9 @@ export default function HomePage() {
                 <div className="flex items-center justify-center w-16 h-16 bg-blue-100 rounded-2xl mx-auto mb-6">
                   <RefreshCw className="w-8 h-8 text-blue-600" />
                 </div>
-                <h3 className="text-xl font-bold text-foreground mb-4 text-center">{t.home.cloudSync.features[0].title}</h3>
-                <p className="text-muted text-center">
-                  {t.home.cloudSync.features[0].description}
+                <h3 className="text-xl font-bold text-foreground mb-4 text-center">{t.cloudSync.features[0].title}</h3>
+                <p className="text-muted-foreground text-center">
+                  {t.cloudSync.features[0].description}
                 </p>
               </div>
 
@@ -534,9 +541,9 @@ export default function HomePage() {
                 <div className="flex items-center justify-center w-16 h-16 bg-green-100 rounded-2xl mx-auto mb-6">
                   <Shield className="w-8 h-8 text-green-600" />
                 </div>
-                <h3 className="text-xl font-bold text-foreground mb-4 text-center">{t.home.cloudSync.features[1].title}</h3>
-                <p className="text-muted text-center">
-                  {t.home.cloudSync.features[1].description}
+                <h3 className="text-xl font-bold text-foreground mb-4 text-center">{t.cloudSync.features[1].title}</h3>
+                <p className="text-muted-foreground text-center">
+                  {t.cloudSync.features[1].description}
                 </p>
               </div>
 
@@ -545,9 +552,9 @@ export default function HomePage() {
                 <div className="flex items-center justify-center w-16 h-16 bg-purple-100 rounded-2xl mx-auto mb-6">
                   <Cloud className="w-8 h-8 text-purple-600" />
                 </div>
-                <h3 className="text-xl font-bold text-foreground mb-4 text-center">{t.home.cloudSync.features[2].title}</h3>
-                <p className="text-muted text-center">
-                  {t.home.cloudSync.features[2].description}
+                <h3 className="text-xl font-bold text-foreground mb-4 text-center">{t.cloudSync.features[2].title}</h3>
+                <p className="text-muted-foreground text-center">
+                  {t.cloudSync.features[2].description}
                 </p>
               </div>
             </div>
@@ -565,10 +572,10 @@ export default function HomePage() {
           
           <div className="container mx-auto px-4 text-center md:px-6 relative">
             <h2 className="text-4xl font-bold tracking-tight text-foreground md:text-5xl mb-6">
-              {t.home.finalCta.title}
+              {t.finalCta.title}
             </h2>
-            <p className="text-xl text-muted mb-12 max-w-3xl mx-auto">
-              {t.home.finalCta.subtitle}
+            <p className="text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
+              {t.finalCta.subtitle}
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
@@ -577,28 +584,28 @@ export default function HomePage() {
                 <AndroidDownloadLink size="large" locale={locale} />
               </div>
               <div className="text-center">
-                <p className="text-sm text-muted">{t.home.finalCta.trial}</p>
-                <p className="text-xs text-muted mt-1">{t.home.finalCta.users.replace('{count}', stats.finalCta.find(s => s.labelKey === 'stats.activeUsers')?.value || '500+')}</p>
+                <p className="text-sm text-muted-foreground">{t.finalCta.trial}</p>
+                <p className="text-xs text-muted-foreground mt-1">{t.finalCta.users.replace('{count}', stats.finalCta.find(s => s.labelKey === 'stats.activeUsers')?.value || '500+')}</p>
               </div>
             </div>
 
             {/* 服务条款和隐私政策链接 */}
             <div className="mb-8 text-center">
-              <p className="text-sm text-muted">
-                {t.home.finalCta.termsAndPrivacy.split('{terms}')[0]}
-                <a href={`/${locale}/terms`} className="text-primary hover:underline mx-1">{t.home.finalCta.termsLink}</a>
-                {t.home.finalCta.termsAndPrivacy.split('{terms}')[1].split('{privacy}')[0]}
-                <a href={`/${locale}/privacy`} className="text-primary hover:underline mx-1">{t.home.finalCta.privacyLink}</a>
-                {t.home.finalCta.termsAndPrivacy.split('{privacy}')[1]}
+              <p className="text-sm text-muted-foreground">
+                {t.finalCta.termsAndPrivacy.split('{terms}')[0]}
+                <a href={`/${locale}/terms`} className="text-primary hover:underline mx-1">{t.finalCta.termsLink}</a>
+                {t.finalCta.termsAndPrivacy.split('{terms}')[1].split('{privacy}')[0]}
+                <a href={`/${locale}/privacy`} className="text-primary hover:underline mx-1">{t.finalCta.privacyLink}</a>
+                {t.finalCta.termsAndPrivacy.split('{privacy}')[1]}
               </p>
             </div>
 
             {/* 社交证明 */}
             <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto">
-              {stats.finalCta.map((stat, index) => (
+              {stats.finalCta.map((stat: any, index: number) => (
                 <div key={index} className="text-center">
                   <div className="text-3xl font-bold text-primary">{stat.value}</div>
-                  <div className="text-sm text-muted">
+                  <div className="text-sm text-muted-foreground">
                     {t.stats && stat.labelKey.includes('.') 
                       ? t.stats[stat.labelKey.split('.')[1] as keyof typeof t.stats]
                       : ''}
@@ -608,10 +615,20 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-      </main>
+        </main>
 
       {/* Footer */}
       <Footer locale={locale} logoAlt={getImageAlt('logo')} />
-    </div>
+      </div>
+    </>
   );
 }
+
+
+
+
+
+
+
+
+

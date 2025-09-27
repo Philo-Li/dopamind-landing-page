@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { ChevronDown } from 'lucide-react';
-import { languageNames, locales, type Locale } from '../src/lib/i18n';
+import { languageNames, locales, type Locale } from '@/lib/i18n';
 
 // 语言配置，包含国旗和简化显示名称
 const languageConfig: Record<Locale, { name: string; flag: string; shortName: string }> = {

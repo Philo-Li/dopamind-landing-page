@@ -1,7 +1,7 @@
 'use client';
 
 import { FileText, Shield, Users, AlertTriangle, Calendar, Mail } from 'lucide-react';
-import { getTranslation } from '../../lib/i18n';
+import { getTranslation } from '@/lib/i18n';
 
 // Use English as default locale
 const t = getTranslation('en');

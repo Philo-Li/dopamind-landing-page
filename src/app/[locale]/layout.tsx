@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
+import MarketingBodyClass from '@/components/MarketingBodyClass';
 import { notFound } from 'next/navigation';
-import { locales } from '../../lib/i18n';
-import Navigation from '../../components/Navigation';
-import Footer from '../../components/Footer';
+import { locales } from '@/lib/i18n';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -189,6 +190,7 @@ export default async function LocaleLayout({
         />
       </head>
       <body className={inter.className}>
+        <MarketingBodyClass />
         <div className="flex min-h-screen flex-col">
           <Navigation locale={locale} logoAlt="Dopamind - AI-powered focus companion for ADHD users" />
           <main className="flex-1">

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { getTranslation } from '../lib/i18n';
+import { getLandingTranslation } from '@/lib/i18n';
 
 interface FooterProps {
   locale: string;
@@ -7,7 +7,7 @@ interface FooterProps {
 }
 
 export default function Footer({ locale, logoAlt = "Dopamind Logo" }: FooterProps) {
-  const t = getTranslation(locale);
+  const t = getLandingTranslation(locale);
 
   return (
     <footer className="w-full border-t border-gray-200 bg-white py-8">
@@ -24,13 +24,13 @@ export default function Footer({ locale, logoAlt = "Dopamind Logo" }: FooterProp
               />
               <span className="font-bold text-foreground">Dopamind</span>
             </div>
-            <p className="text-sm text-muted">
+            <p className="text-sm text-muted-foreground">
               {t.footer.description}
             </p>
           </div>
           <div>
             <h4 className="font-semibold text-foreground mb-3">{t.footer.sections.product}</h4>
-            <ul className="space-y-2 text-sm text-muted">
+            <ul className="space-y-2 text-sm text-muted-foreground">
               <li><a href={`/${locale}`} className="hover:text-primary transition-colors">{t.navigation.home}</a></li>
               <li><a href={`/${locale}#features`} className="hover:text-primary transition-colors">{t.navigation.features}</a></li>
               <li><a href={`/${locale}#how-it-works`} className="hover:text-primary transition-colors">{t.navigation.howItWorks}</a></li>
@@ -40,7 +40,7 @@ export default function Footer({ locale, logoAlt = "Dopamind Logo" }: FooterProp
           </div>
           <div>
             <h4 className="font-semibold text-foreground mb-3">{t.footer.sections.support}</h4>
-            <ul className="space-y-2 text-sm text-muted">
+            <ul className="space-y-2 text-sm text-muted-foreground">
               <li><a href={`/${locale}/support`} className="hover:text-primary transition-colors">{t.footer.links.supportCenter}</a></li>
               <li><a href="mailto:support@dopamind.com" className="hover:text-primary transition-colors">{t.footer.links.contactUs}</a></li>
               <li><a href={`/${locale}/status`} className="hover:text-primary transition-colors">{t.footer.links.status}</a></li>
@@ -48,7 +48,7 @@ export default function Footer({ locale, logoAlt = "Dopamind Logo" }: FooterProp
           </div>
           <div>
             <h4 className="font-semibold text-foreground mb-3">{t.footer.sections.community}</h4>
-            <ul className="space-y-2 text-sm text-muted">
+            <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
                 <a href="https://discord.gg/E9tEAYNaqK" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary transition-colors">
                   <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
@@ -69,7 +69,7 @@ export default function Footer({ locale, logoAlt = "Dopamind Logo" }: FooterProp
           </div>
           <div>
             <h4 className="font-semibold text-foreground mb-3">{t.footer.sections.legal}</h4>
-            <ul className="space-y-2 text-sm text-muted">
+            <ul className="space-y-2 text-sm text-muted-foreground">
               <li><a href={`/${locale}/privacy`} className="hover:text-primary transition-colors">{t.footer.links.privacy}</a></li>
               <li><a href={`/${locale}/terms`} className="hover:text-primary transition-colors">{t.footer.links.terms}</a></li>
               <li><a href={`/${locale}/account-deletion`} className="hover:text-primary transition-colors">{t.footer.links.accountDeletion}</a></li>
@@ -77,7 +77,7 @@ export default function Footer({ locale, logoAlt = "Dopamind Logo" }: FooterProp
             </ul>
           </div>
         </div>
-        <div className="mt-8 pt-6 border-t border-gray-200 text-center text-sm text-muted">
+        <div className="mt-8 pt-6 border-t border-gray-200 text-center text-sm text-muted-foreground">
           <p>&copy; {new Date().getFullYear()} Dopamind Inc. {t.footer.copyright}.</p>
         </div>
       </div>

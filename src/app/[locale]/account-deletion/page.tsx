@@ -1,5 +1,5 @@
 import { Trash2, AlertTriangle, Mail, User, Key } from 'lucide-react';
-import { getTranslation } from '../../../lib/i18n';
+import { getTranslation } from '@/lib/i18n';
 
 interface AccountDeletionPageProps {
   params: Promise<{
@@ -155,3 +155,4 @@ export default async function AccountDeletionPage({ params }: AccountDeletionPag
     </>
   );
 }
+

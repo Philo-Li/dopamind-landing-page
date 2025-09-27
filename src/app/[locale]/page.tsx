@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { CheckCircle, Calendar, Brain, Clock, TrendingUp, Cloud, RefreshCw, Shield } from 'lucide-react';
-import { getTranslation } from '../../lib/i18n';
+import { getTranslation } from '@/lib/i18n';
 import { stats } from '../../config/stats';
 import AppStoreButton from '../../components/AppStoreButton';
 import AndroidDownloadLink from '../../components/AndroidDownloadLink';
@@ -147,7 +147,7 @@ export default async function HomePage({ params }: HomePageProps) {
                   {t.home.features.section1.subtitle}
                 </p>
                 <ul className="space-y-3">
-                  {t.home.features.section1.points.map((point, index) => (
+                  {t.home.features.section1.points.map((point: any, index: number) => (
                     <li key={index} className="flex items-start gap-3">
                       <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
                       <span className="text-muted">{point}</span>
@@ -185,7 +185,7 @@ export default async function HomePage({ params }: HomePageProps) {
                   {t.home.features.section2.subtitle}
                 </p>
                 <ul className="space-y-3">
-                  {t.home.features.section2.points.map((point, index) => (
+                  {t.home.features.section2.points.map((point: any, index: number) => (
                     <li key={index} className="flex items-start gap-3">
                       <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
                       <span className="text-muted">{point}</span>
@@ -221,7 +221,7 @@ export default async function HomePage({ params }: HomePageProps) {
                     <span className="font-medium text-foreground">{t.home.howItWorks.section1.example.title}</span>
                   </div>
                   <div className="space-y-2 text-sm text-muted ml-6">
-                    {t.home.howItWorks.section1.example.steps.map((step, index) => (
+                    {t.home.howItWorks.section1.example.steps.map((step: any, index: number) => (
                       <p key={index}>• {step}</p>
                     ))}
                   </div>
@@ -262,7 +262,7 @@ export default async function HomePage({ params }: HomePageProps) {
                   {t.home.howItWorks.section2.subtitle}
                 </p>
                 <div className="grid grid-cols-3 gap-4">
-                  {t.home.howItWorks.section2.stats.map((stat, index) => (
+                  {t.home.howItWorks.section2.stats.map((stat: any, index: number) => (
                     <div key={index} className="bg-white rounded-lg p-4 text-center shadow-sm">
                       <div className={`text-2xl font-bold ${
                         index === 0 ? 'text-primary' : 
@@ -487,7 +487,7 @@ export default async function HomePage({ params }: HomePageProps) {
 
             {/* 社交证明 */}
             <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto">
-              {stats.finalCta.map((stat, index) => (
+              {stats.finalCta.map((stat: any, index: number) => (
                 <div key={index} className="text-center">
                   <div className="text-3xl font-bold text-primary">{stat.value}</div>
                   <div className="text-sm text-muted">
@@ -503,3 +503,5 @@ export default async function HomePage({ params }: HomePageProps) {
     </>
   );
 }
+
+

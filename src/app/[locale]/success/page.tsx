@@ -134,7 +134,7 @@ function PaymentSuccessContent({ locale }: { locale: Locale }) {
         </h3>
         
         <div className="grid gap-3">
-          {t.paymentSuccess.features.map((feature, index) => (
+          {t.paymentSuccess.features.map((feature: any, index: number) => (
             <div key={index} className="flex items-center gap-3">
               <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
               <span className="text-sm text-foreground">{feature}</span>

@@ -1,5 +1,5 @@
 import { FileText, Shield, Users, AlertTriangle, Calendar, Mail } from 'lucide-react';
-import { getTranslation } from '../../../lib/i18n';
+import { getTranslation } from '@/lib/i18n';
 import { Metadata } from 'next';
 
 interface TermsPageProps {
@@ -226,3 +226,4 @@ export default async function TermsPage({ params }: TermsPageProps) {
     </>
   );
 }
+

@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getTranslation } from '../../lib/i18n';
+import { getTranslation } from '@/lib/i18n';
 
 export default function PaymentProcessingPage() {
   const locale = 'en';

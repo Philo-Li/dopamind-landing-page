@@ -1,5 +1,5 @@
 import { CheckCircle, AlertCircle } from 'lucide-react';
-import { getTranslation } from '../../../lib/i18n';
+import { getTranslation } from '@/lib/i18n';
 import { fetchHealthStatus, getFallbackHealthStatus, isSystemOperational } from '../../../lib/healthApi';
 import { Metadata } from 'next';
 
@@ -136,3 +136,4 @@ export default async function StatusPage({ params }: StatusPageProps) {
     </>
   );
 }
+

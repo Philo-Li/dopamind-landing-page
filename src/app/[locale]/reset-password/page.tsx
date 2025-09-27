@@ -4,7 +4,7 @@ import { useState, use, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { getTranslation, type Locale } from "../../../lib/i18n";
+import { getTranslation, type Locale } from "@/lib/i18n";
 import { apiService } from "../../../lib/api";
 
 interface ResetPasswordPageProps {
@@ -245,3 +245,4 @@ export default function ResetPasswordPage({ params }: ResetPasswordPageProps) {
     </Suspense>
   );
 }
+

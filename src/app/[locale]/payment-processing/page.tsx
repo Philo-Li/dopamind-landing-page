@@ -3,7 +3,7 @@
 import { useEffect, use } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { getTranslation, type Locale } from "../../../lib/i18n";
+import { getTranslation, type Locale } from "@/lib/i18n";
 
 interface PaymentProcessingPageProps {
   params: Promise<{ locale: string }>;
@@ -96,3 +96,4 @@ export default function PaymentProcessingPage({ params }: PaymentProcessingPageP
     </div>
   );
 }
+

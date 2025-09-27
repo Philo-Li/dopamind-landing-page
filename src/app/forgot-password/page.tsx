@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { getTranslation } from "../../lib/i18n";
+import { getTranslation } from "@/lib/i18n";
 import { apiService } from "../../lib/api";
 
 // 使用英文作为默认语言

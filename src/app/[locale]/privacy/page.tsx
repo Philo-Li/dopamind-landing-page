@@ -1,5 +1,5 @@
 import { Shield, Lock, Eye, Users, Calendar, Mail } from 'lucide-react';
-import { getTranslation } from '../../../lib/i18n';
+import { getTranslation } from '@/lib/i18n';
 
 interface PrivacyPageProps {
   params: Promise<{
@@ -215,3 +215,4 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
     </>
   );
 }
+

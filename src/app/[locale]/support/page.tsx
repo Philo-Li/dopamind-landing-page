@@ -1,5 +1,5 @@
 import { Mail, MessageCircle, Book } from 'lucide-react';
-import { getTranslation } from '../../../lib/i18n';
+import { getTranslation } from '@/lib/i18n';
 
 interface SupportPageProps {
   params: Promise<{
@@ -154,3 +154,4 @@ export default async function SupportPage({ params }: SupportPageProps) {
     </>
   );
 }
+

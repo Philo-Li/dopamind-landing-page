@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { useAuth } from "../../hooks/useAuth";
-import { getTranslation } from "../../lib/i18n";
+import { getTranslation } from "@/lib/i18n";
 
 // 使用英文作为默认语言
 const locale = 'en';
@@ -180,30 +180,8 @@ function RegisterForm() {
         return;
       }
 
-      // 默认跳转到子域名的仪表盘
-      const webAppUrl = process.env.NEXT_PUBLIC_WEB_APP_URL || "https://web.dopamind.app";
-      const redirectParam = typeof window !== "undefined"
-        ? new URLSearchParams(window.location.search).get('redirect')
-        : null;
-      const targetUrl = sanitizeRedirectTarget(redirectParam, webAppUrl);
-
-      const token = typeof window !== "undefined" ? localStorage.getItem('token') : null;
-      const userJson = typeof window !== "undefined" ? localStorage.getItem('user') : null;
-      const refreshToken = typeof window !== "undefined" ? localStorage.getItem('refreshToken') : null;
-
-      if (token && userJson) {
-        const callbackUrl = new URL('/auth/callback', webAppUrl);
-        callbackUrl.searchParams.set('token', token);
-        if (refreshToken) {
-          callbackUrl.searchParams.set('refreshToken', refreshToken);
-        }
-        callbackUrl.searchParams.set('user', userJson);
-        callbackUrl.searchParams.set('redirect', targetUrl);
-        window.location.href = callbackUrl.toString();
-        return;
-      }
-
-      window.location.href = targetUrl;
+      // 直接跳转到 dashboard
+      window.location.href = "/dashboard";
     } catch (error) {
       setError(error instanceof Error ? error.message : "An error occurred during registration");
     }

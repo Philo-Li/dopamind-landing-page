@@ -4,7 +4,7 @@ import { useState, use } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useAuth } from "../../../hooks/useAuth";
-import { getTranslation, type Locale } from "../../../lib/i18n";
+import { getTranslation, type Locale } from "@/lib/i18n";
 
 const fullyDecode = (raw: string): string => {
   let current = raw;
@@ -75,7 +75,7 @@ export default function LoginPage({ params }: LoginPageProps) {
   const [error, setError] = useState("");
   const { login } = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const webAppBaseUrl = process.env.NEXT_PUBLIC_WEB_APP_URL || "https://web.dopamind.app";
+  const webAppBaseUrl = typeof window !== "undefined" ? window.location.origin : "";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -94,19 +94,8 @@ export default function LoginPage({ params }: LoginPageProps) {
       const userJson = typeof window !== "undefined" ? localStorage.getItem("user") : null;
       const refreshToken = typeof window !== "undefined" ? localStorage.getItem("refreshToken") : null;
 
-      if (token && userJson) {
-        const callbackUrl = new URL("/auth/callback", webAppBaseUrl);
-        callbackUrl.searchParams.set("token", token);
-        if (refreshToken) {
-          callbackUrl.searchParams.set("refreshToken", refreshToken);
-        }
-        callbackUrl.searchParams.set("user", userJson);
-        callbackUrl.searchParams.set("redirect", targetUrl);
-        window.location.href = callbackUrl.toString();
-        return;
-      }
-
-      window.location.href = targetUrl;
+      // 直接跳转到 dashboard
+      window.location.href = "/dashboard";
     } catch (error) {
       setError(error instanceof Error ? error.message : "登录过程中出现错误");
     } finally {
@@ -221,3 +210,4 @@ export default function LoginPage({ params }: LoginPageProps) {
     </div>
   );
 }
+

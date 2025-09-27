@@ -3,7 +3,7 @@
 import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams, useParams } from 'next/navigation';
 import Image from 'next/image';
-import { getTranslation, type Locale } from '../../lib/i18n';
+import { getTranslation, type Locale } from '@/lib/i18n';
 
 // --- 样式部分 ---
 const styles = {

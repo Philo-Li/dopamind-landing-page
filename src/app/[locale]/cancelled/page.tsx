@@ -69,7 +69,7 @@ export default function PaymentCancelledPage({ params }: CancelledPageProps) {
             <h3 className="text-lg font-semibold text-foreground mb-4">{t.paymentCancelled.whatHappened}</h3>
             
             <div className="space-y-3 text-sm text-muted">
-              {t.paymentCancelled.explanation.map((item, index) => (
+              {t.paymentCancelled.explanation.map((item: any, index: number) => (
                 <p key={index}>• {item}</p>
               ))}
             </div>
@@ -83,7 +83,7 @@ export default function PaymentCancelledPage({ params }: CancelledPageProps) {
             </h3>
             
             <div className="grid gap-3">
-              {t.paymentCancelled.premiumFeatures.map((feature, index) => (
+              {t.paymentCancelled.premiumFeatures.map((feature: any, index: number) => (
                 <div key={index} className="text-sm text-foreground">
                   {feature}
                 </div>

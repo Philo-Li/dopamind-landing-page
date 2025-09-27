@@ -7,7 +7,7 @@ import { differenceInDays } from 'date-fns';
 import { CheckCircle, Gift, Crown, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
 import SubscribeButton from './SubscribeButton';
-import { getTranslation } from '../lib/i18n';
+import { getTranslation } from '@/lib/i18n';
 
 interface PricingSectionProps {
   locale: string;
@@ -46,6 +46,12 @@ export default function PricingSection({ locale }: PricingSectionProps) {
   const { user, premiumStatus } = useAuth();
   const router = useRouter();
   const t = getTranslation(locale);
+  const pricing = (t as any).pricing ?? {};
+  const pricingPlans = pricing.plans ?? {};
+  const pricingBadges = pricing.badges ?? {};
+  const pricingStatus = pricing.status ?? {};
+  const pricingButtons = pricing.buttons ?? {};
+  const pricingDescriptions = pricing.descriptions ?? {};
   const [selectedPlan, setSelectedPlan] = useState<PlanType>('yearly');
   const [prices, setPrices] = useState<{ monthly?: StripePrice; yearly?: StripePrice }>({});
   const [loading, setLoading] = useState(true);
@@ -124,31 +130,31 @@ export default function PricingSection({ locale }: PricingSectionProps) {
   const plans: Plan[] = [
     {
       id: 'trial',
-      name: t.pricing?.plans?.trial?.name || '7-Day Premium Trial',
-      price: t.pricing?.plans?.trial?.price || '$0',
-      period: t.pricing?.plans?.trial?.period || 'trial',
-      buttonText: t.pricing?.plans?.trial?.buttonText || 'Start Free Trial',
+      name: pricingPlans.trial?.name || '7-Day Premium Trial',
+      price: pricingPlans.trial?.price || '$0',
+      period: pricingPlans.trial?.period || 'trial',
+      buttonText: pricingPlans.trial?.buttonText || 'Start Free Trial',
       isTrial: true,
-      features: t.pricing?.plans?.trial?.features || []
+      features: pricingPlans.trial?.features || []
     },
     {
       id: 'monthly',
-      name: t.pricing?.plans?.monthly?.name || 'Monthly',
+      name: pricingPlans.monthly?.name || 'Monthly',
       priceId: prices.monthly?.id || process.env.NEXT_PUBLIC_STRIPE_MONTHLY_PRODUCT_ID || 'price_monthly_placeholder',
       price: loading ? 'Loading...' : formatPrice('monthly'),
-      period: t.pricing?.plans?.monthly?.period || 'month',
-      buttonText: t.pricing?.plans?.monthly?.buttonText || 'Choose Monthly',
-      features: t.pricing?.plans?.monthly?.features || []
+      period: pricingPlans.monthly?.period || 'month',
+      buttonText: pricingPlans.monthly?.buttonText || 'Choose Monthly',
+      features: pricingPlans.monthly?.features || []
     },
     {
       id: 'yearly',
-      name: t.pricing?.plans?.yearly?.name || 'Yearly',
+      name: pricingPlans.yearly?.name || 'Yearly',
       priceId: prices.yearly?.id || process.env.NEXT_PUBLIC_STRIPE_YEARLY_PRICE_ID || 'price_yearly_placeholder', 
       price: loading ? 'Loading...' : formatPrice('yearly'),
-      period: t.pricing?.plans?.yearly?.period || 'year',
-      buttonText: t.pricing?.plans?.yearly?.buttonText || 'Choose Yearly',
+      period: pricingPlans.yearly?.period || 'year',
+      buttonText: pricingPlans.yearly?.buttonText || 'Choose Yearly',
       isPopular: true,
-      features: t.pricing?.plans?.yearly?.features || []
+      features: pricingPlans.yearly?.features || []
     }
   ];
 
@@ -158,13 +164,13 @@ export default function PricingSection({ locale }: PricingSectionProps) {
       return (
         <>
           <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl mb-4">
-            {t.pricing?.title || 'Choose Your Plan'}
+            {pricing.title || 'Choose Your Plan'}
           </h2>
-          <p className="text-lg text-muted md:text-xl">
-            {t.pricing?.subtitle || 'Unlock your potential with AI-powered task management'}
+          <p className="text-lg text-muted-foreground md:text-xl">
+            {pricing.subtitle || 'Unlock your potential with AI-powered task management'}
           </p>
           <div className="mt-2 inline-block bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-medium">
-            {t.pricing?.badges?.newUser || 'New User'}
+            {pricingBadges.newUser || 'New User'}
           </div>
         </>
       );
@@ -176,13 +182,13 @@ export default function PricingSection({ locale }: PricingSectionProps) {
       return (
         <>
           <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl mb-4">
-{(t.pricing?.status?.trial_active || 'Your Premium trial has {days} days left').replace('{days}', daysLeft.toString())}
+{(pricingStatus.trial_active || 'Your Premium trial has {days} days left').replace('{days}', daysLeft.toString())}
           </h2>
-          <p className="text-lg text-muted md:text-xl">
-            {t.pricing?.status?.trial_subtitle || 'Subscribe now to continue enjoying premium features'}
+          <p className="text-lg text-muted-foreground md:text-xl">
+            {pricingStatus.trial_subtitle || 'Subscribe now to continue enjoying premium features'}
           </p>
           <div className="mt-2 inline-block bg-orange-100 text-orange-700 px-4 py-2 rounded-full text-sm font-medium">
-            {t.pricing?.badges?.trialEnding || 'Trial Ending'}
+            {pricingBadges.trialEnding || 'Trial Ending'}
           </div>
         </>
       );
@@ -193,13 +199,13 @@ export default function PricingSection({ locale }: PricingSectionProps) {
       return (
         <>
           <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl mb-4">
-{t.pricing?.status?.premium_active || 'You are a Premium Member'}
+{pricingStatus.premium_active || 'You are a Premium Member'}
           </h2>
-          <p className="text-lg text-muted md:text-xl">
-            {t.pricing?.status?.premium_subtitle || 'Thank you for your support! You are enjoying all premium features.'}
+          <p className="text-lg text-muted-foreground md:text-xl">
+            {pricingStatus.premium_subtitle || 'Thank you for your support! You are enjoying all premium features.'}
           </p>
           <div className="mt-2 inline-block bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium">
-            {t.pricing?.badges?.premium || 'Premium'}
+            {pricingBadges.premium || 'Premium'}
           </div>
         </>
       );
@@ -210,13 +216,13 @@ export default function PricingSection({ locale }: PricingSectionProps) {
       return (
         <>
           <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl mb-4">
-{t.pricing?.status?.trial_ended || 'Your free trial has ended'}
+{pricingStatus.trial_ended || 'Your free trial has ended'}
           </h2>
-          <p className="text-lg text-muted md:text-xl">
-            {t.pricing?.status?.trial_ended_subtitle || 'Upgrade to Premium to continue using powerful AI features'}
+          <p className="text-lg text-muted-foreground md:text-xl">
+            {pricingStatus.trial_ended_subtitle || 'Upgrade to Premium to continue using powerful AI features'}
           </p>
           <div className="mt-2 inline-block bg-red-100 text-red-700 px-4 py-2 rounded-full text-sm font-medium">
-            {t.pricing?.badges?.upgrade || 'Upgrade'}
+            {pricingBadges.upgrade || 'Upgrade'}
           </div>
         </>
       );
@@ -226,10 +232,10 @@ export default function PricingSection({ locale }: PricingSectionProps) {
     return (
       <>
         <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl mb-4">
-          {t.pricing?.title || 'Choose Your Plan'}
+          {pricing.title || 'Choose Your Plan'}
         </h2>
-        <p className="text-lg text-muted md:text-xl">
-          {t.pricing?.subtitle || 'Choose the plan that works for you'}
+        <p className="text-lg text-muted-foreground md:text-xl">
+          {pricing.subtitle || 'Choose the plan that works for you'}
         </p>
       </>
     );
@@ -250,18 +256,18 @@ export default function PricingSection({ locale }: PricingSectionProps) {
                 <CheckCircle className="w-8 h-8 text-green-600" />
               </div>
               <h3 className="text-2xl font-bold text-foreground mb-4">Premium 会员</h3>
-              <p className="text-muted mb-6">您正在享受所有高级功能</p>
+              <p className="text-muted-foreground mb-6">您正在享受所有高级功能</p>
               
               <div className="space-y-3 mb-8">
                 {(plans[2]?.features || []).map((feature, index) => (
                   <div key={index} className="flex items-center gap-3">
                     <CheckCircle className="h-5 w-5 flex-shrink-0 text-green-600" />
-                    <span className="text-muted">{feature}</span>
+                    <span className="text-muted-foreground">{feature}</span>
                   </div>
                 ))}
               </div>
               
-              <p className="text-sm text-muted">
+              <p className="text-sm text-muted-foreground">
                 如需更改订阅计划或取消订阅，请访问 
                 <Link href="/dashboard/subscription" className="text-primary hover:underline ml-1">
                   订阅管理页面
@@ -319,22 +325,22 @@ export default function PricingSection({ locale }: PricingSectionProps) {
     if (isCurrentPlan(planId)) {
       switch (currentUserPlan) {
         case 'trial':
-          return t.pricing?.buttons?.trial_active || 'Trial Active';
+          return pricingButtons.trial_active || 'Trial Active';
         case 'monthly':
-          return t.pricing?.buttons?.monthly_member || 'Monthly Member';
+          return pricingButtons.monthly_member || 'Monthly Member';
         case 'yearly':
-          return t.pricing?.buttons?.yearly_member || 'Yearly Member';
+          return pricingButtons.yearly_member || 'Yearly Member';
         default:
-          return t.pricing?.buttons?.current_plan || 'Current Plan';
+          return pricingButtons.current_plan || 'Current Plan';
       }
     }
     
     // 如果是升级方案
     if (isUpgradePlan(planId)) {
       if (planId === 'monthly') {
-        return t.pricing?.buttons?.upgrade_to_monthly || 'Upgrade to Monthly';
+        return pricingButtons.upgrade_to_monthly || 'Upgrade to Monthly';
       } else if (planId === 'yearly') {
-        return t.pricing?.buttons?.upgrade_to_yearly || 'Upgrade to Yearly';
+        return pricingButtons.upgrade_to_yearly || 'Upgrade to Yearly';
       }
     }
     
@@ -383,7 +389,7 @@ export default function PricingSection({ locale }: PricingSectionProps) {
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                     <span className="bg-green-500 text-white px-6 py-2 rounded-full text-sm font-medium shadow-lg flex items-center gap-2">
                       <Crown className="w-4 h-4" />
-{t.pricing?.badges?.current || 'Current'}
+{pricingBadges.current || 'Current'}
                     </span>
                   </div>
                 )}
@@ -393,7 +399,7 @@ export default function PricingSection({ locale }: PricingSectionProps) {
                   <div className="absolute -top-4 right-4">
                     <span className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm font-medium shadow-lg flex items-center gap-1">
                       <TrendingUp className="w-3 h-3" />
-{t.pricing?.badges?.upgrade_label || 'Upgrade'}
+{pricingBadges.upgrade_label || 'Upgrade'}
                     </span>
                   </div>
                 )}
@@ -402,7 +408,7 @@ export default function PricingSection({ locale }: PricingSectionProps) {
                 {plan.isPopular && !isCurrent && !isUpgrade && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                     <span className="bg-primary text-white px-6 py-2 rounded-full text-sm font-medium shadow-lg">
-{t.pricing?.badges?.popular || 'Popular'}
+{pricingBadges.popular || 'Popular'}
                     </span>
                   </div>
                 )}
@@ -412,7 +418,7 @@ export default function PricingSection({ locale }: PricingSectionProps) {
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                     <span className="bg-green-500 text-white px-6 py-2 rounded-full text-sm font-medium shadow-lg flex items-center gap-2">
                       <Gift className="w-4 h-4" />
-{t.pricing?.badges?.trial || 'Trial'}
+{pricingBadges.trial || 'Trial'}
                     </span>
                   </div>
                 )}
@@ -421,14 +427,14 @@ export default function PricingSection({ locale }: PricingSectionProps) {
                   <h3 className="text-2xl font-bold text-foreground mb-2">{plan.name}</h3>
                   <div className="mb-6">
                     <span className="text-4xl font-bold text-foreground">{plan.price}</span>
-                    <span className="text-muted ml-2">/{plan.period}</span>
+                    <span className="text-muted-foreground ml-2">/{plan.period}</span>
                   </div>
 
                   {/* 年度计划折扣 */}
                   {plan.id === 'yearly' && (
                     <div className="mb-6">
                       <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
-{t.pricing?.descriptions?.yearly_discount || 'Save 2 months'}
+{pricingDescriptions.yearly_discount || 'Save 2 months'}
                       </span>
                     </div>
                   )}
@@ -457,7 +463,7 @@ export default function PricingSection({ locale }: PricingSectionProps) {
                           <span className={`text-sm ${
                             shouldHighlight 
                               ? 'text-foreground font-medium' 
-                              : 'text-muted'
+                              : 'text-muted-foreground'
                           }`}>
                             {feature}
                           </span>
@@ -512,16 +518,16 @@ export default function PricingSection({ locale }: PricingSectionProps) {
               </Link>
             )}
             
-            <p className="text-sm text-muted mt-4">
+            <p className="text-sm text-muted-foreground mt-4">
               {isCurrentPlan(selectedPlanData.id)
-                ? (t.pricing?.descriptions?.current || 'This is your current plan')
+                ? (pricingDescriptions.current || 'This is your current plan')
                 : selectedPlanData.isTrial 
-                ? (t.pricing?.descriptions?.trial || 'Start your free trial today')
+                ? (pricingDescriptions.trial || 'Start your free trial today')
                 : isUpgradePlan(selectedPlanData.id)
-                ? (t.pricing?.descriptions?.upgrade || 'Upgrade to {plan}').replace('{plan}', selectedPlanData.name)
+                ? (pricingDescriptions.upgrade || 'Upgrade to {plan}').replace('{plan}', selectedPlanData.name)
                 : selectedPlanData.id === 'yearly'
-                ? (t.pricing?.descriptions?.yearly_special || 'Best value - save 2 months')
-                : (t.pricing?.descriptions?.basic || 'Choose this plan')
+                ? (pricingDescriptions.yearly_special || 'Best value - save 2 months')
+                : (pricingDescriptions.basic || 'Choose this plan')
               }
             </p>
           </div>
@@ -530,3 +536,6 @@ export default function PricingSection({ locale }: PricingSectionProps) {
     </section>
   );
 }
+
+
+

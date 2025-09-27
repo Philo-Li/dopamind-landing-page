@@ -3,7 +3,7 @@
 import { useState, use } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { getTranslation, type Locale } from "../../../lib/i18n";
+import { getTranslation, type Locale } from "@/lib/i18n";
 import { apiService } from "../../../lib/api";
 
 interface ForgotPasswordPageProps {
@@ -139,3 +139,4 @@ export default function ForgotPasswordPage({ params }: ForgotPasswordPageProps) 
     </div>
   );
 }
+
