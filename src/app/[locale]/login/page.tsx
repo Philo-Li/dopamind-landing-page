@@ -1,11 +1,65 @@
 "use client";
 
 import { useState, use } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { useAuth } from "../../../hooks/useAuth";
 import { getTranslation, type Locale } from "../../../lib/i18n";
+
+const fullyDecode = (raw: string): string => {
+  let current = raw;
+  while (true) {
+    try {
+      const next = decodeURIComponent(current);
+      if (next === current) {
+        return current;
+      }
+      current = next;
+    } catch {
+      return current;
+    }
+  }
+};
+
+const sanitizeRedirectTarget = (rawRedirect: string | null, baseUrl: string): string => {
+  const trimmedBase = baseUrl.replace(/\/$/, "");
+  const fallback = `${trimmedBase}/dashboard`;
+
+  if (!rawRedirect) {
+    return fallback;
+  }
+
+  const decoded = fullyDecode(rawRedirect).trim();
+  if (!decoded) {
+    return fallback;
+  }
+
+  if (decoded.startsWith("/")) {
+    return `${trimmedBase}${decoded}`;
+  }
+
+  try {
+    const baseForUrl = new URL(`${trimmedBase}/`);
+    const candidate = new URL(decoded, baseForUrl);
+    const baseHost = baseForUrl.hostname;
+    const candidateHost = candidate.hostname;
+    const hostParts = baseHost.split(".");
+    const allowedSuffix = hostParts.length >= 2 ? hostParts.slice(-2).join(".") : baseHost;
+
+    const isAllowedHost =
+      candidateHost === baseHost ||
+      candidateHost === allowedSuffix ||
+      candidateHost.endsWith(`.${allowedSuffix}`);
+
+    if (isAllowedHost) {
+      return candidate.toString();
+    }
+  } catch (error) {
+    console.warn("Invalid redirect parameter ignored", error);
+  }
+
+  return fallback;
+};
 
 interface LoginPageProps {
   params: Promise<{ locale: string }>;
@@ -20,7 +74,7 @@ export default function LoginPage({ params }: LoginPageProps) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const { login, isLoading } = useAuth();
-  const router = useRouter();
+  const webAppBaseUrl = process.env.NEXT_PUBLIC_WEB_APP_URL || "https://web.dopamind.app";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,9 +83,11 @@ export default function LoginPage({ params }: LoginPageProps) {
     try {
       // 将当前语言作为 preferredLanguage 传递给登录接口
       await login(email, password, locale);
-      // 跳转到子域名的仪表盘
-      const webAppUrl = process.env.NEXT_PUBLIC_WEB_APP_URL || "https://web.dopamind.app";
-      window.location.href = `${webAppUrl}/dashboard`;
+      const redirectParam = typeof window !== "undefined"
+        ? new URLSearchParams(window.location.search).get("redirect")
+        : null;
+      const targetUrl = sanitizeRedirectTarget(redirectParam, webAppBaseUrl);
+      window.location.href = targetUrl;
     } catch (error) {
       setError(error instanceof Error ? error.message : "登录过程中出现错误");
     }

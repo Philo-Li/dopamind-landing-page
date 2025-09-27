@@ -70,6 +70,15 @@
       "nicknameTooLong": "ニックネームは20文字を超えることはできません"
     }
   },
+  "paymentProcessing": {
+    "title": "決済セッションを準備しています...",
+    "message": "サインアップが完了しました。安全な決済セッションを作成しています。しばらくお待ちください...",
+    "statusAccountCreated": "アカウントが正常に作成されました",
+    "statusPreparing": "決済セッションを準備しています...",
+    "retryPrompt": "時間がかかっていますか？",
+    "retryButton": "料金プランに戻って再試行",
+    "backToHome": "ホームに戻る"
+  },
   "status": {
     "title": "システムステータス",
     "subtitle": "すべての Dopamind サービスの現在の運用状況とパフォーマンス指標",

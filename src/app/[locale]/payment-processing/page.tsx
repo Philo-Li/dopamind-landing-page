@@ -1,20 +1,24 @@
 "use client";
 
-import { useEffect } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { getTranslation } from '../../lib/i18n';
+import { useEffect, use } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { getTranslation, type Locale } from "../../../lib/i18n";
 
-export default function PaymentProcessingPage() {
-  const locale = 'en';
+interface PaymentProcessingPageProps {
+  params: Promise<{ locale: string }>;
+}
+
+export default function PaymentProcessingPage({ params }: PaymentProcessingPageProps) {
+  const { locale: localeParam } = use(params);
+  const locale = localeParam as Locale;
   const t = getTranslation(locale);
 
   useEffect(() => {
-    // 如果用户在这个页面停留太久，提供备用选项
     const timer = setTimeout(() => {
-      const retryButton = document.getElementById('retry-button');
+      const retryButton = document.getElementById("retry-button");
       if (retryButton) {
-        retryButton.style.display = 'block';
+        retryButton.style.display = "block";
       }
     }, 5000);
 
@@ -23,20 +27,19 @@ export default function PaymentProcessingPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background relative overflow-hidden">
-      {/* 背景装饰 */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-10 left-10 w-20 h-20 bg-primary/30 rounded-full blur-xl"></div>
         <div className="absolute bottom-10 right-10 w-32 h-32 bg-primary/20 rounded-full blur-xl"></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-primary/10 rounded-full blur-2xl"></div>
       </div>
-      
+
       <div className="max-w-md w-full space-y-8 relative z-10 text-center">
         <div>
           <div className="flex justify-center mb-6">
-            <Link href="/" className="flex items-center gap-3">
-              <Image 
+            <Link href={`/${locale}`} className="flex items-center gap-3">
+              <Image
                 src="/dopamind-logo.png"
-                alt="Dopamind Logo" 
+                alt="Dopamind Logo"
                 width={48}
                 height={48}
                 className="rounded-xl"
@@ -48,11 +51,11 @@ export default function PaymentProcessingPage() {
 
         <div className="bg-white p-8 rounded-xl shadow-lg">
           <div className="animate-spin w-12 h-12 border-4 border-primary border-t-transparent rounded-full mx-auto mb-6"></div>
-          
+
           <h2 className="text-2xl font-bold text-foreground mb-4">
             {t.paymentProcessing.title}
           </h2>
-          
+
           <p className="text-muted mb-6">
             {t.paymentProcessing.message}
           </p>
@@ -68,12 +71,12 @@ export default function PaymentProcessingPage() {
             </div>
           </div>
 
-          <div id="retry-button" style={{ display: 'none' }} className="mt-6">
+          <div id="retry-button" style={{ display: "none" }} className="mt-6">
             <p className="text-sm text-muted mb-4">
               {t.paymentProcessing.retryPrompt}
             </p>
-            <Link 
-              href="/pricing"
+            <Link
+              href={`/${locale}/pricing`}
               className="inline-block bg-primary hover:bg-primary-600 text-white font-semibold py-2 px-6 rounded-lg transition-colors"
             >
               {t.paymentProcessing.retryButton}
@@ -83,7 +86,7 @@ export default function PaymentProcessingPage() {
 
         <div className="text-center">
           <Link
-            href="/"
+            href={`/${locale}`}
             className="font-medium text-primary hover:text-primary-600"
           >
             {t.paymentProcessing.backToHome}

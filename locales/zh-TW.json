@@ -70,6 +70,15 @@
       "nicknameTooLong": "暱稱不能超過20個字元"
     }
   },
+  "paymentProcessing": {
+    "title": "正在準備付款頁面...",
+    "message": "註冊成功！我們正在為您建立安全的付款會話，請稍候...",
+    "statusAccountCreated": "帳戶建立成功",
+    "statusPreparing": "正在準備付款會話...",
+    "retryPrompt": "載入時間較長嗎？",
+    "retryButton": "返回方案頁面重試",
+    "backToHome": "返回首頁"
+  },
   "status": {
     "title": "系統狀態",
     "subtitle": "所有 Dopamind 服務的目前運行狀態和效能指標",

@@ -53,6 +53,15 @@ const translations = {
         nicknameTooLong: '昵称长度不能超过20个字符'
       }
     },
+    paymentProcessing: {
+      title: '正在准备支付页面...',
+      message: '注册成功！我们正在为您创建安全的支付会话，请稍候...',
+      statusAccountCreated: '账户创建成功',
+      statusPreparing: '正在准备支付会话...',
+      retryPrompt: '页面加载时间较长？',
+      retryButton: '返回定价页面重试',
+      backToHome: '返回首页'
+    },
     privacy: {
       title: '隐私政策',
       subtitle: '了解我们如何保护您的个人信息',

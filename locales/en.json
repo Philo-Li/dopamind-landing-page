@@ -70,6 +70,15 @@
       "nicknameTooLong": "Nickname cannot exceed 20 characters"
     }
   },
+  "paymentProcessing": {
+    "title": "Preparing payment session...",
+    "message": "Sign-up successful! We are creating a secure payment session for you. Please wait...",
+    "statusAccountCreated": "Account created successfully",
+    "statusPreparing": "Preparing payment session...",
+    "retryPrompt": "Taking longer than expected?",
+    "retryButton": "Return to pricing and try again",
+    "backToHome": "Back to home"
+  },
   "status": {
     "title": "System Status",
     "subtitle": "Current operational status and performance metrics for all Dopamind services",
