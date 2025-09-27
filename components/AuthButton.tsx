@@ -9,12 +9,8 @@ interface AuthButtonProps {
 }
 
 export default function AuthButton({ locale }: AuthButtonProps) {
-  const { user, isLoading, logout } = useAuth();
+  const { user, logout } = useAuth();
   const t = getTranslation(locale as Locale);
-
-  if (isLoading) {
-    return <div className="animate-pulse bg-gray-200 h-8 w-16 rounded"></div>;
-  }
 
   if (user) {
     const webAppUrl = process.env.NEXT_PUBLIC_WEB_APP_URL || "https://web.dopamind.app";

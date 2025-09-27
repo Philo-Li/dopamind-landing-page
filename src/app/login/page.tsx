@@ -69,12 +69,14 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { login, isLoading } = useAuth();
+  const { login } = useAuth();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const webAppBaseUrl = process.env.NEXT_PUBLIC_WEB_APP_URL || "https://web.dopamind.app";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+    setIsSubmitting(true);
 
     try {
       // 将当前语言作为 preferredLanguage 传递给登录接口
@@ -103,6 +105,8 @@ export default function LoginPage() {
       window.location.href = targetUrl;
     } catch (error) {
       setError(error instanceof Error ? error.message : "An error occurred during login");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -185,10 +189,10 @@ export default function LoginPage() {
           <div>
             <button
               type="submit"
-              disabled={isLoading}
+              disabled={isSubmitting}
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isLoading ? t.login.loggingIn : t.login.loginButton}
+              {isSubmitting ? t.login.loggingIn : t.login.loginButton}
             </button>
           </div>
 
