@@ -100,8 +100,8 @@ export default function LoginPage({ params }: LoginPageProps) {
         if (refreshToken) {
           callbackUrl.searchParams.set("refreshToken", refreshToken);
         }
-        callbackUrl.searchParams.set("user", encodeURIComponent(userJson));
-        callbackUrl.searchParams.set("redirect", encodeURIComponent(targetUrl));
+        callbackUrl.searchParams.set("user", userJson);
+        callbackUrl.searchParams.set("redirect", targetUrl);
         window.location.href = callbackUrl.toString();
         return;
       }
