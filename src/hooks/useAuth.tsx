@@ -24,7 +24,7 @@ interface PremiumStatus {
   subscriptionId?: string;
 }
 
-interface AuthContextType {
+export interface AuthContextType {
   user: User | null;
   premiumStatus: PremiumStatus | null;
   isLoading: boolean;
@@ -46,7 +46,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (typeof document === 'undefined') return null;
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop()?.split(';').shift() || null;
+    if (parts.length === 2) {
+      const cookieValue = parts.pop()?.split(';').shift();
+      if (!cookieValue) return null;
+      try {
+        return decodeURIComponent(cookieValue);
+      } catch {
+        return cookieValue;
+      }
+    }
     return null;
   }, []);
 
@@ -59,8 +67,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const isProduction = window.location.hostname.includes('dopamind.app');
     const domain = isProduction ? '.dopamind.app' : '';
     const secure = isProduction ? ';Secure' : '';
+    const encodedValue = encodeURIComponent(value);
 
-    document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/${domain ? `;domain=${domain}` : ''};SameSite=Lax${secure}`;
+    document.cookie = `${name}=${encodedValue};expires=${expires.toUTCString()};path=/${domain ? `;domain=${domain}` : ''};SameSite=Lax${secure}`;
   }, []);
 
   // 删除 cookie 的辅助函数
@@ -228,10 +237,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   );
 }
 
+export const useAuthOptional = (): AuthContextType | undefined => useContext(AuthContext);
+
 export const useAuth = (): AuthContextType => {
-  const context = useContext(AuthContext);
+  const context = useAuthOptional();
   if (context === undefined) {
     throw new Error('useAuth must be used within an AuthProvider');
   }
   return context;
 };
+
+

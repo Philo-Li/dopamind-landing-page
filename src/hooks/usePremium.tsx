@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect, useCallback, createContext, useContext } from 'react';
-import { settingsApi } from '@/lib/api';
-
+import { useAuthOptional } from './useAuth';
+import type { AuthContextType } from './useAuth';
 export interface PremiumStatus {
   isPremium: boolean;
   type: 'free' | 'trial' | 'paid' | 'referral_credit';
@@ -23,53 +23,74 @@ interface PremiumContextType {
 const PremiumContext = createContext<PremiumContextType | undefined>(undefined);
 
 export function PremiumProvider({ children }: { children: React.ReactNode }) {
+  const auth = useAuthOptional();
+  const authPremiumStatus = auth?.premiumStatus ?? null;
+  const authLoading = auth?.isLoading ?? false;
+  const refreshPremiumStatus = auth?.refreshPremiumStatus;
   const [premiumStatus, setPremiumStatus] = useState<PremiumStatus | null>(null);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
-  const fetchPremiumStatus = useCallback(async () => {
-    try {
-      setLoading(true);
-      setError(null);
-
-      const response = await settingsApi.getSettings();
-
-      if (response.success && response.data) {
-        // 模拟 Premium 状态数据，实际应该从 API 获取
-        const mockStatus: PremiumStatus = {
-          isPremium: (response.data as any)?.premiumStatus?.isPremium || false,
-          type: (response.data as any)?.premiumStatus?.type || 'free',
-          expiresAt: (response.data as any)?.premiumStatus?.expiresAt ? new Date((response.data as any).premiumStatus.expiresAt) : undefined,
-          store: (response.data as any)?.premiumStatus?.store,
-          willRenew: (response.data as any)?.premiumStatus?.willRenew || false,
-          referralCreditDays: (response.data as any)?.premiumStatus?.referralCreditDays
-        };
-
-        setPremiumStatus(mockStatus);
-      } else {
-        // 默认免费用户状态
-        setPremiumStatus({
-          isPremium: false,
-          type: 'free',
-          willRenew: false
-        });
+  const normalizePremiumStatus = useCallback(
+    (status: AuthContextType['premiumStatus']): PremiumStatus | null => {
+      if (!status) {
+        return null;
       }
-    } catch (err) {
-      console.error('Failed to fetch premium status:', err);
-      setError(err instanceof Error ? err.message : 'Failed to fetch premium status');
-      setPremiumStatus({
-        isPremium: false,
-        type: 'free',
-        willRenew: false
-      });
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+
+      let type: PremiumStatus['type'] = 'free';
+
+      if (status.isPremium) {
+        type = status.source === 'trial' ? 'trial' : 'paid';
+      } else if (status.source === 'trial') {
+        type = 'trial';
+      }
+
+      const normalized: PremiumStatus = {
+        isPremium: status.isPremium,
+        type,
+        expiresAt: status.expiresAt ? new Date(status.expiresAt) : undefined,
+        willRenew: status.source === 'subscription' && status.isPremium,
+      };
+
+      if (status.source === 'subscription') {
+        normalized.store = 'STRIPE';
+      }
+
+      return normalized;
+    },
+    []
+  );
 
   useEffect(() => {
-    fetchPremiumStatus();
-  }, [fetchPremiumStatus]);
+    setPremiumStatus(normalizePremiumStatus(authPremiumStatus));
+  }, [authPremiumStatus, normalizePremiumStatus]);
+
+  useEffect(() => {
+    if (auth) {
+      setError(null);
+    }
+  }, [auth]);
+
+  const fetchPremiumStatus = useCallback(async () => {
+    if (!refreshPremiumStatus) {
+      setError('Premium status is unavailable until authentication completes.');
+      return;
+    }
+
+    setIsRefreshing(true);
+    setError(null);
+
+    try {
+      await refreshPremiumStatus();
+    } catch (err) {
+      console.warn('Failed to refresh premium status:', err);
+      setError(err instanceof Error ? err.message : 'Failed to refresh premium status');
+    } finally {
+      setIsRefreshing(false);
+    }
+  }, [refreshPremiumStatus]);
+
+  const loading = authLoading || isRefreshing || !auth;
 
   const contextValue: PremiumContextType = {
     premiumStatus,

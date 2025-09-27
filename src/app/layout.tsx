@@ -124,14 +124,14 @@ export default async function RootLayout({
         <I18nProvider initialLanguage={initialLanguage}>
           <ThemeProvider initialTheme={initialTheme} initialActualTheme={initialActualTheme}>
             <ToastProvider>
-              <PremiumProvider>
-                <AuthProvider>
+              <AuthProvider>
+                <PremiumProvider>
                   <div id="root" data-app-shell>
                     {children}
                   </div>
                   <GlobalPaywall />
-                </AuthProvider>
-              </PremiumProvider>
+                </PremiumProvider>
+              </AuthProvider>
             </ToastProvider>
           </ThemeProvider>
         </I18nProvider>
