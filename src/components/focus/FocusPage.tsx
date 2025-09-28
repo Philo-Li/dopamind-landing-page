@@ -813,17 +813,26 @@ function FocusPageContent() {
 
             {/* 时间显示 */}
             <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <div className="text-4xl font-bold text-gray-900 mb-1">
+              <div
+                className="text-4xl font-bold mb-1"
+                style={{ color: colors.text }}
+              >
                 {formatTime(timeLeft)}
               </div>
-              <div className="text-lg font-medium text-gray-500">
+              <div
+                className="text-lg font-medium"
+                style={{ color: colors.textSecondary }}
+              >
                 {timerState === 'running'
                   ? timerConfigs[focusMode].statusText
                   : timerConfigs[focusMode].label
                 }
               </div>
               {currentTask && timerState === 'running' && (
-                <div className="text-sm text-gray-500 line-clamp-1 max-w-32 text-center mt-1">
+                <div
+                  className="text-sm line-clamp-1 max-w-32 text-center mt-1"
+                  style={{ color: colors.textSecondary }}
+                >
                   {currentTask.title}
                 </div>
               )}
