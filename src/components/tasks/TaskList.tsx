@@ -3,6 +3,7 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import { Task, TaskQueryParams, TaskStats as TaskStatsType, Priority } from '@/types/task'
 import { useLocalization } from '@/hooks/useLocalization'
+import { useThemeColors } from '@/hooks/useThemeColor'
 import TaskItem from './TaskItem'
 import TaskStats from './TaskStats'
 import {
@@ -52,6 +53,7 @@ export default function TaskList({
   taskStats
 }: TaskListProps) {
   const { t } = useLocalization()
+  const colors = useThemeColors()
   const [searchText, setSearchText] = useState('')
   const [showFilters, setShowFilters] = useState(false)
   const [statusFilter, setStatusFilter] = useState<string>('')
@@ -233,27 +235,48 @@ export default function TaskList({
   }, [] as Array<{ type: 'task' | 'divider'; task?: Task; label?: string; index?: number }>)
 
   return (
-    <div className="h-full flex flex-col bg-gray-50 dark:bg-gray-900">
+    <div
+      className="h-full flex flex-col"
+      style={{ backgroundColor: colors.background }}
+    >
       {/* Fixed Header */}
-      <div className={`bg-transparent border-b border-gray-200/50 dark:border-slate-700/30 px-4 pt-3 ${showStatsLocal ? 'pb-3' : 'pb-1'}`}>
+      <div
+        className={`bg-transparent border-b px-4 pt-3 ${showStatsLocal ? 'pb-3' : 'pb-1'}`}
+        style={{ borderColor: colors.card.border }}
+      >
         {/* Control Bar - more compact like mobile */}
-        <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-3 mb-3 flex items-center gap-3 border border-gray-200 dark:border-gray-600">
+        <div
+          className="rounded-xl p-3 mb-3 flex items-center gap-3 border shadow-sm transition-colors"
+          style={{
+            backgroundColor: colors.card.background,
+            borderColor: colors.card.border
+          }}
+        >
           {/* Search Input */}
           <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <Search
+              className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4"
+              style={{ color: colors.tabIconDefault }}
+            />
             <input
               type="text"
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
               placeholder={t('tasks.search_placeholder')}
-              className="w-full pl-10 pr-4 py-2.5 border-0 bg-white dark:bg-gray-700 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-dopamind-500 text-sm shadow-sm transition-all duration-200"
+              className="w-full pl-10 pr-4 py-2.5 border-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-dopamind-500 text-sm shadow-sm transition-all duration-200"
+              style={{
+                backgroundColor: colors.card.background,
+                color: colors.text,
+                borderColor: colors.card.border,
+                boxShadow: '0 1px 3px rgba(15, 23, 42, 0.08)'
+              }}
             />
             {searchText && (
               <button
                 onClick={() => setSearchText('')}
                 className="absolute right-3 top-1/2 transform -translate-y-1/2"
               >
-                <X className="w-4 h-4 text-gray-400" />
+                <X className="w-4 h-4" style={{ color: colors.tabIconDefault }} />
               </button>
             )}
           </div>
@@ -263,7 +286,7 @@ export default function TaskList({
             <button
               onClick={() => setShowFilters(!showFilters)}
               className={`
-                w-10 h-10 rounded-xl transition-all duration-200 flex items-center justify-center shadow-sm
+                w-10 h-10 rounded-lg transition-all duration-200 flex items-center justify-center shadow-sm
                 ${showFilters
                   ? 'bg-dopamind-500 text-white shadow-lg shadow-dopamind-500/25'
                   : 'bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 hover:shadow-md'
@@ -276,7 +299,7 @@ export default function TaskList({
             <button
               onClick={() => setShowStatsLocal(!showStatsLocal)}
               className={`
-                w-10 h-10 rounded-xl transition-all duration-200 flex items-center justify-center shadow-sm
+                w-10 h-10 rounded-lg transition-all duration-200 flex items-center justify-center shadow-sm
                 ${showStatsLocal
                   ? 'bg-dopamind-500 text-white shadow-lg shadow-dopamind-500/25'
                   : 'bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 hover:shadow-md'
@@ -288,7 +311,7 @@ export default function TaskList({
 
             <button
               onClick={() => setViewMode(viewMode === 'detailed' ? 'compact' : 'detailed')}
-              className="w-10 h-10 rounded-xl bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200 flex items-center justify-center shadow-sm hover:shadow-md"
+              className="w-10 h-10 rounded-lg bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200 flex items-center justify-center shadow-sm hover:shadow-md"
             >
               {viewMode === 'detailed' ? <List className="w-4 h-4" /> : <Grid3X3 className="w-4 h-4" />}
             </button>
@@ -297,7 +320,7 @@ export default function TaskList({
 
         {/* Filters Panel */}
         {showFilters && (
-          <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-4 mb-4 border border-gray-200 dark:border-gray-600 shadow-sm">
+          <div className="bg-gray-50 dark:bg-gray-700 rounded-xl p-4 mb-4 border border-gray-200 dark:border-gray-600 shadow-sm">
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">{t('tasks.filter.status_filter')}</label>

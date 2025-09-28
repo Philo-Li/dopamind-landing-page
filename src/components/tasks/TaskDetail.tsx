@@ -519,9 +519,9 @@ export default function TaskDetail({ taskId, onBack, onStartFocus }: TaskDetailP
   if (loadingTask) {
     return (
       <div className="h-full flex items-center justify-center" style={pageBackgroundStyle}>
-        <div className="text-center">
+        <div className="text-center text-card-foreground">
           <RefreshCw className="w-8 h-8 animate-spin text-blue-500 mx-auto mb-4" />
-          <p className="text-gray-600">{t('tasks.detail.loading')}...</p>
+          <p className="text-muted-foreground">{t('tasks.detail.loading')}...</p>
         </div>
       </div>
     )
@@ -530,9 +530,9 @@ export default function TaskDetail({ taskId, onBack, onStartFocus }: TaskDetailP
   if (!task) {
     return (
       <div className="h-full flex items-center justify-center" style={pageBackgroundStyle}>
-        <div className="text-center">
+        <div className="text-center text-card-foreground">
           <AlertTriangle className="w-12 h-12 text-red-500 mx-auto mb-4" />
-          <h3 className="text-lg font-medium text-gray-900 mb-2">{t('tasks.detail.task_not_found')}</h3>
+          <h3 className="text-lg font-medium text-foreground mb-2">{t('tasks.detail.task_not_found')}</h3>
           <button
             onClick={onBack}
             className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
@@ -586,7 +586,7 @@ export default function TaskDetail({ taskId, onBack, onStartFocus }: TaskDetailP
         <div className="max-w-lg mx-auto p-4 space-y-3 sm:max-w-2xl lg:max-w-4xl sm:p-6 sm:space-y-6">
           {/* Main Task Card */}
           <div
-            className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm mb-2 sm:mb-0"
+            className="bg-white dark:bg-gray-700 text-card-foreground rounded-xl border border-gray-200 dark:border-gray-600 overflow-hidden shadow-sm mb-2 sm:mb-0"
             style={{
               borderLeft: `3px solid ${getPriorityBorderColor(task.priority)}`
             }}
@@ -600,7 +600,7 @@ export default function TaskDetail({ taskId, onBack, onStartFocus }: TaskDetailP
                   transition-colors duration-200
                   ${task.status === 'COMPLETED'
                     ? 'bg-green-500 border-green-500'
-                    : 'border-gray-300 hover:border-green-400'
+                    : 'border-border hover:border-green-400'
                   }
                 `}
               >
@@ -613,14 +613,14 @@ export default function TaskDetail({ taskId, onBack, onStartFocus }: TaskDetailP
               <div className="flex-1 min-w-0">
                 <h2 className={`
                   text-base font-medium mb-2 leading-tight
-                  ${task.status === 'COMPLETED' ? 'line-through text-gray-500' : 'text-gray-900'}
+                  ${task.status === 'COMPLETED' ? 'line-through text-muted-foreground' : 'text-foreground'}
                 `}>
                   {task.title}
                 </h2>
 
                 {/* Task Description */}
                 {task.description && (
-                  <p className="text-sm text-gray-600 leading-relaxed mb-3">
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-3">
                     {task.description}
                   </p>
                 )}
@@ -668,8 +668,8 @@ export default function TaskDetail({ taskId, onBack, onStartFocus }: TaskDetailP
                         className={`
                           inline-flex items-center px-2 py-1 rounded-xl text-xs font-medium gap-1
                           ${isOverdue
-                            ? 'bg-red-100 text-red-700'
-                            : 'bg-gray-100 text-gray-600'
+                            ? 'bg-red-500/15 text-red-600'
+                            : 'bg-muted/60 text-muted-foreground'
                           }
                         `}
                       >
@@ -705,29 +705,29 @@ export default function TaskDetail({ taskId, onBack, onStartFocus }: TaskDetailP
           </div>
 
           {/* Subtask Statistics */}
-          <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm mb-2 sm:mb-0 sm:p-6">
-            <h3 className="text-base font-semibold text-gray-900 mb-3">{t('tasks.detail.subtask_progress')}</h3>
+          <div className="bg-white dark:bg-gray-700 text-card-foreground rounded-xl border border-gray-200 dark:border-gray-600 p-4 shadow-sm mb-2 sm:mb-0 sm:p-6">
+            <h3 className="text-base font-semibold text-foreground mb-3">{t('tasks.detail.subtask_progress')}</h3>
             <div className="grid grid-cols-4 gap-3 mb-3">
               <div className="text-center">
-                <div className="text-lg font-bold text-gray-900">{subtaskStats.total}</div>
-                <div className="text-xs text-gray-500">{t('tasks.stats.total')}</div>
+                <div className="text-lg font-bold text-foreground">{subtaskStats.total}</div>
+                <div className="text-xs text-muted-foreground">{t('tasks.stats.total')}</div>
               </div>
               <div className="text-center">
                 <div className="text-lg font-bold" style={{ color: '#10B981' }}>{subtaskStats.completed}</div>
-                <div className="text-xs text-gray-500">{t('tasks.status.COMPLETED')}</div>
+                <div className="text-xs text-muted-foreground">{t('tasks.status.COMPLETED')}</div>
               </div>
               <div className="text-center">
                 <div className="text-lg font-bold" style={{ color: '#3B82F6' }}>{subtaskStats.inProgress}</div>
-                <div className="text-xs text-gray-500">{t('tasks.status.IN_PROGRESS')}</div>
+                <div className="text-xs text-muted-foreground">{t('tasks.status.IN_PROGRESS')}</div>
               </div>
               <div className="text-center">
                 <div className="text-lg font-bold" style={{ color: '#F59E0B' }}>{subtaskStats.pending}</div>
-                <div className="text-xs text-gray-500">{t('tasks.status.PENDING')}</div>
+                <div className="text-xs text-muted-foreground">{t('tasks.status.PENDING')}</div>
               </div>
             </div>
 
             {/* Progress Bar */}
-            <div className="bg-gray-200 rounded-full h-1 overflow-hidden mb-2">
+            <div className="bg-muted/60 rounded-full h-1 overflow-hidden mb-2">
               <div
                 className="h-full rounded-full transition-all duration-300"
                 style={{
@@ -736,7 +736,7 @@ export default function TaskDetail({ taskId, onBack, onStartFocus }: TaskDetailP
                 }}
               />
             </div>
-            <p className="text-center text-xs text-gray-600">{t('tasks.stats.completion_rate')}: {completionRate}%</p>
+            <p className="text-center text-xs text-muted-foreground">{t('tasks.stats.completion_rate')}: {completionRate}%</p>
           </div>
 
           {/* AI Decompose Button */}
@@ -746,7 +746,7 @@ export default function TaskDetail({ taskId, onBack, onStartFocus }: TaskDetailP
             className={`
               w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-medium transition-colors
               ${subtasks.length > 0
-                ? 'bg-gray-100 text-gray-600 border border-gray-200'
+                ? 'bg-muted/60 text-muted-foreground border border-gray-200 dark:border-gray-600'
                 : 'text-white hover:opacity-90 shadow-sm'
               }
               ${(decomposing || showDecomposeConfirm) ? 'opacity-60 cursor-not-allowed' : ''}
@@ -764,16 +764,16 @@ export default function TaskDetail({ taskId, onBack, onStartFocus }: TaskDetailP
           </button>
 
           {/* Subtasks List */}
-          <div className="bg-white rounded-xl border border-gray-200 shadow-sm mb-2 sm:mb-0">
-            <div className="p-4 border-b border-gray-200 sm:p-6">
+          <div className="bg-white dark:bg-gray-700 text-card-foreground rounded-xl border border-gray-200 dark:border-gray-600 shadow-sm mb-2 sm:mb-0">
+            <div className="p-4 border-b border-gray-200 dark:border-gray-600 sm:p-6">
               <div className="flex items-center justify-between">
-                <h3 className="text-base font-semibold text-gray-900">{t('tasks.detail.subtask_list')}</h3>
+                <h3 className="text-base font-semibold text-foreground">{t('tasks.detail.subtask_list')}</h3>
                 <div className="flex items-center gap-2">
                   {/* Clear All Button - only show in detailed view when there are subtasks */}
                   {subtasks.length > 0 && subtaskViewMode === 'detailed' && (
                     <button
                       onClick={handleClearAllSubtasks}
-                      className="px-3 py-1.5 text-xs font-medium text-red-600 bg-red-50 border border-red-200 rounded-lg hover:bg-red-100 transition-colors flex items-center gap-1"
+                      className="px-3 py-1.5 text-xs font-medium text-red-600 bg-red-500/10 border border-red-200 dark:border-red-500/40 rounded-lg hover:bg-red-500/15 transition-colors flex items-center gap-1"
                     >
                       <Trash2 className="w-3 h-3" />
                       {t('tasks.detail.clear_all')}
@@ -783,12 +783,12 @@ export default function TaskDetail({ taskId, onBack, onStartFocus }: TaskDetailP
                   {subtasks.length > 0 && (
                     <button
                       onClick={() => setSubtaskViewMode(subtaskViewMode === 'detailed' ? 'compact' : 'detailed')}
-                      className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
+                      className="p-1.5 hover:bg-muted/50 rounded-lg transition-colors"
                     >
                       {subtaskViewMode === 'detailed' ? (
-                        <List className="w-3.5 h-3.5 text-gray-600" />
+                        <List className="w-3.5 h-3.5 text-muted-foreground" />
                       ) : (
-                        <Grid3X3 className="w-3.5 h-3.5 text-gray-600" />
+                        <Grid3X3 className="w-3.5 h-3.5 text-muted-foreground" />
                       )}
                     </button>
                   )}
@@ -798,10 +798,10 @@ export default function TaskDetail({ taskId, onBack, onStartFocus }: TaskDetailP
 
             <div className="p-4 sm:p-6">
               {subtasks.length === 0 ? (
-                <div className="text-center py-8">
-                  <BarChart3 className="w-10 h-10 text-gray-400 mx-auto mb-3" />
-                  <h4 className="text-base font-medium text-gray-900 mb-2">{t('tasks.detail.no_subtasks')}</h4>
-                  <p className="text-sm text-gray-500">{t('tasks.detail.no_subtasks_desc')}</p>
+                <div className="text-center py-8 text-card-foreground">
+                  <BarChart3 className="w-10 h-10 text-muted-foreground mx-auto mb-3" />
+                  <h4 className="text-base font-medium text-foreground mb-2">{t('tasks.detail.no_subtasks')}</h4>
+                  <p className="text-sm text-muted-foreground">{t('tasks.detail.no_subtasks_desc')}</p>
                 </div>
               ) : (
                 <div className="space-y-2">
@@ -818,8 +818,11 @@ export default function TaskDetail({ taskId, onBack, onStartFocus }: TaskDetailP
                       <div
                         key={subtask.id}
                         className={`
-                          border rounded-lg p-3 transition-colors
-                          ${subtask.status === 'COMPLETED' ? 'bg-gray-50 border-gray-200' : 'bg-white border-gray-200 hover:border-gray-300'}
+                          rounded-lg p-3 transition-colors border
+                          ${subtask.status === 'COMPLETED'
+                            ? 'bg-muted/40 border-gray-200 dark:border-gray-600'
+                            : 'bg-white dark:bg-gray-600/60 border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500'
+                          }
                         `}
                       >
                         <div className="flex items-start gap-3">
@@ -830,7 +833,7 @@ export default function TaskDetail({ taskId, onBack, onStartFocus }: TaskDetailP
                               w-4 h-4 rounded border-2 flex items-center justify-center mt-0.5
                               ${subtask.status === 'COMPLETED'
                                 ? 'bg-green-500 border-green-500'
-                                : 'border-gray-300 hover:border-green-400'
+                                : 'border-border hover:border-green-400'
                               }
                             `}
                           >
@@ -840,18 +843,15 @@ export default function TaskDetail({ taskId, onBack, onStartFocus }: TaskDetailP
                           </button>
 
                           {/* Subtask Content */}
-                          <div className="flex-1 min-w-0">
+                          <div className="flex-1 min-w-0 text-card-foreground">
                             <h4 className={`
                               text-sm font-medium mb-1
-                              ${subtask.status === 'COMPLETED' ? 'line-through text-gray-500' : 'text-gray-900'}
+                              ${subtask.status === 'COMPLETED' ? 'line-through text-muted-foreground' : 'text-foreground'}
                             `}>
                               {subtask.title}
                             </h4>
                             {subtask.description && (
-                              <p className={`
-                                text-sm
-                                ${subtask.status === 'COMPLETED' ? 'text-gray-400' : 'text-gray-600'}
-                              `}>
+                              <p className="text-sm text-muted-foreground">
                                 {subtask.description}
                               </p>
                             )}
@@ -862,14 +862,14 @@ export default function TaskDetail({ taskId, onBack, onStartFocus }: TaskDetailP
                             <div className="flex gap-1">
                               <button
                                 onClick={() => setEditingSubtask(subtask)}
-                                className="p-1 hover:bg-gray-100 rounded transition-colors"
+                                className="p-1 hover:bg-muted/50 rounded transition-colors"
                               >
-                                <Edit className="w-4 h-4 text-gray-400" />
+                                <Edit className="w-4 h-4 text-muted-foreground" />
                               </button>
                               <button
                                 onClick={() => handleDeleteSubtask(subtask.id)}
                                 disabled={deletingSubtaskId === subtask.id}
-                                className="p-1 hover:bg-red-50 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="p-1 hover:bg-red-500/15 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                               >
                                 <Trash2 className="w-4 h-4 text-red-400" />
                               </button>
@@ -896,14 +896,14 @@ export default function TaskDetail({ taskId, onBack, onStartFocus }: TaskDetailP
               width: 'calc(100vw - 256px)' // 在剩余空间内居中
             }}
           >
-            <div className="bg-white rounded-2xl p-6 max-w-sm w-full mx-4">
+            <div className="bg-white dark:bg-gray-800 text-card-foreground rounded-2xl p-6 max-w-sm w-full mx-4 shadow-lg">
               {/* 标题 - 居中显示 */}
-              <h3 className="text-lg font-semibold text-gray-900 text-center mb-3">
+              <h3 className="text-lg font-semibold text-foreground text-center mb-3">
                 {t('tasks.actions.confirm_delete_title')}
               </h3>
 
               {/* 消息内容 - 居中显示 */}
-              <p className="text-sm text-gray-600 text-center leading-5 mb-6">
+              <p className="text-sm text-muted-foreground text-center leading-5 mb-6">
                 {t('tasks.actions.confirm_delete_subtask')}
               </p>
 
@@ -912,7 +912,7 @@ export default function TaskDetail({ taskId, onBack, onStartFocus }: TaskDetailP
                 <button
                   onClick={() => setShowDeleteSubtaskConfirm(null)}
                   disabled={deletingSubtaskId !== null}
-                  className="flex-1 px-6 py-3 text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors text-center font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 px-6 py-3 text-muted-foreground bg-muted/50 rounded-lg hover:bg-muted transition-colors text-center font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {t('tasks.actions.cancel')}
                 </button>
@@ -939,15 +939,15 @@ export default function TaskDetail({ taskId, onBack, onStartFocus }: TaskDetailP
       {/* Delete Confirmation Modal */}
       {showDeleteConfirm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[60]">
-          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-            <h3 className="text-lg font-semibold mb-2">{t('tasks.actions.confirm_delete_title')}</h3>
-            <p className="text-gray-600 mb-4">
+          <div className="bg-white dark:bg-gray-800 text-card-foreground rounded-lg p-6 max-w-md w-full mx-4 shadow-lg">
+            <h3 className="text-lg font-semibold mb-2 text-foreground">{t('tasks.actions.confirm_delete_title')}</h3>
+            <p className="text-muted-foreground mb-4">
               {t('tasks.actions.confirm_delete_message', { title: task.title })}
             </p>
             <div className="flex gap-3 justify-end">
               <button
                 onClick={() => setShowDeleteConfirm(false)}
-                className="px-4 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50"
+                className="px-4 py-2 text-muted-foreground border border-border/60 rounded-lg hover:bg-muted/50"
               >
                 {t('tasks.actions.cancel')}
               </button>
@@ -973,14 +973,14 @@ export default function TaskDetail({ taskId, onBack, onStartFocus }: TaskDetailP
               width: 'calc(100vw - 256px)' // 在剩余空间内居中
             }}
           >
-            <div className="bg-white rounded-2xl p-6 max-w-sm w-full mx-4">
+            <div className="bg-white dark:bg-gray-800 text-card-foreground rounded-2xl p-6 max-w-sm w-full mx-4 shadow-lg">
               {/* 标题 - 居中显示 */}
-              <h3 className="text-lg font-semibold text-gray-900 text-center mb-3">
+              <h3 className="text-lg font-semibold text-foreground text-center mb-3">
                 {t('tasks.detail.ai_decompose_title')}
               </h3>
 
               {/* 消息内容 - 居中显示 */}
-              <p className="text-sm text-gray-600 text-center leading-5 mb-6">
+              <p className="text-sm text-muted-foreground text-center leading-5 mb-6">
                 {t('tasks.detail.ai_decompose_message', { title: task.title })}
               </p>
 
@@ -988,7 +988,7 @@ export default function TaskDetail({ taskId, onBack, onStartFocus }: TaskDetailP
               <div className="flex gap-3">
                 <button
                   onClick={() => setShowDecomposeConfirm(false)}
-                  className="flex-1 px-6 py-3 text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors text-center font-semibold"
+                  className="flex-1 px-6 py-3 text-muted-foreground bg-muted/50 rounded-lg hover:bg-muted transition-colors text-center font-semibold"
                 >
                   {t('tasks.actions.cancel')}
                 </button>
@@ -1029,14 +1029,14 @@ export default function TaskDetail({ taskId, onBack, onStartFocus }: TaskDetailP
               width: 'calc(100vw - 256px)' // 在剩余空间内居中
             }}
           >
-            <div className="bg-white rounded-2xl p-6 max-w-sm w-full mx-4">
+            <div className="bg-white dark:bg-gray-800 text-card-foreground rounded-2xl p-6 max-w-sm w-full mx-4 shadow-lg">
               {/* 标题 - 居中显示 */}
-              <h3 className="text-lg font-semibold text-gray-900 text-center mb-3">
+              <h3 className="text-lg font-semibold text-foreground text-center mb-3">
                 {t('tasks.detail.clear_all_title')}
               </h3>
 
               {/* 消息内容 - 居中显示 */}
-              <p className="text-sm text-gray-600 text-center leading-5 mb-6">
+              <p className="text-sm text-muted-foreground text-center leading-5 mb-6">
                 {t('tasks.detail.clear_all_message', {
                   count: subtasks.length
                 })}
@@ -1047,7 +1047,7 @@ export default function TaskDetail({ taskId, onBack, onStartFocus }: TaskDetailP
                 <button
                   onClick={() => setShowClearAllConfirm(false)}
                   disabled={clearingAllSubtasks}
-                  className="flex-1 px-6 py-3 text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors text-center font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 px-6 py-3 text-muted-foreground bg-muted/50 rounded-lg hover:bg-muted transition-colors text-center font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {t('tasks.actions.cancel')}
                 </button>

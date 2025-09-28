@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import { Play, Clock, ChevronRight } from 'lucide-react'
 import { useLocalization } from '@/hooks/useLocalization'
+import { useThemeColors } from '@/hooks/useThemeColor'
 import { Task } from '@/types/task'
 import { tasksApi } from '@/lib/api'
 
@@ -16,6 +17,7 @@ export const FocusTaskList: React.FC<FocusTaskListProps> = ({
   onTaskSelect
 }) => {
   const { t } = useLocalization()
+  const colors = useThemeColors()
   const [inProgressTasks, setInProgressTasks] = useState<Task[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -66,36 +68,55 @@ export const FocusTaskList: React.FC<FocusTaskListProps> = ({
   }
 
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm m-4">
+    <div
+      className="rounded-2xl p-6 shadow-sm m-4 border transition-colors"
+      style={{
+        backgroundColor: colors.card.background,
+        borderColor: colors.card.border
+      }}
+    >
       <div className="flex items-center mb-4">
-        <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center mr-3">
-          <Play className="w-4 h-4 text-orange-600" />
+        <div
+          className="w-8 h-8 rounded-full flex items-center justify-center mr-3"
+          style={{ backgroundColor: `${colors.accent.orange}1f` }}
+        >
+          <Play className="w-4 h-4" style={{ color: colors.accent.orange }} />
         </div>
-        <h3 className="text-xl font-semibold text-gray-900 ml-2">{t('focus.in_progress_tasks')}</h3>
+        <h3 className="text-xl font-semibold ml-2" style={{ color: colors.text }}>
+          {t('focus.in_progress_tasks')}
+        </h3>
       </div>
-      {inProgressTasks.map((task, index) => (
+      {inProgressTasks.map((task) => (
         <button
           key={task.id}
-          className={`w-full text-left py-3 px-4 rounded-lg mb-1 last:mb-0 transition-colors ${
-            currentTask?.id === task.id
-              ? 'bg-orange-50 border border-orange-200'
-              : 'hover:bg-gray-50'
-          } ${index !== inProgressTasks.length - 1 ? 'border-b border-gray-100' : ''}`}
+          className="w-full text-left py-3 px-4 rounded-lg mb-2 transition-colors border"
           onClick={() => onTaskSelect(task)}
+          style={{
+            backgroundColor: currentTask?.id === task.id
+              ? `${colors.accent.orange}1a`
+              : colors.card.background,
+            borderColor: currentTask?.id === task.id
+              ? `${colors.accent.orange}66`
+              : colors.card.border,
+            boxShadow: currentTask?.id === task.id ? `0 6px 16px ${colors.accent.orange}1f` : 'none'
+          }}
         >
           <div className="flex items-center justify-between">
             <div className="flex-1 mr-3">
               <div className="flex items-center mb-1">
-                <h4 className={`text-base font-medium truncate ${
-                  currentTask?.id === task.id ? 'text-orange-600' : 'text-gray-900'
-                }`}>
+                <h4
+                  className="text-base font-medium truncate"
+                  style={{
+                    color: currentTask?.id === task.id ? colors.accent.orange : colors.text
+                  }}
+                >
                   {task.title}
                 </h4>
               </div>
               {task.dueDate && (
                 <div className="flex items-center gap-1">
-                  <Clock className="w-2.5 h-2.5 text-gray-500" />
-                  <span className="text-xs font-medium text-gray-500">
+                  <Clock className="w-2.5 h-2.5" style={{ color: colors.textSecondary }} />
+                  <span className="text-xs font-medium" style={{ color: colors.textSecondary }}>
                     {formatDueDate(task.dueDate)}
                   </span>
                 </div>
@@ -103,16 +124,19 @@ export const FocusTaskList: React.FC<FocusTaskListProps> = ({
             </div>
             <div className="flex items-center gap-2">
               {task.priority === 'URGENT' && (
-                <span className="px-1.5 py-0.5 bg-red-500 text-white text-xs font-semibold rounded">
+                <span className="px-1.5 py-0.5 text-xs font-semibold rounded" style={{ backgroundColor: '#f87171', color: '#ffffff' }}>
                   {t('tasks.priority.URGENT')}
                 </span>
               )}
               {currentTask?.id === task.id ? (
-                <div className="w-6 h-6 bg-orange-600 rounded-full flex items-center justify-center">
+                <div
+                  className="w-6 h-6 rounded-full flex items-center justify-center"
+                  style={{ backgroundColor: colors.accent.orange }}
+                >
                   <Play className="w-3 h-3 text-white" />
                 </div>
               ) : (
-                <ChevronRight className="w-3 h-3 text-gray-500" />
+                <ChevronRight className="w-3 h-3" style={{ color: colors.textSecondary }} />
               )}
             </div>
           </div>

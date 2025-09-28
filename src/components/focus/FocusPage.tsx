@@ -909,19 +909,24 @@ function FocusPageContent() {
               <button
                 key={mode}
                 className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl border transition-all ${
-                  focusMode === mode
-                    ? `bg-[${config.color}] text-white border-[${config.color}]`
-                    : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'
-                } ${timerState === 'running' ? 'opacity-60 cursor-not-allowed' : ''}`}
+                  timerState === 'running' ? 'opacity-60 cursor-not-allowed' : 'hover:shadow-md'
+                }`}
                 onClick={() => switchTimerMode(mode)}
                 disabled={timerState === 'running'}
                 style={{
-                  backgroundColor: focusMode === mode ? config.color : undefined,
-                  borderColor: focusMode === mode ? config.color : undefined
+                  backgroundColor: focusMode === mode ? config.color : colors.card.background,
+                  color: focusMode === mode ? '#FFFFFF' : colors.textSecondary,
+                  borderColor: focusMode === mode ? config.color : colors.card.border,
+                  boxShadow: focusMode === mode ? `0 10px 20px ${config.color}33` : 'none'
                 }}
               >
-                <IconComponent className="w-4 h-4" />
-                <span className="font-medium text-sm">{config.label}</span>
+                <IconComponent
+                  className="w-4 h-4"
+                  style={{ color: focusMode === mode ? '#FFFFFF' : colors.textSecondary }}
+                />
+                <span className="font-medium text-sm" style={{ color: focusMode === mode ? '#FFFFFF' : colors.text }}>
+                  {config.label}
+                </span>
               </button>
             )
           })}
@@ -929,20 +934,42 @@ function FocusPageContent() {
 
         {/* 统计组件 */}
         {statsLoading ? (
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm m-4">
+          <div
+            className="rounded-2xl p-6 shadow-sm m-4 border transition-colors"
+            style={{
+              backgroundColor: colors.card.background,
+              borderColor: colors.card.border
+            }}
+          >
             <div className="flex items-center mb-4">
-              <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                <div className="w-4 h-4 bg-blue-600 rounded-full animate-pulse"></div>
+              <div
+                className="w-8 h-8 rounded-full flex items-center justify-center mr-3"
+                style={{ backgroundColor: `${colors.accent.blue}1f` }}
+              >
+                <div
+                  className="w-4 h-4 rounded-full animate-pulse"
+                  style={{ backgroundColor: colors.accent.blue }}
+                ></div>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 ml-2">{t('focus.stats.today_focus')}</h3>
+              <h3 className="text-xl font-semibold ml-2" style={{ color: colors.text }}>
+                {t('focus.stats.today_focus')}
+              </h3>
             </div>
             <div className="grid grid-cols-3 gap-4">
               {[...Array(3)].map((_, i) => (
                 <div key={i} className="text-center">
-                  <div className="w-7 h-7 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-2 animate-pulse">
-                  </div>
-                  <div className="w-8 h-6 bg-gray-200 rounded mx-auto mb-1 animate-pulse"></div>
-                  <div className="w-6 h-3 bg-gray-100 rounded mx-auto animate-pulse"></div>
+                  <div
+                    className="w-7 h-7 rounded-full flex items-center justify-center mx-auto mb-2 animate-pulse"
+                    style={{ backgroundColor: `${colors.border}66` }}
+                  ></div>
+                  <div
+                    className="w-8 h-6 rounded mx-auto mb-1 animate-pulse"
+                    style={{ backgroundColor: `${colors.border}aa` }}
+                  ></div>
+                  <div
+                    className="w-6 h-3 rounded mx-auto animate-pulse"
+                    style={{ backgroundColor: `${colors.border}66` }}
+                  ></div>
                 </div>
               ))}
             </div>
@@ -950,20 +977,37 @@ function FocusPageContent() {
         ) : focusStats ? (
           <FocusStats focusData={focusStats} />
         ) : (
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm m-4">
+          <div
+            className="rounded-2xl p-6 shadow-sm m-4 border transition-colors"
+            style={{
+              backgroundColor: colors.card.background,
+              borderColor: colors.card.border
+            }}
+          >
             <div className="flex items-center mb-4">
-              <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
-                <Clock className="w-4 h-4 text-gray-400" />
+              <div
+                className="w-8 h-8 rounded-full flex items-center justify-center mr-3"
+                style={{ backgroundColor: `${colors.border}66` }}
+              >
+                <Clock className="w-4 h-4" style={{ color: colors.tabIconDefault }} />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 ml-2">{t('focus.stats.today_focus')}</h3>
+              <h3 className="text-xl font-semibold ml-2" style={{ color: colors.text }}>
+                {t('focus.stats.today_focus')}
+              </h3>
             </div>
             <div className="text-center py-4">
-              <p className="text-gray-500 mb-3">
+              <p className="mb-3" style={{ color: colors.textSecondary }}>
                 {statsError || t('focus.stats.no_data')}
               </p>
               <button
                 onClick={() => refetchStats()}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                className="px-4 py-2 text-white rounded-lg transition-colors"
+                style={{
+                  backgroundColor: colors.accent.blue,
+                  boxShadow: `0 10px 20px ${colors.accent.blue}26`
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = colors.accent.blue + 'e6'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = colors.accent.blue}
               >
                 {t('common.retry')}
               </button>
@@ -973,11 +1017,19 @@ function FocusPageContent() {
 
         {/* 错误提示 - 更新错误状态 */}
         {(saveError || statsError) && (
-          <div className="mx-4 mb-4 p-3 bg-amber-50 border border-amber-200 rounded-xl">
+          <div
+            className="mx-4 mb-4 p-3 rounded-xl border"
+            style={{
+              backgroundColor: 'rgba(251, 191, 36, 0.12)',
+              borderColor: 'rgba(251, 191, 36, 0.35)'
+            }}
+          >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></div>
-                <p className="text-sm text-amber-800">{saveError || statsError}</p>
+                <p className="text-sm" style={{ color: colors.text }}>
+                  {saveError || statsError}
+                </p>
               </div>
               <button
                 onClick={() => {
@@ -986,7 +1038,10 @@ function FocusPageContent() {
                     refetchStats()
                   }
                 }}
-                className="text-amber-600 hover:text-amber-800 text-lg font-bold"
+                className="text-lg font-bold"
+                style={{ color: colors.accent.orange }}
+                onMouseEnter={(e) => e.currentTarget.style.color = colors.accent.orange + 'dd'}
+                onMouseLeave={(e) => e.currentTarget.style.color = colors.accent.orange}
               >
                 ×
               </button>
@@ -1040,12 +1095,25 @@ function FocusPageContent() {
       {/* 没有选择任务的提示弹窗 */}
       {showNoTaskDialog && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl p-6 max-w-sm w-full">
-            <div className="flex items-center justify-center w-12 h-12 bg-red-100 rounded-full mx-auto mb-4">
-              <Target className="w-6 h-6 text-red-600" />
+          <div
+            className="rounded-2xl p-6 max-w-sm w-full border shadow-lg"
+            style={{
+              backgroundColor: colors.card.background,
+              borderColor: colors.card.border
+            }}
+          >
+            <div
+              className="flex items-center justify-center w-12 h-12 rounded-full mx-auto mb-4"
+              style={{ backgroundColor: colors.accent.orange + '22' }}
+            >
+              <Target className="w-6 h-6" style={{ color: colors.accent.orange }} />
             </div>
-            <h3 className="text-xl font-bold text-gray-900 text-center mb-2">{t('focus.no_task_dialog.title')}</h3>
-            <p className="text-gray-600 text-center mb-6">{t('focus.no_task_dialog.message')}</p>
+            <h3 className="text-xl font-bold text-center mb-2" style={{ color: colors.text }}>
+              {t('focus.no_task_dialog.title')}
+            </h3>
+            <p className="text-center mb-6" style={{ color: colors.textSecondary }}>
+              {t('focus.no_task_dialog.message')}
+            </p>
             <button
               className="w-full py-3 text-white rounded-xl font-semibold transition-all"
               style={{
@@ -1069,10 +1137,10 @@ export const FocusPage: React.FC<FocusPageProps> = () => {
 
   return (
     <Suspense fallback={
-      <div className="h-full bg-gradient-to-br from-white to-gray-50 flex items-center justify-center">
-        <div className="text-center">
+      <div className="h-full flex items-center justify-center" style={{ backgroundColor: '#0F172A' }}>
+        <div className="text-center text-white">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-dopamind-600 mx-auto"></div>
-          <p className="mt-2 text-sm text-gray-600">{t('loading')}</p>
+          <p className="mt-2 text-sm opacity-80">{t('loading')}</p>
         </div>
       </div>
     }>

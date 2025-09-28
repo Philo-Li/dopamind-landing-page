@@ -3,6 +3,7 @@
 import React from 'react'
 import { TaskStats as TaskStatsType } from '@/types/task'
 import { useLocalization } from '@/hooks/useLocalization'
+import { useThemeColors } from '@/hooks/useThemeColor'
 import { BarChart3, Calendar, Clock, Play, CheckCircle2, Target, Check } from 'lucide-react'
 
 interface TaskStatsProps extends TaskStatsType {
@@ -21,6 +22,7 @@ export default function TaskStats({
   onFilterChange
 }: TaskStatsProps) {
   const { t } = useLocalization()
+  const colors = useThemeColors()
   const weeklyCompleted = thisWeekCompleted ?? completed
 
   const stats = [
@@ -82,9 +84,18 @@ export default function TaskStats({
   }
 
   return (
-    <div className="bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-sm border border-gray-100 dark:border-slate-700 mb-0 transition-all duration-200">
+    <div
+      className="rounded-2xl p-5 shadow-sm border mb-0 transition-all duration-200"
+      style={{
+        backgroundColor: colors.card.background,
+        borderColor: colors.card.border
+      }}
+    >
       {/* Achievement section with circular progress - matching mobile design */}
-      <div className="flex items-center mb-5 pb-3 border-b border-gray-100 dark:border-slate-700">
+      <div
+        className="flex items-center mb-5 pb-3 border-b"
+        style={{ borderColor: colors.card.border }}
+      >
         <div className="mr-5">
           <div
             className="w-[70px] h-[70px] rounded-full border-[3px] flex items-center justify-center relative"
@@ -103,7 +114,7 @@ export default function TaskStats({
               >
                 {completionRate}%
               </div>
-              <div className="text-[9px] text-gray-500 dark:text-gray-400 leading-tight mt-0.5">
+              <div className="text-[9px] text-muted-foreground leading-tight mt-0.5">
                 {t('tasks.stats.completion_rate')}
               </div>
             </div>
@@ -118,18 +129,18 @@ export default function TaskStats({
           </div>
         </div>
         <div className="flex-1">
-          <h3 className="text-[15px] font-bold text-gray-900 dark:text-gray-100 mb-1">
+          <h3 className="text-[15px] font-bold text-foreground mb-1">
             {t('tasks.stats.week_progress')}
           </h3>
-          <p className="text-[13px] font-semibold text-gray-700 dark:text-gray-200 mb-0.5">
+          <p className="text-[13px] font-semibold text-muted-foreground mb-0.5">
             {t('tasks.stats.tasks_completed', { count: weeklyCompleted })}
           </p>
           {total > 0 ? (
-            <p className="text-[11px] text-gray-500 dark:text-gray-400">
+            <p className="text-[11px] text-muted-foreground">
               {t('tasks.stats.week_completion_rate', { rate: Math.round((weeklyCompleted / total) * 100) })}
             </p>
           ) : (
-            <p className="text-[11px] text-gray-500 dark:text-gray-400">
+            <p className="text-[11px] text-muted-foreground">
               {t('tasks.stats.no_tasks_yet')}
             </p>
           )}
@@ -140,6 +151,7 @@ export default function TaskStats({
       <div className="flex gap-2">
         {stats.map((stat) => {
           const IconComponent = stat.icon
+          const isWeeklyStat = stat.status === 'ALL'
           return (
             <button
               key={stat.label}
@@ -147,29 +159,33 @@ export default function TaskStats({
               className={`
                 flex-1 flex flex-col items-center py-3 px-2 rounded-xl border transition-all duration-200
                 hover:shadow-lg hover:scale-105 active:scale-95 h-[90px] justify-center
-                bg-gray-50/50 dark:bg-gray-700/30 border-gray-200/60 dark:border-gray-600/40
-                hover:bg-gray-50 dark:hover:bg-gray-700/50 hover:border-gray-300 dark:hover:border-gray-500
               `}
               style={{
-                backgroundColor: `${stat.color}08`,
-                borderColor: `${stat.color}20`,
-                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)'
+                backgroundColor: `${stat.color}14`,
+                borderColor: `${stat.color}28`,
+                boxShadow: '0 2px 10px rgba(0, 0, 0, 0.05)'
               }}
             >
               <div
                 className="w-8 h-8 rounded-full flex items-center justify-center mb-2.5 shadow-sm"
-                style={{ backgroundColor: stat.color + '15', border: `1px solid ${stat.color}25` }}
+                style={{
+                  backgroundColor: isWeeklyStat ? 'rgba(255, 255, 255, 0.15)' : stat.color + '15',
+                  border: `1px solid ${isWeeklyStat ? 'rgba(255, 255, 255, 0.25)' : stat.color + '25'}`
+                }}
               >
-                <IconComponent className="w-4 h-4" style={{ color: stat.color }} />
+                <IconComponent
+                  className="w-4 h-4"
+                  style={{ color: isWeeklyStat ? '#FFFFFF' : stat.color }}
+                />
               </div>
               <div
                 className="text-lg font-bold mb-1 leading-[20px]"
-                style={{ color: stat.color }}
+                style={{ color: isWeeklyStat ? '#FFFFFF' : stat.color }}
               >
                 {stat.value}
               </div>
               <div
-                className="text-[11px] font-medium text-center leading-[13px] text-gray-600 dark:text-gray-400"
+                className="text-[11px] font-medium text-center leading-[13px] text-muted-foreground"
                 style={{ lineHeight: '13px' }}
               >
                 {stat.label}
