@@ -135,7 +135,7 @@ export const FocusTaskList: React.FC<FocusTaskListProps> = ({
                   <div className="flex items-center gap-1 text-xs font-medium" style={{ color: colors.textSecondary }}>
                     <ListTodo className="w-3 h-3" style={{ color: colors.textSecondary }} />
                     <span>
-                      {completedSubtasks}/{totalSubtasks} {t('focus.subtasks')}
+                      {completedSubtasks}/{totalSubtasks}
                     </span>
                     <span className="text-[11px]">{subtaskPercent}%</span>
                   </div>
