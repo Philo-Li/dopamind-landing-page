@@ -69,6 +69,7 @@ export default function LoginPage({ params }: LoginPageProps) {
   const { locale: localeParam } = use(params);
   const locale = localeParam as Locale;
   const t = getTranslation(locale);
+  const loginCopy = t?.auth?.login ?? {};
   
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -127,15 +128,20 @@ export default function LoginPage({ params }: LoginPageProps) {
             </Link>
           </div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-foreground">
-            {t.login.title}
+            {loginCopy.title ?? 'Dopamind'}
           </h2>
-          <p className="mt-2 text-center text-sm text-muted">
-            {t.login.or}{" "}
+          {loginCopy.subtitle && (
+            <p className="mt-2 text-center text-base text-muted">
+              {loginCopy.subtitle}
+            </p>
+          )}
+          <p className="mt-4 text-center text-sm text-muted">
+            {loginCopy.footer_text ?? 'Don\'t have an account?'}{' '}
             <Link
               href={`/${locale}/register`}
               className="font-medium text-primary hover:text-primary-600"
             >
-              {t.login.createAccount}
+              {loginCopy.footer_link ?? 'Sign Up'}
             </Link>
           </p>
         </div>
@@ -143,7 +149,7 @@ export default function LoginPage({ params }: LoginPageProps) {
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <label htmlFor="email" className="sr-only">
-                {t.login.email}
+                {loginCopy.email_label ?? 'Email'}
               </label>
               <input
                 id="email"
@@ -152,14 +158,14 @@ export default function LoginPage({ params }: LoginPageProps) {
                 autoComplete="email"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-foreground rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-                placeholder={t.login.email}
+                placeholder={loginCopy.email_placeholder ?? 'Enter your email'}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div>
               <label htmlFor="password" className="sr-only">
-                {t.login.password}
+                {loginCopy.password_label ?? 'Password'}
               </label>
               <input
                 id="password"
@@ -168,7 +174,7 @@ export default function LoginPage({ params }: LoginPageProps) {
                 autoComplete="current-password"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-foreground rounded-b-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-                placeholder={t.login.password}
+                placeholder={loginCopy.password_placeholder ?? 'Enter your password'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -185,7 +191,9 @@ export default function LoginPage({ params }: LoginPageProps) {
               disabled={isSubmitting}
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isSubmitting ? t.login.loggingIn : t.login.loginButton}
+              {isSubmitting
+                ? loginCopy.loading ?? 'Logging in...'
+                : loginCopy.login_button ?? 'Log In'}
             </button>
           </div>
 
@@ -194,14 +202,14 @@ export default function LoginPage({ params }: LoginPageProps) {
               href={`/${locale}/forgot-password`}
               className="text-sm font-medium text-primary hover:text-primary-600"
             >
-              {t.login.forgotPassword}
+              {loginCopy.forgot_password ?? 'Forgot password?'}
             </Link>
             <div>
               <Link
                 href={`/${locale}`}
                 className="font-medium text-primary hover:text-primary-600"
               >
-                {t.login.backToHome}
+                {t.common?.back_to_home ?? 'Back to Home'}
               </Link>
             </div>
           </div>
