@@ -785,7 +785,7 @@ function FocusPageContent() {
                     <div className="flex items-center gap-1">
                       <ListTodo className="w-3 h-3" style={{ color: colors.textSecondary }} />
                       <span className="text-sm font-medium" style={{ color: colors.textSecondary }}>
-                        {(fullTaskDetail || currentTask)?._count?.completedSubTasks || 0}/{(fullTaskDetail || currentTask)?._count?.subTasks} {t('tasks.subtasks')}
+                        {(fullTaskDetail || currentTask)?._count?.completedSubTasks || 0}/{(fullTaskDetail || currentTask)?._count?.subTasks}
                       </span>
                     </div>
                     <span className="text-sm font-semibold" style={{ color: colors.textSecondary }}>
