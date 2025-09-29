@@ -28,7 +28,7 @@ import { FocusTaskList } from './FocusTaskList'
 import { FocusCompletionDialog } from './FocusCompletionDialog'
 import { PepTalkDialog } from './PepTalkDialog'
 import { StuckSupportDialog } from './StuckSupportDialog'
-import { focusApi } from '@/lib/api'
+import { focusApi, tasksApi } from '@/lib/api'
 import { taskStore } from '@/stores/taskStore'
 import { useSearchParams, useRouter } from 'next/navigation'
 
@@ -79,6 +79,81 @@ function FocusPageContent() {
       taskStore.clearCurrentFocusTask()
     }
   }, [searchParams])
+
+  useEffect(() => {
+    let cancelled = false
+
+    const fetchTaskDetails = async () => {
+      if (!currentTask?.id) {
+        if (!cancelled) {
+          setFullTaskDetail(null)
+          setCurrentSubtask(null)
+        }
+        return
+      }
+
+      try {
+        const [detailResponse, subtaskResponse] = await Promise.all([
+          tasksApi.getTask(currentTask.id),
+          tasksApi.getSubtasks(currentTask.id)
+        ])
+
+        if (cancelled) return
+
+        if (detailResponse.success && detailResponse.data) {
+          setFullTaskDetail(detailResponse.data as Task)
+        } else {
+          setFullTaskDetail(currentTask)
+        }
+
+        const rawSubtasks = subtaskResponse.success ? subtaskResponse.data : undefined
+        const subtasks: Task[] = Array.isArray(rawSubtasks)
+          ? rawSubtasks as Task[]
+          : (rawSubtasks as any)?.data || (rawSubtasks as any)?.tasks || []
+
+        if (Array.isArray(subtasks) && subtasks.length > 0) {
+          const sortedSubtasks = [...subtasks].sort((a, b) => {
+            const extractOrder = (title?: string) => {
+              if (!title) return Number.MAX_SAFE_INTEGER
+              const match = title.match(/^(\d+)\./)
+              return match ? parseInt(match[1], 10) : Number.MAX_SAFE_INTEGER
+            }
+
+            const orderA = extractOrder(a.title)
+            const orderB = extractOrder(b.title)
+
+            if (orderA === orderB) {
+              const timeA = a.createdAt ? new Date(a.createdAt).getTime() : 0
+              const timeB = b.createdAt ? new Date(b.createdAt).getTime() : 0
+              return timeA - timeB
+            }
+
+            return orderA - orderB
+          })
+
+          const firstIncomplete = sortedSubtasks.find(subtask =>
+            subtask.status !== 'COMPLETED' && subtask.status !== 'CANCELLED'
+          )
+
+          setCurrentSubtask(firstIncomplete || null)
+        } else {
+          setCurrentSubtask(null)
+        }
+      } catch (error) {
+        console.error('[FocusPage] Failed to load task details or subtasks:', error)
+        if (!cancelled) {
+          setFullTaskDetail(currentTask)
+          setCurrentSubtask(null)
+        }
+      }
+    }
+
+    fetchTaskDetails()
+
+    return () => {
+      cancelled = true
+    }
+  }, [currentTask?.id, currentTask])
 
   // 处理任务选择并存储到 taskStore
   const handleTaskSelect = useCallback((task: Task) => {

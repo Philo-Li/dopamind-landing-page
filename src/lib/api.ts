@@ -276,6 +276,8 @@ export const tasksApi = {
 
   getTask: (id: string | number) => apiClient.get(`/tasks/${id}`),
 
+  getSubtasks: (parentId: string | number) => apiClient.get(`/tasks/${parentId}/subtasks`),
+
   getTaskStats: () => apiClient.get('/tasks/stats'),
 
   getTaskStatssummary: () => apiClient.get('/tasks/stats/summary'),

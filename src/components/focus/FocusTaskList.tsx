@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { Play, Clock, ChevronRight } from 'lucide-react'
+import { Play, Clock, ChevronRight, ListTodo } from 'lucide-react'
 import { useLocalization } from '@/hooks/useLocalization'
 import { useThemeColors } from '@/hooks/useThemeColor'
 import { Task } from '@/types/task'
@@ -86,7 +86,15 @@ export const FocusTaskList: React.FC<FocusTaskListProps> = ({
           {t('focus.in_progress_tasks')}
         </h3>
       </div>
-      {inProgressTasks.map((task) => (
+      {inProgressTasks.map((task) => {
+        const hasSubtasks = task._count?.subTasks && task._count.subTasks > 0
+        const completedSubtasks = task._count?.completedSubTasks || 0
+        const totalSubtasks = task._count?.subTasks || 0
+        const subtaskPercent = hasSubtasks
+          ? Math.round((completedSubtasks / totalSubtasks) * 100)
+          : 0
+
+        return (
         <button
           key={task.id}
           className="w-full text-left py-3 px-4 rounded-lg mb-2 transition-colors border"
@@ -121,6 +129,27 @@ export const FocusTaskList: React.FC<FocusTaskListProps> = ({
                   </span>
                 </div>
               )}
+
+              {hasSubtasks && (
+                <div className="mt-1">
+                  <div className="flex items-center gap-1 text-xs font-medium" style={{ color: colors.textSecondary }}>
+                    <ListTodo className="w-3 h-3" style={{ color: colors.textSecondary }} />
+                    <span>
+                      {completedSubtasks}/{totalSubtasks} {t('focus.subtasks')}
+                    </span>
+                    <span className="text-[11px]">{subtaskPercent}%</span>
+                  </div>
+                  <div className="h-1 mt-1 rounded-full" style={{ backgroundColor: colors.card.border }}>
+                    <div
+                      className="h-1 rounded-full transition-all"
+                      style={{
+                        width: `${subtaskPercent}%`,
+                        backgroundColor: colors.accent.orange
+                      }}
+                    />
+                  </div>
+                </div>
+              )}
             </div>
             <div className="flex items-center gap-2">
               {task.priority === 'URGENT' && (
@@ -141,7 +170,8 @@ export const FocusTaskList: React.FC<FocusTaskListProps> = ({
             </div>
           </div>
         </button>
-      ))}
+        )
+      })}
     </div>
   )
 }
