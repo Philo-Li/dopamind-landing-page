@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { Task, TaskListResponse, TASK_STATUS_CONFIG, PRIORITY_CONFIG } from '@/types/task'
 import { useThemeColors } from '@/hooks/useThemeColor'
 import { useLocalization } from '@/hooks/useLocalization'
+import { useTheme } from '@/contexts/ThemeContext'
 import { useToast } from '@/contexts/ToastContext'
 import {
   Check,
@@ -45,6 +46,7 @@ export default function TaskDetail({ taskId, onBack, onStartFocus }: TaskDetailP
   const colors = useThemeColors()
   const { t } = useLocalization()
   const { showSuccess, showError, showInfo } = useToast()
+  const { actualTheme } = useTheme()
   const pageBackgroundStyle = { backgroundColor: colors.background }
   const [task, setTask] = useState<Task | null>(null)
   const [subtasks, setSubtasks] = useState<Task[]>([])
@@ -347,9 +349,57 @@ export default function TaskDetail({ taskId, onBack, onStartFocus }: TaskDetailP
 
   const handleSubtaskToggle = async (subtaskId: number, currentStatus: Task['status']) => {
     const newStatus = currentStatus === 'COMPLETED' ? 'PENDING' : 'COMPLETED'
-    setSubtasks(prev => prev.map(subtask =>
-      subtask.id === subtaskId ? { ...subtask, status: newStatus } : subtask
-    ))
+    const previousSubtasks = subtasks
+
+    const applyCounts = (list: Task[]) => {
+      const total = list.length
+      const completed = list.filter(subtask => subtask.status === 'COMPLETED').length
+
+      setTask(prev => {
+        if (!prev) return prev
+        const updated = {
+          ...prev,
+          _count: {
+            subTasks: total,
+            completedSubTasks: completed
+          }
+        }
+        taskStore.setTask(updated)
+        return updated
+      })
+
+    }
+
+    const optimisticSubtasks = previousSubtasks.map(subtask =>
+      subtask.id === subtaskId ? { ...subtask, status: newStatus, _isOptimistic: true } : subtask
+    )
+
+    setSubtasks(optimisticSubtasks)
+    applyCounts(optimisticSubtasks)
+
+    try {
+      const response = await tasksApi.updateTask(subtaskId, { status: newStatus })
+
+      if (!response.success || !response.data) {
+        throw new Error(typeof response.error === 'string' ? response.error : response.error?.message)
+      }
+
+      const updatedSubtask = response.data as Task
+      const syncedSubtasks = optimisticSubtasks.map(subtask =>
+        subtask.id === subtaskId ? updatedSubtask : subtask
+      )
+
+      setSubtasks(syncedSubtasks)
+      applyCounts(syncedSubtasks)
+    } catch (error) {
+      console.error('Failed to toggle subtask status:', error)
+      setSubtasks(previousSubtasks)
+      applyCounts(previousSubtasks)
+      showError(
+        t('tasks.actions.update_failed'),
+        error instanceof Error ? error.message : t('errors.unknown')
+      )
+    }
   }
 
   const handleClearAllSubtasks = () => {
@@ -598,11 +648,16 @@ export default function TaskDetail({ taskId, onBack, onStartFocus }: TaskDetailP
                 className={`
                   w-6 h-6 rounded-full border-2 flex items-center justify-center mr-3 mt-0.5
                   transition-colors duration-200
-                  ${task.status === 'COMPLETED'
-                    ? 'bg-green-500 border-green-500'
-                    : 'border-border hover:border-green-400'
-                  }
+                  ${task.status === 'COMPLETED' ? '' : 'hover:border-green-400'}
                 `}
+                style={{
+                  borderColor: task.status === 'COMPLETED'
+                    ? '#22c55e'
+                    : actualTheme === 'dark'
+                      ? '#FFFFFF'
+                      : colors.border,
+                  backgroundColor: task.status === 'COMPLETED' ? '#22c55e' : 'transparent'
+                }}
               >
                 {task.status === 'COMPLETED' && (
                   <Check className="w-3.5 h-3.5 text-white" />
@@ -831,11 +886,16 @@ export default function TaskDetail({ taskId, onBack, onStartFocus }: TaskDetailP
                             onClick={() => handleSubtaskToggle(subtask.id, subtask.status)}
                             className={`
                               w-4 h-4 rounded border-2 flex items-center justify-center mt-0.5
-                              ${subtask.status === 'COMPLETED'
-                                ? 'bg-green-500 border-green-500'
-                                : 'border-border hover:border-green-400'
-                              }
+                              ${subtask.status === 'COMPLETED' ? '' : 'hover:border-green-400'}
                             `}
+                            style={{
+                              borderColor: subtask.status === 'COMPLETED'
+                                ? '#22c55e'
+                                : actualTheme === 'dark'
+                                  ? '#FFFFFF'
+                                  : colors.border,
+                              backgroundColor: subtask.status === 'COMPLETED' ? '#22c55e' : 'transparent'
+                            }}
                           >
                             {subtask.status === 'COMPLETED' && (
                               <Check className="w-2.5 h-2.5 text-white" />
