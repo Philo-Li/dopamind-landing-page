@@ -521,6 +521,17 @@
         "consumed": "Consumed",
         "available": "Available"
       },
+      "daily_report": {
+        "title": "Daily Report",
+        "subtitle": "Based on",
+        "report_generated": "Report Generated",
+        "report_queried": "Report Queried",
+        "report_viewed": "Report Viewed",
+        "report_available": "Report Available",
+        "default_description": "Click to view your daily report details",
+        "action_text": "Start Chat",
+        "click_hint": "Click to enter"
+      },
       "habit": {
         "completed_today": "Completed Today",
         "pending_today": "Pending Today",
@@ -1603,7 +1614,15 @@
     },
     "daily_report": {
       "title": "Daily Report",
-      "view_report": "View Report"
+      "view_report": "View Report",
+      "today": "Today",
+      "chat_preview": {
+        "title": "Discuss Report with AI Assistant",
+        "subtitle": "Based on",
+        "default_description": "Click to start discussing your daily report with AI assistant for personalized insights and reflections.",
+        "action_text": "Start Chat",
+        "click_hint": "Click to enter"
+      }
     }
   },
   "chat_actions": {

@@ -517,6 +517,17 @@
         "consumed": "消費済み",
         "available": "利用可能"
       },
+      "daily_report": {
+        "title": "デイリーレポート",
+        "subtitle": "基準",
+        "report_generated": "レポート生成済み",
+        "report_queried": "レポート照会済み",
+        "report_viewed": "レポート表示済み",
+        "report_available": "レポート利用可能",
+        "default_description": "デイリーレポートの詳細を表示するにはクリック",
+        "action_text": "チャット開始",
+        "click_hint": "クリックして入力"
+      },
       "habit": {
         "completed_today": "今日完了",
         "pending_today": "今日未完了",
@@ -1632,7 +1643,15 @@
     },
     "daily_report": {
       "title": "デイリーレポート",
-      "view_report": "レポートを見る"
+      "view_report": "レポートを見る",
+      "today": "今日",
+      "chat_preview": {
+        "title": "AIアシスタントとレポートを議論",
+        "subtitle": "基準",
+        "default_description": "デイリーレポートについてAIアシスタントと話し合い、個人的な洞察と反省を得るにはクリックしてください。",
+        "action_text": "チャット開始",
+        "click_hint": "クリックして入力"
+      }
     }
   },
   "notifications": {

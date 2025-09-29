@@ -98,8 +98,22 @@ export default function ChatMessage({ message, onRetry }: ChatMessageProps) {
                                 message.metadata?.action === 'MULTIPLE_FRIDGE_ITEMS_CONSUMED';
     const shouldShowBatchConsumeCard = !message.isUser && hasBatchConsumeData && hasValidBatchConsumeAction;
 
+    const shouldShowDailyReportCard = !message.isUser && message.metadata && (
+      message.metadata.type === 'daily_report' ||
+      message.metadata.actionType?.includes('DAILY_REPORT') ||
+      message.metadata.action?.includes('DAILY_REPORT') ||
+      (message.metadata.dailyReportContent || message.metadata.reportContent) ||
+      (message.metadata.dailyReportDate || message.metadata.reportDate) ||
+      message.metadata.actionType === 'DAILY_REPORT_GENERATED' ||
+      message.metadata.actionType === 'DAILY_REPORT_QUERIED' ||
+      message.metadata.actionType === 'DAILY_REPORT_VIEWED' ||
+      message.metadata.action === 'DAILY_REPORT_GENERATED' ||
+      message.metadata.action === 'DAILY_REPORT_QUERIED' ||
+      message.metadata.action === 'DAILY_REPORT_VIEWED'
+    );
+
     // 如果需要显示预览卡片
-    if (shouldShowTaskCard || shouldShowSubscriptionCard || shouldShowHabitCard || shouldShowDecompositionCard || shouldShowFridgeCard || shouldShowBatchFridgeCard || shouldShowBatchConsumeCard) {
+    if (shouldShowTaskCard || shouldShowSubscriptionCard || shouldShowHabitCard || shouldShowDecompositionCard || shouldShowFridgeCard || shouldShowBatchFridgeCard || shouldShowBatchConsumeCard || shouldShowDailyReportCard) {
       return (
         <div className="space-y-3">
           {message.content && (

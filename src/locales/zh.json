@@ -552,6 +552,17 @@
         "consumed": "已消耗",
         "available": "可用"
       },
+      "daily_report": {
+        "title": "每日报告",
+        "subtitle": "基于",
+        "report_generated": "报告已生成",
+        "report_queried": "已查询报告",
+        "report_viewed": "已查看报告",
+        "report_available": "报告可用",
+        "default_description": "点击查看您的每日报告详情",
+        "action_text": "开始对话",
+        "click_hint": "点击进入"
+      },
       "habit": {
         "completed_today": "今日已完成",
         "pending_today": "今日待完成",
@@ -1633,7 +1644,15 @@
     },
     "daily_report": {
       "title": "每日报告",
-      "view_report": "查看报告"
+      "view_report": "查看报告",
+      "today": "今天",
+      "chat_preview": {
+        "title": "与 AI 助手讨论报告",
+        "subtitle": "基于",
+        "default_description": "点击开始与 AI 助手讨论您的每日报告，获得个性化建议和反思。",
+        "action_text": "开始对话",
+        "click_hint": "点击进入"
+      }
     }
   },
   "chat_actions": {

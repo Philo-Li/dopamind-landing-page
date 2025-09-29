@@ -11,6 +11,7 @@ import { useLocalization } from '@/hooks/useLocalization'
 import { dailyReportService } from '@/services/dailyReportService'
 import type { DailyReport } from '@/types/dailyReport'
 import { useToast } from '@/contexts/ToastContext'
+import ChatPreviewCard from './ChatPreviewCard'
 
 export const DailyReportPage: React.FC = () => {
   const router = useRouter()
@@ -80,8 +81,8 @@ export const DailyReportPage: React.FC = () => {
     try {
       const response = await dailyReportService.getReport(dateParam)
 
-      if (response.success && response.data?.report) {
-        setReport(response.data.report)
+      if (response.success && response.report) {
+        setReport(response.report)
       } else {
         const message = typeof response.error === 'string'
           ? response.error
@@ -125,8 +126,8 @@ export const DailyReportPage: React.FC = () => {
     try {
       const response = await dailyReportService.generateReport(dateParam, true)
 
-      if (response.success && response.data?.report) {
-        setReport(response.data.report)
+      if (response.success && response.report) {
+        setReport(response.report)
         setError(null)
         showSuccess(
           t('calendar.report_generated'),
@@ -296,6 +297,13 @@ export const DailyReportPage: React.FC = () => {
               {report.content}
             </ReactMarkdown>
           </div>
+
+          {/* Chat Preview Card */}
+          <ChatPreviewCard
+            reportDate={dateParam}
+            reportSummary={report.content}
+            onNavigate={() => router.push('/chat')}
+          />
         </div>
       </div>
     )
