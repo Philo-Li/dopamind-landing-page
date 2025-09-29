@@ -57,7 +57,6 @@ export const CalendarTaskView: React.FC<CalendarTaskViewProps> = ({
 
     console.log('[CalendarTaskView] 初次加载，获取当月数据:', startDate, 'to', endDate)
     loadTasks(1, {
-      dueDate: startDate,
       dueDateRange: `${startDate},${endDate}`
     })
   }, [loadTasks])
@@ -95,7 +94,6 @@ export const CalendarTaskView: React.FC<CalendarTaskViewProps> = ({
     const endDate = format(endOfMonth(parseISO(month.dateString)), 'yyyy-MM-dd')
 
     loadTasks(1, {
-      dueDate: startDate,
       dueDateRange: `${startDate},${endDate}`
     })
   }, [loadTasks])
@@ -113,7 +111,6 @@ export const CalendarTaskView: React.FC<CalendarTaskViewProps> = ({
     const endDate = format(endOfMonth(newDate), 'yyyy-MM-dd')
 
     loadTasks(1, {
-      dueDate: startDate,
       dueDateRange: `${startDate},${endDate}`
     })
   }, [currentMonth, loadTasks])
@@ -324,7 +321,7 @@ export const CalendarTaskView: React.FC<CalendarTaskViewProps> = ({
                     className="text-xs font-semibold text-center"
                     style={{
                       color: colors.textSecondary,
-                      width: 32
+                      width: 75
                     }}
                   >
                     {day}

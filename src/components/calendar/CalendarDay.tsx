@@ -45,7 +45,7 @@ export const CalendarDay: React.FC<CalendarDayProps> = ({
   const taskCount = tasksForDay.length
 
   // 根据需求设置固定高度：翻倍当前高度 - 0-1个任务为64px，2个任务为92px，3个及以上任务为120px
-  const containerHeight = taskCount <= 1 ? 64 : taskCount === 2 ? 92 : 120
+  const containerHeight = taskCount <= 1 ? 64 : taskCount === 2 ? 92 : 110
 
   // 根据状态和选中状态确定日期文字颜色
   const getDateTextColor = () => {
@@ -77,7 +77,7 @@ export const CalendarDay: React.FC<CalendarDayProps> = ({
       className="flex flex-col justify-start items-center relative cursor-pointer transition-colors hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg"
       style={{
         height: containerHeight,
-        width: 32,
+        width: 75,
         paddingTop: 2
       }}
       onClick={() => onPress(date)}
@@ -86,8 +86,8 @@ export const CalendarDay: React.FC<CalendarDayProps> = ({
       <div
         className="flex justify-center items-center mb-1"
         style={{
-          height: 36, // 从28增加到36
-          width: 36,  // 从28增加到36
+          height: 40,
+          width: 48,
           ...getDateContainerStyle()
         }}
       >
@@ -108,9 +108,9 @@ export const CalendarDay: React.FC<CalendarDayProps> = ({
         <div
           className="absolute flex flex-col justify-start"
           style={{
-            top: 45, // 从31调整到45，为更大的日期数字区域留出空间
-            left: 1,
-            right: 1
+            top: 44,
+            left: 6,
+            right: 6
           }}
         >
           {tasksForDay.slice(0, 3).map((task, index) => {
@@ -136,12 +136,13 @@ export const CalendarDay: React.FC<CalendarDayProps> = ({
                 <span
                   className="text-center truncate px-1"
                   style={{
+                    width: 66,
                     fontSize: 9,
                     fontWeight: '700',
                     color: textColor
                   }}
                 >
-                  {task.title ? task.title.substring(0, 3) : '•••'}
+                  {task.title ? task.title.substring(0, 6) : '•••'}
                 </span>
               </div>
             )
@@ -149,25 +150,6 @@ export const CalendarDay: React.FC<CalendarDayProps> = ({
         </div>
       )}
 
-      {/* 如果有超过3个任务，显示更多指示器 */}
-      {tasksForDay.length > 3 && (
-        <div
-          className="absolute"
-          style={{
-            bottom: 1,
-            right: 1
-          }}
-        >
-          <div
-            className="rounded-full"
-            style={{
-              width: 3,
-              height: 3,
-              backgroundColor: colors.textSecondary || '#6B7280'
-            }}
-          />
-        </div>
-      )}
     </div>
   )
 }
