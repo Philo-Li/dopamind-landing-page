@@ -11,6 +11,9 @@ import { useThemeColors } from '@/hooks/useThemeColor'
 import { useLocalization } from '@/hooks/useLocalization'
 import { ChevronLeft, ChevronRight, FileText, Plus, CheckCircle } from 'lucide-react'
 import TaskItem from '@/components/tasks/TaskItem'
+import { dailyReportService } from '@/services/dailyReportService'
+import { useToast } from '@/contexts/ToastContext'
+import { useRouter } from 'next/navigation'
 import 'react-calendar/dist/Calendar.css'
 
 interface CalendarTaskViewProps {
@@ -28,11 +31,13 @@ export const CalendarTaskView: React.FC<CalendarTaskViewProps> = ({
   onTaskToggle,
   onCreateTask,
 }) => {
+  const router = useRouter()
   const colors = useThemeColors()
   const { tasks, loading, loadTasks } = useTasks()
   const { t, language } = useLocalization()
   const calendarLocale = language === 'zh' ? 'zh-CN' : language
   const isChinese = language.startsWith('zh')
+  const { showSuccess, showError, showInfo } = useToast()
 
   // 用户当前选中的日期 - 使用字符串格式与移动端保持一致
   const [selectedDate, setSelectedDate] = useState<string>(
@@ -60,6 +65,43 @@ export const CalendarTaskView: React.FC<CalendarTaskViewProps> = ({
       dueDateRange: `${startDate},${endDate}`
     })
   }, [loadTasks])
+
+  // 检查当前选中日期是否已经生成报告
+  useEffect(() => {
+    if (!selectedDate) return
+
+    let cancelled = false
+    setReportCheckLoading(true)
+    setReportExists(false)
+
+    const checkReport = async () => {
+      try {
+        const response = await dailyReportService.checkReportExists(selectedDate)
+        if (cancelled) return
+
+        if (response.success) {
+          setReportExists(Boolean(response.exists))
+        } else {
+          setReportExists(false)
+        }
+      } catch (error) {
+        console.error('[CalendarTaskView] 检查报告存在性失败:', error)
+        if (!cancelled) {
+          setReportExists(false)
+        }
+      } finally {
+        if (!cancelled) {
+          setReportCheckLoading(false)
+        }
+      }
+    }
+
+    checkReport()
+
+    return () => {
+      cancelled = true
+    }
+  }, [selectedDate])
 
   // 根据 tasks 和 selectedDate 筛选出当天需要显示的任务列表
   const tasksForSelectedDay = useMemo(() => {
@@ -200,26 +242,74 @@ export const CalendarTaskView: React.FC<CalendarTaskViewProps> = ({
     setReportLoading(true)
     try {
       console.log('[CalendarTaskView] 开始生成每日报告:', selectedDate)
-      // TODO: 实现每日报告生成功能
-      setReportExists(true)
+      const response = await dailyReportService.generateReport(selectedDate)
+      const displayDate = format(parseISO(selectedDate), isChinese ? 'M月d日' : 'MMM d')
+
+      if (response.success) {
+        setReportExists(true)
+        showSuccess(
+          t('calendar.report_generated'),
+          t('calendar.report_description', { date: displayDate })
+        )
+      } else if ((response as any).report) {
+        setReportExists(true)
+        showInfo(
+          t('calendar.report_exists'),
+          t('calendar.view_report', { date: displayDate })
+        )
+      } else {
+        let errorMessage = t('calendar.generate_failed')
+        if (typeof response.error === 'string') {
+          errorMessage = response.error
+        } else if (response.error?.message) {
+          errorMessage = response.error.message
+        }
+        showError(t('calendar.generate_failed'), errorMessage)
+      }
     } catch (error) {
       console.error('[CalendarTaskView] 生成报告失败:', error)
+      const fallbackMessage =
+        (error as any)?.response?.data?.error ||
+        (error as any)?.message ||
+        t('calendar.network_error')
+      showError(t('calendar.generate_failed'), fallbackMessage)
     } finally {
       setReportLoading(false)
+      setReportCheckLoading(false)
     }
-  }, [selectedDate])
+  }, [selectedDate, isChinese, showSuccess, showError, showInfo, t])
 
   // 处理查看每日报告
   const handleViewReport = useCallback(async () => {
     if (!selectedDate) return
 
+    setReportLoading(true)
     try {
       console.log('[CalendarTaskView] 查看每日报告:', selectedDate)
-      // TODO: 实现查看报告功能
+      const response = await dailyReportService.getReport(selectedDate)
+
+      if (response.success && response.report) {
+        router.push(`/daily-report?date=${selectedDate}`)
+      } else {
+        let errorMessage = t('calendar.cannot_open_report')
+        if (typeof response.error === 'string') {
+          errorMessage = response.error
+        } else if (response.error?.message) {
+          errorMessage = response.error.message
+        }
+        showError(t('calendar.view_failed'), errorMessage)
+      }
     } catch (error: any) {
       console.error('[CalendarTaskView] 查看报告失败:', error)
+      const fallbackMessage =
+        error?.response?.data?.error ||
+        error?.message ||
+        t('calendar.network_error')
+      showError(t('calendar.view_failed'), fallbackMessage)
+    } finally {
+      setReportLoading(false)
     }
-  }, [selectedDate])
+  }, [router, selectedDate, showError, t])
 
   // 渲染任务项 - 使用容器包裹以匹配移动端样式
   const renderTaskItem = useCallback((task: Task) => (
