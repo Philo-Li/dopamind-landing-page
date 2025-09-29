@@ -1,16 +1,17 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { storage } from '@/lib/utils'
+import { useLocalization } from '@/hooks/useLocalization'
+import { normalizeLocale } from '@/lib/locale'
 
 interface AuthGuardProps {
   children: React.ReactNode
 }
 
 export function AuthGuard({ children }: AuthGuardProps) {
-  const router = useRouter()
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null)
+  const { language } = useLocalization()
 
   useEffect(() => {
     const checkAuth = () => {
@@ -20,10 +21,9 @@ export function AuthGuard({ children }: AuthGuardProps) {
       if (!token || !user) {
         // 构建重定向 URL
         const currentUrl = window.location.href
-        const landingPageUrl = process.env.NEXT_PUBLIC_LANDING_PAGE_URL || 'https://dopamind.app'
-        const loginUrl = `${landingPageUrl}/login?redirect=${encodeURIComponent(currentUrl)}`
+        const locale = normalizeLocale(language)
+        const loginUrl = `/${locale}/login?redirect=${encodeURIComponent(currentUrl)}`
 
-        // 重定向到 dopamind.app 登录页面
         window.location.href = loginUrl
         return
       }
@@ -32,7 +32,7 @@ export function AuthGuard({ children }: AuthGuardProps) {
     }
 
     checkAuth()
-  }, [])
+  }, [language])
 
   // 显示加载状态
   if (isAuthenticated === null) {

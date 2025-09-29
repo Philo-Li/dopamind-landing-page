@@ -3,6 +3,7 @@
 import { useEffect, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import { useLocalization } from '@/hooks/useLocalization';
+import { normalizeLocale } from '@/lib/locale';
 
 const fullyDecode = (raw: string): string => {
   let current = raw;
@@ -61,11 +62,8 @@ const sanitizeRedirectTarget = (rawRedirect: string | null, fallbackBase: string
 
 export default function LoginRedirectPage() {
   const searchParams = useSearchParams();
-  const { t } = useLocalization();
-
-  const landingBase = useMemo(() => {
-    return process.env.NEXT_PUBLIC_LANDING_PAGE_URL || "https://dopamind.app";
-  }, []);
+  const { t, language } = useLocalization();
+  const resolvedLocale = useMemo(() => normalizeLocale(language), [language]);
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -73,17 +71,22 @@ export default function LoginRedirectPage() {
     }
 
     try {
-      const loginTarget = new URL("/login", landingBase);
+      const origin = window.location.origin || `${window.location.protocol}//${window.location.host}`;
+      const loginTarget = new URL(`/${resolvedLocale}/login`, origin);
       const redirectParam = searchParams?.get("redirect") ?? window.location.href;
-      const sanitized = sanitizeRedirectTarget(redirectParam, landingBase);
+      const sanitized = sanitizeRedirectTarget(redirectParam, origin);
       loginTarget.searchParams.set("redirect", sanitized);
 
       window.location.replace(loginTarget.toString());
     } catch (error) {
-      console.error("Failed to redirect to landing login:", error);
-      window.location.replace(landingBase);
+      console.error("Failed to redirect to app login page:", error);
+      try {
+        window.location.replace(`/${resolvedLocale}/login`);
+      } catch {
+        window.location.replace("/login");
+      }
     }
-  }, [landingBase, searchParams]);
+  }, [resolvedLocale, searchParams]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white to-gray-50">
