@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useCallback } from 'react'
-import { Task, TaskListResponse, TASK_STATUS_CONFIG, PRIORITY_CONFIG } from '@/types/task'
+import { Task, TaskListResponse, TaskStatus, TASK_STATUS_CONFIG, PRIORITY_CONFIG } from '@/types/task'
 import { useThemeColors } from '@/hooks/useThemeColor'
 import { useLocalization } from '@/hooks/useLocalization'
 import { useTheme } from '@/contexts/ThemeContext'
@@ -381,7 +381,7 @@ export default function TaskDetail({ taskId, onBack, onStartFocus }: TaskDetailP
   }
 
   const handleSubtaskToggle = async (subtaskId: number, currentStatus: Task['status']) => {
-    const newStatus = currentStatus === 'COMPLETED' ? 'PENDING' : 'COMPLETED'
+    const newStatus: TaskStatus = currentStatus === 'COMPLETED' ? 'PENDING' : 'COMPLETED'
     const previousSubtasks = subtasks
 
     const applyCounts = (list: Task[]) => {

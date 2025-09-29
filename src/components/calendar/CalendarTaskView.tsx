@@ -80,7 +80,7 @@ export const CalendarTaskView: React.FC<CalendarTaskViewProps> = ({
         if (cancelled) return
 
         if (response.success) {
-          setReportExists(Boolean(response.exists))
+          setReportExists(Boolean(response.data?.exists))
         } else {
           setReportExists(false)
         }
@@ -288,7 +288,7 @@ export const CalendarTaskView: React.FC<CalendarTaskViewProps> = ({
       console.log('[CalendarTaskView] 查看每日报告:', selectedDate)
       const response = await dailyReportService.getReport(selectedDate)
 
-      if (response.success && response.report) {
+      if (response.success && response.data?.report) {
         router.push(`/daily-report?date=${selectedDate}`)
       } else {
         let errorMessage = t('calendar.cannot_open_report')

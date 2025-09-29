@@ -80,8 +80,8 @@ export const DailyReportPage: React.FC = () => {
     try {
       const response = await dailyReportService.getReport(dateParam)
 
-      if (response.success && response.report) {
-        setReport(response.report)
+      if (response.success && response.data?.report) {
+        setReport(response.data.report)
       } else {
         const message = typeof response.error === 'string'
           ? response.error
@@ -125,8 +125,8 @@ export const DailyReportPage: React.FC = () => {
     try {
       const response = await dailyReportService.generateReport(dateParam, true)
 
-      if (response.success && response.report) {
-        setReport(response.report)
+      if (response.success && response.data?.report) {
+        setReport(response.data.report)
         setError(null)
         showSuccess(
           t('calendar.report_generated'),
@@ -169,35 +169,35 @@ export const DailyReportPage: React.FC = () => {
   }
 
   const markdownComponents = useMemo(() => ({
-    h1: ({ children }: { children: React.ReactNode }) => (
-      <h1 className="text-3xl font-bold mt-6 mb-4" style={{ color: colors.text }}>{children}</h1>
+    h1: ({ children, ...props }: { children?: React.ReactNode } & any) => (
+      <h1 className="text-3xl font-bold mt-6 mb-4" style={{ color: colors.text }} {...props}>{children}</h1>
     ),
-    h2: ({ children }: { children: React.ReactNode }) => (
-      <h2 className="text-2xl font-semibold mt-8 mb-3" style={{ color: colors.text }}>{children}</h2>
+    h2: ({ children, ...props }: { children?: React.ReactNode } & any) => (
+      <h2 className="text-2xl font-semibold mt-8 mb-3" style={{ color: colors.text }} {...props}>{children}</h2>
     ),
-    h3: ({ children }: { children: React.ReactNode }) => (
-      <h3 className="text-xl font-semibold mt-6 mb-2" style={{ color: colors.text }}>{children}</h3>
+    h3: ({ children, ...props }: { children?: React.ReactNode } & any) => (
+      <h3 className="text-xl font-semibold mt-6 mb-2" style={{ color: colors.text }} {...props}>{children}</h3>
     ),
-    p: ({ children }: { children: React.ReactNode }) => (
-      <p className="leading-7 text-base mb-4 whitespace-pre-wrap" style={{ color: colors.text }}>{children}</p>
+    p: ({ children, ...props }: { children?: React.ReactNode } & any) => (
+      <p className="leading-7 text-base mb-4 whitespace-pre-wrap" style={{ color: colors.text }} {...props}>{children}</p>
     ),
-    li: ({ children }: { children: React.ReactNode }) => (
-      <li className="ml-6 leading-7 mb-2" style={{ color: colors.text }}>{children}</li>
+    li: ({ children, ...props }: { children?: React.ReactNode } & any) => (
+      <li className="ml-6 leading-7 mb-2" style={{ color: colors.text }} {...props}>{children}</li>
     ),
-    ul: ({ children }: { children: React.ReactNode }) => (
-      <ul className="list-disc ml-4 mb-4" style={{ color: colors.text }}>{children}</ul>
+    ul: ({ children, ...props }: { children?: React.ReactNode } & any) => (
+      <ul className="list-disc ml-4 mb-4" style={{ color: colors.text }} {...props}>{children}</ul>
     ),
-    ol: ({ children }: { children: React.ReactNode }) => (
-      <ol className="list-decimal ml-4 mb-4" style={{ color: colors.text }}>{children}</ol>
+    ol: ({ children, ...props }: { children?: React.ReactNode } & any) => (
+      <ol className="list-decimal ml-4 mb-4" style={{ color: colors.text }} {...props}>{children}</ol>
     ),
-    strong: ({ children }: { children: React.ReactNode }) => (
-      <strong style={{ color: colors.text }}>{children}</strong>
+    strong: ({ children, ...props }: { children?: React.ReactNode } & any) => (
+      <strong style={{ color: colors.text }} {...props}>{children}</strong>
     ),
-    em: ({ children }: { children: React.ReactNode }) => (
-      <em className="italic" style={{ color: colors.text }}>{children}</em>
+    em: ({ children, ...props }: { children?: React.ReactNode } & any) => (
+      <em className="italic" style={{ color: colors.text }} {...props}>{children}</em>
     ),
-    hr: () => (
-      <hr className="my-6" style={{ borderColor: colors.card.border }} />
+    hr: (props: any) => (
+      <hr className="my-6" style={{ borderColor: colors.card.border }} {...props} />
     )
   }), [colors.text, colors.card.border])
 
