@@ -56,6 +56,7 @@ export default function TaskDetail({ taskId, onBack, onStartFocus }: TaskDetailP
   const [refreshing, setRefreshing] = useState(false)
   const [subtaskViewMode, setSubtaskViewMode] = useState<'compact' | 'detailed'>('compact')
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
+  const [deletingTask, setDeletingTask] = useState(false)
   const [showEditModal, setShowEditModal] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showDecomposeConfirm, setShowDecomposeConfirm] = useState(false)
@@ -279,13 +280,45 @@ export default function TaskDetail({ taskId, onBack, onStartFocus }: TaskDetailP
     setShowDeleteConfirm(true)
   }
 
-  const confirmDelete = () => {
-    // Implement delete logic
-    console.log('Delete task:', task?.id)
-    setShowDeleteConfirm(false)
-    onBack() // Return to task list after deletion
-  }
+  const confirmDelete = async () => {
+    if (!task || deletingTask) return
 
+    try {
+      setDeletingTask(true)
+
+      const response = await tasksApi.deleteTask(task.id)
+
+      if (!response.success) {
+        const errorMessage = typeof response.error === "string"
+          ? response.error
+          : response.error?.message || response.message || t('tasks.delete_failed_desc')
+        throw new Error(errorMessage)
+      }
+
+      const currentFocusTask = taskStore.getCurrentFocusTask()
+      const isCurrentFocusTask = currentFocusTask?.id === task.id
+
+      taskStore.removeTask(task.id)
+      if (isCurrentFocusTask) {
+        taskStore.clearCurrentFocusTask()
+      }
+
+      setShowDeleteConfirm(false)
+      setShowEditModal(false)
+      setTask(null)
+      setSubtasks([])
+
+      showSuccess(t('tasks.actions.delete_success'), t('tasks.delete_success_desc'))
+
+      onBack()
+    } catch (error) {
+      console.error('Failed to delete task:', error)
+      const message = error instanceof Error ? error.message : t('tasks.delete_failed_desc')
+      showError(t('tasks.actions.delete_error'), message)
+    } finally {
+      setDeletingTask(false)
+    }
+  }
   const handleStartFocus = () => {
     if (task) {
       // 将任务存储到全局缓存
@@ -1007,15 +1040,24 @@ export default function TaskDetail({ taskId, onBack, onStartFocus }: TaskDetailP
             <div className="flex gap-3 justify-end">
               <button
                 onClick={() => setShowDeleteConfirm(false)}
-                className="px-4 py-2 text-muted-foreground border border-border/60 rounded-lg hover:bg-muted/50"
+                disabled={deletingTask}
+                className="px-4 py-2 text-muted-foreground border border-border/60 rounded-lg hover:bg-muted/50 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {t('tasks.actions.cancel')}
               </button>
               <button
                 onClick={confirmDelete}
-                className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+                disabled={deletingTask}
+                className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
               >
-                {t('tasks.actions.delete')}
+                {deletingTask ? (
+                  <>
+                    <RefreshCw className="w-4 h-4 animate-spin" />
+                    {t('tasks.actions.deleting')}
+                  </>
+                ) : (
+                  t('tasks.actions.delete')
+                )}
               </button>
             </div>
           </div>
