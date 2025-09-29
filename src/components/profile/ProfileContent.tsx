@@ -12,7 +12,7 @@ import { useFocusData } from '@/hooks/useFocusData'
 import { useTasks } from '@/hooks/useTasks'
 import { useLocalization } from '@/hooks/useLocalization'
 import { storage } from '@/lib/utils'
-import { settingsApi } from '@/lib/api'
+import { settingsApi, authApi } from '@/lib/api'
 
 export default function ProfileContent() {
   const colors = useThemeColors()
@@ -154,6 +154,17 @@ export default function ProfileContent() {
 
       // 2. changeLanguage已经处理了localStorage保存，但我们确保用户设置也被更新
       storage.updateUserLanguage(selectedLanguage)
+
+      // 3. 同步偏好语言到后端，确保跨端保持一致
+      try {
+        const response = await authApi.updateProfile({ preferredLanguage: selectedLanguage })
+
+        if (response.success && response.data) {
+          storage.saveUser(response.data)
+        }
+      } catch (apiError) {
+        console.error('Failed to persist language preference to server:', apiError)
+      }
 
       console.log(`Language saved: ${selectedLanguage}`)
       setHasLanguageChanges(false)

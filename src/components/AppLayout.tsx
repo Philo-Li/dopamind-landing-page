@@ -21,6 +21,7 @@ import ReferralContent from '@/components/referral/ReferralContent'
 import GiftCodeContent from '@/components/giftcode/GiftCodeContent'
 import AccountContent from '@/components/account/AccountContent'
 import PlansContent from '@/components/plans/PlansContent'
+import DailyReportPage from '@/components/daily-report/DailyReportPage'
 
 type AppLayoutProps = {
   initialSidebarCollapsed?: boolean
@@ -65,6 +66,8 @@ export default function AppLayout({ initialSidebarCollapsed = false, children }:
       return 'profile'
     } else if (pathname === '/calendar') {
       return 'calendar'
+    } else if (pathname.startsWith('/daily-report')) {
+      return 'daily-report'
     } else if (pathname === '/habits') {
       return 'habits'
     } else if (pathname.startsWith('/habits/') && pathname !== '/habits') {
@@ -173,6 +176,9 @@ export default function AppLayout({ initialSidebarCollapsed = false, children }:
       case 'plans':
         newPath = '/plans'
         break
+      case 'daily-report':
+        newPath = '/daily-report'
+        break
       case 'about':
         newPath = '/about'
         break
@@ -273,6 +279,8 @@ export default function AppLayout({ initialSidebarCollapsed = false, children }:
           <AccountContent />
         ) : currentView === 'plans' ? (
           <PlansContent />
+        ) : currentView === 'daily-report' ? (
+          <DailyReportPage />
         ) : currentView === 'about' ? (
           <AboutContent />
         ) : currentView === 'changelog' ? (

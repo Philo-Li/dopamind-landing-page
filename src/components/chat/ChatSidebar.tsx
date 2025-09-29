@@ -55,6 +55,7 @@ export type AppView =
   | 'gift-code'
   | 'account'
   | 'plans'
+  | 'daily-report'
 
 interface ChatSidebarProps {
   isCollapsed?: boolean

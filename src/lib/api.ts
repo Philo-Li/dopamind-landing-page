@@ -246,8 +246,14 @@ export const authApi = {
   
   getProfile: (): Promise<ApiResponse<any>> => apiClient.get('/auth/profile'),
 
-  updateProfile: (data: { nickname?: string; email?: string; avatarUrl?: string }): Promise<ApiResponse<any>> =>
-    apiClient.put('/auth/profile', data),
+  updateProfile: (data: {
+    nickname?: string
+    email?: string
+    avatarUrl?: string
+    preferredLanguage?: string
+    timezone?: string
+    pushToken?: string
+  }): Promise<ApiResponse<any>> => apiClient.put('/auth/profile', data),
 
   deleteUser: (): Promise<ApiResponse<void>> => apiClient.delete('/auth/user'),
 }
