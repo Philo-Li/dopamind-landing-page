@@ -49,7 +49,7 @@ export default function ChatPreviewCard({ reportDate, reportSummary, onNavigate 
 
     if (match && match[1]) {
       // 清理提取的内容
-      let extractedContent = match[1]
+      const extractedContent = match[1]
         .replace(/^#{1,6}\s+/gm, '') // 移除标题标记
         .replace(/\*\*(.*?)\*\*/g, '$1') // 移除粗体标记
         .replace(/\*(.*?)\*/g, '$1') // 移除斜体标记
@@ -66,7 +66,7 @@ export default function ChatPreviewCard({ reportDate, reportSummary, onNavigate 
     const lines = content.split('\n')
     let foundFirstHeader = false
     let foundSecondHeader = false
-    let extractedLines = []
+    const extractedLines = []
 
     for (const line of lines) {
       const trimmedLine = line.trim()
