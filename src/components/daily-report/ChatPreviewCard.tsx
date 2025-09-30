@@ -44,7 +44,7 @@ export default function ChatPreviewCard({ reportDate, reportSummary, onNavigate 
   // 提取dopamind寄语栏目的内容
   const extractDopamindMessage = (content: string) => {
     // 寻找 "dopamind 寄语" 或类似的标题
-    const dopamindSectionRegex = /(?:^|\n)#{1,6}\s*(?:dopamind\s*寄语|Dopamind\s*寄语|DOPAMIND\s*寄语|dopamind.*message|Dopamind.*Message).*?\n(.*?)(?=\n#{1,6}|\n\n|$)/si
+    const dopamindSectionRegex = /(?:^|\n)#{1,6}\s*(?:dopamind\s*寄语|Dopamind\s*寄语|DOPAMIND\s*寄语|dopamind.*message|Dopamind.*Message).*?\n([\s\S]*?)(?=\n#{1,6}|\n\n|$)/i
     const match = content.match(dopamindSectionRegex)
 
     if (match && match[1]) {

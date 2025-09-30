@@ -2,7 +2,25 @@
 
 Discover the latest features and improvements in every Dopamind release
 
-## v1.7.0 (September 9, 2025) - Latest
+## v1.7.1 (September 30, 2024) - Latest
+
+### ✨ Experience Optimization & Feature Enhancement
+
+• **Password Manager Autofill Support** - Added autofill functionality for password managers to improve login experience
+
+• **Removed Phone Login** - Removed phone number login option from the login page to simplify the login process
+
+• **Language Setting Optimization** - Fixed issue where login would override user language preferences, ensuring user's preferred language is sent during registration
+
+• **Membership Status Sync** - Improved membership status synchronization mechanism during login flows to ensure accurate status
+
+• **Referral Rewards Update** - Updated referral rewards from previous duration to 30-day credits
+
+• **Message Deduplication Optimization** - Stabilized message deduplication and context processing in chat to enhance conversation experience
+
+---
+
+## v1.7.0 (September 9, 2025)
 
 ### 🚀 Intelligence Evolution - A Major Experience Leap!
 

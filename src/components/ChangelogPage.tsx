@@ -4,7 +4,6 @@ import { useState, useEffect, useCallback } from 'react'
 import { ArrowLeft } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useLocalization } from '@/hooks/useLocalization'
-import { getChangelogContent } from '@/constants/changelogContent'
 import ReactMarkdown from 'react-markdown'
 import { useThemeColors } from '@/hooks/useThemeColor'
 
@@ -12,6 +11,8 @@ interface VersionSection {
   version: string
   date: string
   title: string
+  emoji: string
+  features: string[]
   content: string
 }
 
@@ -28,9 +29,12 @@ export default function ChangelogPage() {
     setError(false)
 
     try {
-      const content = getChangelogContent(language)
-      const parsedVersions = parseVersionsFromMarkdown(content)
-      setVersions(parsedVersions)
+      const response = await fetch(`/api/changelog?locale=${language}`)
+      if (!response.ok) {
+        throw new Error('Failed to fetch changelog')
+      }
+      const data = await response.json()
+      setVersions(data.versions || [])
     } catch (err) {
       console.error('Failed to load changelog:', err)
       setError(true)
@@ -43,79 +47,6 @@ export default function ChangelogPage() {
   useEffect(() => {
     loadAndParseMarkdownContent()
   }, [loadAndParseMarkdownContent])
-
-  const parseVersionsFromMarkdown = (content: string): VersionSection[] => {
-    const lines = content.split('\n')
-    const versions: VersionSection[] = []
-    let currentVersion: Partial<VersionSection> = {}
-    let contentLines: string[] = []
-    let insideVersion = false
-
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i]
-
-      // 跳过文档标题
-      if (line.startsWith('# ')) {
-        continue
-      }
-
-      // 如果遇到版本号标题 (## v1.7.0 (2025-09-09))
-      if (line.startsWith('## v')) {
-        // 保存之前的版本（如果存在）
-        if (currentVersion.version && insideVersion) {
-          versions.push({
-            version: currentVersion.version,
-            date: currentVersion.date || '',
-            title: currentVersion.title || '',
-            content: contentLines.join('\n').trim()
-          })
-        }
-
-        // 解析新版本信息
-        const versionMatch = line.match(/## (v[\d.]+) \(([^)]+)\)/)
-        if (versionMatch) {
-          currentVersion = {
-            version: versionMatch[1],
-            date: versionMatch[2],
-            title: '',
-          }
-          contentLines = []
-          insideVersion = true
-        }
-      } else if (line.startsWith('### ') && currentVersion.version && !currentVersion.title) {
-        // 提取版本标题（只取第一个 ### 标题作为版本标题）
-        currentVersion.title = line.replace('### ', '')
-      } else if (line.trim() === '---') {
-        // 遇到分隔符，结束当前版本
-        if (currentVersion.version && insideVersion) {
-          versions.push({
-            version: currentVersion.version,
-            date: currentVersion.date || '',
-            title: currentVersion.title || '',
-            content: contentLines.join('\n').trim()
-          })
-        }
-        currentVersion = {}
-        contentLines = []
-        insideVersion = false
-      } else if (insideVersion) {
-        // 收集版本内容（包括空行）
-        contentLines.push(line)
-      }
-    }
-
-    // 添加最后一个版本（如果存在）
-    if (currentVersion.version && insideVersion) {
-      versions.push({
-        version: currentVersion.version,
-        date: currentVersion.date || '',
-        title: currentVersion.title || '',
-        content: contentLines.join('\n').trim()
-      })
-    }
-
-    return versions
-  }
 
   return (
     <div className="h-full flex flex-col" style={{ backgroundColor: colors.background }}>

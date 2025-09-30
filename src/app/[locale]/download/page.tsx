@@ -1,5 +1,5 @@
 import { CheckCircle, AlertTriangle } from 'lucide-react';
-import { getTranslation } from '@/lib/i18n';
+import { getLandingTranslation } from '@/lib/i18n';
 import { getChangelog } from '../../../lib/changelog';
 import AndroidDownloadButton from '../../../components/AndroidDownloadButton';
 import AppStoreButton from '../../../components/AppStoreButton';
@@ -74,7 +74,7 @@ function formatChangelogContent(content: string): string {
       const description = trimmedLine.replace(/^\s*-\s+/, '');
       // 处理描述中的markdown粗体语法
       const processedDescription = description.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-      formattedLines.push(`<li class="text-sm text-muted">${processedDescription}</li>`);
+      formattedLines.push(`<li class="text-sm text-muted-foreground">${processedDescription}</li>`);
       continue;
     }
     
@@ -99,7 +99,7 @@ function formatChangelogContent(content: string): string {
       }
       // 处理段落中的markdown粗体语法
       const processedLine = trimmedLine.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-      formattedLines.push(`<p class="text-sm text-muted mb-2">${processedLine}</p>`);
+      formattedLines.push(`<p class="text-sm text-muted-foreground mb-2">${processedLine}</p>`);
     }
   }
   
@@ -119,19 +119,19 @@ interface DownloadPageProps {
 
 export default async function DownloadPage({ params }: DownloadPageProps) {
   const { locale } = await params;
-  const t = getTranslation(locale);
+  const t = getLandingTranslation(locale);
   const changelog = getChangelog(locale);
   
   // 应用信息
   const appInfo = {
-    version: '1.7.0',
-    lastUpdated: '2025-09-09',
+    version: '1.7.1',
+    lastUpdated: '2025-09-30',
     ios: {
       size: '29.2 MB'
     },
     android: {
-      size: '95 MB',
-      downloadUrl: 'https://r2.dopamind.app/dopamind-android-release-1.7.0.apk'
+      size: '92 MB',
+      downloadUrl: 'https://r2.dopamind.app/dopamind-android-release-1.7.1.apk'
     }
   };
 
@@ -147,7 +147,7 @@ export default async function DownloadPage({ params }: DownloadPageProps) {
               <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-6xl mb-6">
                 {t.download.hero.title}
               </h1>
-              <p className="text-lg text-muted md:text-xl max-w-3xl mx-auto">
+              <p className="text-lg text-muted-foreground md:text-xl max-w-3xl mx-auto">
                 {t.download.hero.description}
               </p>
             </div>
@@ -163,20 +163,20 @@ export default async function DownloadPage({ params }: DownloadPageProps) {
                     </svg>
                   </div>
                   <h2 className="text-2xl font-bold text-foreground mb-2">{t.download.platforms.ios.title}</h2>
-                  <p className="text-muted mb-4">{t.download.platforms.ios.description}</p>
-                  
+                  <p className="text-muted-foreground mb-4">{t.download.platforms.ios.description}</p>
+
                   {/* iOS 应用信息 */}
                   <div className="grid grid-cols-3 gap-4 mb-6 text-sm">
                     <div>
-                      <div className="text-muted">{t.download.hero.version}</div>
+                      <div className="text-muted-foreground">{t.download.hero.version}</div>
                       <div className="font-semibold">{appInfo.version}</div>
                     </div>
                     <div>
-                      <div className="text-muted">{t.download.hero.size}</div>
+                      <div className="text-muted-foreground">{t.download.hero.size}</div>
                       <div className="font-semibold">{appInfo.ios.size}</div>
                     </div>
                     <div>
-                      <div className="text-muted">{t.download.hero.lastUpdated}</div>
+                      <div className="text-muted-foreground">{t.download.hero.lastUpdated}</div>
                       <div className="font-semibold">{appInfo.lastUpdated}</div>
                     </div>
                   </div>
@@ -196,20 +196,20 @@ export default async function DownloadPage({ params }: DownloadPageProps) {
                     </svg>
                   </div>
                   <h2 className="text-2xl font-bold text-foreground mb-2">{t.download.platforms.android.title}</h2>
-                  <p className="text-muted mb-4">{t.download.platforms.android.description}</p>
-                  
+                  <p className="text-muted-foreground mb-4">{t.download.platforms.android.description}</p>
+
                   {/* APK 信息 */}
                   <div className="grid grid-cols-3 gap-4 mb-6 text-sm">
                     <div>
-                      <div className="text-muted">{t.download.hero.version}</div>
+                      <div className="text-muted-foreground">{t.download.hero.version}</div>
                       <div className="font-semibold">{appInfo.version}</div>
                     </div>
                     <div>
-                      <div className="text-muted">{t.download.hero.size}</div>
+                      <div className="text-muted-foreground">{t.download.hero.size}</div>
                       <div className="font-semibold">{appInfo.android.size}</div>
                     </div>
                     <div>
-                      <div className="text-muted">{t.download.hero.lastUpdated}</div>
+                      <div className="text-muted-foreground">{t.download.hero.lastUpdated}</div>
                       <div className="font-semibold">{appInfo.lastUpdated}</div>
                     </div>
                   </div>
@@ -233,7 +233,7 @@ export default async function DownloadPage({ params }: DownloadPageProps) {
               <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl mb-4">
                 {changelog.title}
               </h2>
-              <p className="text-lg text-muted max-w-2xl mx-auto">
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 {changelog.description}
               </p>
             </div>
@@ -262,13 +262,13 @@ export default async function DownloadPage({ params }: DownloadPageProps) {
                           {version.title}
                         </h4>
                       </div>
-                      
+
                       <div className="space-y-4">
-                        <div 
-                          className="prose prose-sm max-w-none text-muted"
-                          dangerouslySetInnerHTML={{ 
-                            __html: formatChangelogContent(version.content) 
-                          }} 
+                        <div
+                          className="prose prose-sm max-w-none text-muted-foreground"
+                          dangerouslySetInnerHTML={{
+                            __html: formatChangelogContent(version.content)
+                          }}
                         />
                       </div>
                     </div>
@@ -291,7 +291,7 @@ export default async function DownloadPage({ params }: DownloadPageProps) {
                   {t.download.requirements.items.map((requirement: any, index: number) => (
                     <li key={index} className="flex items-start gap-3">
                       <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-green-500" />
-                      <span className="text-muted">{requirement}</span>
+                      <span className="text-muted-foreground">{requirement}</span>
                     </li>
                   ))}
                 </ul>
@@ -305,7 +305,7 @@ export default async function DownloadPage({ params }: DownloadPageProps) {
                       <div className="text-2xl">{item.icon}</div>
                       <div>
                         <h3 className="font-bold text-foreground mb-2">{item.title}</h3>
-                        <p className="text-sm text-muted">{item.description}</p>
+                        <p className="text-sm text-muted-foreground">{item.description}</p>
                       </div>
                     </div>
                   </div>
@@ -342,7 +342,7 @@ export default async function DownloadPage({ params }: DownloadPageProps) {
                       </div>
                       <h3 className="text-xl font-bold text-foreground">{step.title}</h3>
                     </div>
-                    <p className="text-muted">{step.description}</p>
+                    <p className="text-muted-foreground">{step.description}</p>
                   </div>
                 ))}
               </div>
@@ -363,7 +363,7 @@ export default async function DownloadPage({ params }: DownloadPageProps) {
               {t.download.faq.items.map((faq: any, index: number) => (
                 <div key={index} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
                   <h3 className="font-bold text-foreground mb-3 text-lg">{faq.question}</h3>
-                  <p className="text-muted">{faq.answer}</p>
+                  <p className="text-muted-foreground">{faq.answer}</p>
                 </div>
               ))}
             </div>

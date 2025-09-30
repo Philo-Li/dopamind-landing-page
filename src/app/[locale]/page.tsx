@@ -86,7 +86,7 @@ export default async function HomePage({ params }: HomePageProps) {
                   {t.home.hero.title}<br />
                   <span className="text-primary">{t.home.hero.titleHighlight}</span>
                 </h1>
-                <p className="text-lg text-muted md:text-xl max-w-2xl">
+                <p className="text-lg text-muted-foreground md:text-xl max-w-2xl">
                   {t.home.hero.subtitle}
                 </p>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-4">
@@ -95,7 +95,7 @@ export default async function HomePage({ params }: HomePageProps) {
                     <AndroidDownloadLink size="small" locale={locale} />
                   </div>
                   <div className="flex flex-col justify-center">
-                    <p className="text-sm text-muted">{t.home.hero.downloadText}</p>
+                    <p className="text-sm text-muted-foreground">{t.home.hero.downloadText}</p>
                   </div>
                 </div>
               </div>
@@ -143,14 +143,14 @@ export default async function HomePage({ params }: HomePageProps) {
                 <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
                   {t.home.features.section1.title}
                 </h2>
-                <p className="text-lg text-muted md:text-xl">
+                <p className="text-lg text-muted-foreground md:text-xl">
                   {t.home.features.section1.subtitle}
                 </p>
                 <ul className="space-y-3">
                   {t.home.features.section1.points.map((point: any, index: number) => (
                     <li key={index} className="flex items-start gap-3">
                       <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
-                      <span className="text-muted">{point}</span>
+                      <span className="text-muted-foreground">{point}</span>
                     </li>
                   ))}
                 </ul>
@@ -181,14 +181,14 @@ export default async function HomePage({ params }: HomePageProps) {
                 <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
                   {t.home.features.section2.title}
                 </h2>
-                <p className="text-lg text-muted md:text-xl">
+                <p className="text-lg text-muted-foreground md:text-xl">
                   {t.home.features.section2.subtitle}
                 </p>
                 <ul className="space-y-3">
                   {t.home.features.section2.points.map((point: any, index: number) => (
                     <li key={index} className="flex items-start gap-3">
                       <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
-                      <span className="text-muted">{point}</span>
+                      <span className="text-muted-foreground">{point}</span>
                     </li>
                   ))}
                 </ul>
@@ -212,7 +212,7 @@ export default async function HomePage({ params }: HomePageProps) {
                     {t.home.howItWorks.section1.title}
                   </h2>
                 </div>
-                <p className="text-lg text-muted md:text-xl">
+                <p className="text-lg text-muted-foreground md:text-xl">
                   {t.home.howItWorks.section1.subtitle}
                 </p>
                 <div className="bg-white rounded-lg p-6 shadow-sm">
@@ -220,7 +220,7 @@ export default async function HomePage({ params }: HomePageProps) {
                     <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                     <span className="font-medium text-foreground">{t.home.howItWorks.section1.example.title}</span>
                   </div>
-                  <div className="space-y-2 text-sm text-muted ml-6">
+                  <div className="space-y-2 text-sm text-muted-foreground ml-6">
                     {t.home.howItWorks.section1.example.steps.map((step: any, index: number) => (
                       <p key={index}>• {step}</p>
                     ))}
@@ -258,7 +258,7 @@ export default async function HomePage({ params }: HomePageProps) {
                     {t.home.howItWorks.section2.title}
                   </h2>
                 </div>
-                <p className="text-lg text-muted md:text-xl">
+                <p className="text-lg text-muted-foreground md:text-xl">
                   {t.home.howItWorks.section2.subtitle}
                 </p>
                 <div className="grid grid-cols-3 gap-4">
@@ -268,7 +268,7 @@ export default async function HomePage({ params }: HomePageProps) {
                         index === 0 ? 'text-primary' : 
                         index === 1 ? 'text-green-500' : 'text-blue-500'
                       }`}>{stat.value}</div>
-                      <div className="text-sm text-muted">{stat.label}</div>
+                      <div className="text-sm text-muted-foreground">{stat.label}</div>
                     </div>
                   ))}
                 </div>
@@ -289,7 +289,7 @@ export default async function HomePage({ params }: HomePageProps) {
                   {t.home.globalView.title}
                 </h2>
               </div>
-              <p className="text-lg text-muted md:text-xl max-w-3xl mx-auto">
+              <p className="text-lg text-muted-foreground md:text-xl max-w-3xl mx-auto">
                 {t.home.globalView.subtitle}
               </p>
             </div>
@@ -321,7 +321,7 @@ export default async function HomePage({ params }: HomePageProps) {
               <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl mb-4">
                 {t.home.beyondTasks.title}
               </h2>
-              <p className="text-lg text-muted md:text-xl">
+              <p className="text-lg text-muted-foreground md:text-xl">
                 {t.home.beyondTasks.subtitle}
               </p>
             </div>
@@ -344,7 +344,7 @@ export default async function HomePage({ params }: HomePageProps) {
                   </div>
                   <h3 className="text-xl font-bold text-foreground">{t.home.beyondTasks.features[0].title}</h3>
                 </div>
-                <p className="text-muted">
+                <p className="text-muted-foreground">
                   {t.home.beyondTasks.features[0].description}
                 </p>
               </div>
@@ -366,7 +366,7 @@ export default async function HomePage({ params }: HomePageProps) {
                   </div>
                   <h3 className="text-xl font-bold text-foreground">{t.home.beyondTasks.features[1].title}</h3>
                 </div>
-                <p className="text-muted">
+                <p className="text-muted-foreground">
                   {t.home.beyondTasks.features[1].description}
                 </p>
               </div>
@@ -388,7 +388,7 @@ export default async function HomePage({ params }: HomePageProps) {
                   </div>
                   <h3 className="text-xl font-bold text-foreground">{t.home.beyondTasks.features[2].title}</h3>
                 </div>
-                <p className="text-muted">
+                <p className="text-muted-foreground">
                   {t.home.beyondTasks.features[2].description}
                 </p>
               </div>
@@ -403,7 +403,7 @@ export default async function HomePage({ params }: HomePageProps) {
               <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl mb-4">
                 {t.home.cloudSync.title}
               </h2>
-              <p className="text-lg text-muted md:text-xl max-w-2xl mx-auto">
+              <p className="text-lg text-muted-foreground md:text-xl max-w-2xl mx-auto">
                 {t.home.cloudSync.subtitle}
               </p>
             </div>
@@ -415,7 +415,7 @@ export default async function HomePage({ params }: HomePageProps) {
                   <RefreshCw className="w-8 h-8 text-blue-600" />
                 </div>
                 <h3 className="text-xl font-bold text-foreground mb-4 text-center">{t.home.cloudSync.features[0].title}</h3>
-                <p className="text-muted text-center">
+                <p className="text-muted-foreground text-center">
                   {t.home.cloudSync.features[0].description}
                 </p>
               </div>
@@ -426,7 +426,7 @@ export default async function HomePage({ params }: HomePageProps) {
                   <Shield className="w-8 h-8 text-green-600" />
                 </div>
                 <h3 className="text-xl font-bold text-foreground mb-4 text-center">{t.home.cloudSync.features[1].title}</h3>
-                <p className="text-muted text-center">
+                <p className="text-muted-foreground text-center">
                   {t.home.cloudSync.features[1].description}
                 </p>
               </div>
@@ -437,7 +437,7 @@ export default async function HomePage({ params }: HomePageProps) {
                   <Cloud className="w-8 h-8 text-purple-600" />
                 </div>
                 <h3 className="text-xl font-bold text-foreground mb-4 text-center">{t.home.cloudSync.features[2].title}</h3>
-                <p className="text-muted text-center">
+                <p className="text-muted-foreground text-center">
                   {t.home.cloudSync.features[2].description}
                 </p>
               </div>
@@ -459,7 +459,7 @@ export default async function HomePage({ params }: HomePageProps) {
             <h2 className="text-4xl font-bold tracking-tight text-foreground md:text-5xl mb-6">
               {t.home.finalCta.title}
             </h2>
-            <p className="text-xl text-muted mb-12 max-w-3xl mx-auto">
+            <p className="text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
               {t.home.finalCta.subtitle}
             </p>
             
@@ -469,14 +469,14 @@ export default async function HomePage({ params }: HomePageProps) {
                 <AndroidDownloadLink size="large" locale={locale} />
               </div>
               <div className="text-center">
-                <p className="text-sm text-muted">{t.home.finalCta.trial}</p>
-                <p className="text-xs text-muted mt-1">{t.home.finalCta.users.replace('{count}', stats.finalCta.find(s => s.labelKey === 'stats.activeUsers')?.value || '500+')}</p>
+                <p className="text-sm text-muted-foreground">{t.home.finalCta.trial}</p>
+                <p className="text-xs text-muted-foreground mt-1">{t.home.finalCta.users.replace('{count}', stats.finalCta.find(s => s.labelKey === 'stats.activeUsers')?.value || '500+')}</p>
               </div>
             </div>
 
             {/* 服务条款和隐私政策链接 */}
             <div className="mb-8 text-center">
-              <p className="text-sm text-muted">
+              <p className="text-sm text-muted-foreground">
                 {t.home.finalCta.termsAndPrivacy.split('{terms}')[0]}
                 <a href={`/${locale}/terms`} className="text-primary hover:underline mx-1">{t.home.finalCta.termsLink}</a>
                 {t.home.finalCta.termsAndPrivacy.split('{terms}')[1].split('{privacy}')[0]}
@@ -490,7 +490,7 @@ export default async function HomePage({ params }: HomePageProps) {
               {stats.finalCta.map((stat: any, index: number) => (
                 <div key={index} className="text-center">
                   <div className="text-3xl font-bold text-primary">{stat.value}</div>
-                  <div className="text-sm text-muted">
+                  <div className="text-sm text-muted-foreground">
                     {t.stats && stat.labelKey.includes('.') 
                       ? t.stats[stat.labelKey.split('.')[1] as keyof typeof t.stats]
                       : ''}
