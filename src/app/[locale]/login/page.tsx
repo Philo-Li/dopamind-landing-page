@@ -131,11 +131,11 @@ export default function LoginPage({ params }: LoginPageProps) {
             {loginCopy.title ?? 'Dopamind'}
           </h2>
           {loginCopy.subtitle && (
-            <p className="mt-2 text-center text-base text-muted">
+            <p className="mt-2 text-center text-base text-gray-600">
               {loginCopy.subtitle}
             </p>
           )}
-          <p className="mt-4 text-center text-sm text-muted">
+          <p className="mt-4 text-center text-sm text-gray-600">
             {loginCopy.footer_text ?? 'Don\'t have an account?'}{' '}
             <Link
               href={`/${locale}/register`}

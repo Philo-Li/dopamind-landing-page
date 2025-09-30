@@ -163,10 +163,10 @@ export default function PricingSection({ locale }: PricingSectionProps) {
     if (!user) {
       return (
         <>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl mb-4">
+          <h2 className="text-3xl font-bold tracking-tight text-marketing-foreground md:text-4xl mb-4">
             {pricing.title || 'Choose Your Plan'}
           </h2>
-          <p className="text-lg text-muted-foreground md:text-xl">
+          <p className="text-lg text-marketing-textSecondary md:text-xl">
             {pricing.subtitle || 'Unlock your potential with AI-powered task management'}
           </p>
           <div className="mt-2 inline-block bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-medium">
@@ -181,10 +181,10 @@ export default function PricingSection({ locale }: PricingSectionProps) {
       const daysLeft = Math.max(0, differenceInDays(new Date(premiumStatus.expiresAt!), new Date()));
       return (
         <>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl mb-4">
+          <h2 className="text-3xl font-bold tracking-tight text-marketing-foreground md:text-4xl mb-4">
 {(pricingStatus.trial_active || 'Your Premium trial has {days} days left').replace('{days}', daysLeft.toString())}
           </h2>
-          <p className="text-lg text-muted-foreground md:text-xl">
+          <p className="text-lg text-marketing-textSecondary md:text-xl">
             {pricingStatus.trial_subtitle || 'Subscribe now to continue enjoying premium features'}
           </p>
           <div className="mt-2 inline-block bg-orange-100 text-orange-700 px-4 py-2 rounded-full text-sm font-medium">
@@ -198,10 +198,10 @@ export default function PricingSection({ locale }: PricingSectionProps) {
     if (user && premiumStatus?.isPremium && premiumStatus?.source === 'subscription') {
       return (
         <>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl mb-4">
+          <h2 className="text-3xl font-bold tracking-tight text-marketing-foreground md:text-4xl mb-4">
 {pricingStatus.premium_active || 'You are a Premium Member'}
           </h2>
-          <p className="text-lg text-muted-foreground md:text-xl">
+          <p className="text-lg text-marketing-textSecondary md:text-xl">
             {pricingStatus.premium_subtitle || 'Thank you for your support! You are enjoying all premium features.'}
           </p>
           <div className="mt-2 inline-block bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium">
@@ -215,10 +215,10 @@ export default function PricingSection({ locale }: PricingSectionProps) {
     if (user && !premiumStatus?.isPremium) {
       return (
         <>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl mb-4">
+          <h2 className="text-3xl font-bold tracking-tight text-marketing-foreground md:text-4xl mb-4">
 {pricingStatus.trial_ended || 'Your free trial has ended'}
           </h2>
-          <p className="text-lg text-muted-foreground md:text-xl">
+          <p className="text-lg text-marketing-textSecondary md:text-xl">
             {pricingStatus.trial_ended_subtitle || 'Upgrade to Premium to continue using powerful AI features'}
           </p>
           <div className="mt-2 inline-block bg-red-100 text-red-700 px-4 py-2 rounded-full text-sm font-medium">
@@ -231,10 +231,10 @@ export default function PricingSection({ locale }: PricingSectionProps) {
     // 默认状态
     return (
       <>
-        <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl mb-4">
+        <h2 className="text-3xl font-bold tracking-tight text-marketing-foreground md:text-4xl mb-4">
           {pricing.title || 'Choose Your Plan'}
         </h2>
-        <p className="text-lg text-muted-foreground md:text-xl">
+        <p className="text-lg text-marketing-textSecondary md:text-xl">
           {pricing.subtitle || 'Choose the plan that works for you'}
         </p>
       </>
@@ -250,25 +250,25 @@ export default function PricingSection({ locale }: PricingSectionProps) {
             {renderHeader()}
           </div>
           
-          <div className="max-w-md mx-auto bg-white rounded-3xl p-8 shadow-lg border-2 border-green-200">
+          <div className="max-w-md mx-auto bg-marketing-cardBg rounded-3xl p-8 shadow-lg border-2 border-green-200">
             <div className="text-center">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <CheckCircle className="w-8 h-8 text-green-600" />
               </div>
-              <h3 className="text-2xl font-bold text-foreground mb-4">Premium 会员</h3>
-              <p className="text-muted-foreground mb-6">您正在享受所有高级功能</p>
+              <h3 className="text-2xl font-bold text-marketing-foreground mb-4">Premium 会员</h3>
+              <p className="text-marketing-textSecondary mb-6">您正在享受所有高级功能</p>
               
               <div className="space-y-3 mb-8">
                 {(plans[2]?.features || []).map((feature, index) => (
                   <div key={index} className="flex items-center gap-3">
                     <CheckCircle className="h-5 w-5 flex-shrink-0 text-green-600" />
-                    <span className="text-muted-foreground">{feature}</span>
+                    <span className="text-marketing-textSecondary">{feature}</span>
                   </div>
                 ))}
               </div>
               
-              <p className="text-sm text-muted-foreground">
-                如需更改订阅计划或取消订阅，请访问 
+              <p className="text-sm text-marketing-textSecondary">
+                如需更改订阅计划或取消订阅，请访问
                 <Link href="/dashboard/subscription" className="text-primary hover:underline ml-1">
                   订阅管理页面
                 </Link>
@@ -371,10 +371,10 @@ export default function PricingSection({ locale }: PricingSectionProps) {
               <div
                 key={plan.id}
                 onClick={() => setSelectedPlan(plan.id)}
-                className={`relative bg-white rounded-3xl p-8 shadow-lg cursor-pointer transition-all hover:shadow-xl ${
+                className={`relative bg-marketing-cardBg rounded-3xl p-8 shadow-lg cursor-pointer transition-all hover:shadow-xl ${
                   isSelected
                     ? 'border-2 border-primary ring-4 ring-primary/20'
-                    : 'border border-gray-200 hover:border-gray-300'
+                    : 'border border-marketing-border hover:border-marketing-border'
                 } ${isCurrent ? 'ring-2 ring-green-500 ring-offset-2' : ''}`}
               >
                 {/* 选中指示器 */}
@@ -424,10 +424,10 @@ export default function PricingSection({ locale }: PricingSectionProps) {
                 )}
 
                 <div className="text-center">
-                  <h3 className="text-2xl font-bold text-foreground mb-2">{plan.name}</h3>
+                  <h3 className="text-2xl font-bold text-marketing-foreground mb-2">{plan.name}</h3>
                   <div className="mb-6">
-                    <span className="text-4xl font-bold text-foreground">{plan.price}</span>
-                    <span className="text-muted-foreground ml-2">/{plan.period}</span>
+                    <span className="text-4xl font-bold text-marketing-foreground">{plan.price}</span>
+                    <span className="text-marketing-textSecondary ml-2">/{plan.period}</span>
                   </div>
 
                   {/* 年度计划折扣 */}
@@ -461,9 +461,9 @@ export default function PricingSection({ locale }: PricingSectionProps) {
                             shouldHighlight ? 'text-green-500' : 'text-primary'
                           }`} />
                           <span className={`text-sm ${
-                            shouldHighlight 
-                              ? 'text-foreground font-medium' 
-                              : 'text-muted-foreground'
+                            shouldHighlight
+                              ? 'text-marketing-foreground font-medium'
+                              : 'text-marketing-textSecondary'
                           }`}>
                             {feature}
                           </span>
@@ -518,10 +518,10 @@ export default function PricingSection({ locale }: PricingSectionProps) {
               </Link>
             )}
             
-            <p className="text-sm text-muted-foreground mt-4">
+            <p className="text-sm text-marketing-textSecondary mt-4">
               {isCurrentPlan(selectedPlanData.id)
                 ? (pricingDescriptions.current || 'This is your current plan')
-                : selectedPlanData.isTrial 
+                : selectedPlanData.isTrial
                 ? (pricingDescriptions.trial || 'Start your free trial today')
                 : isUpgradePlan(selectedPlanData.id)
                 ? (pricingDescriptions.upgrade || 'Upgrade to {plan}').replace('{plan}', selectedPlanData.name)

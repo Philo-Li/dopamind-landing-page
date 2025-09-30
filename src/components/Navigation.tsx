@@ -25,7 +25,7 @@ export default function Navigation({ locale, logoAlt }: NavigationProps) {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full border-b border-marketing-border bg-marketing-cardBg backdrop-blur-md">
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
         <a href={`/${locale}`} className="flex items-center gap-2">
           <Image 
@@ -35,16 +35,16 @@ export default function Navigation({ locale, logoAlt }: NavigationProps) {
             height={32}
             className="rounded-[8px]"
           />
-          <span className="text-xl font-bold text-foreground">Dopamind</span>
+          <span className="text-xl font-bold text-marketing-foreground">Dopamind</span>
         </a>
         
         {/* 桌面端导航 */}
         <nav className="hidden items-center gap-6 md:flex">
-          <a href={`/${locale}#features`} className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">{navLabels.features}</a>
-          <a href={`/${locale}#how-it-works`} className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">{navLabels.howItWorks}</a>
-          <a href={`/${locale}/pricing`} className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">{navLabels.pricing}</a>
-          <a href={`/${locale}/download`} className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">{navLabels.download}</a>
-          <a href={`/${locale}/support`} className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">{navLabels.support}</a>
+          <a href={`/${locale}#features`} className="text-sm font-medium text-marketing-foreground transition-colors hover:text-primary">{navLabels.features}</a>
+          <a href={`/${locale}#how-it-works`} className="text-sm font-medium text-marketing-foreground transition-colors hover:text-primary">{navLabels.howItWorks}</a>
+          <a href={`/${locale}/pricing`} className="text-sm font-medium text-marketing-foreground transition-colors hover:text-primary">{navLabels.pricing}</a>
+          <a href={`/${locale}/download`} className="text-sm font-medium text-marketing-foreground transition-colors hover:text-primary">{navLabels.download}</a>
+          <a href={`/${locale}/support`} className="text-sm font-medium text-marketing-foreground transition-colors hover:text-primary">{navLabels.support}</a>
         </nav>
         
         {/* 右侧工具栏 */}
@@ -63,7 +63,7 @@ export default function Navigation({ locale, logoAlt }: NavigationProps) {
           {/* 移动端汉堡菜单按钮 */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-md hover:bg-gray-100 transition-colors"
+            className="md:hidden p-2 rounded-md hover:bg-marketing-cardBg transition-colors text-marketing-foreground"
             aria-label="Toggle mobile menu"
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -73,44 +73,44 @@ export default function Navigation({ locale, logoAlt }: NavigationProps) {
       
       {/* 移动端导航菜单 */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-gray-200 bg-white">
+        <div className="md:hidden border-t border-marketing-border bg-marketing-background">
           <nav className="flex flex-col py-4">
-            <a 
-              href={`/${locale}#features`} 
-              className="px-4 py-2 text-sm font-medium text-muted-foreground hover:bg-gray-50 hover:text-primary transition-colors"
+            <a
+              href={`/${locale}#features`}
+              className="px-4 py-2 text-sm font-medium text-marketing-foreground hover:bg-marketing-cardBg hover:text-primary transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               {navLabels.features}
             </a>
-            <a 
-              href={`/${locale}#how-it-works`} 
-              className="px-4 py-2 text-sm font-medium text-muted-foreground hover:bg-gray-50 hover:text-primary transition-colors"
+            <a
+              href={`/${locale}#how-it-works`}
+              className="px-4 py-2 text-sm font-medium text-marketing-foreground hover:bg-marketing-cardBg hover:text-primary transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               {navLabels.howItWorks}
             </a>
-            <a 
-              href={`/${locale}/pricing`} 
-              className="px-4 py-2 text-sm font-medium text-muted-foreground hover:bg-gray-50 hover:text-primary transition-colors"
+            <a
+              href={`/${locale}/pricing`}
+              className="px-4 py-2 text-sm font-medium text-marketing-foreground hover:bg-marketing-cardBg hover:text-primary transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               {navLabels.pricing}
             </a>
-            <a 
-              href={`/${locale}/download`} 
-              className="px-4 py-2 text-sm font-medium text-muted-foreground hover:bg-gray-50 hover:text-primary transition-colors"
+            <a
+              href={`/${locale}/download`}
+              className="px-4 py-2 text-sm font-medium text-marketing-foreground hover:bg-marketing-cardBg hover:text-primary transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               {navLabels.download}
             </a>
-            <a 
-              href={`/${locale}/support`} 
-              className="px-4 py-2 text-sm font-medium text-muted-foreground hover:bg-gray-50 hover:text-primary transition-colors"
+            <a
+              href={`/${locale}/support`}
+              className="px-4 py-2 text-sm font-medium text-marketing-foreground hover:bg-marketing-cardBg hover:text-primary transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               {navLabels.support}
             </a>
-            <div className="px-4 pt-4 pb-2 border-t border-gray-200 mt-2 flex items-center justify-center">
+            <div className="px-4 pt-4 pb-2 border-t border-marketing-border mt-2 flex items-center justify-center">
               <AuthButton locale={locale} />
             </div>
           </nav>

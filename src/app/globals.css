@@ -4,54 +4,104 @@
 
 @layer base {
   :root {
-    --background: 210 40% 98%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 24 95% 55%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 24 95% 55%;
-    --scrollbar-track: 0 0% 92%;
-    --scrollbar-thumb: 0 0% 46%;
-    --scrollbar-thumb-hover: 0 0% 16%;
+    /* 基础颜色 - 使用十六进制值 */
+    --background: #F9FAFB;
+    --foreground: #111827;
+    --card: #FFFFFF;
+    --card-foreground: #111827;
+    --popover: #FFFFFF;
+    --popover-foreground: #111827;
+    --primary: #F97316;
+    --primary-foreground: #FFFFFF;
+    --secondary: #F3F4F6;
+    --secondary-foreground: #1F2937;
+    --muted: #F3F4F6;
+    --muted-foreground: #6B7280;
+    --accent: #F3F4F6;
+    --accent-foreground: #1F2937;
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    --border: #F3F4F6;
+    --input: #D1D5DB;
+    --ring: #F97316;
+    --scrollbar-track: #EBEBEB;
+    --scrollbar-thumb: #757575;
+    --scrollbar-thumb-hover: #292929;
     --radius: 0.75rem;
   }
 
   .dark {
-    --background: 220 26% 7%;
-    --foreground: 220 9% 98%;
-    --card: 220 20% 14%;
-    --card-foreground: 220 9% 98%;
-    --popover: 220 20% 14%;
-    --popover-foreground: 220 9% 98%;
-    --primary: 22 89% 52%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 220 13% 20%;
-    --secondary-foreground: 220 9% 98%;
-    --muted: 220 13% 20%;
-    --muted-foreground: 220 9% 65%;
-    --accent: 220 13% 20%;
-    --accent-foreground: 220 9% 98%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 220 9% 98%;
-    --border: 220 13% 28%;
-    --input: 220 13% 28%;
-    --ring: 22 89% 52%;
-    --scrollbar-track: 0 0% 12%;
-    --scrollbar-thumb: 0 0% 65%;
-    --scrollbar-thumb-hover: 0 0% 92%;
+    /* 深色模式 - 使用十六进制值 */
+    --background: #111827;
+    --foreground: #F9FAFB;
+    --card: #1F2937;
+    --card-foreground: #F9FAFB;
+    --popover: #1F2937;
+    --popover-foreground: #F9FAFB;
+    --primary: #F97316;
+    --primary-foreground: #FFFFFF;
+    --secondary: #374151;
+    --secondary-foreground: #F9FAFB;
+    --muted: #374151;
+    --muted-foreground: #9CA3AF;
+    --accent: #374151;
+    --accent-foreground: #F9FAFB;
+    --destructive: #F87171;
+    --destructive-foreground: #F9FAFB;
+    --border: #4B5563;
+    --input: #4B5563;
+    --ring: #F97316;
+    --scrollbar-track: #1F1F1F;
+    --scrollbar-thumb: #A6A6A6;
+    --scrollbar-thumb-hover: #EBEBEB;
+  }
+
+  /* Marketing 页面专用颜色 - 浅色模式 */
+  body.marketing-page {
+    --marketing-background: #FFFFFF;
+    --marketing-foreground: #111827;
+    --marketing-text-secondary: #6B7280;
+    --marketing-border: #F3F4F6;
+    --marketing-card-bg: #FFFFFF;
+    --marketing-hero-bg-from: #FFF7ED;
+    --marketing-hero-bg-to: #FFEDD5;
+  }
+
+  /* Marketing 页面专用颜色 - 深色模式 (与浅色模式一致) */
+  body.marketing-page.dark {
+    --marketing-background: #FFFFFF;
+    --marketing-foreground: #111827;
+    --marketing-text-secondary: #6B7280;
+    --marketing-border: #F3F4F6;
+    --marketing-card-bg: #FFFFFF;
+    --marketing-hero-bg-from: #FFF7ED;
+    --marketing-hero-bg-to: #FFEDD5;
+  }
+
+  /* App Shell 页面专用颜色 - 浅色模式 */
+  body.app-shell {
+    --app-background: #F9FAFB;
+    --app-foreground: #111827;
+    --app-text-secondary: #6B7280;
+    --app-card-bg: #FFFFFF;
+    --app-card-border: #F3F4F6;
+    --app-sidebar-bg: #FFFFFF;
+    --app-sidebar-border: #E5E7EB;
+    --app-input-bg: #FFFFFF;
+    --app-input-border: #D1D5DB;
+  }
+
+  /* App Shell 页面专用颜色 - 深色模式 */
+  body.app-shell.dark {
+    --app-background: #111827;
+    --app-foreground: #F9FAFB;
+    --app-text-secondary: #9CA3AF;
+    --app-card-bg: #1F2937;
+    --app-card-border: #4B5563;
+    --app-sidebar-bg: #1F2937;
+    --app-sidebar-border: #374151;
+    --app-input-bg: #1F2937;
+    --app-input-border: #4B5563;
   }
 }
 
@@ -99,7 +149,7 @@
 @layer base {
   * {
     scrollbar-width: thin;
-    scrollbar-color: hsl(var(--scrollbar-thumb)) hsl(var(--scrollbar-track));
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
   }
 
   *::-webkit-scrollbar {
@@ -108,19 +158,19 @@
   }
 
   *::-webkit-scrollbar-track {
-    background: hsl(var(--scrollbar-track));
+    background: var(--scrollbar-track);
     border-radius: 9999px;
   }
 
   *::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, hsl(var(--scrollbar-thumb)) 0%, hsl(var(--scrollbar-thumb-hover)) 100%);
+    background: linear-gradient(180deg, var(--scrollbar-thumb) 0%, var(--scrollbar-thumb-hover) 100%);
     border-radius: 9999px;
     border: 2px solid transparent;
     background-clip: padding-box;
   }
 
   *::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--scrollbar-thumb-hover));
+    background: var(--scrollbar-thumb-hover);
   }
 
   *::-webkit-scrollbar-corner {
