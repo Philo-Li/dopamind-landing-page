@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Read(//c/Work/CS/GitHub/dopamind/**)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Read(//c/Work/CS/GitHub/dopamind-web/src/app/auth/**)",
+      "Read(//c/Work/CS/GitHub/dopamind-web/**)"
     ],
     "deny": [],
     "ask": []
