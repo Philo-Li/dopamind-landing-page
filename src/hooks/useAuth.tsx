@@ -153,7 +153,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             await refreshPremiumStatus();
           } catch (error) {
             console.error('Token 验证失败:', error);
-            logout();
+            // 不要立即登出，先使用本地缓存的用户数据
+            // 只在明确是 401 Unauthorized 时才登出
+            if (error instanceof Error && error.message.includes('401')) {
+              logout();
+            }
+            // 对于其他错误（网络问题等），继续使用缓存的用户信息
           }
         }
       } catch (error) {
