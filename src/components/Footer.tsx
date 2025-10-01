@@ -73,7 +73,6 @@ export default function Footer({ locale, logoAlt = "Dopamind Logo" }: FooterProp
               <li><a href={`/${locale}/privacy`} className="hover:text-primary transition-colors">{t.footer.links.privacy}</a></li>
               <li><a href={`/${locale}/terms`} className="hover:text-primary transition-colors">{t.footer.links.terms}</a></li>
               <li><a href={`/${locale}/account-deletion`} className="hover:text-primary transition-colors">{t.footer.links.accountDeletion}</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">{t.footer.links.cookies}</a></li>
             </ul>
           </div>
         </div>

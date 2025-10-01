@@ -1,5 +1,5 @@
 import { CheckCircle, AlertCircle } from 'lucide-react';
-import { getTranslation } from '@/lib/i18n';
+import { getLandingTranslation } from '@/lib/i18n';
 import { fetchHealthStatus, getFallbackHealthStatus, isSystemOperational } from '../../../lib/healthApi';
 import { Metadata } from 'next';
 
@@ -14,7 +14,7 @@ interface StatusPageProps {
 
 export async function generateMetadata({ params }: StatusPageProps): Promise<Metadata> {
   const { locale } = await params;
-  
+
   return {
     alternates: {
       canonical: `https://www.dopamind.app/${locale}/status`,
@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: StatusPageProps): Promise<Met
 // 获取健康状态数据
 const getHealthData = async () => {
   const healthResponse = await fetchHealthStatus();
-  
+
   if (healthResponse.success && healthResponse.data) {
     return {
       health: healthResponse.data,
@@ -51,30 +51,31 @@ const getHealthData = async () => {
 
 export default async function StatusPage({ params }: StatusPageProps) {
   const { locale } = await params;
-  const t = getTranslation(locale);
+  const t = getLandingTranslation(locale);
   const { health, isOperational, error } = await getHealthData();
 
   return (
     <>
-        {/* 页面标题和总体状态 */}
-        <section className="w-full py-16 md:py-20">
-          <div className="container mx-auto px-4 text-center md:px-6">
+        {/* 页面标题和服务状态 */}
+        <section className="w-full bg-gradient-to-br from-marketing-heroBgFrom to-marketing-heroBgTo">
+          {/* 页面标题和总体状态 */}
+          <div className="container mx-auto px-4 text-center md:px-6 py-16 md:py-20">
             <div className="flex items-center justify-center gap-3 mb-6">
               {isOperational ? (
                 <CheckCircle className="h-12 w-12 text-green-500" />
               ) : (
                 <AlertCircle className="h-12 w-12 text-yellow-500" />
               )}
-              <h1 className="text-4xl font-extrabold tracking-tight text-foreground md:text-5xl">
+              <h1 className="text-4xl font-extrabold tracking-tight text-marketing-foreground md:text-5xl">
                 {t.status.title}
               </h1>
             </div>
-            <p className="text-lg text-muted md:text-xl max-w-3xl mx-auto mb-6">
+            <p className="text-lg text-marketing-textSecondary md:text-xl max-w-3xl mx-auto mb-6">
               {t.status.subtitle}
             </p>
             <div className={`inline-flex items-center gap-2 px-6 py-3 rounded-full text-lg font-semibold ${
-              isOperational 
-                ? 'bg-green-100 text-green-800 border border-green-200' 
+              isOperational
+                ? 'bg-green-100 text-green-800 border border-green-200'
                 : 'bg-yellow-100 text-yellow-800 border border-yellow-200'
             }`}>
               {isOperational ? (
@@ -84,7 +85,7 @@ export default async function StatusPage({ params }: StatusPageProps) {
               )}
               {isOperational ? t.status.allSystemsOperational : t.status.systemIssues}
             </div>
-            <p className="text-sm text-muted mt-4">
+            <p className="text-sm text-marketing-textSecondary mt-4">
               {t.status.lastUpdated}: {health.lastUpdated ? new Date(health.lastUpdated).toLocaleString(locale === 'zh' ? 'zh-CN' : locale === 'ja' ? 'ja-JP' : 'en-US') : new Date().toLocaleString(locale === 'zh' ? 'zh-CN' : locale === 'ja' ? 'ja-JP' : 'en-US')}
             </p>
             {error && (
@@ -93,46 +94,57 @@ export default async function StatusPage({ params }: StatusPageProps) {
               </p>
             )}
           </div>
-        </section>
 
-        {/* 服务状态详情 */}
-        {health.services && Object.keys(health.services).length > 0 && (
-          <section className="w-full py-8 md:py-12">
+          {/* 服务状态详情 */}
+          {health.services && Object.keys(health.services).length > 0 && (
+          <div className="w-full pb-16 md:pb-20">
             <div className="container mx-auto px-4 md:px-6">
               <div className="max-w-4xl mx-auto">
-                <h2 className="text-2xl font-bold text-foreground mb-8 text-center">Service Status</h2>
-                <div className="space-y-4">
+                <h2 className="text-2xl font-bold text-marketing-foreground mb-8 text-center">Service Status</h2>
+                <div className="space-y-3">
                   {Object.entries(health.services).map(([serviceName, serviceStatus]) => (
-                    <div key={serviceName} className="bg-white rounded-lg p-4 shadow-sm border flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        {serviceStatus.status === 'healthy' ? (
-                          <CheckCircle className="h-5 w-5 text-green-500" />
-                        ) : (
-                          <AlertCircle className="h-5 w-5 text-yellow-500" />
-                        )}
-                        <div>
-                          <h3 className="font-semibold text-foreground capitalize">{serviceName}</h3>
-                          {serviceStatus.message && (
-                            <p className="text-sm text-muted">{serviceStatus.message}</p>
-                          )}
+                    <div
+                      key={serviceName}
+                      className="bg-white/80 backdrop-blur-sm rounded-lg p-5 border border-gray-200/80 hover:border-gray-300 transition-colors"
+                    >
+                      <div className="flex items-center justify-between gap-4">
+                        <div className="flex items-center gap-4 flex-1 min-w-0">
+                          <div className={`flex-shrink-0 w-2 h-2 rounded-full ${
+                            serviceStatus.status === 'healthy'
+                              ? 'bg-green-500'
+                              : serviceStatus.status === 'degraded'
+                              ? 'bg-yellow-500'
+                              : 'bg-red-500'
+                          }`} />
+                          <div className="flex-1 min-w-0">
+                            <h3 className="font-semibold text-marketing-foreground capitalize">
+                              {serviceName}
+                            </h3>
+                            {serviceStatus.message && (
+                              <p className="text-sm text-marketing-textSecondary mt-0.5 truncate">
+                                {serviceStatus.message}
+                              </p>
+                            )}
+                          </div>
                         </div>
-                      </div>
-                      <div className={`px-3 py-1 rounded-full text-xs font-medium ${
-                        serviceStatus.status === 'healthy'
-                          ? 'bg-green-100 text-green-800'
-                          : serviceStatus.status === 'degraded'
-                          ? 'bg-yellow-100 text-yellow-800'
-                          : 'bg-red-100 text-red-800'
-                      }`}>
-                        {serviceStatus.status}
+                        <span className={`flex-shrink-0 text-sm font-medium capitalize ${
+                          serviceStatus.status === 'healthy'
+                            ? 'text-green-600'
+                            : serviceStatus.status === 'degraded'
+                            ? 'text-yellow-600'
+                            : 'text-red-600'
+                        }`}>
+                          {serviceStatus.status}
+                        </span>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
             </div>
-          </section>
+          </div>
         )}
+        </section>
     </>
   );
 }
