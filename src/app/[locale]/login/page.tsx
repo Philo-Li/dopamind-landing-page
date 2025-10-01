@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, use } from "react";
+import { useState, use, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useAuth } from "../../../hooks/useAuth";
 import { getLandingTranslation, type Locale } from "@/lib/i18n";
 
@@ -23,7 +24,7 @@ const fullyDecode = (raw: string): string => {
 
 const sanitizeRedirectTarget = (rawRedirect: string | null, baseUrl: string): string => {
   const trimmedBase = baseUrl.replace(/\/$/, "");
-  const fallback = `${trimmedBase}/dashboard`;
+  const fallback = `${trimmedBase}/chat`;
 
   if (!rawRedirect) {
     return fallback;
@@ -70,13 +71,21 @@ export default function LoginPage({ params }: LoginPageProps) {
   const locale = localeParam as Locale;
   const t = getLandingTranslation(locale);
   const loginCopy = t?.login ?? {};
-  
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { login } = useAuth();
+  const { login, user, isLoading } = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
   const webAppBaseUrl = typeof window !== "undefined" ? window.location.origin : "";
+
+  // 如果用户已登录，重定向到 /chat
+  useEffect(() => {
+    if (!isLoading && user) {
+      router.push('/chat');
+    }
+  }, [user, isLoading, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -86,24 +95,43 @@ export default function LoginPage({ params }: LoginPageProps) {
     try {
       // 将当前语言作为 preferredLanguage 传递给登录接口
       await login(email, password, locale);
+
       const redirectParam = typeof window !== "undefined"
         ? new URLSearchParams(window.location.search).get("redirect")
         : null;
       const targetUrl = sanitizeRedirectTarget(redirectParam, webAppBaseUrl);
 
-      const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
-      const userJson = typeof window !== "undefined" ? localStorage.getItem("user") : null;
-      const refreshToken = typeof window !== "undefined" ? localStorage.getItem("refreshToken") : null;
-
-      // 等待 cookie 写入完成后再跳转
-      await new Promise(resolve => setTimeout(resolve, 100));
+      // 使用 router.push 进行客户端导航，避免完整页面刷新
       window.location.href = targetUrl;
     } catch (error) {
       setError(error instanceof Error ? error.message : "登录过程中出现错误");
-    } finally {
       setIsSubmitting(false);
     }
   };
+
+  // 显示加载状态
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-marketing-background relative overflow-hidden">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+          <p className="mt-4 text-lg text-marketing-textSecondary">{loginCopy.loading || 'Loading...'}</p>
+        </div>
+      </div>
+    );
+  }
+
+  // 如果已登录，显示重定向提示
+  if (user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-marketing-background relative overflow-hidden">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+          <p className="mt-4 text-lg text-marketing-textSecondary">{loginCopy.redirecting || 'Redirecting...'}</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-marketing-background relative overflow-hidden">

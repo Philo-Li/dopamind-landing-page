@@ -22,7 +22,7 @@ const fullyDecode = (raw: string): string => {
 
 const sanitizeRedirectTarget = (rawRedirect: string | null, fallbackBase: string): string => {
   const trimmedBase = fallbackBase.replace(/\/$/, "");
-  const fallback = `${trimmedBase}/dashboard`;
+  const fallback = `${trimmedBase}/chat`;
 
   if (!rawRedirect) {
     return fallback;
