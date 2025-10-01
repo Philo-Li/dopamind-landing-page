@@ -280,6 +280,8 @@
     "links": {
       "features": "功能特性",
       "pricing": "价格方案",
+      "login": "登录",
+      "register": "注册",
       "supportCenter": "帮助中心",
       "contactUs": "联系我们",
       "status": "状态页面",

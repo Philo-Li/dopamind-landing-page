@@ -4,7 +4,7 @@ import { useState, use } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useAuth } from "../../../hooks/useAuth";
-import { getTranslation, type Locale } from "@/lib/i18n";
+import { getLandingTranslation, type Locale } from "@/lib/i18n";
 
 const fullyDecode = (raw: string): string => {
   let current = raw;
@@ -68,8 +68,8 @@ interface LoginPageProps {
 export default function LoginPage({ params }: LoginPageProps) {
   const { locale: localeParam } = use(params);
   const locale = localeParam as Locale;
-  const t = getTranslation(locale);
-  const loginCopy = t?.auth?.login ?? {};
+  const t = getLandingTranslation(locale);
+  const loginCopy = t?.login ?? {};
   
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -128,20 +128,15 @@ export default function LoginPage({ params }: LoginPageProps) {
             </Link>
           </div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-foreground">
-            {loginCopy.title ?? 'Dopamind'}
+            {loginCopy.title ?? 'Sign in to your account'}
           </h2>
-          {loginCopy.subtitle && (
-            <p className="mt-2 text-center text-base text-gray-600">
-              {loginCopy.subtitle}
-            </p>
-          )}
           <p className="mt-4 text-center text-sm text-gray-600">
-            {loginCopy.footer_text ?? 'Don\'t have an account?'}{' '}
+            {loginCopy.or ?? 'Or'}{' '}
             <Link
               href={`/${locale}/register`}
               className="font-medium text-primary hover:text-primary-600"
             >
-              {loginCopy.footer_link ?? 'Sign Up'}
+              {loginCopy.createAccount ?? 'create a new account'}
             </Link>
           </p>
         </div>
@@ -149,7 +144,7 @@ export default function LoginPage({ params }: LoginPageProps) {
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <label htmlFor="email" className="sr-only">
-                {loginCopy.email_label ?? 'Email'}
+                {loginCopy.email ?? 'Email address'}
               </label>
               <input
                 id="email"
@@ -158,14 +153,14 @@ export default function LoginPage({ params }: LoginPageProps) {
                 autoComplete="email"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-foreground rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-                placeholder={loginCopy.email_placeholder ?? 'Enter your email'}
+                placeholder={loginCopy.email ?? 'Email address'}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div>
               <label htmlFor="password" className="sr-only">
-                {loginCopy.password_label ?? 'Password'}
+                {loginCopy.password ?? 'Password'}
               </label>
               <input
                 id="password"
@@ -174,7 +169,7 @@ export default function LoginPage({ params }: LoginPageProps) {
                 autoComplete="current-password"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-foreground rounded-b-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-                placeholder={loginCopy.password_placeholder ?? 'Enter your password'}
+                placeholder={loginCopy.password ?? 'Password'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -192,8 +187,8 @@ export default function LoginPage({ params }: LoginPageProps) {
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting
-                ? loginCopy.loading ?? 'Logging in...'
-                : loginCopy.login_button ?? 'Log In'}
+                ? loginCopy.loggingIn ?? 'Signing in...'
+                : loginCopy.loginButton ?? 'Sign in'}
             </button>
           </div>
 
@@ -202,14 +197,14 @@ export default function LoginPage({ params }: LoginPageProps) {
               href={`/${locale}/forgot-password`}
               className="text-sm font-medium text-primary hover:text-primary-600"
             >
-              {loginCopy.forgot_password ?? 'Forgot password?'}
+              {loginCopy.forgotPassword ?? 'Forgot your password?'}
             </Link>
             <div>
               <Link
                 href={`/${locale}`}
                 className="font-medium text-primary hover:text-primary-600"
               >
-                {t.common?.back_to_home ?? 'Back to Home'}
+                {loginCopy.backToHome ?? '← Back to Home'}
               </Link>
             </div>
           </div>

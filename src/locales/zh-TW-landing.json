@@ -280,6 +280,8 @@
     "links": {
       "features": "功能特色",
       "pricing": "價格方案",
+      "login": "登入",
+      "register": "註冊",
       "supportCenter": "幫助中心",
       "contactUs": "聯繫我們",
       "status": "狀態頁面",

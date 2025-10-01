@@ -280,6 +280,8 @@
     "links": {
       "features": "Features",
       "pricing": "Pricing",
+      "login": "Login",
+      "register": "Sign Up",
       "supportCenter": "Support Center",
       "contactUs": "Contact Us",
       "status": "Status Page",

@@ -191,7 +191,7 @@ export default async function LocaleLayout({
       </head>
       <body className={inter.className}>
         <MarketingBodyClass />
-        <div className="flex min-h-screen flex-col">
+        <div className="flex min-h-screen flex-col bg-marketing-background">
           <Navigation locale={locale} logoAlt="Dopamind - AI-powered focus companion for ADHD users" />
           <main className="flex-1">
             {children}

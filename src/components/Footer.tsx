@@ -32,10 +32,10 @@ export default function Footer({ locale, logoAlt = "Dopamind Logo" }: FooterProp
             <h4 className="font-semibold text-marketing-foreground mb-3">{t.footer.sections.product}</h4>
             <ul className="space-y-2 text-sm text-marketing-textSecondary">
               <li><a href={`/${locale}`} className="hover:text-primary transition-colors">{t.navigation.home}</a></li>
-              <li><a href={`/${locale}#features`} className="hover:text-primary transition-colors">{t.navigation.features}</a></li>
-              <li><a href={`/${locale}#how-it-works`} className="hover:text-primary transition-colors">{t.navigation.howItWorks}</a></li>
               <li><a href={`/${locale}/pricing`} className="hover:text-primary transition-colors">{t.navigation.pricing}</a></li>
               <li><a href={`/${locale}/download`} className="hover:text-primary transition-colors">{t.navigation.download}</a></li>
+              <li><a href={`/${locale}/login`} className="hover:text-primary transition-colors">{t.footer.links.login}</a></li>
+              <li><a href={`/${locale}/register`} className="hover:text-primary transition-colors">{t.footer.links.register}</a></li>
             </ul>
           </div>
           <div>

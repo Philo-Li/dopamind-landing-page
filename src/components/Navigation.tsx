@@ -17,8 +17,7 @@ export default function Navigation({ locale, logoAlt }: NavigationProps) {
   const t = getLandingTranslation(locale);
   const marketingNav = ((t as any).marketing?.navigation ?? (t as any).landingNavigation) ?? {};
   const navLabels = {
-    features: marketingNav.features ?? 'Features',
-    howItWorks: marketingNav.howItWorks ?? 'How it works',
+    home: marketingNav.home ?? t.navigation?.home ?? 'Home',
     pricing: marketingNav.pricing ?? 'Pricing',
     download: marketingNav.download ?? 'Download',
     support: marketingNav.support ?? 'Support',
@@ -40,8 +39,7 @@ export default function Navigation({ locale, logoAlt }: NavigationProps) {
         
         {/* 桌面端导航 */}
         <nav className="hidden items-center gap-6 md:flex">
-          <a href={`/${locale}#features`} className="text-sm font-medium text-marketing-foreground transition-colors hover:text-primary">{navLabels.features}</a>
-          <a href={`/${locale}#how-it-works`} className="text-sm font-medium text-marketing-foreground transition-colors hover:text-primary">{navLabels.howItWorks}</a>
+          <a href={`/${locale}`} className="text-sm font-medium text-marketing-foreground transition-colors hover:text-primary">{navLabels.home}</a>
           <a href={`/${locale}/pricing`} className="text-sm font-medium text-marketing-foreground transition-colors hover:text-primary">{navLabels.pricing}</a>
           <a href={`/${locale}/download`} className="text-sm font-medium text-marketing-foreground transition-colors hover:text-primary">{navLabels.download}</a>
           <a href={`/${locale}/support`} className="text-sm font-medium text-marketing-foreground transition-colors hover:text-primary">{navLabels.support}</a>
@@ -76,18 +74,11 @@ export default function Navigation({ locale, logoAlt }: NavigationProps) {
         <div className="md:hidden border-t border-marketing-border bg-marketing-background">
           <nav className="flex flex-col py-4">
             <a
-              href={`/${locale}#features`}
+              href={`/${locale}`}
               className="px-4 py-2 text-sm font-medium text-marketing-foreground hover:bg-marketing-cardBg hover:text-primary transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
-              {navLabels.features}
-            </a>
-            <a
-              href={`/${locale}#how-it-works`}
-              className="px-4 py-2 text-sm font-medium text-marketing-foreground hover:bg-marketing-cardBg hover:text-primary transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              {navLabels.howItWorks}
+              {navLabels.home}
             </a>
             <a
               href={`/${locale}/pricing`}

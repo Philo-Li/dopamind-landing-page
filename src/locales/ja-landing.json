@@ -280,6 +280,8 @@
     "links": {
       "features": "機能",
       "pricing": "料金",
+      "login": "ログイン",
+      "register": "登録",
       "supportCenter": "サポートセンター",
       "contactUs": "お問い合わせ",
       "status": "ステータスページ",

@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { useAuth } from "../../../hooks/useAuth";
-import { getTranslation, type Locale } from "@/lib/i18n";
+import { getLandingTranslation, type Locale } from "@/lib/i18n";
 
 const fullyDecode = (raw: string): string => {
   let current = raw;
@@ -76,7 +76,7 @@ function RegisterForm({ locale }: { locale: Locale }) {
   const { register, isLoading } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const t = getTranslation(locale);
+  const t = getLandingTranslation(locale);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -299,7 +299,7 @@ function RegisterForm({ locale }: { locale: Locale }) {
 export default function RegisterPage({ params }: RegisterPageProps) {
   const { locale: localeParam } = use(params);
   const locale = localeParam as Locale;
-  const t = getTranslation(locale);
+  const t = getLandingTranslation(locale);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background relative overflow-hidden">

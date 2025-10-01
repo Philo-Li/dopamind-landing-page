@@ -26,7 +26,7 @@ export default async function SupportPage({ params }: SupportPageProps) {
         </section>
 
         {/* 快速联系方式 */}
-        <section className="w-full bg-gray-50 py-12">
+        <section className="w-full bg-marketing-background py-12">
           <div className="container mx-auto px-4 md:px-6">
             <div className="grid gap-6 md:grid-cols-3">
               <div className="flex flex-col items-center rounded-lg bg-marketing-cardBg p-6 shadow-sm">
@@ -94,7 +94,7 @@ export default async function SupportPage({ params }: SupportPageProps) {
             <div className="max-w-3xl mx-auto space-y-6">
               {/* 这里可以添加实际的 FAQ 内容 */}
               <div className="border border-marketing-border rounded-lg">
-                <h3 className="text-lg font-semibold text-marketing-foreground bg-gray-50 px-6 py-4 border-b border-marketing-border">
+                <h3 className="text-lg font-semibold text-marketing-foreground bg-marketing-background px-6 py-4 border-b border-marketing-border">
                   {t.support.faq.categories.account}
                 </h3>
                 <div className="p-6">
@@ -106,7 +106,7 @@ export default async function SupportPage({ params }: SupportPageProps) {
         </section>
 
         {/* 功能指南链接 */}
-        <section className="w-full bg-gray-50 py-16">
+        <section className="w-full bg-marketing-background py-16">
           <div className="container mx-auto px-4 md:px-6">
             <h2 className="text-3xl font-bold text-center text-marketing-foreground mb-8">
               {t.support.guides.title}
