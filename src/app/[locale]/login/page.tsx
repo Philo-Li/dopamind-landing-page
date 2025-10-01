@@ -105,42 +105,42 @@ export default function LoginPage({ params }: LoginPageProps) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-marketing-background relative overflow-hidden">
       {/* 背景装饰 */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-10 left-10 w-20 h-20 bg-primary/30 rounded-full blur-xl"></div>
         <div className="absolute bottom-10 right-10 w-32 h-32 bg-primary/20 rounded-full blur-xl"></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-primary/10 rounded-full blur-2xl"></div>
       </div>
-      
+
       <div className="max-w-md w-full space-y-8 relative z-10">
         <div>
           <div className="flex justify-center mb-6">
             <Link href={`/${locale}`} className="flex items-center gap-3">
-              <Image 
+              <Image
                 src="/dopamind-logo.png"
-                alt="Dopamind Logo" 
+                alt="Dopamind Logo"
                 width={48}
                 height={48}
                 className="rounded-xl"
               />
-              <span className="text-2xl font-bold text-foreground">Dopamind</span>
+              <span className="text-2xl font-bold text-marketing-foreground">Dopamind</span>
             </Link>
           </div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-foreground">
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-marketing-foreground">
             {loginCopy.title ?? 'Sign in to your account'}
           </h2>
-          <p className="mt-4 text-center text-sm text-gray-600">
+          <p className="mt-4 text-center text-sm text-marketing-textSecondary">
             {loginCopy.or ?? 'Or'}{' '}
             <Link
               href={`/${locale}/register`}
-              className="font-medium text-primary hover:text-primary-600"
+              className="font-medium text-primary hover:opacity-80"
             >
               {loginCopy.createAccount ?? 'create a new account'}
             </Link>
           </p>
         </div>
-        <form className="mt-8 space-y-6 bg-white p-8 rounded-xl shadow-lg" onSubmit={handleSubmit}>
+        <form className="mt-8 space-y-6 bg-marketing-cardBg p-8 rounded-xl shadow-lg border border-marketing-border" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <label htmlFor="email" className="sr-only">
@@ -152,7 +152,7 @@ export default function LoginPage({ params }: LoginPageProps) {
                 type="email"
                 autoComplete="email"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-foreground rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder:text-marketing-textSecondary text-marketing-foreground bg-marketing-background rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
                 placeholder={loginCopy.email ?? 'Email address'}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -168,7 +168,7 @@ export default function LoginPage({ params }: LoginPageProps) {
                 type="password"
                 autoComplete="current-password"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-foreground rounded-b-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder:text-marketing-textSecondary text-marketing-foreground bg-marketing-background rounded-b-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
                 placeholder={loginCopy.password ?? 'Password'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -184,7 +184,7 @@ export default function LoginPage({ params }: LoginPageProps) {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-primary-foreground bg-primary hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting
                 ? loginCopy.loggingIn ?? 'Signing in...'
@@ -195,14 +195,14 @@ export default function LoginPage({ params }: LoginPageProps) {
           <div className="text-center space-y-2">
             <Link
               href={`/${locale}/forgot-password`}
-              className="text-sm font-medium text-primary hover:text-primary-600"
+              className="text-sm font-medium text-primary hover:opacity-80"
             >
               {loginCopy.forgotPassword ?? 'Forgot your password?'}
             </Link>
             <div>
               <Link
                 href={`/${locale}`}
-                className="font-medium text-primary hover:text-primary-600"
+                className="font-medium text-primary hover:opacity-80"
               >
                 {loginCopy.backToHome ?? '← Back to Home'}
               </Link>

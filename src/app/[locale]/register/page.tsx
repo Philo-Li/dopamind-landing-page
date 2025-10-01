@@ -189,7 +189,7 @@ function RegisterForm({ locale }: { locale: Locale }) {
   };
 
   return (
-    <form className="mt-8 space-y-6 bg-white p-8 rounded-xl shadow-lg" onSubmit={handleSubmit}>
+    <form className="mt-8 space-y-6 bg-marketing-cardBg p-8 rounded-xl shadow-lg border border-marketing-border" onSubmit={handleSubmit}>
       <div className="space-y-4">
         <div>
           <label htmlFor="nickname" className="sr-only">
@@ -200,7 +200,7 @@ function RegisterForm({ locale }: { locale: Locale }) {
             name="nickname"
             type="text"
             required
-            className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-foreground rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+            className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder:text-marketing-textSecondary text-marketing-foreground bg-marketing-background rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
             placeholder={`${t.register.nickname} (最多20个字符)`}
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
@@ -216,7 +216,7 @@ function RegisterForm({ locale }: { locale: Locale }) {
             type="email"
             autoComplete="email"
             required
-            className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-foreground rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+            className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder:text-marketing-textSecondary text-marketing-foreground bg-marketing-background rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
             placeholder={t.register.email}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -232,7 +232,7 @@ function RegisterForm({ locale }: { locale: Locale }) {
             type="password"
             autoComplete="new-password"
             required
-            className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-foreground rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+            className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder:text-marketing-textSecondary text-marketing-foreground bg-marketing-background rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
             placeholder={`${t.register.password} (至少6位)`}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -248,7 +248,7 @@ function RegisterForm({ locale }: { locale: Locale }) {
             type="password"
             autoComplete="new-password"
             required
-            className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-foreground rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+            className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder:text-marketing-textSecondary text-marketing-foreground bg-marketing-background rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
             placeholder={t.register.confirmPassword}
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -262,7 +262,7 @@ function RegisterForm({ locale }: { locale: Locale }) {
             id="referralCode"
             name="referralCode"
             type="text"
-            className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-foreground rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+            className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder:text-marketing-textSecondary text-marketing-foreground bg-marketing-background rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
             placeholder={t.register.referralCode}
             value={referralCode}
             onChange={(e) => setReferralCode(e.target.value)}
@@ -278,7 +278,7 @@ function RegisterForm({ locale }: { locale: Locale }) {
         <button
           type="submit"
           disabled={isLoading}
-          className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
+          className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-primary-foreground bg-primary hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isLoading ? t.register.registering : t.register.registerButton}
         </button>
@@ -287,7 +287,7 @@ function RegisterForm({ locale }: { locale: Locale }) {
       <div className="text-center">
         <Link
           href={`/${locale}`}
-          className="font-medium text-primary hover:text-primary-600"
+          className="font-medium text-primary hover:opacity-80"
         >
           {t.register.backToHome}
         </Link>
@@ -302,36 +302,36 @@ export default function RegisterPage({ params }: RegisterPageProps) {
   const t = getLandingTranslation(locale);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-marketing-background relative overflow-hidden">
       {/* 背景装饰 */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-10 left-10 w-20 h-20 bg-primary/30 rounded-full blur-xl"></div>
         <div className="absolute bottom-10 right-10 w-32 h-32 bg-primary/20 rounded-full blur-xl"></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-primary/10 rounded-full blur-2xl"></div>
       </div>
-      
+
       <div className="max-w-md w-full space-y-8 relative z-10">
         <div>
           <div className="flex justify-center mb-6">
             <Link href={`/${locale}`} className="flex items-center gap-3">
-              <Image 
+              <Image
                 src="/dopamind-logo.png"
-                alt="Dopamind Logo" 
+                alt="Dopamind Logo"
                 width={48}
                 height={48}
                 className="rounded-xl"
               />
-              <span className="text-2xl font-bold text-foreground">Dopamind</span>
+              <span className="text-2xl font-bold text-marketing-foreground">Dopamind</span>
             </Link>
           </div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-foreground">
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-marketing-foreground">
             {t.register.title}
           </h2>
-          <p className="mt-2 text-center text-sm text-muted">
+          <p className="mt-2 text-center text-sm text-marketing-textSecondary">
             {t.register.or}{" "}
             <Link
               href={`/${locale}/login`}
-              className="font-medium text-primary hover:text-primary-600"
+              className="font-medium text-primary hover:opacity-80"
             >
               {t.register.alreadyHaveAccount}
             </Link>
