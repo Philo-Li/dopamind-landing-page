@@ -18,8 +18,13 @@ class ApiClient {
   private refreshPromise: Promise<string> | null = null
 
   constructor() {
+    const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL
+    if (!apiUrl) {
+      throw new Error('NEXT_PUBLIC_BACKEND_URL is not configured')
+    }
+
     this.client = axios.create({
-      baseURL: `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/api`,
+      baseURL: `${apiUrl}/api`,
       timeout: 30000,
       headers: {
         'Content-Type': 'application/json',
@@ -100,9 +105,14 @@ class ApiClient {
       throw new Error('No token available for refresh')
     }
 
+    const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL
+    if (!apiUrl) {
+      throw new Error('NEXT_PUBLIC_BACKEND_URL is not configured')
+    }
+
     // 后端的 /auth/refresh 端点需要在 Header 中提供当前 token
     const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/api/auth/refresh`,
+      `${apiUrl}/api/auth/refresh`,
       {},
       {
         headers: {
@@ -462,8 +472,20 @@ export const settingsApi = {
 export const pricingApi = {
   getPrices: async () => {
     try {
+      const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL
+      if (!apiUrl) {
+        console.error('NEXT_PUBLIC_BACKEND_URL is not configured, using fallback prices')
+        return {
+          success: true,
+          data: {
+            monthly: { id: 'monthly', amount: 2900, currency: 'usd', interval: 'month' },
+            yearly: { id: 'yearly', amount: 29900, currency: 'usd', interval: 'year' }
+          }
+        }
+      }
+
       // 使用与 landing page 相同的 Stripe 价格获取端点
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/api/stripe/prices`);
+      const response = await fetch(`${apiUrl}/api/stripe/prices`);
 
       if (response.ok) {
         const data = await response.json();
@@ -561,7 +583,7 @@ export const fridgeApi = {
 
   getStats: () => apiClient.get('/fridge/stats'),
 }
-const LEGACY_API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+const LEGACY_API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "";
 
 export interface LoginResponse {
   message?: string;

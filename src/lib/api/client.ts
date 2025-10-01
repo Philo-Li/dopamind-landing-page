@@ -1,6 +1,9 @@
 import axios, { AxiosError } from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+if (!API_URL) {
+  throw new Error('NEXT_PUBLIC_BACKEND_URL is not configured');
+}
 
 export const apiClient = axios.create({
   baseURL: API_URL,

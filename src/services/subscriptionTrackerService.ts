@@ -12,7 +12,7 @@ import type {
 export const getSubscriptions = async (): Promise<SubscriptionTracker[]> => {
   try {
     console.log('[SubscriptionService] 开始获取订阅列表...')
-    console.log('[SubscriptionService] API URL:', `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/api/subscription-tracker`)
+    console.log('[SubscriptionService] API URL:', `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/subscription-tracker`)
 
     const response = await apiClient.get<SubscriptionListResponse>('/subscription-tracker')
     console.log('[SubscriptionService] 原始API响应:', response)
