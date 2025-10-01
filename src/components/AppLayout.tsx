@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useMemo, useCallback, useRef } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
-import { storage } from '@/lib/utils'
 import { useThemeColors } from '@/hooks/useThemeColor'
 import ChatContainer from '@/components/chat/ChatContainer'
 import ChatSidebar, { type AppView } from '@/components/chat/ChatSidebar'
@@ -122,14 +121,7 @@ export default function AppLayout({ initialSidebarCollapsed = false, children }:
     setSidebarCollapsed((prev) => !prev)
   }
 
-  useEffect(() => {
-    // 检查用户是否已登录
-    const token = storage.get('token')
-    if (!token) {
-      router.push('/login')
-      return
-    }
-  }, [router])
+  // 移除了重复的认证检查，因为 AuthGuard 已经处理了认证逻辑
 
   const handleNavigate = useCallback((view: AppView) => {
     // 清除之前的导航超时
