@@ -95,8 +95,9 @@ export default function LoginPage({ params }: LoginPageProps) {
       const userJson = typeof window !== "undefined" ? localStorage.getItem("user") : null;
       const refreshToken = typeof window !== "undefined" ? localStorage.getItem("refreshToken") : null;
 
-      // 直接跳转到 dashboard
-      window.location.href = "/dashboard";
+      // 等待 cookie 写入完成后再跳转
+      await new Promise(resolve => setTimeout(resolve, 100));
+      window.location.href = targetUrl;
     } catch (error) {
       setError(error instanceof Error ? error.message : "登录过程中出现错误");
     } finally {

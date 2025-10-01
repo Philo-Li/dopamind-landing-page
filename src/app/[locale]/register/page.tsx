@@ -180,8 +180,9 @@ function RegisterForm({ locale }: { locale: Locale }) {
         router.push(`/${locale}/payment-processing`);
         return;
       }
-      
-      // 直接跳转到 dashboard
+
+      // 等待 cookie 写入完成后再跳转到 dashboard
+      await new Promise(resolve => setTimeout(resolve, 100));
       window.location.href = "/dashboard";
     } catch (error) {
       setError(error instanceof Error ? error.message : "注册过程中出现错误");
