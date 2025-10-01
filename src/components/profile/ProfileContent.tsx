@@ -12,7 +12,7 @@ import { useFocusData } from '@/hooks/useFocusData'
 import { useTasks } from '@/hooks/useTasks'
 import { useLocalization } from '@/hooks/useLocalization'
 import { storage } from '@/lib/utils'
-import { settingsApi, authApi } from '@/lib/api'
+import { authApi } from '@/lib/api'
 
 export default function ProfileContent() {
   const colors = useThemeColors()
@@ -36,45 +36,11 @@ export default function ProfileContent() {
     setSelectedLanguage(currentLang)
   }, [language])
 
-  // 初始化时区设置
+  // 初始化时区设置 - 参考移动端实现，直接使用本地存储的时区
   useEffect(() => {
-    console.log('Initializing timezone settings...')
-
-    const initializeTimezone = async () => {
-      try {
-        // 首先尝试从服务器获取用户设置
-        console.log('Fetching timezone from server...')
-        const response = await settingsApi.getSettings()
-
-        if (response.success && (response.data as any)?.preferences?.timezone) {
-          const serverTimezone = (response.data as any).preferences.timezone
-          console.log('Server timezone:', serverTimezone)
-          setCurrentTimezone(serverTimezone)
-
-          // 同步到本地用户存储
-          const user = storage.getUser()
-          if (user && user.timezone !== serverTimezone) {
-            const updatedUser = { ...user, timezone: serverTimezone }
-            storage.saveUser(updatedUser)
-          }
-
-          console.log(`Loaded timezone from server: ${serverTimezone}`)
-          return
-        } else {
-          console.log('No timezone in server response, using local fallback')
-        }
-      } catch (error) {
-        console.error('Failed to load timezone from server:', error)
-      }
-
-      // 如果服务器获取失败，使用本地存储的时区
-      const user = storage.getUser()
-      const userTimezone = user?.timezone || 'Asia/Shanghai'
-      setCurrentTimezone(userTimezone)
-      console.log(`Using local timezone: ${userTimezone}`)
-    }
-
-    initializeTimezone()
+    const user = storage.getUser()
+    const userTimezone = user?.timezone || 'Asia/Shanghai'
+    setCurrentTimezone(userTimezone)
   }, []) // 确保只在组件初始化时运行
 
   // 加载任务统计数据
@@ -196,7 +162,7 @@ export default function ProfileContent() {
     }
   }
 
-  // Handle timezone save
+  // Handle timezone save - 参考移动端实现
   const handleTimezoneSave = async (timezone: string) => {
     console.log('handleTimezoneSave called with:', timezone)
 
@@ -213,28 +179,22 @@ export default function ProfileContent() {
         console.log('Updated local user storage with timezone:', timezone)
       }
 
-      // 尝试调用API更新服务器设置
+      // 同步到后端 - 使用 authApi.updateProfile
       console.log('Calling API to update timezone...')
-      const response = await settingsApi.updateSettings({
-        preferences: {
-          timezone
-        }
-      })
+      const response = await authApi.updateProfile({ timezone })
 
       console.log('API response:', response)
 
-      if (response.success) {
+      if (response.success && response.data) {
+        storage.saveUser(response.data)
         console.log(`Timezone saved to server successfully: ${timezone}`)
       } else {
         console.warn('API returned success=false, but local state is already updated')
-        // 不抛出错误，因为本地状态已更新
       }
 
     } catch (error) {
       console.error('API调用失败，但本地状态已更新:', error)
-
       // 即使API失败，也不抛出错误，因为本地状态已经更新
-      // 这样用户界面能正常工作，时区设置会在本地生效
       console.log('Continuing with local-only timezone change')
     }
   }
