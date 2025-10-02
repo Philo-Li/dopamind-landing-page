@@ -111,14 +111,12 @@ export const useTodayFocusData = (): UseTodayFocusDataResult => {
       // 1. Load cached data immediately for better UX
       const cachedData = loadCachedData()
       if (cachedData) {
-        console.log('Loaded cached focus data:', cachedData)
         setData(cachedData)
         setLoading(false)
       }
 
       // 2. Fetch fresh data from API (always returns valid data)
       const freshData = await fetchTodayStats()
-      console.log('Fetched fresh focus data:', freshData)
 
       if (freshData) {
         setData(freshData)

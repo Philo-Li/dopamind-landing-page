@@ -11,16 +11,10 @@ import type {
 // 获取所有订阅 - 使用正确的API路径
 export const getSubscriptions = async (): Promise<SubscriptionTracker[]> => {
   try {
-    console.log('[SubscriptionService] 开始获取订阅列表...')
-    console.log('[SubscriptionService] API URL:', `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/subscription-tracker`)
-
     const response = await apiClient.get<SubscriptionListResponse>('/subscription-tracker')
-    console.log('[SubscriptionService] 原始API响应:', response)
 
     if (response.success && response.data) {
       const subscriptions = response.data.data || response.data
-      console.log(`[SubscriptionService] 成功获取 ${subscriptions.length} 个订阅`)
-      console.log('[SubscriptionService] 订阅数据样本:', subscriptions.slice(0, 2))
 
       // 后台异步更新缓存，不阻塞主流程
       if (subscriptions.length > 0) {
@@ -54,12 +48,10 @@ export const getSubscriptions = async (): Promise<SubscriptionTracker[]> => {
 // 获取单个订阅详情
 export const getSubscription = async (id: number): Promise<SubscriptionTracker> => {
   try {
-    console.log(`[SubscriptionService] 开始获取订阅详情 ID: ${id}`)
     const response = await apiClient.get<SubscriptionResponse>(`/subscription-tracker/${id}`)
 
     if (response.success && response.data) {
       const subscription = response.data.data || response.data
-      console.log(`[SubscriptionService] 成功获取订阅详情: ${subscription.name}`)
       return subscription
     } else {
       throw new Error('获取订阅详情失败')
@@ -73,12 +65,10 @@ export const getSubscription = async (id: number): Promise<SubscriptionTracker> 
 // 创建订阅 - 使用正确的API路径
 export const createSubscription = async (data: CreateSubscriptionRequest): Promise<SubscriptionTracker> => {
   try {
-    console.log('[SubscriptionService] 开始创建订阅:', data)
     const response = await apiClient.post<SubscriptionResponse>('/subscription-tracker', data)
 
     if (response.success && response.data) {
       const subscription = response.data.data || response.data
-      console.log(`[SubscriptionService] 成功创建订阅: ${subscription.name}`)
       return subscription
     } else {
       throw new Error('创建订阅失败')
@@ -92,12 +82,10 @@ export const createSubscription = async (data: CreateSubscriptionRequest): Promi
 // 更新订阅 - 使用正确的API路径
 export const updateSubscription = async (id: number, data: UpdateSubscriptionRequest): Promise<SubscriptionTracker> => {
   try {
-    console.log(`[SubscriptionService] 开始更新订阅 ID: ${id}`, data)
     const response = await apiClient.put<SubscriptionResponse>(`/subscription-tracker/${id}`, data)
 
     if (response.success && response.data) {
       const subscription = response.data.data || response.data
-      console.log(`[SubscriptionService] 成功更新订阅: ${subscription.name}`)
       return subscription
     } else {
       throw new Error('更新订阅失败')
@@ -111,12 +99,9 @@ export const updateSubscription = async (id: number, data: UpdateSubscriptionReq
 // 删除订阅 - 使用正确的API路径
 export const deleteSubscription = async (id: number): Promise<void> => {
   try {
-    console.log(`[SubscriptionService] 开始删除订阅 ID: ${id}`)
     const response = await apiClient.delete(`/subscription-tracker/${id}`)
 
-    if (response.success) {
-      console.log(`[SubscriptionService] 成功删除订阅 ID: ${id}`)
-    } else {
+    if (!response.success) {
       throw new Error('删除订阅失败')
     }
   } catch (error: any) {
@@ -128,13 +113,10 @@ export const deleteSubscription = async (id: number): Promise<void> => {
 // 切换订阅状态（激活/取消）
 export const toggleSubscriptionStatus = async (id: number): Promise<SubscriptionTracker> => {
   try {
-    console.log(`[SubscriptionService] 开始切换订阅状态 ID: ${id}`)
     const response = await apiClient.patch<SubscriptionResponse>(`/subscription-tracker/${id}/toggle`)
 
     if (response.success && response.data) {
       const subscription = response.data.data || response.data
-      const status = subscription.isActive ? '激活' : '取消'
-      console.log(`[SubscriptionService] 成功${status}订阅: ${subscription.name}`)
       return subscription
     } else {
       throw new Error('切换订阅状态失败')

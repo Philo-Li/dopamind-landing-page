@@ -40,7 +40,6 @@ export const useLocalization = (): UseLocalizationReturn => {
           const user = JSON.parse(userStr)
           user.preferredLanguage = language
           localStorage.setItem('dopamind-user', JSON.stringify(user))
-          console.log('Updated user preferred language to:', language)
         }
       } catch (error) {
         console.warn('Failed to update user language preference:', error)

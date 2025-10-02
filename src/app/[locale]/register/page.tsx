@@ -123,13 +123,7 @@ function RegisterForm({ locale }: { locale: Locale }) {
             const currentLocale = locale;
             const successUrl = `${baseUrl}/${currentLocale}/success?session_id={CHECKOUT_SESSION_ID}`;
             const cancelUrl = `${baseUrl}/${currentLocale}/cancelled`;
-            
-            console.log('Register page sending URLs:', {
-              success_url: successUrl,
-              cancel_url: cancelUrl,
-              currentLocale
-            });
-            
+
             // 根据 planId 确定计划类型
             const planType = planId === process.env.NEXT_PUBLIC_STRIPE_MONTHLY_PRODUCT_ID ? 'monthly' : 'yearly';
             

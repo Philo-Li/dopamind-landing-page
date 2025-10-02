@@ -4,7 +4,7 @@ import { useEffect, use } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { X, ArrowLeft, CreditCard, HelpCircle } from 'lucide-react';
-import { getTranslation, type Locale } from '@/lib/i18n';
+import { getLandingTranslation, type Locale } from '@/lib/i18n';
 
 interface CancelledPageProps {
   params: Promise<{ locale: string }>;
@@ -13,15 +13,14 @@ interface CancelledPageProps {
 export default function PaymentCancelledPage({ params }: CancelledPageProps) {
   const { locale: localeParam } = use(params);
   const locale = localeParam as Locale;
-  const t = getTranslation(locale);
+  const t = getLandingTranslation(locale);
 
   useEffect(() => {
     // 可以在这里添加分析或日志
-    console.log('User cancelled payment');
   }, []);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background relative overflow-hidden py-12">
+    <div className="min-h-screen flex items-center justify-center bg-marketing-background relative overflow-hidden py-12">
       {/* 背景装饰 */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-10 left-10 w-20 h-20 bg-red-300/30 rounded-full blur-xl"></div>
@@ -40,7 +39,7 @@ export default function PaymentCancelledPage({ params }: CancelledPageProps) {
               height={48}
               className="rounded-xl"
             />
-            <span className="text-2xl font-bold text-foreground">Dopamind</span>
+            <span className="text-2xl font-bold text-marketing-foreground">Dopamind</span>
           </Link>
         </div>
 
@@ -51,11 +50,11 @@ export default function PaymentCancelledPage({ params }: CancelledPageProps) {
               <X className="w-12 h-12 text-orange-600" />
             </div>
             
-            <h1 className="text-3xl font-bold text-foreground mb-4">
+            <h1 className="text-3xl font-bold text-marketing-foreground mb-4">
               {t.paymentCancelled.title}
             </h1>
-            
-            <p className="text-lg text-muted mb-2">
+
+            <p className="text-lg text-marketing-textSecondary mb-2">
               {t.paymentCancelled.subtitle}
             </p>
             
@@ -65,10 +64,10 @@ export default function PaymentCancelledPage({ params }: CancelledPageProps) {
           </div>
 
           {/* 说明信息 */}
-          <div className="bg-white rounded-xl p-6 shadow-lg border mb-8">
-            <h3 className="text-lg font-semibold text-foreground mb-4">{t.paymentCancelled.whatHappened}</h3>
-            
-            <div className="space-y-3 text-sm text-muted">
+          <div className="bg-marketing-cardBg rounded-xl p-6 shadow-lg border border-marketing-border mb-8">
+            <h3 className="text-lg font-semibold text-marketing-foreground mb-4">{t.paymentCancelled.whatHappened}</h3>
+
+            <div className="space-y-3 text-sm text-marketing-textSecondary">
               {t.paymentCancelled.explanation.map((item: any, index: number) => (
                 <p key={index}>• {item}</p>
               ))}
@@ -77,14 +76,14 @@ export default function PaymentCancelledPage({ params }: CancelledPageProps) {
 
           {/* 重新尝试的理由 */}
           <div className="bg-gradient-to-r from-primary/5 to-primary/10 rounded-xl p-6 mb-8">
-            <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+            <h3 className="text-lg font-semibold text-marketing-foreground mb-4 flex items-center gap-2">
               <CreditCard className="w-5 h-5 text-primary" />
               {t.paymentCancelled.whyPremium}
             </h3>
-            
+
             <div className="grid gap-3">
               {t.paymentCancelled.premiumFeatures.map((feature: any, index: number) => (
-                <div key={index} className="text-sm text-foreground">
+                <div key={index} className="text-sm text-marketing-foreground">
                   {feature}
                 </div>
               ))}
@@ -104,15 +103,15 @@ export default function PaymentCancelledPage({ params }: CancelledPageProps) {
             <div className="flex gap-3">
               <Link
                 href={`/${locale}`}
-                className="flex-1 flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-foreground font-semibold py-3 px-4 rounded-xl transition-colors"
+                className="flex-1 flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-marketing-foreground font-semibold py-3 px-4 rounded-xl transition-colors"
               >
                 <ArrowLeft className="w-4 h-4" />
                 {t.paymentCancelled.backToHome}
               </Link>
-              
+
               <Link
                 href={`/${locale}/support`}
-                className="flex-1 flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-foreground font-semibold py-3 px-4 rounded-xl transition-colors"
+                className="flex-1 flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-marketing-foreground font-semibold py-3 px-4 rounded-xl transition-colors"
               >
                 <HelpCircle className="w-4 h-4" />
                 {t.paymentCancelled.contactSupport}

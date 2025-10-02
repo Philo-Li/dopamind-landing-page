@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { CheckCircle, Crown, ArrowRight } from 'lucide-react';
-import { getTranslation, type Locale } from '@/lib/i18n';
+import { getLandingTranslation, type Locale } from '@/lib/i18n';
 
 interface SessionData {
   paymentStatus: string;
@@ -18,17 +18,11 @@ function PaymentSuccessContent({ locale }: { locale: Locale }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const searchParams = useSearchParams();
-  const t = getTranslation(locale);
+  const t = getLandingTranslation(locale);
 
   useEffect(() => {
     const sessionId = searchParams.get('session_id');
-    
-    // 调试信息
-    console.log('Current URL:', window.location.href);
-    console.log('Search params:', window.location.search);
-    console.log('Session ID from searchParams:', sessionId);
-    console.log('All search params:', Object.fromEntries(searchParams.entries()));
-    
+
     if (!sessionId) {
       console.error('Missing session_id in URL params');
       setError(t.paymentSuccess.missingSessionId);
@@ -65,7 +59,7 @@ function PaymentSuccessContent({ locale }: { locale: Locale }) {
     return (
       <div className="text-center">
         <div className="animate-spin w-12 h-12 border-4 border-primary border-t-transparent rounded-full mx-auto mb-6"></div>
-        <p className="text-muted">{t.paymentSuccess.confirmingPayment}</p>
+        <p className="text-marketing-textSecondary">{t.paymentSuccess.confirmingPayment}</p>
       </div>
     );
   }
@@ -78,11 +72,11 @@ function PaymentSuccessContent({ locale }: { locale: Locale }) {
           <CheckCircle className="w-12 h-12 text-green-600" />
         </div>
         
-        <h1 className="text-3xl font-bold text-foreground mb-4">
+        <h1 className="text-3xl font-bold text-marketing-foreground mb-4">
           {t.paymentSuccess.title}
         </h1>
-        
-        <p className="text-xl text-muted mb-2">
+
+        <p className="text-xl text-marketing-textSecondary mb-2">
           {t.paymentSuccess.subtitle}
         </p>
         
@@ -94,26 +88,26 @@ function PaymentSuccessContent({ locale }: { locale: Locale }) {
 
       {/* 支付详情 */}
       {sessionData && (
-        <div className="bg-white rounded-xl p-6 shadow-lg border mb-8">
-          <h3 className="text-lg font-semibold text-foreground mb-4">{t.paymentSuccess.paymentDetails}</h3>
-          
+        <div className="bg-marketing-cardBg rounded-xl p-6 shadow-lg border border-marketing-border mb-8">
+          <h3 className="text-lg font-semibold text-marketing-foreground mb-4">{t.paymentSuccess.paymentDetails}</h3>
+
           <div className="space-y-3 text-sm">
             <div className="flex justify-between">
-              <span className="text-muted">{t.paymentSuccess.paymentStatus}</span>
+              <span className="text-marketing-textSecondary">{t.paymentSuccess.paymentStatus}</span>
               <span className="font-medium text-green-600">
                 {sessionData.paymentStatus === 'paid' ? t.paymentSuccess.paid : sessionData.paymentStatus}
               </span>
             </div>
-            
+
             {sessionData.subscriptionId && (
               <div className="flex justify-between">
-                <span className="text-muted">{t.paymentSuccess.subscriptionId}</span>
+                <span className="text-marketing-textSecondary">{t.paymentSuccess.subscriptionId}</span>
                 <span className="font-mono text-xs">{sessionData.subscriptionId}</span>
               </div>
             )}
-            
+
             <div className="flex justify-between">
-              <span className="text-muted">{t.paymentSuccess.sessionId}</span>
+              <span className="text-marketing-textSecondary">{t.paymentSuccess.sessionId}</span>
               <span className="font-mono text-xs">{sessionData.sessionId}</span>
             </div>
           </div>
@@ -128,16 +122,16 @@ function PaymentSuccessContent({ locale }: { locale: Locale }) {
 
       {/* Premium 功能预览 */}
       <div className="bg-gradient-to-r from-primary/5 to-primary/10 rounded-xl p-6 mb-8">
-        <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+        <h3 className="text-lg font-semibold text-marketing-foreground mb-4 flex items-center gap-2">
           <Crown className="w-5 h-5 text-primary" />
           {t.paymentSuccess.premiumFeatures}
         </h3>
-        
+
         <div className="grid gap-3">
           {t.paymentSuccess.features.map((feature: any, index: number) => (
             <div key={index} className="flex items-center gap-3">
               <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
-              <span className="text-sm text-foreground">{feature}</span>
+              <span className="text-sm text-marketing-foreground">{feature}</span>
             </div>
           ))}
         </div>
@@ -155,7 +149,7 @@ function PaymentSuccessContent({ locale }: { locale: Locale }) {
         
         <Link
           href="/dashboard/subscription"
-          className="flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-foreground font-semibold py-3 px-6 rounded-xl transition-colors"
+          className="flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-marketing-foreground font-semibold py-3 px-6 rounded-xl transition-colors"
         >
           {t.paymentSuccess.manageSubscription}
         </Link>
@@ -163,11 +157,11 @@ function PaymentSuccessContent({ locale }: { locale: Locale }) {
 
       {/* 帮助信息 */}
       <div className="text-center mt-8 space-y-2">
-        <p className="text-sm text-muted">
+        <p className="text-sm text-marketing-textSecondary">
           {t.paymentSuccess.thankYou}
         </p>
-        <p className="text-xs text-muted">
-          如有任何问题，请联系我们的 
+        <p className="text-xs text-marketing-textSecondary">
+          如有任何问题，请联系我们的
           <Link href={`/${locale}/support`} className="text-primary hover:underline ml-1">
             {t.paymentSuccess.support}
           </Link>
@@ -182,7 +176,7 @@ export default function PaymentSuccessPage({ params }: { params: Promise<{ local
   const locale = localeParam as Locale;
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background relative overflow-hidden py-12">
+    <div className="min-h-screen flex items-center justify-center bg-marketing-background relative overflow-hidden py-12">
       {/* 背景装饰 */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-10 left-10 w-20 h-20 bg-green-300/30 rounded-full blur-xl"></div>
@@ -201,14 +195,14 @@ export default function PaymentSuccessPage({ params }: { params: Promise<{ local
               height={48}
               className="rounded-xl"
             />
-            <span className="text-2xl font-bold text-foreground">Dopamind</span>
+            <span className="text-2xl font-bold text-marketing-foreground">Dopamind</span>
           </Link>
         </div>
 
         <Suspense fallback={
           <div className="text-center">
             <div className="animate-spin w-8 h-8 border-4 border-primary border-t-transparent rounded-full mx-auto mb-4"></div>
-            <p className="text-muted">加载中...</p>
+            <p className="text-marketing-textSecondary">加载中...</p>
           </div>
         }>
           <PaymentSuccessContent locale={locale} />
