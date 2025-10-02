@@ -303,7 +303,7 @@ export default function RegisterPage({ params }: RegisterPageProps) {
   const t = getLandingTranslation(locale);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-marketing-background relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-marketing-heroBgFrom to-marketing-heroBgTo relative overflow-hidden">
       {/* 背景装饰 */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-10 left-10 w-20 h-20 bg-primary/30 rounded-full blur-xl"></div>
