@@ -22,14 +22,14 @@ interface PremiumStatus {
   isPremium: boolean;
   type: 'free' | 'trial' | 'paid' | 'referral_credit';
   expiresAt?: Date;
-  store?: 'APP_STORE' | 'GOOGLE_PLAY' | 'STRIPE';
+  store?: 'APP_STORE' | 'GOOGLE_PLAY' | 'STRIPE' | 'system';
   willRenew: boolean;
   referralCreditDays?: number;
 }
 
 interface LocalSubscription {
   id: string;
-  plan: 'free' | 'monthly' | 'yearly';
+  plan: 'free' | 'monthly' | 'yearly' | 'trial';
   status: 'active' | 'canceled' | 'expired' | 'trial';
   startDate: string;
   endDate?: string;
@@ -157,9 +157,9 @@ export default function PlansContent() {
       if (response) {
         const status: PremiumStatus = {
           isPremium: response.isPremium || false,
-          type: response.type || 'free',
+          type: (response.type as 'trial' | 'free' | 'paid' | 'referral_credit') || 'free',
           expiresAt: response.expiresAt ? new Date(response.expiresAt) : undefined,
-          store: response.store,
+          store: response.store as 'APP_STORE' | 'GOOGLE_PLAY' | 'STRIPE' | 'system' | undefined,
           willRenew: response.willRenew || false,
           referralCreditDays: response.referralCreditDays
         };
