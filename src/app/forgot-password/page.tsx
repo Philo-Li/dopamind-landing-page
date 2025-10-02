@@ -3,12 +3,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { getTranslation } from "@/lib/i18n";
+import { getLandingTranslation } from "@/lib/i18n";
 import { apiService } from "../../lib/api";
 
 // 使用英文作为默认语言
 const locale = 'en';
-const t = getTranslation(locale);
+const t = getLandingTranslation(locale);
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");

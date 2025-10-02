@@ -3,7 +3,7 @@
 import { useState, use } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { getTranslation, type Locale } from "@/lib/i18n";
+import { getLandingTranslation, type Locale } from "@/lib/i18n";
 import { apiService } from "../../../lib/api";
 
 interface ForgotPasswordPageProps {
@@ -13,7 +13,7 @@ interface ForgotPasswordPageProps {
 export default function ForgotPasswordPage({ params }: ForgotPasswordPageProps) {
   const { locale: localeParam } = use(params);
   const locale = localeParam as Locale;
-  const t = getTranslation(locale);
+  const t = getLandingTranslation(locale);
   
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
