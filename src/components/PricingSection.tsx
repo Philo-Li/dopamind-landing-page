@@ -8,6 +8,7 @@ import { CheckCircle, Gift, Crown, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
 import SubscribeButton from './SubscribeButton';
 import { getTranslation } from '@/lib/i18n';
+import SubscriptionPlans from './plans/SubscriptionPlans';
 
 interface PricingSectionProps {
   locale: string;
@@ -52,26 +53,9 @@ export default function PricingSection({ locale }: PricingSectionProps) {
   const pricingStatus = pricing.status ?? {};
   const pricingButtons = pricing.buttons ?? {};
   const pricingDescriptions = pricing.descriptions ?? {};
-  const [selectedPlan, setSelectedPlan] = useState<PlanType>('yearly');
   const [prices, setPrices] = useState<{ monthly?: StripePrice; yearly?: StripePrice }>({});
   const [loading, setLoading] = useState(true);
 
-  // 检查 URL 参数，如果有选中的计划则高亮显示
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const urlParams = new URLSearchParams(window.location.search);
-      const selectedPlanParam = urlParams.get('selected_plan');
-      
-      if (selectedPlanParam) {
-        // 根据 priceId 找到对应的计划类型
-        if (selectedPlanParam === process.env.NEXT_PUBLIC_STRIPE_MONTHLY_PRODUCT_ID) {
-          setSelectedPlan('monthly');
-        } else if (selectedPlanParam === process.env.NEXT_PUBLIC_STRIPE_YEARLY_PRODUCT_ID) {
-          setSelectedPlan('yearly');
-        }
-      }
-    }
-  }, []);
 
   // 获取 Stripe 价格信息
   useEffect(() => {
@@ -127,36 +111,6 @@ export default function PricingSection({ locale }: PricingSectionProps) {
     }
   };
 
-  const plans: Plan[] = [
-    {
-      id: 'trial',
-      name: pricingPlans.trial?.name || '7-Day Premium Trial',
-      price: pricingPlans.trial?.price || '$0',
-      period: pricingPlans.trial?.period || 'trial',
-      buttonText: pricingPlans.trial?.buttonText || 'Start Free Trial',
-      isTrial: true,
-      features: pricingPlans.trial?.features || []
-    },
-    {
-      id: 'monthly',
-      name: pricingPlans.monthly?.name || 'Monthly',
-      priceId: prices.monthly?.id || process.env.NEXT_PUBLIC_STRIPE_MONTHLY_PRODUCT_ID || 'price_monthly_placeholder',
-      price: loading ? 'Loading...' : formatPrice('monthly'),
-      period: pricingPlans.monthly?.period || 'month',
-      buttonText: pricingPlans.monthly?.buttonText || 'Choose Monthly',
-      features: pricingPlans.monthly?.features || []
-    },
-    {
-      id: 'yearly',
-      name: pricingPlans.yearly?.name || 'Yearly',
-      priceId: prices.yearly?.id || process.env.NEXT_PUBLIC_STRIPE_YEARLY_PRICE_ID || 'price_yearly_placeholder', 
-      price: loading ? 'Loading...' : formatPrice('yearly'),
-      period: pricingPlans.yearly?.period || 'year',
-      buttonText: pricingPlans.yearly?.buttonText || 'Choose Yearly',
-      isPopular: true,
-      features: pricingPlans.yearly?.features || []
-    }
-  ];
 
   const renderHeader = () => {
     // 状态 1: 未登录用户（新访客）
@@ -259,7 +213,7 @@ export default function PricingSection({ locale }: PricingSectionProps) {
               <p className="text-marketing-textSecondary mb-6">您正在享受所有高级功能</p>
               
               <div className="space-y-3 mb-8">
-                {(plans[2]?.features || []).map((feature, index) => (
+                {(pricingPlans.yearly?.features || []).map((feature: string, index: number) => (
                   <div key={index} className="flex items-center gap-3">
                     <CheckCircle className="h-5 w-5 flex-shrink-0 text-green-600" />
                     <span className="text-marketing-textSecondary">{feature}</span>
@@ -283,75 +237,21 @@ export default function PricingSection({ locale }: PricingSectionProps) {
   // 判断用户当前的订阅状态
   const getUserPlanStatus = () => {
     if (!user) return null;
-    
+
     if (premiumStatus?.isPremium && premiumStatus?.source === 'trial') {
       return 'trial';
     }
-    
+
     if (premiumStatus?.isPremium && premiumStatus?.source === 'subscription') {
       // 这里应该根据实际的订阅类型判断，目前默认为yearly
       // 在实际项目中，可以从premiumStatus中获取具体的计划类型
       return premiumStatus.planType === 'monthly' ? 'monthly' : 'yearly';
     }
-    
+
     return 'free'; // 免费用户或试用已结束
   };
 
   const currentUserPlan = getUserPlanStatus();
-
-  // 判断是否为升级方案
-  const isUpgradePlan = (planId: PlanType) => {
-    if (!user || !currentUserPlan) return false;
-    
-    const planHierarchy = { trial: 0, free: 0, monthly: 1, yearly: 2 };
-    const currentLevel = planHierarchy[currentUserPlan as keyof typeof planHierarchy] || 0;
-    const targetLevel = planHierarchy[planId] || 0;
-    
-    return targetLevel > currentLevel;
-  };
-
-  // 判断是否为当前方案
-  const isCurrentPlan = (planId: PlanType) => {
-    return currentUserPlan === planId;
-  };
-
-  const selectedPlanData = plans.find(plan => plan.id === selectedPlan)!;
-
-  // 获取按钮文案
-  const getButtonText = () => {
-    const planId = selectedPlanData.id;
-    
-    // 如果是当前方案
-    if (isCurrentPlan(planId)) {
-      switch (currentUserPlan) {
-        case 'trial':
-          return pricingButtons.trial_active || 'Trial Active';
-        case 'monthly':
-          return pricingButtons.monthly_member || 'Monthly Member';
-        case 'yearly':
-          return pricingButtons.yearly_member || 'Yearly Member';
-        default:
-          return pricingButtons.current_plan || 'Current Plan';
-      }
-    }
-    
-    // 如果是升级方案
-    if (isUpgradePlan(planId)) {
-      if (planId === 'monthly') {
-        return pricingButtons.upgrade_to_monthly || 'Upgrade to Monthly';
-      } else if (planId === 'yearly') {
-        return pricingButtons.upgrade_to_yearly || 'Upgrade to Yearly';
-      }
-    }
-    
-    // 试用方案
-    if (planId === 'trial') {
-      return selectedPlanData.buttonText;
-    }
-    
-    // 默认文案
-    return selectedPlanData.buttonText;
-  };
 
   return (
     <section id="pricing" className="w-full py-20 md:py-32 bg-gray-50">
@@ -359,179 +259,68 @@ export default function PricingSection({ locale }: PricingSectionProps) {
         <div className="text-center mb-16">
           {renderHeader()}
         </div>
-        
-        {/* 定价卡片 */}
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12">
-          {plans.map((plan) => {
-            const isSelected = selectedPlan === plan.id;
-            const isCurrent = isCurrentPlan(plan.id);
-            const isUpgrade = isUpgradePlan(plan.id);
-            
-            return (
-              <div
-                key={plan.id}
-                onClick={() => setSelectedPlan(plan.id)}
-                className={`relative bg-marketing-cardBg rounded-3xl p-8 shadow-lg cursor-pointer transition-all hover:shadow-xl ${
-                  isSelected
-                    ? 'border-2 border-primary ring-4 ring-primary/20'
-                    : 'border border-marketing-border hover:border-marketing-border'
-                } ${isCurrent ? 'ring-2 ring-green-500 ring-offset-2' : ''}`}
-              >
-                {/* 选中指示器 */}
-                {isSelected && !isCurrent && (
-                  <div className="absolute -top-3 -right-3 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
-                    <CheckCircle className="w-4 h-4 text-white" />
-                  </div>
-                )}
 
-                {/* 当前方案标识 */}
-                {isCurrent && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-green-500 text-white px-6 py-2 rounded-full text-sm font-medium shadow-lg flex items-center gap-2">
-                      <Crown className="w-4 h-4" />
-{pricingBadges.current || 'Current'}
-                    </span>
-                  </div>
-                )}
-
-                {/* 升级标识 */}
-                {isUpgrade && !isSelected && (
-                  <div className="absolute -top-4 right-4">
-                    <span className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm font-medium shadow-lg flex items-center gap-1">
-                      <TrendingUp className="w-3 h-3" />
-{pricingBadges.upgrade_label || 'Upgrade'}
-                    </span>
-                  </div>
-                )}
-
-                {/* 推荐标签 */}
-                {plan.isPopular && !isCurrent && !isUpgrade && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-primary text-white px-6 py-2 rounded-full text-sm font-medium shadow-lg">
-{pricingBadges.popular || 'Popular'}
-                    </span>
-                  </div>
-                )}
-
-                {/* 试用标签 */}
-                {plan.isTrial && !isCurrent && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-green-500 text-white px-6 py-2 rounded-full text-sm font-medium shadow-lg flex items-center gap-2">
-                      <Gift className="w-4 h-4" />
-{pricingBadges.trial || 'Trial'}
-                    </span>
-                  </div>
-                )}
-
-                <div className="text-center">
-                  <h3 className="text-2xl font-bold text-marketing-foreground mb-2">{plan.name}</h3>
-                  <div className="mb-6">
-                    <span className="text-4xl font-bold text-marketing-foreground">{plan.price}</span>
-                    <span className="text-marketing-textSecondary ml-2">/{plan.period}</span>
-                  </div>
-
-                  {/* 年度计划折扣 */}
-                  {plan.id === 'yearly' && (
-                    <div className="mb-6">
-                      <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
-{pricingDescriptions.yearly_discount || 'Save 2 months'}
-                      </span>
-                    </div>
-                  )}
-
-                  <ul className="space-y-4 text-left">
-                    {plan.features.map((feature, index) => {
-                      // 为年度订阅的独有功能添加特殊样式
-                      const isYearlyExclusiveFeature = plan.id === 'yearly' && (
-                        feature.includes('省下 2 个月费用') || 
-                        feature.includes('专属会员社群')
-                      );
-                      
-                      // 为试用、月度和年度订阅的高级功能添加特殊样式
-                      const isPremiumFeature = (plan.id === 'trial' || plan.id === 'monthly' || plan.id === 'yearly') && (
-                        feature.includes('一对一 AI 教练支持') || 
-                        feature.includes('新功能抢先体验权')
-                      );
-                      
-                      const shouldHighlight = isYearlyExclusiveFeature || isPremiumFeature;
-                      
-                      return (
-                        <li key={index} className="flex items-start gap-3">
-                          <CheckCircle className={`mt-0.5 h-5 w-5 flex-shrink-0 ${
-                            shouldHighlight ? 'text-green-500' : 'text-primary'
-                          }`} />
-                          <span className={`text-sm ${
-                            shouldHighlight
-                              ? 'text-marketing-foreground font-medium'
-                              : 'text-marketing-textSecondary'
-                          }`}>
-                            {feature}
-                          </span>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* 统一的订阅按钮 */}
-        <div className="text-center">
-          <div className="max-w-md mx-auto">
-            {isCurrentPlan(selectedPlanData.id) ? (
-              <button 
-                disabled
-                className="w-full bg-green-100 text-green-700 font-semibold py-4 px-8 rounded-xl text-lg cursor-not-allowed border-2 border-green-200"
-              >
-                <Crown className="w-5 h-5 inline mr-2" />
-                {getButtonText()}
-              </button>
-            ) : selectedPlanData.isTrial ? (
-              <button 
-                onClick={handleTrialStart}
-                className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-4 px-8 rounded-xl text-lg transition-colors shadow-lg"
-              >
-                {getButtonText()}
-              </button>
-            ) : user ? (
-              <SubscribeButton 
-                plan={{
-                  id: selectedPlanData.id,
-                  name: selectedPlanData.name,
-                  priceId: selectedPlanData.priceId!,
-                  price: selectedPlanData.price,
-                  period: selectedPlanData.period === '每月' ? 'month' : 'year'
-                }}
-                isPopular={selectedPlanData.isPopular}
-                className="w-full py-4 text-lg"
-                customText={getButtonText()}
-                locale={locale}
-              />
-            ) : (
-              <Link 
-                href={`/${locale}/register`} 
-                className="w-full inline-block bg-primary hover:bg-primary-600 text-white font-semibold py-4 px-8 rounded-xl text-lg transition-colors shadow-lg text-center"
-              >
-                {getButtonText()}
-              </Link>
-            )}
-            
-            <p className="text-sm text-marketing-textSecondary mt-4">
-              {isCurrentPlan(selectedPlanData.id)
-                ? (pricingDescriptions.current || 'This is your current plan')
-                : selectedPlanData.isTrial
-                ? (pricingDescriptions.trial || 'Start your free trial today')
-                : isUpgradePlan(selectedPlanData.id)
-                ? (pricingDescriptions.upgrade || 'Upgrade to {plan}').replace('{plan}', selectedPlanData.name)
-                : selectedPlanData.id === 'yearly'
-                ? (pricingDescriptions.yearly_special || 'Best value - save 2 months')
-                : (pricingDescriptions.basic || 'Choose this plan')
+        {/* 使用统一的订阅产品列表组件 */}
+        <SubscriptionPlans
+          user={user}
+          currentUserPlan={currentUserPlan}
+          monthlyPrice={formatPrice('monthly')}
+          yearlyPrice={formatPrice('yearly')}
+          monthlyPriceId={prices.monthly?.id}
+          yearlyPriceId={prices.yearly?.id}
+          isLoadingPrices={loading}
+          translations={{
+            plans: {
+              trial: {
+                name: pricingPlans.trial?.name || '7-Day Premium Trial',
+                price: pricingPlans.trial?.price || '$0',
+                period: pricingPlans.trial?.period || 'trial',
+                buttonText: pricingPlans.trial?.buttonText || 'Start Free Trial',
+                features: pricingPlans.trial?.features || []
+              },
+              monthly: {
+                name: pricingPlans.monthly?.name || 'Monthly',
+                period: pricingPlans.monthly?.period || 'month',
+                buttonText: pricingPlans.monthly?.buttonText || 'Choose Monthly',
+                features: pricingPlans.monthly?.features || []
+              },
+              yearly: {
+                name: pricingPlans.yearly?.name || 'Yearly',
+                period: pricingPlans.yearly?.period || 'year',
+                buttonText: pricingPlans.yearly?.buttonText || 'Choose Yearly',
+                features: pricingPlans.yearly?.features || []
               }
-            </p>
-          </div>
-        </div>
+            },
+            badges: {
+              current: pricingBadges.current || 'Current',
+              upgrade: pricingBadges.upgrade_label || 'Upgrade',
+              popular: pricingBadges.popular || 'Popular',
+              trial: pricingBadges.trial || 'Trial',
+            },
+            buttons: {
+              trialActive: pricingButtons.trial_active || 'Trial Active',
+              monthlyMember: pricingButtons.monthly_member || 'Monthly Member',
+              yearlyMember: pricingButtons.yearly_member || 'Yearly Member',
+              currentPlan: pricingButtons.current_plan || 'Current Plan',
+              upgradeToMonthly: pricingButtons.upgrade_to_monthly || 'Upgrade to Monthly',
+              upgradeToYearly: pricingButtons.upgrade_to_yearly || 'Upgrade to Yearly',
+            },
+            descriptions: {
+              current: pricingDescriptions.current || 'This is your current plan',
+              trial: pricingDescriptions.trial || 'Start your free trial today',
+              upgrade: pricingDescriptions.upgrade || 'Upgrade to {plan}',
+              yearlySpecial: pricingDescriptions.yearly_special || 'Best value - save 2 months',
+              yearlyDiscount: pricingDescriptions.yearly_discount || 'Save 2 months',
+              basic: pricingDescriptions.basic || 'Choose this plan',
+            },
+          }}
+          featureHighlights={{
+            yearlyExclusive: ['省下 2 个月费用', '专属会员社群'],
+            premiumFeatures: ['一对一 AI 教练支持', '新功能抢先体验权'],
+          }}
+          locale={locale}
+          onTrialStart={handleTrialStart}
+        />
       </div>
     </section>
   );

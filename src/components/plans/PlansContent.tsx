@@ -16,6 +16,7 @@ import {
   TrendingUp,
   Gift
 } from "lucide-react";
+import SubscriptionPlans from './SubscriptionPlans';
 
 // 将 Premium 相关的接口和逻辑移到组件内部，避免 hook 依赖问题
 interface PremiumStatus {
@@ -88,7 +89,6 @@ export default function PlansContent() {
   const [premiumStatus, setPremiumStatus] = useState<PremiumStatus | null>(null);
   const [loading, setLoading] = useState(true);
   const [premiumLoading, setPremiumLoading] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState<'monthly' | 'yearly'>('yearly');
   const [pricingData, setPricingData] = useState<PricingData | null>(null);
   const [pricingLoading, setPricingLoading] = useState(true);
   const router = useRouter();
@@ -288,22 +288,6 @@ export default function PlansContent() {
 
   const currentUserPlan = getUserPlanStatus();
 
-  // 判断是否为升级方案
-  const isUpgradePlan = (planId: 'monthly' | 'yearly') => {
-    if (!user || !currentUserPlan) return false;
-
-    const planHierarchy = { trial: 0, free: 0, monthly: 1, yearly: 2 };
-    const currentLevel = planHierarchy[currentUserPlan as keyof typeof planHierarchy] || 0;
-    const targetLevel = planHierarchy[planId] || 0;
-
-    return targetLevel > currentLevel;
-  };
-
-  // 判断是否为当前方案
-  const isCurrentPlan = (planId: 'monthly' | 'yearly') => {
-    return currentUserPlan === planId;
-  };
-
   // 定义方案数据
   const plans = [
     {
@@ -324,37 +308,6 @@ export default function PlansContent() {
       features: t('pricing.plans.yearly.features', { returnObjects: true }) as string[] || []
     }
   ];
-
-  const selectedPlanData = plans.find(plan => plan.id === selectedPlan)!;
-
-  // 获取按钮文案
-  const getButtonText = () => {
-    const planId = selectedPlanData.id;
-
-    // 如果是当前方案
-    if (isCurrentPlan(planId)) {
-      switch (currentUserPlan) {
-        case 'monthly':
-          return t('pricing.buttons.monthly_member') || t('plans.plan_names.monthly');
-        case 'yearly':
-          return t('pricing.buttons.yearly_member') || t('plans.plan_names.yearly');
-        default:
-          return t('pricing.buttons.current_plan') || t('plans.current_subscription');
-      }
-    }
-
-    // 如果是升级方案
-    if (isUpgradePlan(planId)) {
-      if (planId === 'monthly') {
-        return t('pricing.buttons.upgrade_to_monthly') || t('plans.actions.upgrade_to', { plan: t('plans.plan_names.monthly') });
-      } else if (planId === 'yearly') {
-        return t('pricing.buttons.upgrade_to_yearly') || t('plans.actions.upgrade_to', { plan: t('plans.plan_names.yearly') });
-      }
-    }
-
-    // 默认文案
-    return selectedPlanData.buttonText;
-  };
 
   const handleTrialStart = () => {
     if (!user) {
@@ -556,22 +509,14 @@ export default function PlansContent() {
                     <div className="text-sm text-green-700 mt-1 space-y-1">
                       {premiumStatus.expiresAt && (
                         <p>
-                          {premiumStatus.type === 'trial'
-                            ? t('plans.premium_status.trial_expires_at')
-                            : t('plans.premium_status.expiry_time', { date: new Date(premiumStatus.expiresAt).toLocaleDateString(getLocale()) })
-                          }
-                          {premiumStatus.type === 'trial' && (
-                            <span className="ml-1 font-medium">
-                              {new Date(premiumStatus.expiresAt).toLocaleDateString(getLocale())}
-                            </span>
-                          )}
+                          Expires: {new Date(premiumStatus.expiresAt).toLocaleDateString(getLocale())}
                         </p>
                       )}
                       {premiumStatus.store && premiumStatus.store !== 'system' && (
-                        <p>{t('plans.premium_status.subscription_source', { source: premiumStatus.store === 'APP_STORE' ? t('plans.premium_status.app_store') : premiumStatus.store === 'GOOGLE_PLAY' ? t('plans.premium_status.google_play') : premiumStatus.store })}</p>
+                        <p>Source: {premiumStatus.store}</p>
                       )}
                       {premiumStatus.referralCreditDays && (
-                        <p>{t('plans.premium_status.referral_credit_remaining', { days: premiumStatus.referralCreditDays })}</p>
+                        <p>Referral credit remaining: {premiumStatus.referralCreditDays} days</p>
                       )}
                       {premiumStatus.willRenew ? (
                         <p className="text-green-600">{t('plans.premium_status.auto_renew_enabled')}</p>
@@ -622,159 +567,76 @@ export default function PlansContent() {
           </div>
         </div>
 
-        {/* {t('plans.subscription_plans')} - 完全仿照 landing page 的 pricing section */}
-        <div className="py-12 bg-gray-50 rounded-lg">
-          <div className="container mx-auto px-4 md:px-6">
-
-            {/* {t('plans.plan_cards')} */}
-            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">
-              {plans.map((plan) => {
-                const isSelected = selectedPlan === plan.id;
-                const isCurrent = isCurrentPlan(plan.id);
-                const isUpgrade = isUpgradePlan(plan.id);
-
-                return (
-                  <div
-                    key={plan.id}
-                    onClick={() => setSelectedPlan(plan.id)}
-                    className={`relative bg-white rounded-3xl p-8 shadow-lg cursor-pointer transition-all hover:shadow-xl ${
-                      isSelected
-                        ? 'border-2 ring-4 ring-offset-2'
-                        : 'border border-gray-200 hover:border-gray-300'
-                    } ${isCurrent ? 'ring-2 ring-green-500 ring-offset-2' : ''}`}
-                    style={{
-                      borderColor: isSelected ? colors.tint : undefined,
-                      '--tw-ring-color': isSelected ? `${colors.tint}33` : undefined,
-                    } as React.CSSProperties}
-                  >
-                    {/* {t('plans.selected_indicator')} */}
-                    {isSelected && !isCurrent && (
-                      <div className="absolute -top-3 -right-3 w-6 h-6 rounded-full flex items-center justify-center" style={{ backgroundColor: colors.tint }}>
-                        <CheckCircle className="w-4 h-4 text-white" />
-                      </div>
-                    )}
-
-                    {/* {t('plans.current_plan_badge')} */}
-                    {isCurrent && (
-                      <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                        <span className="bg-green-500 text-white px-6 py-2 rounded-full text-sm font-medium shadow-lg flex items-center gap-2">
-                          <Crown className="w-4 h-4" />
-                          {t('pricing.badges.current')}
-                        </span>
-                      </div>
-                    )}
-
-                    {/* {t('plans.upgrade_badge')} */}
-                    {isUpgrade && !isSelected && (
-                      <div className="absolute -top-4 right-4">
-                        <span className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm font-medium shadow-lg flex items-center gap-1">
-                          <CheckCircle className="w-3 h-3" />
-                          {t('pricing.badges.upgrade_label')}
-                        </span>
-                      </div>
-                    )}
-
-                    {/* {t('plans.popular_badge')} */}
-                    {plan.isPopular && !isCurrent && !isUpgrade && (
-                      <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                        <span className="text-white px-6 py-2 rounded-full text-sm font-medium shadow-lg" style={{ backgroundColor: colors.tint }}>
-                          {t('pricing.badges.popular')}
-                        </span>
-                      </div>
-                    )}
-
-                    {/* {t('plans.trial_badge')} */}
-                    {(plan as any).isTrial && !isCurrent && (
-                      <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                        <span className="bg-green-500 text-white px-6 py-2 rounded-full text-sm font-medium shadow-lg flex items-center gap-2">
-                          <CheckCircle className="w-4 h-4" />
-                          {t('pricing.badges.trial')}
-                        </span>
-                      </div>
-                    )}
-
-                    <div className="text-center">
-                      <h3 className="text-2xl font-bold mb-2" style={{ color: colors.text }}>{plan.name}</h3>
-                      <div className="mb-6">
-                        <span className="text-4xl font-bold" style={{ color: colors.text }}>{plan.price}</span>
-                        <span className="text-gray-500 ml-2">/{plan.period}</span>
-                      </div>
-
-                      {/* {t('plans.yearly_discount')} */}
-                      {plan.id === 'yearly' && (
-                        <div className="mb-6">
-                          <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
-                            {t('pricing.descriptions.yearly_discount')}
-                          </span>
-                        </div>
-                      )}
-
-                      <ul className="space-y-4 text-left">
-                        {plan.features.map((feature, index) => {
-                          // 为年度订阅的独有功能添加特殊样式
-                          const isYearlyExclusiveFeature = plan.id === 'yearly' && (
-                            (t('plans.feature_highlights.yearly_exclusive', { returnObjects: true }) as string[]).some(exclusiveFeature => feature.includes(exclusiveFeature))
-                          );
-
-                          // 为试用、月度和年度订阅的高级功能添加特殊样式
-                          const isPremiumFeature = (plan.id === 'monthly' || plan.id === 'yearly') && (
-                            (t('plans.feature_highlights.premium_features', { returnObjects: true }) as string[]).some(premiumFeature => feature.includes(premiumFeature))
-                          );
-
-                          const shouldHighlight = isYearlyExclusiveFeature || isPremiumFeature;
-
-                          return (
-                            <li key={index} className="flex items-start gap-3">
-                              <CheckCircle className={`mt-0.5 h-5 w-5 flex-shrink-0 ${
-                                shouldHighlight ? 'text-green-500' : ''
-                              }`} style={{ color: shouldHighlight ? '#10b981' : colors.tint }} />
-                              <span className={`text-sm ${
-                                shouldHighlight
-                                  ? 'font-medium'
-                                  : ''
-                              }`} style={{
-                                color: shouldHighlight ? colors.text : colors.textSecondary
-                              }}>
-                                {feature}
-                              </span>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* {t('plans.unified_subscription_button')} */}
-            <div className="text-center">
-              <div className="max-w-md mx-auto">
-                {isCurrentPlan(selectedPlanData.id) ? (
-                  <button
-                    disabled
-                    className="w-full bg-green-100 text-green-700 font-semibold py-4 px-8 rounded-xl text-lg cursor-not-allowed border-2 border-green-200"
-                  >
-                    <Crown className="w-5 h-5 inline mr-2" />
-                    {getButtonText()}
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => {
-                      // 这里应该集成实际的订阅功能
-                      alert(t('plans.actions.upgrade_to', { plan: selectedPlanData.name }));
-                    }}
-                    className="w-full text-white font-semibold py-4 px-8 rounded-xl text-lg transition-colors shadow-lg hover:opacity-90"
-                    style={{ backgroundColor: colors.tint }}
-                  >
-                    {getButtonText()}
-                  </button>
-                )}
-
-              </div>
-            </div>
-          </div>
-        </div>
+        {/* {t('plans.subscription_plans')} - 使用统一的订阅产品列表组件 */}
+        <SubscriptionPlans
+          user={user}
+          currentUserPlan={currentUserPlan}
+          monthlyPrice={formatPrice(pricingData?.monthly || null)}
+          yearlyPrice={formatPrice(pricingData?.yearly || null)}
+          monthlyPriceId={pricingData?.monthly?.id}
+          yearlyPriceId={pricingData?.yearly?.id}
+          isLoadingPrices={pricingLoading}
+          translations={{
+            plans: {
+              trial: {
+                name: t('pricing.plans.trial.name') || '7天免费试用',
+                price: t('pricing.plans.trial.price') || '$0',
+                period: t('pricing.plans.trial.period') || '试用',
+                buttonText: t('pricing.plans.trial.buttonText') || '开始免费试用',
+                features: t('pricing.plans.trial.features', { returnObjects: true }) as string[] || []
+              },
+              monthly: {
+                name: t('pricing.plans.monthly.name') || t('plans.plan_names.monthly'),
+                period: t('pricing.plans.monthly.period') || t('plans.subscription_info.per_month'),
+                buttonText: t('pricing.plans.monthly.buttonText') || t('plans.actions.upgrade_to').replace('{plan}', t('plans.plan_names.monthly')),
+                features: t('pricing.plans.monthly.features', { returnObjects: true }) as string[] || []
+              },
+              yearly: {
+                name: t('pricing.plans.yearly.name') || t('plans.plan_names.yearly'),
+                period: t('pricing.plans.yearly.period') || t('plans.subscription_info.per_year'),
+                buttonText: t('pricing.plans.yearly.buttonText') || t('plans.actions.upgrade_to').replace('{plan}', t('plans.plan_names.yearly')),
+                features: t('pricing.plans.yearly.features', { returnObjects: true }) as string[] || []
+              }
+            },
+            badges: {
+              current: t('pricing.badges.current'),
+              upgrade: t('pricing.badges.upgrade_label'),
+              popular: t('pricing.badges.popular'),
+              trial: t('pricing.badges.trial'),
+            },
+            buttons: {
+              trialActive: t('pricing.buttons.trial_active'),
+              monthlyMember: t('pricing.buttons.monthly_member'),
+              yearlyMember: t('pricing.buttons.yearly_member'),
+              currentPlan: t('pricing.buttons.current_plan'),
+              upgradeToMonthly: t('pricing.buttons.upgrade_to_monthly'),
+              upgradeToYearly: t('pricing.buttons.upgrade_to_yearly'),
+            },
+            descriptions: {
+              current: t('pricing.descriptions.current'),
+              trial: t('pricing.descriptions.trial'),
+              upgrade: t('pricing.descriptions.upgrade'),
+              yearlySpecial: t('pricing.descriptions.yearly_special'),
+              yearlyDiscount: t('pricing.descriptions.yearly_discount'),
+              basic: t('pricing.descriptions.basic'),
+            },
+          }}
+          colors={{
+            tint: colors.tint,
+            text: colors.text,
+            textSecondary: colors.textSecondary,
+            cardBackground: colors.card.background,
+            cardBorder: colors.border,
+            cardBorderHover: colors.border,
+            sectionBackground: colors.background,
+          }}
+          featureHighlights={{
+            yearlyExclusive: t('plans.feature_highlights.yearly_exclusive', { returnObjects: true }) as string[],
+            premiumFeatures: t('plans.feature_highlights.premium_features', { returnObjects: true }) as string[],
+          }}
+          locale={currentLanguage}
+          visiblePlans={['monthly', 'yearly']}
+        />
 
         {/* {t('plans.refresh_status_button')} */}
         <div className="mt-8 text-center">
