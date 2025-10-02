@@ -793,7 +793,11 @@
       "summary_placeholder": "記錄下這次專注的感受、收穫或想法...",
       "skip": "跳過",
       "submitting": "處理中...",
-      "share_button": "分享成就"
+      "share_button": "分享成就",
+      "chat_message_line1": "我剛剛完成了「{{taskTitle}}」的一個{{duration}}分鐘的專注番茄鐘。",
+      "chat_message_line2": "當前子任務：{{subtaskTitle}}。",
+      "chat_message_line3": "任務進度：{{completedCount}}/{{totalCount}} 個子任務已完成。",
+      "chat_message_line4": "我的收穫和感想：{{summary}}"
     },
     "break_end_title": "休息結束",
     "break_end_message": "準備好開始下一個專注了嗎？讓我們繼續保持專注狀態！",

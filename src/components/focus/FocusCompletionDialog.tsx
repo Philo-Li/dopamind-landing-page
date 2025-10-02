@@ -53,22 +53,32 @@ export const FocusCompletionDialog: React.FC<FocusCompletionDialogProps> = ({
         const messageParts: string[] = []
 
         // 第一行：完成番茄钟的基本信息
-        messageParts.push(`我刚刚完成了「${taskTitle}」的一个${minutes}分钟的专注番茄钟。`)
+        messageParts.push(t('focus.completion.chat_message_line1', {
+          duration: minutes,
+          taskTitle
+        }))
 
         // 第二行：当前子任务信息（如果有）
         if (currentSubtask) {
-          messageParts.push(`当前子任务：${currentSubtask.title}。`)
+          messageParts.push(t('focus.completion.chat_message_line2', {
+            subtaskTitle: currentSubtask.title
+          }))
         }
 
         // 第三行：任务进度（如果有子任务）
         if (fullTask?._count && fullTask._count.subTasks > 0) {
           const completedCount = fullTask._count.completedSubTasks || 0
           const totalCount = fullTask._count.subTasks
-          messageParts.push(`任务进度：${completedCount}/${totalCount} 个子任务已完成。`)
+          messageParts.push(t('focus.completion.chat_message_line3', {
+            completedCount,
+            totalCount
+          }))
         }
 
         // 第四行：用户的收获和感想
-        messageParts.push(`我的收获和感想：${summary.trim()}`)
+        messageParts.push(t('focus.completion.chat_message_line4', {
+          summary: summary.trim()
+        }))
 
         // 用换行符连接所有部分
         const chatMessage = messageParts.join('\n')

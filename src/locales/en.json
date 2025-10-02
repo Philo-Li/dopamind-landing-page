@@ -818,7 +818,11 @@
       "summary_placeholder": "Record your feelings, insights, or thoughts from this focus session...",
       "skip": "Skip",
       "submitting": "Processing...",
-      "share_button": "Share Achievement"
+      "share_button": "Share Achievement",
+      "chat_message_line1": "I just completed a {{duration}}-minute focus pomodoro session for \"{{taskTitle}}\".",
+      "chat_message_line2": "Current subtask: {{subtaskTitle}}.",
+      "chat_message_line3": "Task progress: {{completedCount}}/{{totalCount}} subtasks completed.",
+      "chat_message_line4": "My insights and reflections: {{summary}}"
     },
     "break_end_title": "Break Time's Over",
     "break_end_message": "Ready to start your next focus session? Let's keep that momentum going!",

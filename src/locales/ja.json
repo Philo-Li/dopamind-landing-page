@@ -1239,7 +1239,11 @@
       "summary_placeholder": "この集中セッションでの感想、成果、思考を記録してください...",
       "skip": "スキップ",
       "submitting": "処理中...",
-      "share_button": "成果をシェア"
+      "share_button": "成果をシェア",
+      "chat_message_line1": "「{{taskTitle}}」の{{duration}}分間のポモドーロ集中セッションを完了しました。",
+      "chat_message_line2": "現在のサブタスク：{{subtaskTitle}}。",
+      "chat_message_line3": "タスク進捗：{{completedCount}}/{{totalCount}}個のサブタスクが完了しました。",
+      "chat_message_line4": "私の成果と感想：{{summary}}"
     },
     "break_end_title": "休憩時間終了",
     "break_end_message": "次の集中セッションを始める準備はできていますか？この勢いを続けましょう！",

@@ -848,7 +848,11 @@
       "summary_placeholder": "记录下这次专注的感受、收获或想法...",
       "skip": "跳过",
       "submitting": "处理中...",
-      "share_button": "分享成就"
+      "share_button": "分享成就",
+      "chat_message_line1": "我刚刚完成了「{{taskTitle}}」的一个{{duration}}分钟的专注番茄钟。",
+      "chat_message_line2": "当前子任务：{{subtaskTitle}}。",
+      "chat_message_line3": "任务进度：{{completedCount}}/{{totalCount}} 个子任务已完成。",
+      "chat_message_line4": "我的收获和感想：{{summary}}"
     },
     "break_end_title": "休息结束",
     "break_end_message": "准备好开始下一个专注了吗？让我们继续保持专注状态！",
