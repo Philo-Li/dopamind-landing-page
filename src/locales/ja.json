@@ -1842,6 +1842,7 @@
     },
     "plan_names": {
       "free": "無料プラン",
+      "trial": "無料トライアル",
       "monthly": "月額サブスクリプション",
       "yearly": "年額サブスクリプション",
       "unknown": "不明"
@@ -1861,12 +1862,16 @@
       "trial_active": "試用期間有効",
       "referral_credit_active": "紹介クレジット有効",
       "expiry_time": "有効期限: {date}",
+      "trial_expires_at": "トライアル期限:",
       "subscription_source": "サブスクリプション元: {source}",
       "referral_credit_remaining": "紹介クレジット残り: {days} 日",
       "auto_renew_enabled": "自動更新が有効",
       "auto_renew_disabled": "自動更新が無効",
       "app_store": "App Store",
-      "google_play": "Google Play"
+      "google_play": "Google Play",
+      "trial_expired_notice": "無料トライアル期限切れ",
+      "free_user_notice": "無料プランをご利用中",
+      "upgrade_to_premium": "Premiumにアップグレードして全機能を解除"
     },
     "cancellation": {
       "confirm_title": "サブスクリプションをキャンセルしますか？",

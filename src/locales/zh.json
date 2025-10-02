@@ -1999,6 +1999,7 @@
     },
     "plan_names": {
       "free": "免费版",
+      "trial": "免费试用",
       "monthly": "月度订阅",
       "yearly": "年度订阅",
       "unknown": "未知"
@@ -2018,12 +2019,16 @@
       "trial_active": "试用期激活中",
       "referral_credit_active": "推荐奖励激活中",
       "expiry_time": "到期时间: {date}",
+      "trial_expires_at": "试用到期时间:",
       "subscription_source": "订阅来源: {source}",
       "referral_credit_remaining": "推荐奖励剩余: {days} 天",
       "auto_renew_enabled": "自动续费已开启",
       "auto_renew_disabled": "自动续费已关闭",
       "app_store": "App Store",
-      "google_play": "Google Play"
+      "google_play": "Google Play",
+      "trial_expired_notice": "免费试用已过期",
+      "free_user_notice": "您正在使用免费版",
+      "upgrade_to_premium": "升级至 Premium 解锁全部功能"
     },
     "cancellation": {
       "confirm_title": "确定要取消订阅吗？",

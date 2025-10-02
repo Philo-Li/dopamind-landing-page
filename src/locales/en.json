@@ -1964,6 +1964,7 @@
     },
     "plan_names": {
       "free": "Free Plan",
+      "trial": "Free Trial",
       "monthly": "Monthly Subscription",
       "yearly": "Yearly Subscription",
       "unknown": "Unknown"
@@ -1983,12 +1984,16 @@
       "trial_active": "Trial Period Active",
       "referral_credit_active": "Referral Credits Active",
       "expiry_time": "Expires: {date}",
+      "trial_expires_at": "Trial expires:",
       "subscription_source": "Subscription Source: {source}",
       "referral_credit_remaining": "Referral credits remaining: {days} days",
       "auto_renew_enabled": "Auto-renewal enabled",
       "auto_renew_disabled": "Auto-renewal disabled",
       "app_store": "App Store",
-      "google_play": "Google Play"
+      "google_play": "Google Play",
+      "trial_expired_notice": "Free Trial Expired",
+      "free_user_notice": "You're on the Free Plan",
+      "upgrade_to_premium": "Upgrade to Premium to unlock all features"
     },
     "cancellation": {
       "confirm_title": "Are you sure you want to cancel your subscription?",

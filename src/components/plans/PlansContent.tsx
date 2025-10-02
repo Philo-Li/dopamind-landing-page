@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useTranslation } from 'react-i18next';
 import { useThemeColors } from '@/hooks/useThemeColor';
 import { storage } from '@/lib/utils';
-import { settingsApi, pricingApi } from '@/lib/api';
+import { settingsApi, pricingApi, apiService } from '@/lib/api';
 import {
   Calendar,
   DollarSign,
@@ -142,21 +142,32 @@ export default function PlansContent() {
     try {
       setPremiumLoading(true);
 
-      const response = await settingsApi.getSettings();
+      const token = storage.get('token');
+      console.log('[PlansContent] Token from storage:', token ? 'exists' : 'missing');
 
-      if (response.success && response.data) {
-        // 模拟 Premium 状态数据，实际应该从 API 获取
-        const mockStatus: PremiumStatus = {
-          isPremium: (response.data as any)?.premiumStatus?.isPremium || false,
-          type: (response.data as any)?.premiumStatus?.type || 'free',
-          expiresAt: (response.data as any)?.premiumStatus?.expiresAt ? new Date((response.data as any).premiumStatus.expiresAt) : undefined,
-          store: (response.data as any)?.premiumStatus?.store,
-          willRenew: (response.data as any)?.premiumStatus?.willRenew || false,
-          referralCreditDays: (response.data as any)?.premiumStatus?.referralCreditDays
+      if (!token) {
+        console.error('[PlansContent] No token found in storage');
+        throw new Error('No token found');
+      }
+
+      console.log('[PlansContent] Calling getPremiumStatus API...');
+      const response = await apiService.getPremiumStatus(token);
+      console.log('[PlansContent] API Response:', response);
+
+      if (response) {
+        const status: PremiumStatus = {
+          isPremium: response.isPremium || false,
+          type: response.type || 'free',
+          expiresAt: response.expiresAt ? new Date(response.expiresAt) : undefined,
+          store: response.store,
+          willRenew: response.willRenew || false,
+          referralCreditDays: response.referralCreditDays
         };
 
-        setPremiumStatus(mockStatus);
+        console.log('[PlansContent] Parsed status:', status);
+        setPremiumStatus(status);
       } else {
+        console.log('[PlansContent] No response from API, setting default free status');
         // 默认免费用户状态
         setPremiumStatus({
           isPremium: false,
@@ -165,7 +176,7 @@ export default function PlansContent() {
         });
       }
     } catch (err) {
-      console.error('Failed to fetch premium status:', err);
+      console.error('[PlansContent] Failed to fetch premium status:', err);
       setPremiumStatus({
         isPremium: false,
         type: 'free',
@@ -210,15 +221,24 @@ export default function PlansContent() {
   useEffect(() => {
     if (user && premiumStatus) {
       if (premiumStatus.isPremium) {
+        let plan: 'free' | 'monthly' | 'yearly' | 'trial' = 'free';
+
+        if (premiumStatus.type === 'trial') {
+          plan = 'trial';
+        } else if (premiumStatus.type === 'paid') {
+          plan = premiumStatus.store === 'STRIPE' ? 'yearly' : 'monthly';
+        }
+
         const localSub: LocalSubscription = {
           id: "sub_from_premium_status",
-          plan: premiumStatus.type === 'paid' ? (premiumStatus.store === 'STRIPE' ? 'yearly' : 'monthly') : 'free',
-          status: 'active',
+          plan: plan as any,
+          status: premiumStatus.type === 'trial' ? 'trial' : 'active',
           startDate: new Date().toISOString(),
           nextBillingDate: premiumStatus.expiresAt ? premiumStatus.expiresAt.toISOString() : undefined,
           price: premiumStatus.type === 'paid' ? 159.99 : undefined,
           currency: "USD",
-          autoRenew: premiumStatus.willRenew
+          autoRenew: premiumStatus.willRenew,
+          trialEndsAt: premiumStatus.type === 'trial' && premiumStatus.expiresAt ? premiumStatus.expiresAt.toISOString() : undefined
         };
         setSubscription(localSub);
       } else {
@@ -383,6 +403,8 @@ export default function PlansContent() {
     switch (plan) {
       case 'free':
         return t('plans.plan_names.free');
+      case 'trial':
+        return t('plans.plan_names.trial');
       case 'monthly':
         return t('plans.plan_names.monthly');
       case 'yearly':
@@ -454,14 +476,9 @@ export default function PlansContent() {
                     {getStatusText(subscription.status)}
                   </span>
                 </div>
-                {subscription.price && subscription.plan !== 'free' && (
+                {subscription.price && subscription.plan !== 'free' && subscription.plan !== 'trial' && (
                   <p className="text-2xl font-bold" style={{ color: colors.tint }}>
                     ${subscription.price} <span className="text-sm font-normal" style={{ color: colors.textSecondary }}>/ {subscription.plan === 'yearly' ? t('plans.subscription_info.per_year') : t('plans.subscription_info.per_month')}</span>
-                  </p>
-                )}
-                {subscription.plan === 'free' && (
-                  <p className="text-2xl font-bold" style={{ color: colors.textSecondary }}>
-                    {t('plans.subscription_info.free_plan')}
                   </p>
                 )}
               </div>
@@ -530,7 +547,7 @@ export default function PlansContent() {
               <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
                 <div className="flex items-start space-x-3">
                   <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
-                  <div>
+                  <div className="w-full">
                     <p className="text-sm font-medium text-green-800">
                       {premiumStatus.type === 'paid' && t('plans.premium_status.subscription_active')}
                       {premiumStatus.type === 'trial' && t('plans.premium_status.trial_active')}
@@ -538,9 +555,19 @@ export default function PlansContent() {
                     </p>
                     <div className="text-sm text-green-700 mt-1 space-y-1">
                       {premiumStatus.expiresAt && (
-                        <p>{t('plans.premium_status.expiry_time', { date: new Date(premiumStatus.expiresAt).toLocaleDateString(getLocale()) })}</p>
+                        <p>
+                          {premiumStatus.type === 'trial'
+                            ? t('plans.premium_status.trial_expires_at')
+                            : t('plans.premium_status.expiry_time', { date: new Date(premiumStatus.expiresAt).toLocaleDateString(getLocale()) })
+                          }
+                          {premiumStatus.type === 'trial' && (
+                            <span className="ml-1 font-medium">
+                              {new Date(premiumStatus.expiresAt).toLocaleDateString(getLocale())}
+                            </span>
+                          )}
+                        </p>
                       )}
-                      {premiumStatus.store && (
+                      {premiumStatus.store && premiumStatus.store !== 'system' && (
                         <p>{t('plans.premium_status.subscription_source', { source: premiumStatus.store === 'APP_STORE' ? t('plans.premium_status.app_store') : premiumStatus.store === 'GOOGLE_PLAY' ? t('plans.premium_status.google_play') : premiumStatus.store })}</p>
                       )}
                       {premiumStatus.referralCreditDays && (
@@ -552,6 +579,23 @@ export default function PlansContent() {
                         <p className="text-yellow-600">{t('plans.premium_status.auto_renew_disabled')}</p>
                       )}
                     </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Free trial status for non-premium users (trial expired) */}
+            {!isPremium && premiumStatus?.expiresAt && (
+              <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                <div className="flex items-start space-x-3">
+                  <Calendar className="h-5 w-5 text-blue-600 mt-0.5" />
+                  <div>
+                    <p className="text-sm font-medium text-blue-800">
+                      {t('plans.premium_status.trial_expired_notice')}
+                    </p>
+                    <p className="text-sm text-blue-700 mt-1">
+                      {new Date(premiumStatus.expiresAt).toLocaleDateString(getLocale())}
+                    </p>
                   </div>
                 </div>
               </div>
