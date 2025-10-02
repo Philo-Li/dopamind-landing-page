@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { Trophy, Target, X } from 'lucide-react'
 import { useThemeColors } from '@/hooks/useThemeColor'
 import { useLocalization } from '@/hooks/useLocalization'
+import { Task } from '@/types/task'
 
 interface FocusCompletionDialogProps {
   visible: boolean
@@ -12,6 +13,9 @@ interface FocusCompletionDialogProps {
   taskTitle: string
   isLoading?: boolean
   duration: number // 专注时长（秒）
+  fullTask?: Task // 完整的任务信息（包含子任务）
+  currentSubtask?: Task // 当前子任务
+  onNavigateToChat?: (message: string) => void // 导航到聊天页面的回调
 }
 
 export const FocusCompletionDialog: React.FC<FocusCompletionDialogProps> = ({
@@ -20,7 +24,10 @@ export const FocusCompletionDialog: React.FC<FocusCompletionDialogProps> = ({
   onSubmit,
   taskTitle,
   isLoading = false,
-  duration
+  duration,
+  fullTask,
+  currentSubtask,
+  onNavigateToChat
 }) => {
   const colors = useThemeColors()
   const { t } = useLocalization()
@@ -33,15 +40,59 @@ export const FocusCompletionDialog: React.FC<FocusCompletionDialogProps> = ({
     }
   }, [visible])
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (summary.trim()) {
-      onSubmit(summary.trim())
+      // 如果提供了导航回调，先保存总结，然后构建消息并导航到聊天
+      if (onNavigateToChat) {
+        // 先调用原始的 onSubmit 保存总结
+        await onSubmit(summary.trim())
+
+        const minutes = Math.floor(duration / 60)
+
+        // 构建消息的各个部分
+        const messageParts: string[] = []
+
+        // 第一行：完成番茄钟的基本信息
+        messageParts.push(`我刚刚完成了「${taskTitle}」的一个${minutes}分钟的专注番茄钟。`)
+
+        // 第二行：当前子任务信息（如果有）
+        if (currentSubtask) {
+          messageParts.push(`当前子任务：${currentSubtask.title}。`)
+        }
+
+        // 第三行：任务进度（如果有子任务）
+        if (fullTask?._count && fullTask._count.subTasks > 0) {
+          const completedCount = fullTask._count.completedSubTasks || 0
+          const totalCount = fullTask._count.subTasks
+          messageParts.push(`任务进度：${completedCount}/${totalCount} 个子任务已完成。`)
+        }
+
+        // 第四行：用户的收获和感想
+        messageParts.push(`我的收获和感想：${summary.trim()}`)
+
+        // 用换行符连接所有部分
+        const chatMessage = messageParts.join('\n')
+
+        // 延迟一下确保总结保存完成
+        setTimeout(() => {
+          onNavigateToChat(chatMessage)
+        }, 100)
+      } else {
+        // 没有导航回调，只保存总结
+        onSubmit(summary.trim())
+      }
     }
   }
 
   const formatDuration = (seconds: number) => {
     const minutes = Math.floor(seconds / 60)
-    return t('common.minutes_format', { minutes })
+    const hours = Math.floor(minutes / 60)
+    const remainingMinutes = minutes % 60
+
+    if (hours > 0) {
+      return `${hours}小時${remainingMinutes}分鐘`
+    }
+    return `${minutes}分鐘`
   }
 
   if (!visible) return null
@@ -75,7 +126,7 @@ export const FocusCompletionDialog: React.FC<FocusCompletionDialogProps> = ({
           <h3 className="text-2xl font-bold mb-1" style={{ color: colors.text }}>
             {t('focus.completion.title')}
           </h3>
-          <p className="text-gray-500">
+          <p style={{ color: colors.textSecondary }}>
             {t('focus.completion.congratulations', { duration: formatDuration(duration) })}
           </p>
         </div>
@@ -90,7 +141,7 @@ export const FocusCompletionDialog: React.FC<FocusCompletionDialogProps> = ({
           }}
         >
           <Target className="w-4 h-4 text-red-500 mr-2 flex-shrink-0" />
-          <span className="font-semibold text-gray-900 line-clamp-2">
+          <span className="font-semibold line-clamp-2" style={{ color: colors.text }}>
             {taskTitle}
           </span>
         </div>

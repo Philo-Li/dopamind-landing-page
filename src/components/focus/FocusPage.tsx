@@ -28,9 +28,10 @@ import { FocusTaskList } from './FocusTaskList'
 import { FocusCompletionDialog } from './FocusCompletionDialog'
 import { PepTalkDialog } from './PepTalkDialog'
 import { StuckSupportDialog } from './StuckSupportDialog'
-import { focusApi, tasksApi } from '@/lib/api'
+import { focusApi, tasksApi, chatApi } from '@/lib/api'
 import { taskStore } from '@/stores/taskStore'
 import { useSearchParams, useRouter } from 'next/navigation'
+import { chatStorage, ChatMessage } from '@/lib/chatStorage'
 
 interface FocusPageProps {}
 
@@ -240,8 +241,8 @@ function FocusPageContent() {
       try {
         const response = await focusApi.startSession({
           duration,
-          type: 'focus',
-          taskId: currentTask?.id?.toString()
+          mode: 'focus',
+          taskId: currentTask?.id
         })
 
         if (response.success && response.data) {
@@ -267,8 +268,8 @@ function FocusPageContent() {
 
       focusApi.startSession({
         duration: timerConfigs[focusMode].duration,
-        type: sessionType,
-        taskId: currentTask?.id?.toString()
+        mode: sessionType,
+        taskId: currentTask?.id
       }).then((sessionData) => {
         console.log('Break session synced:', sessionData)
         setSaveError(null)
@@ -325,8 +326,8 @@ function FocusPageContent() {
       try {
         const response = await focusApi.startSession({
           duration: actualDuration,
-          type: 'focus',
-          taskId: currentTask?.id?.toString()
+          mode: 'focus',
+          taskId: currentTask?.id
         })
 
         if (response.success && response.data) {
@@ -368,17 +369,12 @@ function FocusPageContent() {
       if (response.success) {
         console.log('Focus session summary saved:', response.data)
 
-        // 关闭弹窗
-        setShowCompletionDialog(false)
-        setCompletionData(null)
-        setCompletionSessionId(null)
-
-        // 导航到聊天页面，如同移动端
-        // TODO: 这里可以添加导航到聊天页面的逻辑
-        // router.push('/chat?focus_completed=true')
-
         // 刷新统计数据
         refetchStats()
+
+        // 注意：不在这里关闭弹窗，因为可能需要导航到聊天页面
+        // 如果是跳过按钮调用的，会由 handleCompletionClose 关闭
+        // 如果是分享成就，会由 handleNavigateToChat 关闭
       } else {
         throw new Error(response.error?.message || 'Failed to save summary')
       }
@@ -390,13 +386,36 @@ function FocusPageContent() {
     }
   }, [completionSessionId, refetchStats, t])
 
+  // 处理导航到聊天页面
+  const handleNavigateToChat = useCallback((message: string) => {
+    console.log('🚀 handleNavigateToChat called with message:', message)
+
+    // 关闭弹窗
+    setShowCompletionDialog(false)
+    setCompletionData(null)
+    setCompletionSessionId(null)
+    setIsSubmittingCompletion(false)
+
+    // 重置计时器
+    resetTimer()
+
+    // 使用 sessionStorage 临时存储待发送的消息
+    sessionStorage.setItem('dopamind-pending-chat-message', message)
+
+    // 导航到聊天页面
+    router.push('/chat')
+  }, [router, resetTimer])
+
   // 处理完成弹窗关闭
   const handleCompletionClose = useCallback(() => {
     setShowCompletionDialog(false)
     setCompletionData(null)
     setCompletionSessionId(null)
     setIsSubmittingCompletion(false)
-  }, [])
+
+    // 重置计时器
+    resetTimer()
+  }, [resetTimer])
 
   // 处理鼓励弹窗确认
   const handlePepTalkConfirm = useCallback(() => {
@@ -1149,6 +1168,9 @@ function FocusPageContent() {
           taskTitle={completionData.taskTitle}
           duration={completionData.duration}
           isLoading={isSubmittingCompletion}
+          fullTask={fullTaskDetail || currentTask || undefined}
+          currentSubtask={currentSubtask || undefined}
+          onNavigateToChat={handleNavigateToChat}
         />
       )}
 

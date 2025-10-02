@@ -375,9 +375,9 @@ export const chatApi = {
 // 专注模式相关API
 export const focusApi = {
   startSession: (data: {
-    taskId?: string
+    taskId?: string | number
     duration: number
-    type: 'focus' | 'shortBreak' | 'longBreak'
+    mode: 'focus' | 'shortBreak' | 'longBreak' | 'countup'
   }) => apiClient.post<FocusSession & { sessionId?: string }>('/focus/sessions', data),
 
   completeSession: (sessionId: string, data: {

@@ -813,7 +813,7 @@
     },
     "completion": {
       "title": "Focus Complete!",
-      "congratulations": "Congratulations! You completed {duration} of focus time",
+      "congratulations": "Congratulations! You completed {{duration}} of focus time",
       "share_label": "Share your focus insights:",
       "summary_placeholder": "Record your feelings, insights, or thoughts from this focus session...",
       "skip": "Skip",

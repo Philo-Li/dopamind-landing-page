@@ -407,6 +407,20 @@ export default function ChatContainer() {
     }
   }
 
+  // 检查是否有待发送的消息（来自专注完成等其他页面）
+  useEffect(() => {
+    const pendingMessage = sessionStorage.getItem('dopamind-pending-chat-message')
+    if (pendingMessage && !isLoading) {
+      // 清除标记
+      sessionStorage.removeItem('dopamind-pending-chat-message')
+
+      // 延迟一下确保聊天历史加载完成
+      setTimeout(() => {
+        sendMessage(pendingMessage)
+      }, 500)
+    }
+  }, [isLoading])
+
   // 无限滚动检测
   useEffect(() => {
     const observer = new IntersectionObserver(

@@ -788,7 +788,7 @@
     },
     "completion": {
       "title": "專注完成！",
-      "congratulations": "恭喜你完成了 {duration} 的專注時間",
+      "congratulations": "恭喜你完成了 {{duration}} 的專注時間",
       "share_label": "分享你的專注收穫：",
       "summary_placeholder": "記錄下這次專注的感受、收穫或想法...",
       "skip": "跳過",

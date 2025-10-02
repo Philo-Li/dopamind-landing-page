@@ -1234,7 +1234,7 @@
     },
     "completion": {
       "title": "集中完了！",
-      "congratulations": "おめでとうございます！{duration}の集中時間を完了しました",
+      "congratulations": "おめでとうございます！{{duration}}の集中時間を完了しました",
       "share_label": "集中の成果をシェア：",
       "summary_placeholder": "この集中セッションでの感想、成果、思考を記録してください...",
       "skip": "スキップ",

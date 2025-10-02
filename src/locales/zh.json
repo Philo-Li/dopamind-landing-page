@@ -843,7 +843,7 @@
     },
     "completion": {
       "title": "专注完成！",
-      "congratulations": "恭喜你完成了 {duration} 的专注时间",
+      "congratulations": "恭喜你完成了 {{duration}} 的专注时间",
       "share_label": "分享你的专注收获：",
       "summary_placeholder": "记录下这次专注的感受、收获或想法...",
       "skip": "跳过",
