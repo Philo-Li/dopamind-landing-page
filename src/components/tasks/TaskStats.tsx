@@ -4,6 +4,7 @@ import React from 'react'
 import { TaskStats as TaskStatsType } from '@/types/task'
 import { useLocalization } from '@/hooks/useLocalization'
 import { useThemeColors } from '@/hooks/useThemeColor'
+import { useTheme } from '@/contexts/ThemeContext'
 import { BarChart3, Calendar, Clock, Play, CheckCircle2, Target, Check } from 'lucide-react'
 
 interface TaskStatsProps extends TaskStatsType {
@@ -23,6 +24,7 @@ export default function TaskStats({
 }: TaskStatsProps) {
   const { t } = useLocalization()
   const colors = useThemeColors()
+  const { actualTheme } = useTheme()
   const weeklyCompleted = thisWeekCompleted ?? completed
 
   const stats = [
@@ -169,18 +171,18 @@ export default function TaskStats({
               <div
                 className="w-8 h-8 rounded-full flex items-center justify-center mb-2.5 shadow-sm"
                 style={{
-                  backgroundColor: isWeeklyStat ? 'rgba(255, 255, 255, 0.15)' : stat.color + '15',
-                  border: `1px solid ${isWeeklyStat ? 'rgba(255, 255, 255, 0.25)' : stat.color + '25'}`
+                  backgroundColor: isWeeklyStat ? 'rgba(107, 114, 128, 0.15)' : stat.color + '15',
+                  border: `1px solid ${isWeeklyStat ? 'rgba(107, 114, 128, 0.25)' : stat.color + '25'}`
                 }}
               >
                 <IconComponent
                   className="w-4 h-4"
-                  style={{ color: isWeeklyStat ? '#FFFFFF' : stat.color }}
+                  style={{ color: isWeeklyStat && actualTheme === 'dark' ? '#FFFFFF' : stat.color }}
                 />
               </div>
               <div
                 className="text-lg font-bold mb-1 leading-[20px]"
-                style={{ color: isWeeklyStat ? '#FFFFFF' : stat.color }}
+                style={{ color: isWeeklyStat && actualTheme === 'dark' ? '#FFFFFF' : stat.color }}
               >
                 {stat.value}
               </div>

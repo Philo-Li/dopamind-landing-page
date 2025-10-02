@@ -365,7 +365,8 @@ export default function TaskItem({
         onMouseLeave={() => setIsHovered(false)}
         style={{
           backgroundColor: isHovered ? colors.border : colors.card.background,
-          borderColor: colors.card.border
+          borderColor: colors.card.border,
+          borderLeft: `3px solid ${getPriorityBorderColor(task.priority)}`
         }}
       >
         <div className="flex items-start p-3">
