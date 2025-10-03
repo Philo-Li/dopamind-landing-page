@@ -222,11 +222,29 @@ export default function PlansContent() {
     if (user && premiumStatus) {
       if (premiumStatus.isPremium) {
         let plan: 'free' | 'monthly' | 'yearly' | 'trial' = 'free';
+        let price: number | undefined = undefined;
 
         if (premiumStatus.type === 'trial') {
           plan = 'trial';
         } else if (premiumStatus.type === 'paid') {
-          plan = premiumStatus.store === 'STRIPE' ? 'yearly' : 'monthly';
+          // 根据 productId (Stripe Price ID) 判断是月付还是年付
+          const productId = (premiumStatus as any).productId;
+          const monthlyPriceId = pricingData?.monthly?.id || process.env.NEXT_PUBLIC_STRIPE_MONTHLY_PRODUCT_ID;
+          const yearlyPriceId = pricingData?.yearly?.id || process.env.NEXT_PUBLIC_STRIPE_YEARLY_PRICE_ID;
+
+          if (productId === monthlyPriceId) {
+            plan = 'monthly';
+            price = pricingData?.monthly ? pricingData.monthly.amount / 100 : undefined;
+          } else if (productId === yearlyPriceId) {
+            plan = 'yearly';
+            price = pricingData?.yearly ? pricingData.yearly.amount / 100 : undefined;
+          } else {
+            // 默认判断逻辑：如果 productId 包含 monthly/month，则为月付，否则为年付
+            plan = productId && (productId.toLowerCase().includes('monthly') || productId.toLowerCase().includes('month')) ? 'monthly' : 'yearly';
+            price = plan === 'monthly'
+              ? (pricingData?.monthly ? pricingData.monthly.amount / 100 : undefined)
+              : (pricingData?.yearly ? pricingData.yearly.amount / 100 : undefined);
+          }
         }
 
         const localSub: LocalSubscription = {
@@ -235,7 +253,7 @@ export default function PlansContent() {
           status: premiumStatus.type === 'trial' ? 'trial' : 'active',
           startDate: new Date().toISOString(),
           nextBillingDate: premiumStatus.expiresAt ? premiumStatus.expiresAt.toISOString() : undefined,
-          price: premiumStatus.type === 'paid' ? 159.99 : undefined,
+          price: price,
           currency: "USD",
           autoRenew: premiumStatus.willRenew,
           trialEndsAt: premiumStatus.type === 'trial' && premiumStatus.expiresAt ? premiumStatus.expiresAt.toISOString() : undefined
@@ -253,7 +271,7 @@ export default function PlansContent() {
         setSubscription(freeSub);
       }
     }
-  }, [user, premiumStatus]);
+  }, [user, premiumStatus, pricingData]);
 
   const handleCancelSubscription = async () => {
     if (!confirm(t('plans.cancellation.confirm_title') + " " + t('plans.cancellation.confirm_message'))) {

@@ -615,6 +615,7 @@ export interface LegacyPremiumStatus {
   type: string | null;
   willRenew: boolean;
   referralCreditDays?: number;
+  productId?: string; // Stripe Price ID or Product ID
 }
 
 export interface ForgotPasswordResponse {
