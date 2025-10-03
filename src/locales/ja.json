@@ -2010,5 +2010,16 @@
         "satisfaction": "満足度"
       }
     }
+  },
+  "paywall": {
+    "trial_expired_title": "無料トライアルは終了しました",
+    "membership_expired_title": "メンバーシップの有効期限が切れました",
+    "trial_expired_description": "Dopamindプレミアムにアップグレードして、Web版のすべての機能を引き続きご利用ください。",
+    "membership_expired_description": "Dopamindプレミアムを更新して、Web版のすべての機能へのアクセスを取り戻しましょう。",
+    "premium_badge": "Premium Only",
+    "web_only_notice": "Web版の全機能はメンバー限定です。",
+    "actions": {
+      "view_plans": "プランを見る"
+    }
   }
 } 

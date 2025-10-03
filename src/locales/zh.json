@@ -2167,5 +2167,16 @@
         "satisfaction": "满意度"
       }
     }
+  },
+  "paywall": {
+    "trial_expired_title": "试用已结束",
+    "membership_expired_title": "会员已到期",
+    "trial_expired_description": "升级为 Dopamind 会员继续使用网页端的全部功能。",
+    "membership_expired_description": "续订 Dopamind 会员即可重新解锁网页端的全部功能。",
+    "premium_badge": "Premium Only",
+    "web_only_notice": "网页端所有功能限会员使用。",
+    "actions": {
+      "view_plans": "查看会员方案"
+    }
   }
 } 

@@ -1,9 +1,10 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { Button } from '@/components/ui/button'
 import { useThemeColors } from '@/hooks/useThemeColor'
+import { useLocalization } from '@/hooks/useLocalization'
 
 interface PaywallModalProps {
   isOpen: boolean
@@ -19,6 +20,7 @@ export function PaywallModal({
   hasEverPaid = false
 }: PaywallModalProps) {
   const colors = useThemeColors()
+  const { t } = useLocalization()
   const [container, setContainer] = useState<HTMLElement | null>(() => {
     if (typeof document === 'undefined') {
       return null
@@ -35,14 +37,28 @@ export function PaywallModal({
     setContainer(target)
   }, [])
 
-  if (!isOpen) return null
-
-  const handleButtonClick = () => {
+  const handleUpgradeClick = () => {
     onClose()
     onNavigateToPlans()
   }
 
-  const message = hasEverPaid ? '你的会员已到期' : '你当前的试用已到期'
+  const title = useMemo(
+    () => hasEverPaid ? t('paywall.membership_expired_title') : t('paywall.trial_expired_title'),
+    [hasEverPaid, t]
+  )
+
+  const description = useMemo(
+    () => hasEverPaid ? t('paywall.membership_expired_description') : t('paywall.trial_expired_description'),
+    [hasEverPaid, t]
+  )
+
+  const premiumBadge = t('paywall.premium_badge')
+  const premiumNotice = t('paywall.web_only_notice')
+  const upgradeLabel = t('paywall.actions.view_plans')
+
+  if (!isOpen) {
+    return null
+  }
 
   const overlayPosition = container ? 'absolute' : 'fixed'
 
@@ -51,37 +67,40 @@ export function PaywallModal({
       {/* 背景遮罩 */}
       <div
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-        onClick={handleButtonClick}
+        onClick={handleUpgradeClick}
       />
 
       {/* 弹窗内容 */}
       <div
-        className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-sm w-full mx-4 p-6"
+        className="relative bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-md w-full mx-4 p-6"
         style={{ backgroundColor: colors.card.background }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* 消息内容 */}
-        <div className="text-center mb-6">
-          <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-            {message}
-          </h2>
-        </div>
+        <div className="flex flex-col items-center text-center gap-6">
+          <div className="flex flex-col items-center gap-4">
+            <span className="inline-flex items-center gap-2 rounded-full bg-orange-100 text-orange-700 dark:bg-orange-500/15 dark:text-orange-200 px-3 py-1 text-xs font-semibold uppercase tracking-wider">
+              {premiumBadge}
+            </span>
 
-        {/* 按钮组 */}
-        <div className="flex space-x-3">
-          <Button
-            onClick={handleButtonClick}
-            variant="outline"
-            className="flex-1"
-          >
-            取消
-          </Button>
+            <div className="space-y-3">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                {title}
+              </h2>
+              <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                {description}
+              </p>
+            </div>
+          </div>
+
+          <div className="w-full rounded-lg border border-orange-200 dark:border-orange-400/40 bg-orange-50 dark:bg-orange-500/10 px-4 py-3 text-sm text-orange-700 dark:text-orange-100">
+            {premiumNotice}
+          </div>
 
           <Button
-            onClick={handleButtonClick}
-            className="flex-1 bg-blue-500 hover:bg-blue-600 text-white"
+            onClick={handleUpgradeClick}
+            className="w-full bg-dopamind-500 hover:bg-dopamind-600 text-white"
           >
-            确定
+            {upgradeLabel}
           </Button>
         </div>
       </div>

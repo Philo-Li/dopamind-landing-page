@@ -2011,5 +2011,16 @@
         "satisfaction": "滿意度"
       }
     }
+  },
+  "paywall": {
+    "trial_expired_title": "試用已結束",
+    "membership_expired_title": "會員已到期",
+    "trial_expired_description": "升級為 Dopamind 會員即可繼續使用網頁版的全部功能。",
+    "membership_expired_description": "續訂 Dopamind 會員即可重新解鎖網頁版的全部功能。",
+    "premium_badge": "Premium Only",
+    "web_only_notice": "網頁版所有功能僅限會員使用。",
+    "actions": {
+      "view_plans": "查看會員方案"
+    }
   }
 }

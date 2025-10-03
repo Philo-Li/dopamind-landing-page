@@ -2132,5 +2132,16 @@
         "satisfaction": "Satisfaction"
       }
     }
+  },
+  "paywall": {
+    "trial_expired_title": "Your trial has ended",
+    "membership_expired_title": "Your membership has ended",
+    "trial_expired_description": "Upgrade to Dopamind Premium to keep every web feature at your fingertips.",
+    "membership_expired_description": "Renew Dopamind Premium to regain access to every web feature.",
+    "premium_badge": "Premium Only",
+    "web_only_notice": "All web features are available exclusively to members.",
+    "actions": {
+      "view_plans": "View membership plans"
+    }
   }
 } 
