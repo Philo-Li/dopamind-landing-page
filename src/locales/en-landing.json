@@ -746,7 +746,35 @@
       "yearly_special": "Annual exclusive benefits • Cancel anytime • Save $40 • Dedicated coach",
       "basic": "Includes core features • Cancel anytime • Secure payment",
       "current": "You are using this plan",
-      "yearly_discount": "Save 2 Months' Cost (Equivalent to 33% off)"
+      "yearly_discount": "Save 2 Months' Cost (Equivalent to 33% off)",
+      "premium_member": "Premium Member",
+      "enjoying_features": "You are enjoying all premium features",
+      "manage_subscription_prompt": "To change your subscription plan or cancel, please visit",
+      "subscription_page": "Subscription Management",
+      "yearly_exclusive": ["Save 2 months", "Exclusive member community"],
+      "premium_extras": ["1-on-1 AI coach support", "Early access to new features"]
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "subtitle": "Common questions about subscriptions and features",
+      "items": [
+        {
+          "question": "What features are included in the 7-day free trial?",
+          "answer": "During the free trial, you can use all Premium features including AI smart suggestions, unlimited task management, focus mode, cloud sync and more. After the trial ends, you can choose to continue with a subscription or use the free version."
+        },
+        {
+          "question": "Can I cancel my subscription anytime?",
+          "answer": "Yes, you can cancel your subscription at any time in the settings. After cancellation, you can still use Premium features until the end of the current billing cycle, then it will automatically revert to the free version."
+        },
+        {
+          "question": "What are the benefits of an annual subscription?",
+          "answer": "An annual subscription saves you 33% compared to monthly billing, equivalent to getting two months free. Additionally, annual subscribers enjoy priority customer support."
+        },
+        {
+          "question": "What payment methods are supported?",
+          "answer": "We support major credit and debit cards including Visa, MasterCard, American Express, etc. All payments are securely processed through Stripe."
+        }
+      ]
     }
   },
   "paymentCancelled": {

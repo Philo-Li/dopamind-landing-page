@@ -746,7 +746,35 @@
       "yearly_special": "年付專享特權 • 隨時取消 • 省下 NT$590 • 專屬教練",
       "basic": "包含核心功能 • 隨時取消 • 安全付款",
       "current": "您正在使用此方案",
-      "yearly_discount": "省下 2 個月費用 (相當於 88 折)"
+      "yearly_discount": "省下 2 個月費用 (相當於 88 折)",
+      "premium_member": "Premium 會員",
+      "enjoying_features": "您正在享受所有進階功能",
+      "manage_subscription_prompt": "如需更改訂閱計劃或取消訂閱，請造訪",
+      "subscription_page": "訂閱管理頁面",
+      "yearly_exclusive": ["省下 2 個月費用", "專屬會員社群"],
+      "premium_extras": ["一對一 AI 教練支援", "新功能搶先體驗權"]
+    },
+    "faq": {
+      "title": "常見問題",
+      "subtitle": "關於訂閱和功能的常見問題解答",
+      "items": [
+        {
+          "question": "7天免費試用包含哪些功能？",
+          "answer": "免費試用期間，您可以使用所有Premium功能，包括AI智能建議、無限任務管理、專注模式、雲端同步等。試用結束後，您可以選擇繼續訂閱或使用免費版本。"
+        },
+        {
+          "question": "可以隨時取消訂閱嗎？",
+          "answer": "是的，您可以隨時在設定中取消訂閱。取消後，您仍可使用Premium功能直到目前計費週期結束，之後將自動轉為免費版本。"
+        },
+        {
+          "question": "年度訂閱有什麼優勢？",
+          "answer": "年度訂閱可以節省12%的費用，相當於獲得兩個月的免費使用。此外，年度訂閱使用者還享有優先客戶支援服務。"
+        },
+        {
+          "question": "支援哪些付款方式？",
+          "answer": "我們支援主要的信用卡和金融卡付款，包括Visa、MasterCard、American Express等。所有付款都透過Stripe安全處理。"
+        }
+      ]
     }
   },
   "paymentCancelled": {

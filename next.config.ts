@@ -15,7 +15,16 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 60 * 60 * 24 * 30,
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    domains: ["r2.dopamind.com", "localhost"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "r2.dopamind.com",
+      },
+      {
+        protocol: "http",
+        hostname: "localhost",
+      },
+    ],
   },
   experimental: {
     optimizePackageImports: ["lucide-react"],

@@ -7,7 +7,7 @@ import { differenceInDays } from 'date-fns';
 import { CheckCircle, Gift, Crown, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
 import SubscribeButton from './SubscribeButton';
-import { getTranslation } from '@/lib/i18n';
+import { getLandingTranslation } from '@/lib/i18n';
 import SubscriptionPlans from './plans/SubscriptionPlans';
 
 interface PricingSectionProps {
@@ -46,7 +46,7 @@ interface PricesResponse {
 export default function PricingSection({ locale }: PricingSectionProps) {
   const { user, premiumStatus } = useAuth();
   const router = useRouter();
-  const t = getTranslation(locale);
+  const t = getLandingTranslation(locale);
   const pricing = (t as any).pricing ?? {};
   const pricingPlans = pricing.plans ?? {};
   const pricingBadges = pricing.badges ?? {};
@@ -209,9 +209,9 @@ export default function PricingSection({ locale }: PricingSectionProps) {
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <CheckCircle className="w-8 h-8 text-green-600" />
               </div>
-              <h3 className="text-2xl font-bold text-marketing-foreground mb-4">Premium 会员</h3>
-              <p className="text-marketing-textSecondary mb-6">您正在享受所有高级功能</p>
-              
+              <h3 className="text-2xl font-bold text-marketing-foreground mb-4">{pricingStatus.premium_member || 'Premium Member'}</h3>
+              <p className="text-marketing-textSecondary mb-6">{pricingStatus.enjoying_features || 'You are enjoying all premium features'}</p>
+
               <div className="space-y-3 mb-8">
                 {(pricingPlans.yearly?.features || []).map((feature: string, index: number) => (
                   <div key={index} className="flex items-center gap-3">
@@ -220,11 +220,11 @@ export default function PricingSection({ locale }: PricingSectionProps) {
                   </div>
                 ))}
               </div>
-              
+
               <p className="text-sm text-marketing-textSecondary">
-                如需更改订阅计划或取消订阅，请访问
+                {pricingStatus.manage_subscription_prompt || 'To change your subscription plan or cancel, please visit'}
                 <Link href="/dashboard/subscription" className="text-primary hover:underline ml-1">
-                  订阅管理页面
+                  {pricingStatus.subscription_page || 'Subscription Management'}
                 </Link>
               </p>
             </div>
@@ -315,8 +315,8 @@ export default function PricingSection({ locale }: PricingSectionProps) {
             },
           }}
           featureHighlights={{
-            yearlyExclusive: ['省下 2 个月费用', '专属会员社群'],
-            premiumFeatures: ['一对一 AI 教练支持', '新功能抢先体验权'],
+            yearlyExclusive: pricingDescriptions.yearly_exclusive || ['Save 2 months', 'Exclusive member community'],
+            premiumFeatures: pricingDescriptions.premium_extras || ['1-on-1 AI coach support', 'Early access to new features'],
           }}
           locale={locale}
           onTrialStart={handleTrialStart}

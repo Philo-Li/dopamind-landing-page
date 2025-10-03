@@ -4,14 +4,14 @@ import { useState, use, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { getTranslation, type Locale } from "@/lib/i18n";
+import { getLandingTranslation, type Locale } from "@/lib/i18n";
 import { apiService } from "../../../lib/api";
 
 interface ResetPasswordPageProps {
   params: Promise<{ locale: string }>;
 }
 
-function ResetPasswordContent({ locale, t }: { locale: Locale; t: ReturnType<typeof getTranslation> }) {
+function ResetPasswordContent({ locale, t }: { locale: Locale; t: ReturnType<typeof getLandingTranslation> }) {
   const searchParams = useSearchParams();
   const token = searchParams.get('token');
   
@@ -230,7 +230,7 @@ function ResetPasswordContent({ locale, t }: { locale: Locale; t: ReturnType<typ
 export default function ResetPasswordPage({ params }: ResetPasswordPageProps) {
   const { locale: localeParam } = use(params);
   const locale = localeParam as Locale;
-  const t = getTranslation(locale);
+  const t = getLandingTranslation(locale);
 
   return (
     <Suspense fallback={
