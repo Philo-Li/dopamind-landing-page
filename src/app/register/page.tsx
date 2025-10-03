@@ -73,7 +73,8 @@ function RegisterForm() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [referralCode, setReferralCode] = useState("");
   const [error, setError] = useState("");
-  const { register, isLoading } = useAuth();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { register, isLoading: authLoading } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -101,6 +102,7 @@ function RegisterForm() {
       return;
     }
 
+    setIsSubmitting(true);
     try {
       // 将当前语言作为 preferredLanguage 传递给注册接口
       await register(email, password, nickname.trim(), referralCode.trim() || undefined, locale);
@@ -179,6 +181,7 @@ function RegisterForm() {
       window.location.href = "/dashboard";
     } catch (error) {
       setError(error instanceof Error ? error.message : "An error occurred during registration");
+      setIsSubmitting(false);
     }
   };
 
@@ -271,10 +274,10 @@ function RegisterForm() {
       <div>
         <button
           type="submit"
-          disabled={isLoading}
+          disabled={authLoading || isSubmitting}
           className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {isLoading ? t.register.registering : t.register.registerButton}
+          {(authLoading || isSubmitting) ? t.register.registering : t.register.registerButton}
         </button>
       </div>
 
