@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState, Suspense, use } from 'react';
+import { useEffect, useState, useMemo, Suspense, use } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { CheckCircle, Crown, ArrowRight } from 'lucide-react';
 import { getLandingTranslation, type Locale } from '@/lib/i18n';
+import { usePremium } from '@/hooks/usePremium';
 
 interface SessionData {
   paymentStatus: string;
@@ -19,41 +20,66 @@ function PaymentSuccessContent({ locale }: { locale: Locale }) {
   const [error, setError] = useState('');
   const searchParams = useSearchParams();
   const t = getLandingTranslation(locale);
+  const { refetch: refreshPremiumStatus } = usePremium();
+  const sessionId = useMemo(() => searchParams.get('session_id'), [searchParams]);
+
+  const missingSessionMessage = t.paymentSuccess.missingSessionId;
+  const fetchErrorMessage = t.paymentSuccess.fetchError;
 
   useEffect(() => {
-    const sessionId = searchParams.get('session_id');
-
     if (!sessionId) {
       console.error('Missing session_id in URL params');
-      setError(t.paymentSuccess.missingSessionId);
+      setSessionData(null);
+      setError(missingSessionMessage);
       setLoading(false);
       return;
     }
 
-    // 获取支付详情
+    let isMounted = true;
+
     const fetchPaymentDetails = async () => {
+      setLoading(true);
+      setSessionData(null);
+      setError('');
       try {
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/stripe/success?session_id=${sessionId}`
         );
-        
-        if (response.ok) {
-          const data = await response.json();
-          setSessionData(data);
-        } else {
+
+        if (!response.ok) {
           throw new Error('Failed to fetch payment details');
+        }
+
+        const data = await response.json();
+        if (!isMounted) {
+          return;
+        }
+
+        setSessionData(data);
+
+        try {
+          await refreshPremiumStatus();
+        } catch (refreshError) {
+          console.warn('Failed to refresh premium status after payment:', refreshError);
         }
       } catch (error) {
         console.error('Error fetching payment details:', error);
-        setError(t.paymentSuccess.fetchError);
+        if (isMounted) {
+          setError(fetchErrorMessage);
+        }
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     };
 
     fetchPaymentDetails();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [sessionId, missingSessionMessage, fetchErrorMessage, refreshPremiumStatus]);
 
   if (loading) {
     return (

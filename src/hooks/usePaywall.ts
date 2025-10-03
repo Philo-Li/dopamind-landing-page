@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useMemo, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { usePremium } from './usePremium'
 import { storage } from '@/lib/utils'
@@ -14,7 +14,7 @@ export function usePaywall() {
   const hasEverPaid = premiumStatus?.type === 'paid' || premiumStatus?.store !== undefined
 
   // 检查是否需要显示付费墙
-  const shouldShowPaywall = useCallback(() => {
+  const canShowPaywall = useCallback(() => {
     // 检查用户是否已登录
     const token = storage.get('token')
     if (!token) {
@@ -29,12 +29,20 @@ export function usePaywall() {
     return true
   }, [isPremium])
 
+  const shouldShowPaywall = useMemo(() => canShowPaywall(), [canShowPaywall])
+
+  useEffect(() => {
+    if (!shouldShowPaywall && isPaywallOpen) {
+      setIsPaywallOpen(false)
+    }
+  }, [shouldShowPaywall, isPaywallOpen])
+
   // 显示付费墙
   const showPaywall = useCallback(() => {
-    if (shouldShowPaywall()) {
+    if (canShowPaywall()) {
       setIsPaywallOpen(true)
     }
-  }, [shouldShowPaywall])
+  }, [canShowPaywall])
 
   // 关闭付费墙
   const hidePaywall = useCallback(() => {
@@ -48,16 +56,16 @@ export function usePaywall() {
 
   // 检查功能权限并在需要时显示付费墙
   const checkAccess = useCallback((feature?: string) => {
-    if (shouldShowPaywall()) {
+    if (canShowPaywall()) {
       showPaywall()
       return false
     }
     return true
-  }, [shouldShowPaywall, showPaywall])
+  }, [canShowPaywall, showPaywall])
 
   return {
     isPaywallOpen,
-    shouldShowPaywall: shouldShowPaywall(),
+    shouldShowPaywall,
     hasEverPaid,
     showPaywall,
     hidePaywall,
