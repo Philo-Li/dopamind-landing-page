@@ -1,5 +1,7 @@
 'use client'
 
+import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { Button } from '@/components/ui/button'
 import { useThemeColors } from '@/hooks/useThemeColor'
 
@@ -17,6 +19,21 @@ export function PaywallModal({
   hasEverPaid = false
 }: PaywallModalProps) {
   const colors = useThemeColors()
+  const [container, setContainer] = useState<HTMLElement | null>(() => {
+    if (typeof document === 'undefined') {
+      return null
+    }
+    return document.querySelector('[data-paywall-container]') as HTMLElement | null
+  })
+
+  useEffect(() => {
+    if (typeof document === 'undefined') {
+      return
+    }
+
+    const target = document.querySelector('[data-paywall-container]') as HTMLElement | null
+    setContainer(target)
+  }, [])
 
   if (!isOpen) return null
 
@@ -27,8 +44,10 @@ export function PaywallModal({
 
   const message = hasEverPaid ? '你的会员已到期' : '你当前的试用已到期'
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+  const overlayPosition = container ? 'absolute' : 'fixed'
+
+  const modal = (
+    <div className={`${overlayPosition} inset-0 z-50 flex items-center justify-center`}>
       {/* 背景遮罩 */}
       <div
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
@@ -68,4 +87,10 @@ export function PaywallModal({
       </div>
     </div>
   )
+
+  if (container) {
+    return createPortal(modal, container)
+  }
+
+  return modal
 }

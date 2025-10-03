@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 import { PaywallModal } from './PaywallModal'
 import { usePaywall } from '@/hooks/usePaywall'
-import { useRouter, usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 
 export function GlobalPaywall() {
   const {
@@ -18,24 +18,30 @@ export function GlobalPaywall() {
   const pathname = usePathname()
 
   useEffect(() => {
-    // 排除不需要付费墙的页面
-    const excludedPaths = [
-      '/login',
-      '/register',
-      '/plans',
-      '/',
-    ]
-
-    // 如果在排除的页面，不显示付费墙
-    if (excludedPaths.some(path => pathname === path || pathname.startsWith(path))) {
+    if (!pathname || !shouldShowPaywall) {
       return
     }
 
-    // 如果需要显示付费墙且当前未显示，则显示
-    if (shouldShowPaywall && !isPaywallOpen) {
-      showPaywall()
+    const paywalledPaths = [
+      '/chat',
+      '/tasks',
+      '/calendar',
+      '/focus',
+      '/fridge',
+      '/habits',
+      '/subscription-tracker',
+    ]
+
+    const isPaywalledPath = paywalledPaths.some(path => {
+      return pathname === path || pathname.startsWith(`${path}/`)
+    })
+
+    if (!isPaywalledPath) {
+      return
     }
-  }, [pathname, shouldShowPaywall, isPaywallOpen, showPaywall])
+
+    showPaywall()
+  }, [pathname, shouldShowPaywall, showPaywall])
 
   return (
     <PaywallModal

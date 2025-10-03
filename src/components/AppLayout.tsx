@@ -220,7 +220,10 @@ export default function AppLayout({ initialSidebarCollapsed = false, children }:
       />
 
       {/* Main Content Area */}
-      <div style={{ flex: 1, height: '100vh', overflow: 'hidden' }}>
+      <div
+        style={{ flex: 1, height: '100vh', overflow: 'hidden', position: 'relative' }}
+        data-paywall-container
+      >
         {currentView === 'chat' ? (
           <ChatContainer />
         ) : currentView === 'dashboard' ? (
